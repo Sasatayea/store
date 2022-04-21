@@ -7,6 +7,8 @@ const Login = () => {
   const [password, setpassword] = useState("");
   const [error, setError] = useState("");
 
+  
+  
   return (
     <View>
       <View
@@ -47,6 +49,7 @@ const Login = () => {
               .then()
               .catch((e) => setError(e.message));
           }}
+          
         />
         <Text>{error}</Text>
       </View>
