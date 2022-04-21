@@ -54,13 +54,14 @@ const CitiesList = ({ navigation }) => {
   ) : (
     
     <View>
-      
+
       <View
           style={{
             height:550,
           }}>
       <FlatList 
         data={cities}
+        keyExtractor={cities.id}
         renderItem={({item})=>(
           
           <View
@@ -79,6 +80,7 @@ const CitiesList = ({ navigation }) => {
             {item.name}
           </Text>
           <Button title="Delete" onPress={() => deleteCity(item.id)} />
+
         </View>
           )}
       />
