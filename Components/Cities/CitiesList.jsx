@@ -55,26 +55,6 @@ const CitiesList = ({ navigation }) => {
     
     <View>
       
-      {/* {cities.map((c) => (
-        <View
-          key={c.id}
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            padding: 2,
-          }}
-          >
-          <Text
-            onPress={() => {
-              setCityToEdit(c);
-              console.log('cityToEdit', c);
-            }}
-          >
-            {c.name}
-          </Text>
-          <Button title="Delete" onPress={() => deleteCity(c.id)} />
-        </View>
-      ))} */}
       <View
           style={{
             height:550,

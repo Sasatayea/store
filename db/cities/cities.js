@@ -25,10 +25,10 @@ async function editCity(city) {
   await setDoc(doc(db, "cities", city.id), city);
 }
 
-async function deleteCity(id) {
+async function deleteCity(city) {
   try {
-    await deleteDoc(doc(db, "cities", id));
-    console.log("Document deleted with ID: ", id);
+    await deleteDoc(doc(db, "cities", city));
+    console.log("Document deleted with ID: ", city);
   } catch (error) {
     console.error("Error deleting document: ", error);
   }

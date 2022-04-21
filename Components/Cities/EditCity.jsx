@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import { useState } from "react";
-import { editCity } from "../../db/cities/cities";
+import { editCity ,deleteCity } from "../../db/cities/cities";
 
 const EditCity = ({ city: cityToEdit, onSave }) => {
   const [cityToEditName, setCityToEditName] = useState(cityToEdit.name);
@@ -20,7 +20,7 @@ const EditCity = ({ city: cityToEdit, onSave }) => {
           style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
         />
         <Button
-          title="Save city"
+          title="Save"
           onPress={() => {
             editCity({ ...cityToEdit, name: cityToEditName })
               .then((d) => {
@@ -31,6 +31,7 @@ const EditCity = ({ city: cityToEdit, onSave }) => {
           }}
         />
       </View>
+      <Button title="Delete" onPress={() => deleteCity(city)} />
     </View>
   );
 };
