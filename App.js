@@ -1,9 +1,7 @@
 import { onAuthStateChanged } from "firebase/auth";
 import CitiesList from "./Components/Cities/CitiesList";
 import fpage from './Components/Cities/fpage';
-// import fppage from './Components/Cities/fppage';
-// import weight from './Components/Cities/weight';
-// import Kilometre from './Components/Cities/Kilometre'
+import EditCity from "./Components/Cities/EditCity";
 
 // import Login from "./Components/Users/Login";
 import { auth } from "./db/Config";
@@ -33,10 +31,12 @@ export default function App() {
       // user ? <CitiesList /> : <Register/>
 
       if(user){
-          return (
+            return (
             <NavigationContainer>
             <Stack.Navigator >
               <Stack.Screen name="hello in chat" component={CitiesList} />
+              <Stack.Screen name="EditCity" component={EditCity} />
+
             </Stack.Navigator>
           </NavigationContainer>
               // <CitiesList /> 
@@ -52,6 +52,5 @@ export default function App() {
           </NavigationContainer>
         )}
       
-
 }
 const styles = StyleSheet.create({});
