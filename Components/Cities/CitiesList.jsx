@@ -6,6 +6,7 @@ import {
   deleteCity,
   subscribe,
 } from "../../db/cities/cities";
+import image1 from "../../assets/loginn.png";
 import EditCity from "./EditCity";
 
 const CitiesList = ({ navigation }) => {
@@ -65,9 +66,9 @@ const CitiesList = ({ navigation }) => {
           
           <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            padding: 2,
+            flexDirection: "",
+            justifyContent: "",
+           
           }}
           >
           <Text
@@ -78,6 +79,8 @@ const CitiesList = ({ navigation }) => {
           >
             {item.name}
           </Text>
+          <Text>{item.price}</Text>
+          <Image style = {{height:'100%',width:'100%',}} source={{uri:item.image}}></Image>
           <Button title="Delete" onPress={() => deleteCity(item.id)} />
 
         </View>
