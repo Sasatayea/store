@@ -74,10 +74,10 @@ const CitiesList = ({ navigation }) => {
             margin:10
           }}
           >
-            <TouchableOpacity onPress={() =>navigation.navigate('product',item)} >
-          <Image style = {{height:100,width:100, margin:10}} source={{uri:item.image}}></Image>
-          <Text> {item.name} </Text>
-          <Text>$ {item.price}</Text>
+          <TouchableOpacity onPress={() =>navigation.navigate('product',item)} >
+            <Image style = {{height:100,width:100, margin:10}} source={{uri:item.image}}></Image>
+            <Text> {item.name} </Text>
+            <Text>$ {item.price}</Text>
           </TouchableOpacity>
           {/* <Button title="Delete" onPress={() => deleteCity(item.id)} /> */}
           <Button title="Add to char"/>

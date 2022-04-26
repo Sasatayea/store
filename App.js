@@ -33,10 +33,9 @@ export default function App() {
             return (
             <NavigationContainer>
             <Stack.Navigator >
-              <Stack.Screen name="hello in chat" component={CitiesList} />
+              <Stack.Screen name="Home Page"   component={CitiesList}/>
               <Stack.Screen name="EditCity" component={EditCity} />
               <Stack.Screen name="product" component={product} />
-
 
             </Stack.Navigator>
           </NavigationContainer>
