@@ -14,6 +14,7 @@ const Stack = createNativeStackNavigator();
 // import Cities from "./Components/Cities/Cities";
 // import GuessMyNumber from "./Components/GuessMyNumber";
 import fpage from './Components/Cities/fpage';
+import product from './Components/items/product';
 
 export default function App() {
   useEffect(() => {
@@ -34,6 +35,8 @@ export default function App() {
             <Stack.Navigator >
               <Stack.Screen name="hello in chat" component={CitiesList} />
               <Stack.Screen name="EditCity" component={EditCity} />
+              <Stack.Screen name="product" component={product} />
+
 
             </Stack.Navigator>
           </NavigationContainer>
