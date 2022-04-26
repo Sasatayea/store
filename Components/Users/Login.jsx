@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button ,ImageBackground } from "react-native";
 import { React, useState } from "react";
 import { login } from "../../db/auth/auth";
+import loginn from '../../assets/loginn.png'
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -8,29 +9,38 @@ const Login = () => {
   const [error, setError] = useState("");
   
   return (
-    <View>
+    <ImageBackground source={require('../../assets/loginn.png')} resizeMode="cover"
+      style={styles.heder}>
+        <View style={{
+          marginTop:'50%',
+          backgroundColor:'white',
+          borderRadius:20,
+          height:'40%'
+        }}>
+      <Text  style={{
+          padding: 2,
+          textAlign:'center',
+          fontSize:30
+        }}> Welcome </Text>
       <View
         style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          padding: 2,
+          padding: 10,
+          borderRadius:20,
         }}
       >
-        <Text style={{ flex: 1 }}>Email:</Text>
         <TextInput
           onChangeText={setEmail}
           keyboardType="email-address"
-          style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
+          style={{ flex: 2, borderColor: "black", borderWidth: 2  }}
         />
       </View>
+      
       <View
         style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          padding: 2,
+          padding: 10,
+          borderRadius:20
         }}
       >
-        <Text style={{ flex: 1 }}>Password:</Text>
         <TextInput
           onChangeText={setpassword}
           keyboardType="visible-password"
@@ -38,7 +48,10 @@ const Login = () => {
           style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
         />
       </View>
-      <View>
+      <View style={{
+          width:100,
+          padding:10,
+        }}>
         <Button
           title="Login"
           onPress={() => {
@@ -51,10 +64,16 @@ const Login = () => {
         />
         <Text>{error}</Text>
       </View>
-    </View>
+      </View>
+    </ImageBackground>
   );
 };
 
 export default Login;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  heder:{
+    height:'100%',
+    width:'100%',
+  },
+});

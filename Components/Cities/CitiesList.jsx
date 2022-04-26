@@ -1,11 +1,10 @@
-import { View, Text, Button, TextInput ,FlatList } from "react-native";
+import { View, Text, Button, TextInput ,FlatList ,Image } from "react-native";
 import { useEffect, useState } from "react";
 import {
   getCities,
   addCity,
   deleteCity,
   subscribe,
-  
 } from "../../db/cities/cities";
 import EditCity from "./EditCity";
 
@@ -16,7 +15,7 @@ const CitiesList = ({ navigation }) => {
     setCities(c);
     console.log("cities", c);
   };
-
+  
   useEffect(() => {
     getCitiesList();
   }, []);
@@ -52,7 +51,7 @@ const CitiesList = ({ navigation }) => {
   return cityToEdit ? (
     <EditCity city={cityToEdit} onSave={()=>setCityToEdit(undefined)} />
   ) : (
-    
+
     <View>
 
       <View
@@ -104,6 +103,7 @@ const CitiesList = ({ navigation }) => {
           }
         />
       </View>
+      
     </View>
     
   );

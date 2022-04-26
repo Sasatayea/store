@@ -9,7 +9,7 @@ const EditCity = ({ city: cityToEdit, onSave }) => {
 
   const fun=()=>{
     deleteCity(city);
-    <CitiesList /> 
+    <CitiesList /> ;
   }
 
   return (
