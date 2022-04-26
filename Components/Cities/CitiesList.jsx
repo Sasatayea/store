@@ -19,7 +19,7 @@ const CitiesList = ({ navigation }) => {
   useEffect(() => {
     getCitiesList();
   }, []);
-
+  
   useEffect(() => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
       //   console.log("changes", change, snapshot, change.type);
@@ -38,7 +38,7 @@ const CitiesList = ({ navigation }) => {
       }
       // }
     });
-
+    
     return () => {
       unsubscribe();
     };
