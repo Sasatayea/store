@@ -80,7 +80,7 @@ const CitiesList = ({ navigation }) => {
             {item.name}
           </Text>
           <Text>{item.price}</Text>
-          <Image style = {{height:'100%',width:'100%',}} source={{uri:item.image}}></Image>
+          <Image style = {{height:'1000%',width:'100%',}} source={{uri:item.image}}></Image>
           <Button title="Delete" onPress={() => deleteCity(item.id)} />
 
         </View>
