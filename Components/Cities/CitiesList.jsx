@@ -6,6 +6,7 @@ import {
   deleteCity,
   subscribe,
 } from "../../db/cities/cities";
+import Pitem from "../items/Pitem";
 import image1 from "../../assets/loginn.png";
 import EditCity from "./EditCity";
 import { TouchableOpacity } from "react-native-web";
@@ -51,11 +52,9 @@ const CitiesList = ({ navigation }) => {
 
   const [cities, setCities] = useState([]);
   
-
-  const [cityName, setCityName] = useState("");
   const [cityToEdit, setCityToEdit] = useState(undefined);
   
-const bed = cities.filter((e)=>e.type=="dolab");
+//const bed = cities.filter((e)=>e.type=="dolab");
 
   return cityToEdit ? (
     <EditCity city={cityToEdit} onSave={()=>setCityToEdit(undefined)} />
@@ -67,25 +66,10 @@ const bed = cities.filter((e)=>e.type=="dolab");
           style={{
             height:550,
           }}>
-      {bed.map((item,index) => (
+      {cities.map((item,index) => (
         
           
-          <View
-          style={{
-            height:200,
-            width:200 ,
-            backgroundColor:'red',
-            margin:10,
-          }}
-          >
-          <TouchableOpacity onPress={() =>navigation.navigate('product',item)} >
-            <Image style = {{height:100,width:100, margin:10}} source={{uri:item.image}}></Image>
-            <Text> {item.name} </Text>
-            <Text>$ {item.price}</Text>
-          </TouchableOpacity>
-          {/* <Button title="Delete" onPress={() => deleteCity(item.id)} /> */}
-          <Button title="Add to char"/>
-        </View>
+          <Pitem navigation={navigation} item = {item} key = {index}/>
           ))}
       
     </View>
