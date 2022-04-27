@@ -14,12 +14,15 @@ const CitiesList = ({ navigation }) => {
   
   const getCitiesList = async () => {
     const c = await getCities();
+    
     setCities(c);
+    
     console.log("cities", c);
   };
   
   useEffect(() => {
     getCitiesList();
+    
   }, []);
   
   useEffect(() => {
@@ -47,8 +50,12 @@ const CitiesList = ({ navigation }) => {
   }, []);
 
   const [cities, setCities] = useState([]);
+  
+
   const [cityName, setCityName] = useState("");
   const [cityToEdit, setCityToEdit] = useState(undefined);
+  
+const bed = cities.filter((e)=>e.type=="dolab");
 
   return cityToEdit ? (
     <EditCity city={cityToEdit} onSave={()=>setCityToEdit(undefined)} />
@@ -60,10 +67,8 @@ const CitiesList = ({ navigation }) => {
           style={{
             height:550,
           }}>
-      <FlatList 
-        data={cities}
-        keyExtractor={cities.id}
-        renderItem={({item})=>(
+      {bed.map((item,index) => (
+        
           
           <View
           style={{
@@ -81,8 +86,8 @@ const CitiesList = ({ navigation }) => {
           {/* <Button title="Delete" onPress={() => deleteCity(item.id)} /> */}
           <Button title="Add to char"/>
         </View>
-          )}
-      />
+          ))}
+      
     </View>
   </View>
     
