@@ -65,13 +65,12 @@ const CitiesList = ({ navigation }) => {
         keyExtractor={cities.id}
         renderItem={({item})=>(
           
-
           <View
           style={{
             height:200,
             width:200 ,
             backgroundColor:'red',
-            margin:10
+            margin:10,
           }}
           >
           <TouchableOpacity onPress={() =>navigation.navigate('product',item)} >
