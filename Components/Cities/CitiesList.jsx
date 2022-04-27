@@ -64,7 +64,7 @@ const CitiesList = ({ navigation }) => {
         data={cities}
         keyExtractor={cities.id}
         renderItem={({item})=>(
-          
+            
           <View
           style={{
             height:200,
