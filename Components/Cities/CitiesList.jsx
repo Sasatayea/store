@@ -8,7 +8,7 @@ import {
 } from "../../db/cities/cities";
 import image1 from "../../assets/loginn.png";
 import EditCity from "./EditCity";
-import { map } from "@firebase/util";
+import { TouchableOpacity } from "react-native-web";
 
 const CitiesList = ({ navigation }) => {
   
@@ -24,7 +24,7 @@ const CitiesList = ({ navigation }) => {
     getCitiesList();
     
   }, []);
-
+  
   useEffect(() => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
       //   console.log("changes", change, snapshot, change.type);
@@ -43,7 +43,7 @@ const CitiesList = ({ navigation }) => {
       }
       // }
     });
-
+    
     return () => {
       unsubscribe();
     };
@@ -72,54 +72,24 @@ const bed = cities.filter((e)=>e.type=="dolab");
           
           <View
           style={{
-            flexDirection: "",
-            justifyContent: "",
-           
+            height:200,
+            width:200 ,
+            backgroundColor:'red',
+            margin:10,
           }}
           >
-           
-          <Text
-            onPress={() => {
-              setCityToEdit(item);
-              console.log('cityToEdit', item);
-            }}
-          >
-            
-            {item.name}
-            
-          </Text>
-          
-          <Text>{item.price}</Text>
-          <Image style = {{height:'1000%',width:'100%',}} source={{uri:item.image}}></Image>
-          <Button title="Delete" onPress={() => deleteCity(item.id)} />
-
+          <TouchableOpacity onPress={() =>navigation.navigate('product',item)} >
+            <Image style = {{height:100,width:100, margin:10}} source={{uri:item.image}}></Image>
+            <Text> {item.name} </Text>
+            <Text>$ {item.price}</Text>
+          </TouchableOpacity>
+          {/* <Button title="Delete" onPress={() => deleteCity(item.id)} /> */}
+          <Button title="Add to char"/>
         </View>
-        ))}
-          
-        
-      
-</View>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          padding: 2,
-          paddingTop:10
-        }}
-      >
-        <TextInput
-          onChangeText={setCityName}
-          style={{ flex: 2, borderColor: "black", borderWidth: 2  }}
-        />
-        <Button
-          title="send"
-          onPress={() =>
-            addCity({ name: cityName || "new city" + cities.length })
-          }
-        />
-      </View>
+          ))}
       
     </View>
+  </View>
     
   );
 };
