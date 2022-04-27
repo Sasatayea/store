@@ -69,7 +69,7 @@ const CitiesList = ({ navigation }) => {
       {cities.map((item,index) => (
         
           
-          <Pitem item = {item} key = {index}/>
+          <Pitem navigation={navigation} item = {item} key = {index}/>
           ))}
       
     </View>
