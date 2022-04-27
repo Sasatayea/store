@@ -59,10 +59,8 @@ const CitiesList = ({ navigation }) => {
           style={{
             height:550,
           }}>
-      <FlatList 
-        data={cities}
-        keyExtractor={cities.id}
-        renderItem={({item})=>(
+      {cities.map((item) => ( 
+        
           
           <View
           style={{
@@ -78,14 +76,18 @@ const CitiesList = ({ navigation }) => {
             }}
           >
             {item.name}
+            
           </Text>
+          <Text>{item.m}</Text>
           <Text>{item.price}</Text>
           <Image style = {{height:'1000%',width:'100%',}} source={{uri:item.image}}></Image>
           <Button title="Delete" onPress={() => deleteCity(item.id)} />
 
         </View>
-          )}
-      />
+        ))}
+          
+        
+      
 </View>
       <View
         style={{
