@@ -8,17 +8,21 @@ import {
 } from "../../db/cities/cities";
 import image1 from "../../assets/loginn.png";
 import EditCity from "./EditCity";
+import { map } from "@firebase/util";
 
 const CitiesList = ({ navigation }) => {
   
   const getCitiesList = async () => {
     const c = await getCities();
+    
     setCities(c);
+    
     console.log("cities", c);
   };
   
   useEffect(() => {
     getCitiesList();
+    
   }, []);
 
   useEffect(() => {
@@ -46,8 +50,12 @@ const CitiesList = ({ navigation }) => {
   }, []);
 
   const [cities, setCities] = useState([]);
+  
+
   const [cityName, setCityName] = useState("");
   const [cityToEdit, setCityToEdit] = useState(undefined);
+  
+const bed = cities.filter((e)=>e.type=="bed");
 
   return cityToEdit ? (
     <EditCity city={cityToEdit} onSave={()=>setCityToEdit(undefined)} />
@@ -59,7 +67,7 @@ const CitiesList = ({ navigation }) => {
           style={{
             height:550,
           }}>
-      {cities.map((item) => ( 
+      {bed.map((item,index) => (
         
           
           <View
@@ -69,16 +77,18 @@ const CitiesList = ({ navigation }) => {
            
           }}
           >
+           
           <Text
             onPress={() => {
               setCityToEdit(item);
               console.log('cityToEdit', item);
             }}
           >
+            
             {item.name}
             
           </Text>
-          <Text>{item.m}</Text>
+          
           <Text>{item.price}</Text>
           <Image style = {{height:'1000%',width:'100%',}} source={{uri:item.image}}></Image>
           <Button title="Delete" onPress={() => deleteCity(item.id)} />
