@@ -55,7 +55,7 @@ const CitiesList = ({ navigation }) => {
   const [cityName, setCityName] = useState("");
   const [cityToEdit, setCityToEdit] = useState(undefined);
   
-const bed = cities.filter((e)=>e.type=="bed");
+const bed = cities.filter((e)=>e.type=="dolab");
 
   return cityToEdit ? (
     <EditCity city={cityToEdit} onSave={()=>setCityToEdit(undefined)} />
