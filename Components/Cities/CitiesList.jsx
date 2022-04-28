@@ -1,4 +1,4 @@
-import { View, Text, Button, TextInput ,FlatList ,Image } from "react-native";
+import { View, Text, Button, TextInput ,FlatList ,Image ,Picker ,StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
 import {
   getCities,
@@ -67,21 +67,46 @@ const CitiesList = ({ navigation }) => {
       return cartt ;
     }
   console.log(cartt);
-  
-//const bed = cities.filter((e)=>e.type=="dolab");
+  const [selectedValue, setSelectedValue] = useState("bed");
+
+  const dataa = cities.filter((e)=>e.type== selectedValue);
+  //const [dataa, setDataa] = useState([]);
+  //setDataa = cities.filter((e)=>e.type== selectedValue);
+
+  if(selectedValue == "All"){
+    dataa === cities ;
+    console.log("done");
+    }
+
+    console.log(selectedValue);
 
   return (
     <View>
+
       <Button
         title="cart"
         onPress={() => navigation.navigate('cart', {itemId:cartt} )}
       />
+    
+    <View style={styles.container}>
+      <Picker
+        selectedValue={selectedValue}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+      >
+        <Picker.Item label="All" value="All" />
+        <Picker.Item label="chair" value="chair" />
+        <Picker.Item label="bed" value="bed" />
+        <Picker.Item label="sofa" value="sofa" />
+      </Picker>
+    </View>
+
       <View
           style={{
             height:550,
           }}>
       <FlatList 
-        data={cities}
+        data={dataa}
         keyExtractor={cities.id}
         renderItem={({item})=>(
           <Pitem navigation={navigation} item = {item} AddToCart={AddToCart} />
@@ -94,3 +119,10 @@ const CitiesList = ({ navigation }) => {
 };
 
 export default CitiesList;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 10,
+    alignItems: "center"
+  }
+});
