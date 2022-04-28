@@ -2,7 +2,12 @@ import { StyleSheet, Text, View, TextInput, Button ,ImageBackground } from "reac
 import { React, useState } from "react";
 import { login } from "../../db/auth/auth";
 import loginn from '../../assets/loginn.png'
-
+import {
+  getUsers,
+  addUser,
+  deleteUser,
+  subscribe,
+} from "../../db/cities/users";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
@@ -55,7 +60,7 @@ const Login = () => {
         <Button
           title="Login"
           onPress={() => {
-            console.log(email, password);
+            
             login(email,password)
               .then()
               .catch((e) => setError(e.message));
