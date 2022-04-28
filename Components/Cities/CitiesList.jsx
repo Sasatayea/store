@@ -15,9 +15,7 @@ const CitiesList = ({ navigation }) => {
   
   const getCitiesList = async () => {
     const c = await getCities();
-    
     setCities(c);
-    
     console.log("cities", c);
   };
   
@@ -53,25 +51,42 @@ const CitiesList = ({ navigation }) => {
   const [cities, setCities] = useState([]);
   
   const [cityToEdit, setCityToEdit] = useState(undefined);
+
+  const [cartt, setCartt] = useState([]);
+  const sasa ='sss';
+  const AddToCart = (id)=>{
+    setCartt ((prevCart)=>{
+        return [
+          cities.filter(iteem => iteem.id == id),
+          ...prevCart
+          ];
+      })
+    }
+    
+    const showCart =()=> {
+      return cartt ;
+    }
+  console.log(cartt);
   
 //const bed = cities.filter((e)=>e.type=="dolab");
 
-  return cityToEdit ? (
-    <EditCity city={cityToEdit} onSave={()=>setCityToEdit(undefined)} />
-  ) : (
-
+  return (
     <View>
-
+      <Button
+        title="cart"
+        onPress={() => navigation.navigate('cart', {itemId:cartt} )}
+      />
       <View
           style={{
             height:550,
           }}>
-      {cities.map((item,index) => (
-        
-          
-          <Pitem navigation={navigation} item = {item} key = {index}/>
-          ))}
-      
+      <FlatList 
+        data={cities}
+        keyExtractor={cities.id}
+        renderItem={({item})=>(
+          <Pitem navigation={navigation} item = {item} AddToCart={AddToCart} />
+          )}
+      />
     </View>
   </View>
     
