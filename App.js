@@ -9,6 +9,7 @@ import Login from "./Components/Users/Login";
 import Register from "./Components/Users/Register";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import cart from "./Components/Cart/cart";
 
 const Stack = createNativeStackNavigator();
 // import Cities from "./Components/Cities/Cities";
@@ -42,8 +43,8 @@ export default function App() {
                   },
                   headerRight: () => (
                       <Button
-                      onPress={() => alert('This is a button!')}
-                      title="Info"
+                      onPress={() => navigation.navigate('cart')}
+                      title="cart"
                     /> 
                     // <Img source={imm}  />
                   ),
@@ -51,6 +52,8 @@ export default function App() {
               />
               <Stack.Screen name="EditCity" component={EditCity} />
               <Stack.Screen name="product" component={product} />
+              <Stack.Screen name="cart" component={cart} />
+
 
             </Stack.Navigator>
           </NavigationContainer>
