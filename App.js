@@ -16,8 +16,14 @@ const Stack = createNativeStackNavigator();
 // import GuessMyNumber from "./Components/GuessMyNumber";
 import fpage from './Components/Cities/fpage';
 import product from './Components/items/product';
+function Root() {
+  return (
+    <Stack.Navigator >
 
-export default function App() {
+    </Stack.Navigator>
+  );
+}
+export default function App({navigation}) {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => setUser(user));
     return () => {
