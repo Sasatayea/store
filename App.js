@@ -18,10 +18,19 @@ const Stack = createNativeStackNavigator();
 // import GuessMyNumber from "./Components/GuessMyNumber";
 import fpage from './Components/Cities/fpage';
 import product from './Components/items/product';
+<<<<<<< HEAD
 import Chairs from './Components/pages/Chairs';
 import Sofas from './Components/pages/Sofas';
+=======
+function Root() {
+  return (
+    <Stack.Navigator >
+>>>>>>> df69e38a5c0292ee7ee2376b173f6f9562118360
 
-export default function App() {
+    </Stack.Navigator>
+  );
+}
+export default function App({navigation}) {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => setUser(user));
     return () => {

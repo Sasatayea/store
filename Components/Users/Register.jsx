@@ -3,6 +3,7 @@ import { React, useState } from "react";
 import { register } from "../../db/auth/auth";
 import loginn from '../../assets/loginn.png'
 
+
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
@@ -57,7 +58,7 @@ const Register = () => {
         <Button
           title="Register"
           onPress={() => {
-            console.log(email, password);
+            
             register(email,password)
               .then()
               .catch((e) => setError(e.message));
