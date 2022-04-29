@@ -1,13 +1,29 @@
 import { StyleSheet, Text, View, TouchableOpacity,Button, TextInput  ,FlatList } from "react-native";
-import { useState } from "react";
+import { useState ,useEffect } from "react";
 import { ScrollView } from "react-native-web";
+import {
+    getCart,
+  } from "../../db/cities/cities";
+  import Pitem from "../items/Pitem";
 export default function cart({ route,navigation }) {
-    const { itemId, otherParam } = route.params;
+    //const { itemId, otherParam } = route.params;
+    const [cart, setCart] = useState([]);
+
+    const getCartsList = async () => {
+        const c = await getCart();
+        setCart(c);
+        console.log("carts", c);
+      };
+      useEffect(() => {
+        getCartsList();
+        
+      }, []);
+
     return (
-    <View style={styles.content}> 
+    <View> 
         <Text>heloll</Text> 
 
-        <Text>{JSON.stringify(itemId)}</Text>
+        {/* <Text>{JSON.stringify(itemId)}</Text> */}
         {/* <ScrollView>
             {itemId.map((e,index)=>(
             <View key={index}>
@@ -15,6 +31,14 @@ export default function cart({ route,navigation }) {
             </View>
             ))}
         </ScrollView> */}
+
+        <FlatList 
+        data={cart}
+        keyExtractor={cart.id}
+        renderItem={({item})=>(
+          <Pitem navigation={navigation} item = {item} />
+          )}
+      />
     </View>
     );
 }
