@@ -10,7 +10,6 @@ import Pitem from "../items/Pitem";
 import image1 from "../../assets/loginn.png";
 import EditCity from "./EditCity";
 import { TouchableOpacity } from "react-native-web";
-
 const CitiesList = ({ navigation }) => {
   
   const getCitiesList = async () => {
@@ -76,6 +75,7 @@ const CitiesList = ({ navigation }) => {
         title="cart"
         onPress={() => navigation.navigate('cart', {itemId:cartt} )}
       />
+
       <View
           style={{
             height:550,
@@ -88,6 +88,9 @@ const CitiesList = ({ navigation }) => {
           )}
       />
     </View>
+    <Button title="Beds" onPress={() => navigation.navigate('Bed', {cities:cities} )}/>
+    <Button title="Chairs" onPress={() => navigation.navigate('Chairs', {cities:cities} )}/>
+    <Button title="Sofas" onPress={() => navigation.navigate('Sofas', {cities:cities} )}/>
   </View>
     
   );

@@ -1,6 +1,8 @@
 import { onAuthStateChanged } from "firebase/auth";
 import CitiesList from "./Components/Cities/CitiesList";
 import EditCity from "./Components/Cities/EditCity";
+import Bed from "./Components/pages/Bed";
+
 import imm from "./assets/icon.png";
 import { auth } from "./db/Config";
 import { useState, useEffect} from "react";
@@ -16,6 +18,8 @@ const Stack = createNativeStackNavigator();
 // import GuessMyNumber from "./Components/GuessMyNumber";
 import fpage from './Components/Cities/fpage';
 import product from './Components/items/product';
+import Chairs from './Components/pages/Chairs';
+import Sofas from './Components/pages/Sofas';
 
 export default function App() {
   useEffect(() => {
@@ -53,7 +57,9 @@ export default function App() {
               <Stack.Screen name="EditCity" component={EditCity} />
               <Stack.Screen name="product" component={product} />
               <Stack.Screen name="cart" component={cart} />
-
+              <Stack.Screen name="Bed" component={Bed} />
+              <Stack.Screen name="Chairs" component={Chairs} />
+              <Stack.Screen name="Sofas" component={Sofas} />
 
             </Stack.Navigator>
           </NavigationContainer>
