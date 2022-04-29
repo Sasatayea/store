@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity,Button, TextInput  ,Image } fr
 import { editCity } from "../../db/cities/cities";
 import { useState } from "react";
 export default function Pitem({ navigation ,item ,AddToCart}) {
-    const [productsCart, setProductsCart] = useState([]);
+    
     
   return (
     <View
