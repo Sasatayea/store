@@ -2,7 +2,8 @@ import { StyleSheet, Text, View, TouchableOpacity,Button, TextInput  ,FlatList }
 import { useState } from "react";
 import { ScrollView } from "react-native-web";
 export default function cart({ route,navigation }) {
-    const { itemId, otherParam } = route.params;
+    
+    const { itemId, otherParam } = route.params.itemId;
     return (
     <View style={styles.content}> 
         <Text>heloll</Text> 

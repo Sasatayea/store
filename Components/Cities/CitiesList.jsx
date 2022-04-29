@@ -52,8 +52,7 @@ const CitiesList = ({ navigation }) => {
   
   const [cityToEdit, setCityToEdit] = useState(undefined);
 
-  const [cartt, setCartt] = useState([]);
-  const sasa ='sss';
+  const [cartt, setCartt] = useState([]);;
   const AddToCart = (id)=>{
     setCartt ((prevCart)=>{
         return [
@@ -69,14 +68,13 @@ const CitiesList = ({ navigation }) => {
   console.log(cartt);
   const [selectedValue, setSelectedValue] = useState("bed");
 
-  const dataa = cities.filter((e)=>e.type== selectedValue);
+  let dataa = cities.filter((e)=>e.type== selectedValue);
   //const [dataa, setDataa] = useState([]);
   //setDataa = cities.filter((e)=>e.type== selectedValue);
 
   if(selectedValue == "All"){
-    dataa === cities ;
-    console.log("done");
-    }
+    dataa = cities ;
+  }
 
     console.log(selectedValue);
 
