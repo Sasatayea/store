@@ -1,6 +1,8 @@
 import { onAuthStateChanged } from "firebase/auth";
 import CitiesList from "./Components/Cities/CitiesList";
 import EditCity from "./Components/Cities/EditCity";
+import Bed from "./Components/pages/Bed";
+
 import imm from "./assets/icon.png";
 import { auth } from "./db/Config";
 import { useState, useEffect} from "react";
@@ -9,14 +11,26 @@ import Login from "./Components/Users/Login";
 import Register from "./Components/Users/Register";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import cart from "./Components/Cart/cart";
 
 const Stack = createNativeStackNavigator();
 // import Cities from "./Components/Cities/Cities";
 // import GuessMyNumber from "./Components/GuessMyNumber";
 import fpage from './Components/Cities/fpage';
 import product from './Components/items/product';
+<<<<<<< HEAD
+import Chairs from './Components/pages/Chairs';
+import Sofas from './Components/pages/Sofas';
+=======
+function Root() {
+  return (
+    <Stack.Navigator >
+>>>>>>> df69e38a5c0292ee7ee2376b173f6f9562118360
 
-export default function App() {
+    </Stack.Navigator>
+  );
+}
+export default function App({navigation}) {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => setUser(user));
     return () => {
@@ -42,8 +56,8 @@ export default function App() {
                   },
                   headerRight: () => (
                       <Button
-                      onPress={() => alert('This is a button!')}
-                      title="Info"
+                      onPress={() => navigation.navigate('cart')}
+                      title="cart"
                     /> 
                     // <Img source={imm}  />
                   ),
@@ -51,6 +65,10 @@ export default function App() {
               />
               <Stack.Screen name="EditCity" component={EditCity} />
               <Stack.Screen name="product" component={product} />
+              <Stack.Screen name="cart" component={cart} />
+              <Stack.Screen name="Bed" component={Bed} />
+              <Stack.Screen name="Chairs" component={Chairs} />
+              <Stack.Screen name="Sofas" component={Sofas} />
 
             </Stack.Navigator>
           </NavigationContainer>

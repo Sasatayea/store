@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View, TouchableOpacity,Button, TextInput  ,Image } from "react-native";
 import { editCity } from "../../db/cities/cities";
 import { useState } from "react";
-export default function Pitem({ navigation ,item}) {
-    const [productsCart, setProductsCart] = useState([]);
+export default function Pitem({ navigation ,item ,AddToCart}) {
+    
+    
   return (
     <View
           style={styles.content}
@@ -13,7 +14,7 @@ export default function Pitem({ navigation ,item}) {
             <Text>$ {item.price}</Text>
           </TouchableOpacity>
           {/* <Button title="Delete" onPress={() => deleteCity(item.id)} /> */}
-          <Button title="Add to char" onPress={()=>setProductsCart(item.id)}/>
+          <Button title="Add to char" onPress={()=>AddToCart(item.id)}/>
         </View>
   );
 }

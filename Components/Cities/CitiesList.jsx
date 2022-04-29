@@ -1,4 +1,4 @@
-import { View, Text, Button, TextInput ,FlatList ,Image } from "react-native";
+import { View, Text, Button, TextInput ,FlatList ,Image ,Picker ,StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
 import {
   getCities,
@@ -10,14 +10,11 @@ import Pitem from "../items/Pitem";
 import image1 from "../../assets/loginn.png";
 import EditCity from "./EditCity";
 import { TouchableOpacity } from "react-native-web";
-
 const CitiesList = ({ navigation }) => {
   
   const getCitiesList = async () => {
     const c = await getCities();
-    
     setCities(c);
-    
     console.log("cities", c);
   };
   
@@ -53,29 +50,79 @@ const CitiesList = ({ navigation }) => {
   const [cities, setCities] = useState([]);
   
   const [cityToEdit, setCityToEdit] = useState(undefined);
-  
-//const bed = cities.filter((e)=>e.type=="dolab");
 
-  return cityToEdit ? (
-    <EditCity city={cityToEdit} onSave={()=>setCityToEdit(undefined)} />
-  ) : (
+  const [cartt, setCartt] = useState([]);;
+  const AddToCart = (id)=>{
+    setCartt ((prevCart)=>{
+        return [
+          cities.filter(iteem => iteem.id == id),
+          ...prevCart
+          ];
+      })
+    }
+    
+    const showCart =()=> {
+      return cartt ;
+    }
+  console.log(cartt);
+  const [selectedValue, setSelectedValue] = useState("bed");
 
+  let dataa = cities.filter((e)=>e.type== selectedValue);
+  //const [dataa, setDataa] = useState([]);
+  //setDataa = cities.filter((e)=>e.type== selectedValue);
+
+  if(selectedValue == "All"){
+    dataa = cities ;
+  }
+
+    console.log(selectedValue);
+
+  return (
     <View>
+
+      <Button
+        title="cart"
+        onPress={() => navigation.navigate('cart', {itemId:cartt} )}
+      />
+    
+    <View style={styles.container}>
+      <Picker
+        selectedValue={selectedValue}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+      >
+        <Picker.Item label="All" value="All" />
+        <Picker.Item label="chair" value="chair" />
+        <Picker.Item label="bed" value="bed" />
+        <Picker.Item label="sofa" value="sofa" />
+      </Picker>
+    </View>
 
       <View
           style={{
             height:550,
           }}>
-      {cities.map((item,index) => (
-        
-          
-          <Pitem navigation={navigation} item = {item} key = {index}/>
-          ))}
-      
+      <FlatList 
+        data={dataa}
+        keyExtractor={cities.id}
+        renderItem={({item})=>(
+          <Pitem navigation={navigation} item = {item} AddToCart={AddToCart} />
+          )}
+      />
     </View>
+    <Button title="Beds" onPress={() => navigation.navigate('Bed', {cities:cities} )}/>
+    <Button title="Chairs" onPress={() => navigation.navigate('Chairs', {cities:cities} )}/>
+    <Button title="Sofas" onPress={() => navigation.navigate('Sofas', {cities:cities} )}/>
   </View>
     
   );
 };
 
 export default CitiesList;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 10,
+    alignItems: "center"
+  }
+});
