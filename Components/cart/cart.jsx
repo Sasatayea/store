@@ -18,6 +18,7 @@ import {
       useEffect(() => {
         getCartsList();
       }, []);
+      
       const auth = getAuth();
       const userr = auth.currentUser;
       if (userr !== null) {

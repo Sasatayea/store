@@ -17,8 +17,8 @@ onAuthStateChanged(auth, (user) => {
   // Do other things
 });
 
-async function register(email, password) {
-  await createUserWithEmailAndPassword(auth, email, password);
+async function register(email, password ) {
+  await createUserWithEmailAndPassword(auth, email, password );
 }
 
 async function login(email, password) {

@@ -36,7 +36,7 @@ export default function App() {
 //   const email = userr.email;
 //   console.log("ssssssssss",email);
 // }
-
+console.log(user)
 
       // user ? <CitiesList /> : <Register/>
 
