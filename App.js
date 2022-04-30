@@ -1,9 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import CitiesList from "./Components/Cities/CitiesList";
 import EditCity from "./Components/Cities/EditCity";
-
-
-
 import imm from "./assets/icon.png";
 import { auth } from "./db/Config";
 import { useState, useEffect} from "react";
@@ -12,7 +9,7 @@ import Login from "./Components/Users/Login";
 import Register from "./Components/Users/Register";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import cart from "./Components/Cart/cart";
 import { getAuth } from "firebase/auth";
 
@@ -22,6 +19,8 @@ const Tab = createBottomTabNavigator();
 // import GuessMyNumber from "./Components/GuessMyNumber";
 import fpage from './Components/Cities/fpage';
 import product from './Components/items/product';
+import profile from './Components/Cities/profile';
+import search from './Components/Cities/search';
 
 function Root() {
   return (
@@ -41,49 +40,22 @@ export default function App({navigation}) {
   }, []);
   
   const [user, setUser] = useState(undefined);
-//git curant user info
 
-// const auth = getAuth();
-// const userr = auth.currentUser;
-
-// if (userr !== null) {
-//   const email = userr.email;
-//   console.log("ssssssssss",email);
-// }
 console.log(user)
-
-      // user ? <CitiesList /> : <Register/>
-      // ahmed 
       if(user){
-            return (
-            <NavigationContainer>
+            return ( 
               
-            <Stack.Navigator >
-              <Stack.Screen name="Home Page"   component={CitiesList}
-                options={{
-                  headerStyle: {
-                    backgroundColor: '#0F5959',
-                  },
-                  headerTitleStyle: {
-                    fontWeight: 'bold',
-                  },
-                  headerRight: () => (
-                      <Button
-                      onPress={() => navigation.navigate('cart')}
-                      title="cart"
-                    /> 
-                    // <Img source={imm}  />
-                  ),
-                }}
-              />
-              <Stack.Screen name="EditCity" component={EditCity} />
-              <Stack.Screen name="product" component={product} />
-              <Stack.Screen name="cart" component={cart} />
-              
+              <NavigationContainer>
+              <Tab.Navigator>
+                  <Tab.Screen name="Home" component={CitiesList}/>
+                  <Tab.Screen name="Cart" component={cart}/>
+                  <Tab.Screen name="Profile" component={profile}/>
+                  <Tab.Screen name="product" component={product}/>
+                  <Tab.Screen name="Search" component={search}/>
 
-            </Stack.Navigator>
-          </NavigationContainer>
-              // <CitiesList /> 
+              </Tab.Navigator>
+      
+              </NavigationContainer>
               )
       }else{ 
         return(
