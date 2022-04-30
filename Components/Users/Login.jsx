@@ -36,6 +36,8 @@ const Login = () => {
         <TextInput
           onChangeText={setEmail}
           keyboardType="email-address"
+          placeholder="email-address"
+
           style={{ flex: 2, borderColor: "black", borderWidth: 2  }}
         />
       </View>
@@ -49,6 +51,7 @@ const Login = () => {
         <TextInput
           onChangeText={setpassword}
           keyboardType="visible-password"
+          placeholder="password"
           secureTextEntry={true}
           style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
         />
