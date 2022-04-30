@@ -81,4 +81,19 @@ function subscribe(callback) {
   return unsubscribe;
 }
 
-export { getCities, addCity, editCity, deleteCity, subscribe ,addCart ,getCart ,deleteCart};
+function subscribeCart(callback) {
+  const unsubscribe = onSnapshot(
+    query(collection(db, "cart")),
+    (snapshot) => {
+      const source = snapshot.metadata.hasPendingWrites ? "Local" : "Server";
+      snapshot.docChanges().forEach((change) => {
+        // console.log("changes", change, snapshot.metadata);
+        if (callback) callback({ change, snapshot });
+      });
+      // console.log(source, " data: ", snapshot.data());
+    }
+  );
+  return unsubscribe;
+}
+
+export { getCities, addCity, editCity, deleteCity, subscribe ,addCart ,getCart ,deleteCart,subscribeCart};

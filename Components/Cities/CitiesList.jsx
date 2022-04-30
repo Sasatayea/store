@@ -23,6 +23,7 @@ import image1 from "../../assets/loginn.png";
 import EditCity from "./EditCity";
 import { TouchableOpacity } from "react-native-web";
 import { async } from "@firebase/util";
+import { getCart } from "../../db/cities/cities";
 const CitiesList = ({ navigation }) => {
   const getCitiesList = async () => {
     const c = await getCities();
@@ -38,6 +39,7 @@ const CitiesList = ({ navigation }) => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
       if (change.type === "added") {
         getCitiesList();
+
       }
       if (change.type === "modified") {
         getCitiesList();
