@@ -35,6 +35,7 @@ async function deleteCart(cartt) {
     console.error("Error deleting document: ", error);
   }
 }
+
 async function editCity(city) {
   console.log("at editCity", city);
   await setDoc(doc(db, "products", city.id), city);
