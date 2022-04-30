@@ -42,7 +42,7 @@ export default function App({navigation}) {
   const [user, setUser] = useState(undefined);
 
       // user ? <CitiesList /> : <Register/>
-
+      // ahmed 
       if(user){
             return (
             <NavigationContainer>
