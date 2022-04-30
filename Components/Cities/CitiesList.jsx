@@ -15,13 +15,13 @@ import EditCity from "./EditCity";
 import { TouchableOpacity } from "react-native-web";
 
 const CitiesList = ({ navigation }) => {
-  const getUsersList = async () => {
-    const u = await getUsers();
-    setUsers(u);
-    let newcart = u.map((e)=>(e.cart));
-    setCartt(newcart);
-    console.log("users: ", u);
-  };
+  // const getUsersList = async () => {
+  //   const u = await getUsers();
+  //   setUsers(u);
+  //   let newcart = u.map((e)=>(e.cart));
+  //   setCartt(newcart);
+  //   console.log("users: ", u);
+  // };
   const getCitiesList = async () => {
     const c = await getCities();
     setCities(c);
@@ -30,7 +30,7 @@ const CitiesList = ({ navigation }) => {
   
   useEffect(() => {
     getCitiesList();
-    getUsersList();
+    //getUsersList();
   }, []);
   
   useEffect(() => {
@@ -57,24 +57,24 @@ const CitiesList = ({ navigation }) => {
     };
   }, []);
 
-  useEffect(() => {
-    const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
-      if (change.type === "added") {
-        getUsersList();
-      }
-      if (change.type === "modified") {
-        getUsersList();
+  // useEffect(() => {
+  //   const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
+  //     if (change.type === "added") {
+  //       getUsersList();
+  //     }
+  //     if (change.type === "modified") {
+  //       getUsersList();
         
-      }
-      if (change.type === "removed") {
-        getUsersList();
-      }
-    });
+  //     }
+  //     if (change.type === "removed") {
+  //       getUsersList();
+  //     }
+  //   });
     
-    return () => {
-      unsubscribeUser();
-    };
-  }, []);
+  //   return () => {
+  //     unsubscribeUser();
+  //   };
+  // }, []);
 
   const [cities, setCities] = useState([]);
   const [users, setUsers] = useState([]);
