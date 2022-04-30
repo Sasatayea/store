@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
   getCities,
   addCity,
+  addCart,
   deleteCity,
   subscribe,
 } from "../../db/cities/cities";
@@ -24,7 +25,7 @@ const CitiesList = ({ navigation }) => {
   const getCitiesList = async () => {
     const c = await getCities();
     setCities(c);
-    console.log("cities", c);
+    console.log("products", c);
   };
   
   useEffect(() => {
@@ -79,30 +80,22 @@ const CitiesList = ({ navigation }) => {
   const [users, setUsers] = useState([]);
   const [cityToEdit, setCityToEdit] = useState(undefined);
 
-  const [cartt, setCartt] = useState([]);
-  console.log("mycart: ",cartt);
-  const AddToCart = (id)=>{
-    setCartt ((prevCart)=>{
-
+  // const [cartt, setCartt] = useState([]);
+  // const sasa ='sss';
+  // const AddToCart = (id)=>{
+  //   setCartt ((prevCart)=>{
+  //       return [
+  //         cities.filter(iteem => iteem.id == id),
+  //         ...prevCart
+  //         ];
+  //     })
+  //   }
     
-      let x = cities.filter((iteem) => iteem.id == id);
-      let x2 = [
-        x.map((iteem) => (iteem.id)),
-        ...prevCart
-        ]
-        editUser({id:" Lb1OO6KAkbEarIlRq5xl",email:"201927074@std.sci.cu.edu.eg",password:"1927074",money:1,cart:x2,sold:[]});
-        return x2;
-      })
-    }
-    const addUserCart = ()=>{
-      let car = cartt.map((e)=>(e[0].id));
-      return{id:" Lb1OO6KAkbEarIlRq5xl",email:"201927074@std.sci.cu.edu.eg",password:"1927074",money:1,cart:car,sold:[]};
-    }
-    //editUser(addUserCart());
-    
-    
-
-  const [selectedValue, setSelectedValue] = useState("bed");
+  //   const showCart =()=> {
+  //     return cartt ;
+  //   }
+  // console.log(cartt);
+  const [selectedValue, setSelectedValue] = useState("All");
 
   let dataa = cities.filter((e)=>e.type== selectedValue);
   //const [dataa, setDataa] = useState([]);
@@ -110,15 +103,20 @@ const CitiesList = ({ navigation }) => {
 
   if(selectedValue == "All"){
     dataa = cities ;
-  }
+    console.log("done");
+    }
 
+    //console.log(selectedValue);
 
-  return (
+    return cityToEdit ? (
+      <EditCity city={cityToEdit} onSave={()=>setCityToEdit(undefined)} />
+    ) : (
+
     <View>
 
       <Button
         title="cart"
-        onPress={() => navigation.navigate('cart', {itemId:cartt} )}
+        onPress={() => navigation.navigate('cart')}
       />
     
     <View style={styles.container}>
@@ -142,7 +140,7 @@ const CitiesList = ({ navigation }) => {
         data={dataa}
         keyExtractor={cities.id}
         renderItem={({item})=>(
-          <Pitem navigation={navigation} item = {item} AddToCart={AddToCart} />
+          <Pitem navigation={navigation} item = {item} />
           )}
       />
     </View>
