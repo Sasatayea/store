@@ -4,7 +4,9 @@ import { ScrollView } from "react-native-web";
 import {
     getCart,
     } from "../../db/cities/cities";
-  import Pitem from "../items/Pitem";
+  import CartItem from "../items/CartItem";
+  import { getAuth } from "firebase/auth";
+
   export default function cart({ route,navigation }) {
     //const { itemId, otherParam } = route.params;
     const [cart, setCart] = useState([]);
@@ -16,19 +18,24 @@ import {
       useEffect(() => {
         getCartsList();
       }, []);
+      const auth = getAuth();
+      const userr = auth.currentUser;
+      if (userr !== null) {
+        const email = userr.email;
+        let dataa = cart.filter((e)=>e.username == email);
 
     return (
     <View> 
         <Text>heloll</Text> 
         <FlatList 
-        data={cart}
+        data={dataa}
         keyExtractor={cart.id}
         renderItem={({item})=>(
-          <Pitem navigation={navigation} item = {item} />
+          <CartItem navigation={navigation} item = {item} />
           )}
       />
     </View>
-    );
+    );}
 }
 
 const styles = StyleSheet.create({
