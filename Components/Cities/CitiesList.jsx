@@ -60,75 +60,26 @@ const CitiesList = ({ navigation }) => {
 
   const [selectedValue, setSelectedValue] = useState("All");
   const [searchItem, setsearchItem] = useState("");
-  const [dataa, setDataa] = useState(cities);
-  const [toggle, setToggle] = useState(true);
-  console.log("myci: ",cities);
   
-  if (toggle) {
-    if (selectedValue == "All") {
-      setDataa(cities);
-      console.log(cities);
-    } else {
-      setDataa(cities.filter((e) => e.type == selectedValue));
+  let dataa = cities.filter((e)=>e.type== selectedValue);
+  //const [dataa, setDataa] = useState([]);
+  //setDataa = cities.filter((e)=>e.type== selectedValue);
+  if(selectedValue == "All"){
+    dataa = cities ;
+    console.log("done");
     }
-      setToggle(false);
-
-  }
-
-  
-  const search = (searchItem) => {
-    let x = [];
-    let s = "";
-    let h =0 ;
-    for (let i = 0; i < cities.length; i++) {
-
-        s = cities[i].name; 
-        if (s.match(searchItem)){
-          if(s.match(searchItem).input!=null){
-          x[h] = s.match(searchItem).input;
-            h++;
-          }
-        };
-    
-    }
-    console.log("match2: ", x);
-    let k =0;
-    let data = [];
-    for (let i = 0; i < cities.length; i++) {
-      const ddd = cities[i].name ;
-      for (let j = 0; j < x.length; j++) {
-        if( ddd == x[j]){
-          data[k] = cities[i];
-          k++;
-          console.log("match: ", data[j]);
-        
-      }
-        
-        
-      }
-    }
-    console.log("x:", data);
-    setDataa(data);
-  };
 
   return cityToEdit ? (
     <EditCity city={cityToEdit} onSave={() => setCityToEdit(undefined)} />
   ) : (
     <View>
-      <Button title="cart" onPress={() => navigation.navigate("cart")} />
-
       <View style={styles.container}>
-        <TextInput
-          onChangeText={(e)=>{setsearchItem(e),search(e)}}
-          //onChange ={()=>search(searchItem)}
-          style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
-        />
-        <Button title="search" onPress={() => search(searchItem)} />
+        
         <Picker
           selectedValue={selectedValue}
           style={{ height: 50, width: 150 }}
           onValueChange={(itemValue, itemIndex) => {
-            setSelectedValue(itemValue), setToggle(true);
+            setSelectedValue(itemValue);
           }}
         >
           <Picker.Item label="All" value="All" />

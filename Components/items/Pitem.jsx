@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity,Button, TextInput  ,Image } from "react-native";
 import { editCity } from "../../db/cities/cities";
 import { getAuth } from "firebase/auth";
-
+import imm from "../../assets/shopping-cart.png"
 import { useState ,useEffect } from "react";
 import {
   addCity,
@@ -25,8 +25,10 @@ export default function Pitem({ navigation ,item }) {
             <Text> {item.name} </Text>
             <Text>$ {item.price}</Text>
           </TouchableOpacity>
-          {/* <Button title="Delete" onPress={() => deleteCity(item.id)} /> */}
-          {/* <Button title="Add to char" onPress={()=>AddToCart(item.id)}/> */}
+
+          <TouchableOpacity >
+            <Image source={imm} ></Image>
+          </TouchableOpacity>
           <Button
           title="Add to char"
           onPress={() =>

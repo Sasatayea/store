@@ -9,14 +9,19 @@ import Login from "./Components/Users/Login";
 import Register from "./Components/Users/Register";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import cart from "./Components/Cart/cart";
 import { getAuth } from "firebase/auth";
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 // import Cities from "./Components/Cities/Cities";
 // import GuessMyNumber from "./Components/GuessMyNumber";
 import fpage from './Components/Cities/fpage';
 import product from './Components/items/product';
+import profile from './Components/Cities/profile';
+import search from './Components/Cities/search';
+
 function Root() {
   return (
     <Stack.Navigator >
@@ -25,6 +30,8 @@ function Root() {
   );
 }
 export default function App({navigation}) {
+
+  
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => setUser(user));
     return () => {
@@ -33,48 +40,22 @@ export default function App({navigation}) {
   }, []);
   
   const [user, setUser] = useState(undefined);
-//git curant user info
 
-// const auth = getAuth();
-// const userr = auth.currentUser;
-
-// if (userr !== null) {
-//   const email = userr.email;
-//   console.log("ssssssssss",email);
-// }
 console.log(user)
-
-      // user ? <CitiesList /> : <Register/>
-
       if(user){
-            return (
-            <NavigationContainer>
-            <Stack.Navigator >
-              <Stack.Screen name="Home Page"   component={CitiesList}
-                options={{
-                  headerStyle: {
-                    backgroundColor: 'white',
-                  },
-                  headerTitleStyle: {
-                    fontWeight: 'bold',
-                  },
-                  headerRight: () => (
-                      <Button
-                      onPress={() => navigation.navigate('cart')}
-                      title="cart"
-                    /> 
-                    // <Img source={imm}  />
-                  ),
-                }}
-              />
-              <Stack.Screen name="EditCity" component={EditCity} />
-              <Stack.Screen name="product" component={product} />
-              <Stack.Screen name="cart" component={cart} />
+            return ( 
+              
+              <NavigationContainer>
+              <Tab.Navigator>
+                  <Tab.Screen name="Home" component={CitiesList}/>
+                  <Tab.Screen name="Cart" component={cart}/>
+                  <Tab.Screen name="Profile" component={profile}/>
+                  <Tab.Screen name="product" component={product}/>
+                  <Tab.Screen name="Search" component={search}/>
 
-
-            </Stack.Navigator>
-          </NavigationContainer>
-              // <CitiesList /> 
+              </Tab.Navigator>
+      
+              </NavigationContainer>
               )
       }else{ 
         return(
@@ -84,6 +65,7 @@ console.log(user)
               <Stack.Screen name="Login" component={Login} />
               <Stack.Screen name="Register" component={Register} />
             </Stack.Navigator>
+            
           </NavigationContainer>
             //<fpage />
         )}
