@@ -1,4 +1,13 @@
-import { View, Text, Button, TextInput ,FlatList ,Image ,Picker ,StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  TextInput,
+  FlatList,
+  Image,
+  Picker,
+  StyleSheet,
+} from "react-native";
 import { useEffect, useState } from "react";
 import {
   getCities,
@@ -9,7 +18,7 @@ import {
 } from "../../db/cities/cities";
 import { subscribeUser } from "../../db/cities/users";
 import Pitem from "../items/Pitem";
-import { editUser,getUsers } from "../../db/cities/users";
+import { editUser, getUsers } from "../../db/cities/users";
 import image1 from "../../assets/loginn.png";
 import EditCity from "./EditCity";
 import { TouchableOpacity } from "react-native-web";
@@ -27,12 +36,12 @@ const CitiesList = ({ navigation }) => {
     setCities(c);
     console.log("products", c);
   };
-  
+
   useEffect(() => {
     getCitiesList();
     //getUsersList();
   }, []);
-  
+
   useEffect(() => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
       //   console.log("changes", change, snapshot, change.type);
@@ -51,7 +60,7 @@ const CitiesList = ({ navigation }) => {
       }
       // }
     });
-    
+
     return () => {
       unsubscribe();
     };
@@ -64,13 +73,13 @@ const CitiesList = ({ navigation }) => {
   //     }
   //     if (change.type === "modified") {
   //       getUsersList();
-        
+
   //     }
   //     if (change.type === "removed") {
   //       getUsersList();
   //     }
   //   });
-    
+
   //   return () => {
   //     unsubscribeUser();
   //   };
@@ -90,62 +99,86 @@ const CitiesList = ({ navigation }) => {
   //         ];
   //     })
   //   }
-    
+
   //   const showCart =()=> {
   //     return cartt ;
   //   }
   // console.log(cartt);
   const [selectedValue, setSelectedValue] = useState("All");
-
-  let dataa = cities.filter((e)=>e.type== selectedValue);
+  const [searchItem, setsearchItem] = useState("");
+  const [dataa, setDataa] = useState("");
+  const [toggle, setToggle] = useState(true);
+if(toggle){
+  if (selectedValue == "All") {
+    setDataa(cities);
+    console.log(cities);
+  }else{
+    setDataa(cities.filter((e) => e.type == selectedValue));
+  }
+  setToggle(false);
+}
   //const [dataa, setDataa] = useState([]);
   //setDataa = cities.filter((e)=>e.type== selectedValue);
 
-  if(selectedValue == "All"){
-    dataa = cities ;
-    console.log("done");
+  
+
+  let x = [];
+
+  //console.log(selectedValue);
+
+  const search = (searchItem) => {
+    let s = "";
+    for (let i = 0; i < cities.length; i++) {
+      s = cities[i].name;
+      if (s.match(searchItem) != null) x[i] = s.match(searchItem).input;
     }
 
-    //console.log(selectedValue);
-
-    return cityToEdit ? (
-      <EditCity city={cityToEdit} onSave={()=>setCityToEdit(undefined)} />
-    ) : (
-
+    let data = [];
+    for (let i = 0; i < x.length; i++) {
+      data[i] = cities[i];
+    }
+    console.log("x:", data);
+    setDataa(data);
+  };
+  
+  return cityToEdit ? (
+    <EditCity city={cityToEdit} onSave={() => setCityToEdit(undefined)} />
+  ) : (
     <View>
+      <Button title="cart" onPress={() => navigation.navigate("cart")} />
 
-      <Button
-        title="cart"
-        onPress={() => navigation.navigate('cart')}
-      />
-    
-    <View style={styles.container}>
-      <Picker
-        selectedValue={selectedValue}
-        style={{ height: 50, width: 150 }}
-        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-      >
-        <Picker.Item label="All" value="All" />
-        <Picker.Item label="chair" value="chair" />
-        <Picker.Item label="bed" value="bed" />
-        <Picker.Item label="sofa" value="sofa" />
-      </Picker>
-    </View>
+      <View style={styles.container}>
+        <TextInput
+          onChangeText={setsearchItem}
+          style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
+        />
+        <Button title="search" onPress={() => search(searchItem)} />
+        <Picker
+          selectedValue={selectedValue}
+          style={{ height: 50, width: 150 }}
+          onValueChange={(itemValue, itemIndex) => {setSelectedValue(itemValue), setToggle(true)}}
+        >
+          <Picker.Item label="All" value="All" />
+          <Picker.Item label="chair" value="chair" />
+          <Picker.Item label="bed" value="bed" />
+          <Picker.Item label="sofa" value="sofa" />
+        </Picker>
+      </View>
 
       <View
-          style={{
-            height:550,
-          }}>
-      <FlatList 
-        data={dataa}
-        keyExtractor={cities.id}
-        renderItem={({item})=>(
-          <Pitem navigation={navigation} item = {item} />
+        style={{
+          height: 550,
+        }}
+      >
+        <FlatList
+          data={dataa}
+          keyExtractor={cities.id}
+          renderItem={({ item }) => (
+            <Pitem navigation={navigation} item={item} />
           )}
-      />
+        />
+      </View>
     </View>
-  </View>
-    
   );
 };
 
@@ -154,6 +187,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 10,
-    alignItems: "center"
-  }
+    flexDirection: "row",
+    alignItems: "center",
+  },
 });
