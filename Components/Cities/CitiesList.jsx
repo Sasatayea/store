@@ -10,8 +10,9 @@ import Pitem from "../items/Pitem";
 import image1 from "../../assets/loginn.png";
 import EditCity from "./EditCity";
 import { TouchableOpacity } from "react-native-web";
+import fpage from './fpage';
 const CitiesList = ({ navigation }) => {
-  
+
   const getCitiesList = async () => {
     const c = await getCities();
     setCities(c);
@@ -79,7 +80,7 @@ const CitiesList = ({ navigation }) => {
 
   return (
     <View>
-
+      
       <Button
         title="cart"
         onPress={() => navigation.navigate('cart', {itemId:cartt} )}
@@ -110,9 +111,9 @@ const CitiesList = ({ navigation }) => {
           )}
       />
     </View>
-    <Button title="Beds" onPress={() => navigation.navigate('Bed', {cities:cities} )}/>
+    {/* <Button title="Beds" onPress={() => navigation.navigate('Bed', {cities:cities} )}/>
     <Button title="Chairs" onPress={() => navigation.navigate('Chairs', {cities:cities} )}/>
-    <Button title="Sofas" onPress={() => navigation.navigate('Sofas', {cities:cities} )}/>
+    <Button title="Sofas" onPress={() => navigation.navigate('Sofas', {cities:cities} )}/> */}
   </View>
     
   );
