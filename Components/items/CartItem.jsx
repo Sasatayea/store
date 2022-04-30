@@ -1,17 +1,19 @@
 import { StyleSheet, Text, View, TouchableOpacity,Button, TextInput  ,Image } from "react-native";
 import { editCity } from "../../db/cities/cities";
 import { getAuth } from "firebase/auth";
-
 import { useState ,useEffect } from "react";
 import {
   addCity,
   addCart,
+  deleteCart,
+  subscribe
 } from "../../db/cities/cities";
-export default function Pitem({ navigation ,item }) {
+export default function CartItem({ navigation ,item }) {
     const [productsCart, setProductsCart] = useState([]);  
     
     const auth = getAuth();
     const userr = auth.currentUser;
+    
 
     if (userr !== null) {
       const email = userr.email;
@@ -28,9 +30,9 @@ export default function Pitem({ navigation ,item }) {
           {/* <Button title="Delete" onPress={() => deleteCity(item.id)} /> */}
           {/* <Button title="Add to char" onPress={()=>AddToCart(item.id)}/> */}
           <Button
-          title="Add to char"
+          title="dellet"
           onPress={() =>
-            addCart({ username:email, name: item.name , size:item.size ,type:item.type ,image:item.image ,price:item.price || "new city" + item.length })
+            deleteCart(item.id)
           }
         />
         </View>
@@ -43,7 +45,7 @@ const styles = StyleSheet.create({
     
         height:200,
         width:200 ,
-        backgroundColor:'blue',
+        backgroundColor:'red',
         margin:10,
         
   },
