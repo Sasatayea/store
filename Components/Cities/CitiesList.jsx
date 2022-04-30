@@ -23,7 +23,6 @@ import image1 from "../../assets/loginn.png";
 import EditCity from "./EditCity";
 import { TouchableOpacity } from "react-native-web";
 import { async } from "@firebase/util";
-
 const CitiesList = ({ navigation }) => {
   const getCitiesList = async () => {
     const c = await getCities();
@@ -59,8 +58,10 @@ const CitiesList = ({ navigation }) => {
 
   const [selectedValue, setSelectedValue] = useState("All");
   const [searchItem, setsearchItem] = useState("");
-  const [dataa, setDataa] = useState("");
-  const [toggle, setToggle] = useState(false);
+  const [dataa, setDataa] = useState(cities);
+  const [toggle, setToggle] = useState(true);
+  console.log("myci: ",cities);
+  
   if (toggle) {
     if (selectedValue == "All") {
       setDataa(cities);
@@ -68,29 +69,39 @@ const CitiesList = ({ navigation }) => {
     } else {
       setDataa(cities.filter((e) => e.type == selectedValue));
     }
-    setToggle(false);
+      setToggle(false);
+
   }
 
-  let x = [];
-
+  
   const search = (searchItem) => {
+    let x = [];
     let s = "";
+    let h =0 ;
     for (let i = 0; i < cities.length; i++) {
-      if(cities[i].name){
+
         s = cities[i].name; 
         if (s.match(searchItem)){
-          x[i] = s.match(searchItem).input
-
+          if(s.match(searchItem).input!=null){
+          x[h] = s.match(searchItem).input;
+            h++;
+          }
         };
+    
     }
-    }
+    console.log("match2: ", x);
     let k =0;
     let data = [];
     for (let i = 0; i < cities.length; i++) {
-      
-        if(cities[i].name = x[k]){
+      const ddd = cities[i].name ;
+      for (let j = 0; j < x.length; j++) {
+        if( ddd == x[j]){
           data[k] = cities[i];
-        k++;
+          k++;
+          console.log("match: ", data[j]);
+        
+      }
+        
         
       }
     }
@@ -106,7 +117,8 @@ const CitiesList = ({ navigation }) => {
 
       <View style={styles.container}>
         <TextInput
-          onChangeText={setsearchItem}
+          onChangeText={(e)=>{setsearchItem(e),search(e)}}
+          //onChange ={()=>search(searchItem)}
           style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
         />
         <Button title="search" onPress={() => search(searchItem)} />
