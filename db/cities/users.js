@@ -12,12 +12,12 @@ import {
 } from "firebase/firestore";
 // Get a list of cities from your database
 async function getUsers() {
-  const citiesCol = collection(db, "products");
-  const citySnapshot = await getDocs(citiesCol);
-  const cityList = citySnapshot.docs.map((doc) => {
+  const usersCol = collection(db, "users");
+  const userSnapshot = await getDocs(usersCol);
+  const userList = userSnapshot.docs.map((doc) => {
     return { id: doc.id, ...doc.data() };
   });
-  return cityList;
+  return userList;
 }
 
 async function editUser(user) {
@@ -43,7 +43,7 @@ async function addUser(user) {
   }
 }
 
-function subscribe(callback) {
+function subscribeUser(callback) {
   const unsubscribe = onSnapshot(
     query(collection(db, "users")),
     (snapshot) => {
@@ -58,4 +58,4 @@ function subscribe(callback) {
   return unsubscribe;
 }
 
-export { getUsers, addUser, editUser, deleteUser, subscribe };
+export { getUsers, addUser, editUser, deleteUser, subscribeUser };

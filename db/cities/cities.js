@@ -19,7 +19,22 @@ async function getCities() {
   });
   return cityList;
 }
-
+async function getCart() {
+  const citiesCol = collection(db, "cart");
+  const citySnapshot = await getDocs(citiesCol);
+  const cityList = citySnapshot.docs.map((doc) => {
+    return { id: doc.id, ...doc.data() };
+  });
+  return cityList;
+}
+async function deleteCart(cartt) {
+  try {
+    await deleteDoc(doc(db, "cart", cartt));
+    console.log("Document deleted with ID: ", cartt);
+  } catch (error) {
+    console.error("Error deleting document: ", error);
+  }
+}
 async function editCity(city) {
   console.log("at editCity", city);
   await setDoc(doc(db, "products", city.id), city);
@@ -42,6 +57,14 @@ async function addCity(city) {
     console.error("Error adding document: ", e);
   }
 }
+async function addCart(cat) {
+  try {
+    const docRef = await addDoc(collection(db, "cart"), cat);
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
 
 function subscribe(callback) {
   const unsubscribe = onSnapshot(
@@ -58,4 +81,4 @@ function subscribe(callback) {
   return unsubscribe;
 }
 
-export { getCities, addCity, editCity, deleteCity, subscribe };
+export { getCities, addCity, editCity, deleteCity, subscribe ,addCart ,getCart ,deleteCart};

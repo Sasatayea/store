@@ -10,6 +10,7 @@ import Register from "./Components/Users/Register";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import cart from "./Components/Cart/cart";
+import { getAuth } from "firebase/auth";
 
 const Stack = createNativeStackNavigator();
 // import Cities from "./Components/Cities/Cities";
@@ -32,6 +33,16 @@ export default function App({navigation}) {
   }, []);
   
   const [user, setUser] = useState(undefined);
+//git curant user info
+
+// const auth = getAuth();
+// const userr = auth.currentUser;
+
+// if (userr !== null) {
+//   const email = userr.email;
+//   console.log("ssssssssss",email);
+// }
+console.log(user)
 
       // user ? <CitiesList /> : <Register/>
 
