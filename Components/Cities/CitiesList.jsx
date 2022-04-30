@@ -6,13 +6,21 @@ import {
   deleteCity,
   subscribe,
 } from "../../db/cities/cities";
+import { subscribeUser } from "../../db/cities/users";
 import Pitem from "../items/Pitem";
+import { editUser,getUsers } from "../../db/cities/users";
 import image1 from "../../assets/loginn.png";
 import EditCity from "./EditCity";
 import { TouchableOpacity } from "react-native-web";
 
 const CitiesList = ({ navigation }) => {
-  
+  const getUsersList = async () => {
+    const u = await getUsers();
+    setUsers(u);
+    let newcart = u.map((e)=>(e.cart));
+    setCartt(newcart);
+    console.log("users: ", u);
+  };
   const getCitiesList = async () => {
     const c = await getCities();
     setCities(c);
@@ -21,7 +29,7 @@ const CitiesList = ({ navigation }) => {
   
   useEffect(() => {
     getCitiesList();
-    
+    getUsersList();
   }, []);
   
   useEffect(() => {
@@ -29,15 +37,15 @@ const CitiesList = ({ navigation }) => {
       //   console.log("changes", change, snapshot, change.type);
       // if (snapshot.metadata.hasPendingWrites) {
       if (change.type === "added") {
-        console.log("New city: ", change.doc.data());
+        //console.log("New city: ", change.doc.data());
         getCitiesList();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
+        //console.log("Modified city: ", change.doc.data());
         getCitiesList();
       }
       if (change.type === "removed") {
-        console.log("Removed city: ", change.doc.data());
+        //console.log("Removed city: ", change.doc.data());
         getCitiesList();
       }
       // }
@@ -48,24 +56,52 @@ const CitiesList = ({ navigation }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
+      if (change.type === "added") {
+        getUsersList();
+      }
+      if (change.type === "modified") {
+        getUsersList();
+        
+      }
+      if (change.type === "removed") {
+        getUsersList();
+      }
+    });
+    
+    return () => {
+      unsubscribeUser();
+    };
+  }, []);
+
   const [cities, setCities] = useState([]);
-  
+  const [users, setUsers] = useState([]);
   const [cityToEdit, setCityToEdit] = useState(undefined);
 
-  const [cartt, setCartt] = useState([]);;
+  const [cartt, setCartt] = useState([]);
+  console.log("mycart: ",cartt);
   const AddToCart = (id)=>{
     setCartt ((prevCart)=>{
-        return [
-          cities.filter(iteem => iteem.id == id),
-          ...prevCart
-          ];
+
+    
+      let x = cities.filter((iteem) => iteem.id == id);
+      let x2 = [
+        x.map((iteem) => (iteem.id)),
+        ...prevCart
+        ]
+        editUser({id:" Lb1OO6KAkbEarIlRq5xl",email:"201927074@std.sci.cu.edu.eg",password:"1927074",money:1,cart:x2,sold:[]});
+        return x2;
       })
     }
-    
-    const showCart =()=> {
-      return cartt ;
+    const addUserCart = ()=>{
+      let car = cartt.map((e)=>(e[0].id));
+      return{id:" Lb1OO6KAkbEarIlRq5xl",email:"201927074@std.sci.cu.edu.eg",password:"1927074",money:1,cart:car,sold:[]};
     }
-  console.log(cartt);
+    //editUser(addUserCart());
+    
+    
+
   const [selectedValue, setSelectedValue] = useState("bed");
 
   let dataa = cities.filter((e)=>e.type== selectedValue);
@@ -76,7 +112,6 @@ const CitiesList = ({ navigation }) => {
     dataa = cities ;
   }
 
-    console.log(selectedValue);
 
   return (
     <View>

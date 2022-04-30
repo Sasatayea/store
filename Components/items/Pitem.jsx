@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity,Button, TextInput  ,Image } from "react-native";
-import { editCity } from "../../db/cities/cities";
+import { editUser } from "../../db/cities/users";
 import { useState } from "react";
 export default function Pitem({ navigation ,item ,AddToCart}) {
     
@@ -14,7 +14,7 @@ export default function Pitem({ navigation ,item ,AddToCart}) {
             <Text>$ {item.price}</Text>
           </TouchableOpacity>
           {/* <Button title="Delete" onPress={() => deleteCity(item.id)} /> */}
-          <Button title="Add to char" onPress={()=>AddToCart(item.id)}/>
+          <Button title="Add to char" onPress={()=>{editUser()}}/>
         </View>
   );
 }

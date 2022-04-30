@@ -1,14 +1,23 @@
 import { StyleSheet, Text, View, TouchableOpacity,Button, TextInput  ,FlatList } from "react-native";
 import { useState } from "react";
 import { ScrollView } from "react-native-web";
+import { editUser } from "../../db/cities/users";
 export default function cart({ route,navigation }) {
     
-    const { itemId, otherParam } = route.params.itemId;
+    const { itemId, otherParam } = route.params;
+    console.log(itemId);
+
     return (
     <View style={styles.content}> 
-        <Text>heloll</Text> 
+        <FlatList 
+        data={itemId}
+        keyExtractor={itemId.id}
+        renderItem={({item})=>(
+        <Text>{item[0].name}</Text>
+        )}
+      />
 
-        <Text>{JSON.stringify(itemId)}</Text>
+        
         {/* <ScrollView>
             {itemId.map((e,index)=>(
             <View key={index}>
