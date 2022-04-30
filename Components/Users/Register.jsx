@@ -6,6 +6,10 @@ import loginn from '../../assets/loginn.png'
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
+  const [username, setusername] = useState("");
+  const [country, setcountry] = useState("");
+
+
   const [error, setError] = useState("");
   
   return (
@@ -15,7 +19,7 @@ const Register = () => {
           marginTop:'50%',
           backgroundColor:'white',
           borderRadius:20,
-          height:'40%'
+          height:'50%'
         }}>
         
         <Text  style={{
@@ -23,7 +27,19 @@ const Register = () => {
           textAlign:'center',
           fontSize:30
         }}> Sign Up </Text>
-
+      <View
+        style={{
+          padding: 10,
+          borderRadius:20,
+        }}
+      >
+        <TextInput
+          onChangeText={setusername}
+          keyboardType="default"
+          placeholder="User name"
+          style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
+        />
+      </View>
       <View
         style={{
           padding: 10,
@@ -33,6 +49,7 @@ const Register = () => {
         <TextInput
           onChangeText={setEmail}
           keyboardType="email-address"
+          placeholder="email-address"
           style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
         />
       </View>
@@ -45,7 +62,22 @@ const Register = () => {
         <TextInput
           onChangeText={setpassword}
           keyboardType="visible-password"
+          placeholder="password"
           secureTextEntry={true}
+          style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
+        />
+      </View>
+
+      <View
+        style={{
+          padding: 10,
+          borderRadius:20,
+        }}
+      >
+        <TextInput
+          onChangeText={setcountry}
+          keyboardType="default"
+          placeholder="country name"
           style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
         />
       </View>
@@ -58,11 +90,12 @@ const Register = () => {
           title="Register"
           onPress={() => {
             console.log(email, password);
-            register(email,password)
+            register(email,password  )
               .then()
               .catch((e) => setError(e.message));
           }}
         />
+
         <Text>{error}</Text>
       </View>
       </View>

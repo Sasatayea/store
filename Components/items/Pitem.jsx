@@ -1,13 +1,22 @@
 import { StyleSheet, Text, View, TouchableOpacity,Button, TextInput  ,Image } from "react-native";
 import { editCity } from "../../db/cities/cities";
-import { useState } from "react";
+import { getAuth } from "firebase/auth";
+
+import { useState ,useEffect } from "react";
 import {
   addCity,
   addCart,
 } from "../../db/cities/cities";
 export default function Pitem({ navigation ,item }) {
-    const [productsCart, setProductsCart] = useState([]);
+    const [productsCart, setProductsCart] = useState([]);  
     
+    const auth = getAuth();
+    const userr = auth.currentUser;
+
+    if (userr !== null) {
+      const email = userr.email;
+      console.log("ssssssssss",email);
+     
   return (
     <View
           style={styles.content}
@@ -22,11 +31,12 @@ export default function Pitem({ navigation ,item }) {
           <Button
           title="Add to char"
           onPress={() =>
-            addCart({ name: item.name , size:item.size ,type:item.type ,image:item.image ,price:item.price || "new city" + item.length })
+            addCart({ username:email, name: item.name , size:item.size ,type:item.type ,image:item.image ,price:item.price || "new city" + item.length })
           }
         />
         </View>
   );
+        }
 }
 
 const styles = StyleSheet.create({

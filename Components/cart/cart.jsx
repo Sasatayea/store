@@ -3,12 +3,11 @@ import { useState ,useEffect } from "react";
 import { ScrollView } from "react-native-web";
 import {
     getCart,
-  } from "../../db/cities/cities";
+    } from "../../db/cities/cities";
   import Pitem from "../items/Pitem";
-export default function cart({ route,navigation }) {
+  export default function cart({ route,navigation }) {
     //const { itemId, otherParam } = route.params;
     const [cart, setCart] = useState([]);
-
     const getCartsList = async () => {
         const c = await getCart();
         setCart(c);
@@ -16,22 +15,11 @@ export default function cart({ route,navigation }) {
       };
       useEffect(() => {
         getCartsList();
-        
       }, []);
 
     return (
     <View> 
         <Text>heloll</Text> 
-
-        {/* <Text>{JSON.stringify(itemId)}</Text> */}
-        {/* <ScrollView>
-            {itemId.map((e,index)=>(
-            <View key={index}>
-                <Text>{e}</Text>
-            </View>
-            ))}
-        </ScrollView> */}
-
         <FlatList 
         data={cart}
         keyExtractor={cart.id}
