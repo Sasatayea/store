@@ -27,7 +27,14 @@ async function getCart() {
   });
   return cityList;
 }
-
+async function deleteCart(cartt) {
+  try {
+    await deleteDoc(doc(db, "cart", cartt));
+    console.log("Document deleted with ID: ", cartt);
+  } catch (error) {
+    console.error("Error deleting document: ", error);
+  }
+}
 async function editCity(city) {
   console.log("at editCity", city);
   await setDoc(doc(db, "products", city.id), city);
@@ -74,4 +81,4 @@ function subscribe(callback) {
   return unsubscribe;
 }
 
-export { getCities, addCity, editCity, deleteCity, subscribe ,addCart ,getCart};
+export { getCities, addCity, editCity, deleteCity, subscribe ,addCart ,getCart ,deleteCart};

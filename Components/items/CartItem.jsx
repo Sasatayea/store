@@ -1,17 +1,19 @@
 import { StyleSheet, Text, View, TouchableOpacity,Button, TextInput  ,Image } from "react-native";
 import { editCity } from "../../db/cities/cities";
 import { getAuth } from "firebase/auth";
-
 import { useState ,useEffect } from "react";
 import {
   addCity,
   addCart,
+  deleteCart,
+  subscribe
 } from "../../db/cities/cities";
 export default function CartItem({ navigation ,item }) {
     const [productsCart, setProductsCart] = useState([]);  
     
     const auth = getAuth();
     const userr = auth.currentUser;
+    
 
     if (userr !== null) {
       const email = userr.email;
@@ -30,7 +32,7 @@ export default function CartItem({ navigation ,item }) {
           <Button
           title="dellet"
           onPress={() =>
-            console.log("اعمل الديليت يا عمرو ")
+            deleteCart(item.id)
           }
         />
         </View>

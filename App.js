@@ -42,7 +42,7 @@ export default function App({navigation}) {
 //   const email = userr.email;
 //   console.log("ssssssssss",email);
 // }
-
+console.log(user)
 
       // user ? <CitiesList /> : <Register/>
 

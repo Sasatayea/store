@@ -91,7 +91,7 @@ const Register = () => {
           title="Register"
           onPress={() => {
             console.log(email, password);
-            register(email,password  )
+            register(email,password ,username )
               .then()
               .catch((e) => setError(e.message));
           }}
