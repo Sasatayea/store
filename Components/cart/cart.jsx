@@ -6,6 +6,7 @@ import {
     } from "../../db/cities/cities";
   import CartItem from "../items/CartItem";
   import { getAuth } from "firebase/auth";
+  import { subscribeCart } from "../../db/cities/cities";
 
   export default function cart({ route,navigation }) {
     //const { itemId, otherParam } = route.params;
@@ -17,6 +18,25 @@ import {
       };
       useEffect(() => {
         getCartsList();
+      }, []);
+
+      useEffect(() => {
+        const unsubscribe = subscribeCart(({ change, snapshot }) => {
+          if (change.type === "added") {
+            getCartsList();
+    
+          }
+          if (change.type === "modified") {
+            getCartsList();
+          }
+          if (change.type === "removed") {
+            getCartsList();
+          }
+        });
+    
+        return () => {
+          unsubscribe();
+        };
       }, []);
       
       const auth = getAuth();
