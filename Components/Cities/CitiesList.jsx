@@ -61,7 +61,6 @@ const CitiesList = ({ navigation }) => {
     dataa = cities ;
     console.log("done");
     }
-    
     //console.log(selectedValue);
 
     return cityToEdit ? (
