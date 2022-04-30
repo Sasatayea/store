@@ -52,33 +52,16 @@ const CitiesList = ({ navigation }) => {
   const [cities, setCities] = useState([]);
   
   const [cityToEdit, setCityToEdit] = useState(undefined);
-
-  // const [cartt, setCartt] = useState([]);
-  // const sasa ='sss';
-  // const AddToCart = (id)=>{
-  //   setCartt ((prevCart)=>{
-  //       return [
-  //         cities.filter(iteem => iteem.id == id),
-  //         ...prevCart
-  //         ];
-  //     })
-  //   }
-    
-  //   const showCart =()=> {
-  //     return cartt ;
-  //   }
-  // console.log(cartt);
   const [selectedValue, setSelectedValue] = useState("All");
 
   let dataa = cities.filter((e)=>e.type== selectedValue);
   //const [dataa, setDataa] = useState([]);
   //setDataa = cities.filter((e)=>e.type== selectedValue);
-
   if(selectedValue == "All"){
     dataa = cities ;
     console.log("done");
     }
-
+    
     //console.log(selectedValue);
 
     return cityToEdit ? (

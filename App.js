@@ -64,8 +64,6 @@ console.log(user)
               <Stack.Screen name="EditCity" component={EditCity} />
               <Stack.Screen name="product" component={product} />
               <Stack.Screen name="cart" component={cart} />
-
-
             </Stack.Navigator>
           </NavigationContainer>
               // <CitiesList /> 
