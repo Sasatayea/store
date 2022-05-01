@@ -20,7 +20,7 @@ onAuthStateChanged(auth, (user) => {
 
 async function register(email, password) {
   await createUserWithEmailAndPassword(auth, email, password);
-  addUser({email:email,password:password,money:0,cart:[],sold:[]});
+  addUser({email:email,password:password,money:50000,cart:[],sold:[]});
 }
 
 async function login(email, password) {
