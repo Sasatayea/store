@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View, TouchableOpacity ,Button, TextInput  ,Image} from "react-native";
+import fpage from './fpage';
 
 export default function profile({ navigation }) {
 
   return (
     <View >
                   <View style={{padding: 10}}>
-                <Button title={"Logout"}/>
+                <Button title={"Logout"} onPress={() => navigation.navigate('fpage')}/>
             </View>
     </View>
   );
