@@ -17,18 +17,13 @@ export default function Pitem({ navigation ,item }) {
       const email = userr.email;
       console.log("ssssssssss",email);
   return (
-    <View
-          style={styles.content}
-          >
+    <View style={styles.content} >
           <TouchableOpacity onPress={() =>navigation.navigate('product',{item:item})} >
-            <Image style = {{height:100,width:100, margin:10}} source={{uri:item.image}}></Image>
-            <Text> {item.name} </Text>
-            <Text>$ {item.price}</Text>
+            <Image style = {{height:150,width:150, margin:10}} source={{uri:item.image}}></Image>
+            <Text style={{color:"#D9D9D9"}}> {item.name} </Text>
+            <Text style={{color:"#D9D9D9"}}>$ {item.price}</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity >
-            <Image source={imm} ></Image>
-          </TouchableOpacity>
           <Button
           title="Add to char"
           onPress={() =>
@@ -44,8 +39,8 @@ const styles = StyleSheet.create({
   content: {
     
         height:200,
-        width:200 ,
-        backgroundColor:'red',
+        width:200,
+        backgroundColor:'#161F30',
         margin:10,
         
   },

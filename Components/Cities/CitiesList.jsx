@@ -24,6 +24,7 @@ import EditCity from "./EditCity";
 import { TouchableOpacity } from "react-native-web";
 import { async } from "@firebase/util";
 import { getCart } from "../../db/cities/cities";
+
 const CitiesList = ({ navigation }) => {
   const getCitiesList = async () => {
     const c = await getCities();
@@ -62,8 +63,6 @@ const CitiesList = ({ navigation }) => {
   const [searchItem, setsearchItem] = useState("");
   
   let dataa = cities.filter((e)=>e.type== selectedValue);
-  //const [dataa, setDataa] = useState([]);
-  //setDataa = cities.filter((e)=>e.type== selectedValue);
   if(selectedValue == "All"){
     dataa = cities ;
     console.log("done");
@@ -72,9 +71,8 @@ const CitiesList = ({ navigation }) => {
   return cityToEdit ? (
     <EditCity city={cityToEdit} onSave={() => setCityToEdit(undefined)} />
   ) : (
-    <View>
-      <View style={styles.container}>
-        
+    <View style={styles.container}>
+      <View style={styles.search}>
         <Picker
           selectedValue={selectedValue}
           style={{ height: 50, width: 150 }}
@@ -89,11 +87,7 @@ const CitiesList = ({ navigation }) => {
         </Picker>
       </View>
 
-      <View
-        style={{
-          height: 550,
-        }}
-      >
+      <View style={styles.items}>
         <FlatList
           data={dataa}
           keyExtractor={cities.id}
@@ -109,9 +103,19 @@ const CitiesList = ({ navigation }) => {
 export default CitiesList;
 const styles = StyleSheet.create({
   container: {
+    backgroundColor:'#161F30',
+  },
+  search:{
     flex: 1,
     paddingTop: 10,
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
+    justifyContent:"center",
   },
+  items:{
+    paddingTop: 10,
+    flexDirection: "column",
+    alignItems: "center",
+
+  }
 });
