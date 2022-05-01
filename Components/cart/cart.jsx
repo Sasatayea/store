@@ -18,6 +18,7 @@ import { editUser,getUsers, subscribeUser } from "../../db/cities/users";
     const [users, setUsers] = useState([]);
     const [cashdata, setCashData] = useState([]);
     const [toggle, setToggle] = useState(true);
+    const [buy, setBuy] = useState("");
     const getCartsList = async () => {
         const c = await getCart();
         setCart(c);
@@ -75,14 +76,13 @@ import { editUser,getUsers, subscribeUser } from "../../db/cities/users";
       const Cash = ()=>{
         let dataa = cart.filter((e)=>e.username == userr.email);
         const cartmoney = dataa.map((e)=>(e.price));
-
+        let user = users.filter((e)=>e.email == userr.email);
         let total = 0;
         for (let i = 0; i < cartmoney.length; i++) {
           total += parseInt(cartmoney[i]);
         }
-        let user = users.filter((e)=>e.email == userr.email);
-        
-        
+        if(user[0].money>=total){
+          setBuy("");
         let usermoney =0;
         usermoney = user[0].money;
         console.log("myuser: ", dataa)
@@ -93,13 +93,15 @@ import { editUser,getUsers, subscribeUser } from "../../db/cities/users";
           
         }
         
+      }else{
+        setBuy("You don't have enough money  ي شحات");
+      }
       }
 
       
       if (userr !== null) {
         const email = userr.email;
         let dataa = cart.filter((e)=>e.username == email);
-        let m =true;
         if(toggle){
           setCashData(dataa);
           setToggle(false);
@@ -116,6 +118,7 @@ import { editUser,getUsers, subscribeUser } from "../../db/cities/users";
           )}
       />
       <Button title="cash" onPress={()=>Cash()}/>
+      <Text>{buy}</Text>
     </View>
     );}
 }
