@@ -50,12 +50,12 @@ console.log(user)
                   <Tab.Screen name="Home" component={CitiesList}/>
                   <Tab.Screen name="Cart" component={cart}/>
                   <Tab.Screen name="Profile" component={profile}/>
-                  <Tab.Screen name="product" component={product}/>
                   <Tab.Screen name="Search" component={search}/>
 
+
               </Tab.Navigator>
-      
               </NavigationContainer>
+              
               )
       }else{ 
         return(

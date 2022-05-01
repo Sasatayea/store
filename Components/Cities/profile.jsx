@@ -4,7 +4,9 @@ export default function profile({ navigation }) {
 
   return (
     <View >
-      <Text> hello</Text>
+                  <View style={{padding: 10}}>
+                <Button title={"Logout"}/>
+            </View>
     </View>
   );
 }
