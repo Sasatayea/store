@@ -85,8 +85,8 @@ import { editUser,getUsers, subscribeUser } from "../../db/cities/users";
         
         let usermoney =0;
         usermoney = user[0].money;
-        console.log("myuser: ", total)
-        editUser({ ...user[0], money: parseInt(usermoney) - total,sold:cashdata });
+        console.log("myuser: ", dataa)
+        editUser({ ...user[0], money: parseInt(usermoney) - total,sold:dataa });
         
         for (let j = 0; j < dataa.length; j++) {
           deleteCart(dataa[j].id);
