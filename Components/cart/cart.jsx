@@ -8,7 +8,7 @@ import {
   import CartItem from "../items/CartItem";
   import { getAuth } from "firebase/auth";
   import { subscribeCart } from "../../db/cities/cities";
-import { editUser,getUsers } from "../../db/cities/users";
+import { editUser,getUsers, subscribeUser } from "../../db/cities/users";
 
   export default function cart({ route,navigation }) {
     //const { itemId, otherParam } = route.params;
@@ -37,7 +37,7 @@ import { editUser,getUsers } from "../../db/cities/users";
         const unsubscribe = subscribeCart(({ change, snapshot }) => {
           if (change.type === "added") {
             getCartsList();
-    
+          
           }
           if (change.type === "modified") {
             getCartsList();
@@ -46,12 +46,31 @@ import { editUser,getUsers } from "../../db/cities/users";
             getCartsList();
           }
         });
-    
+      
         return () => {
           unsubscribe();
         };
       }, []);
       
+
+      useEffect(() => {
+        const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
+          if (change.type === "added") {
+            getUsersList();
+          
+          }
+          if (change.type === "modified") {
+            getUsersList();
+          }
+          if (change.type === "removed") {
+            getUsersList();
+          }
+        });
+    
+        return () => {
+          unsubscribeUser();
+        };
+      }, []);
 
       const Cash = ()=>{
         let dataa = cart.filter((e)=>e.username == userr.email);
