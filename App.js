@@ -38,12 +38,14 @@ export default function App({ navigation }) {
   console.log(user);
   if (user) {
     return (
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Home" component={CitiesList}
+      
+      <NavigationContainer >
+         
+        <Tab.Navigator >
+          <Tab.Screen name="Home" component={CitiesList} 
           options={{
             tabBarIcon: () => (<Image source={require("./assets/home.png")} 
-            style={{width: 20, height: 20}} />)
+            style={{width: 20, height: 20 }} />)
         }}
           />
                     <Tab.Screen name="Search" component={search} 
@@ -72,7 +74,6 @@ export default function App({ navigation }) {
 
 
         </Tab.Navigator>
-        
       </NavigationContainer>
     );
   } else {
@@ -88,4 +89,9 @@ export default function App({ navigation }) {
     );
   }
 }
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  navbar:{
+    backgroundColor:'red',
+  }
+
+});
