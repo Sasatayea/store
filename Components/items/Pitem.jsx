@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity,Button, TextInput  ,Image } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity,Button, TextInput  ,Image,Pressable } from "react-native";
 import { editCity } from "../../db/cities/cities";
 import { getAuth } from "firebase/auth";
 import imm from "../../assets/shopping-cart.png"
@@ -24,12 +24,14 @@ export default function Pitem({ navigation ,item }) {
             <Text style={{color:"#D9D9D9"}}>$ {item.price}</Text>
           </TouchableOpacity>
 
-          <Button
-          title="Add to char"
+          <Pressable
+          style={styles.button}
           onPress={() =>
             addCart({ username:email, name: item.name , size:item.size ,type:item.type ,image:item.image ,price:item.price || "new city" + item.length })
           }
-        />
+          >
+            <Text style={styles.text}>Add to char</Text>
+       </Pressable>
         </View>
   );
         }
@@ -38,10 +40,25 @@ export default function Pitem({ navigation ,item }) {
 const styles = StyleSheet.create({
   content: {
     
-        height:200,
-        width:200,
+        height:250,
+        width:250,
         backgroundColor:'#161F30',
         margin:10,
-        
+        justifyContent:'center',
+        alignItems:'center',
   },
+  button:{
+    backgroundColor:'#D9D9D9',
+    height:40,
+    borderRadius:20,
+    justifyContent:'center',
+    alignItems:'center',
+    
+  },
+  text:{
+    fontSize:14,
+    fontWeight:600,
+    textTransform:'uppercase',
+    
+  }
 });
