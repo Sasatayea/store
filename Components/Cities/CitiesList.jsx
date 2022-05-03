@@ -114,8 +114,8 @@ const styles = StyleSheet.create({
   },
   items:{
     paddingTop: 10,
-    flexDirection: "column",
+    flexDirection: "row",
     alignItems: "center",
-
+ 
   }
 });

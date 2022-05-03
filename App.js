@@ -10,7 +10,7 @@ import Register from "./Components/Users/Register";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import cart from "./Components/Cart/cart";
+import cart from "./Components/cart/cart";
 import { getAuth } from "firebase/auth";
 
 const Stack = createNativeStackNavigator();
