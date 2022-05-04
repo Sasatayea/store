@@ -7,8 +7,9 @@ import {
   confirmPasswordReset,
   signInWithCredential,
   FacebookAuthProvider,
+  
 } from "firebase/auth";
-import { addUser } from "../cities/Users";
+import { addUser } from "../../db/cities/users";
 // Listen for authentication state to change.
 onAuthStateChanged(auth, (user) => {
   if (user != null) {

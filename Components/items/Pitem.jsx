@@ -8,16 +8,17 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import { editCity } from "../../db/cities/Cities";
+
 import { getAuth } from "firebase/auth";
-import imm from "../../assets/shopping-cart.png";
+
 import { useState, useEffect } from "react";
-import { addCity, addCart } from "../../db/cities/Cities";
+import { addCity, addCart } from "../../db/cities/cities";
 export default function Pitem({ navigation, item }) {
   const [productsCart, setProductsCart] = useState([]);
 
   const auth = getAuth();
   const userr = auth.currentUser;
+
   if (userr !== null) {
     const email = userr.email;
     console.log("ssssssssss", email);
@@ -25,7 +26,7 @@ export default function Pitem({ navigation, item }) {
       <View style={[styles.card, styles.shadowProp]}>
         <View>
           <TouchableOpacity
-            onPress={() => navigation.navigate("product", { item: item })}
+            onPress={() => navigation.navigate("Product", { item: item })}
           >
             <Image
               style={{ height: 150, width: 150, margin: 10 }}
@@ -75,13 +76,13 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 10,
-    fontWeight: 600,
+    //fontWeight: 600,
     textTransform: "uppercase",
   },
 
   heading: {
     fontSize: 18,
-    fontWeight: "600",
+    //fontWeight: "600",
     marginBottom: 13,
   },
   card: {

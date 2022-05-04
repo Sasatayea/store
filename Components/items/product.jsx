@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity ,Button, TextInput  ,Image} from "react-native";
 
-export default function product({ navigation, route }) {
+export default function Product({ navigation, route }) {
   let item = route.params.item;
   console.log("item: ", route.params.item);
   return (

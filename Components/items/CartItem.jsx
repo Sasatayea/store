@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity,Button, TextInput  ,Image } from "react-native";
-import { editCity } from "../../db/cities/Cities";
+import { editCity } from "../../db/cities/cities";
 import { getAuth } from "firebase/auth";
 import { useState ,useEffect } from "react";
 import {
@@ -7,7 +7,7 @@ import {
   addCart,
   deleteCart,
   subscribe
-} from "../../db/cities/Cities";
+} from "../../db/cities/cities";
 export default function CartItem({ navigation ,item }) {
     const [productsCart, setProductsCart] = useState([]);  
     
