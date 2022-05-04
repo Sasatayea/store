@@ -58,6 +58,24 @@ export default function cart({ route, navigation }) {
   }, []);
 
   useEffect(() => {
+    const unsubscribe = subscribeCart(({ change, snapshot }) => {
+      if (change.type === "added") {
+        getCartsList();
+      }
+      if (change.type === "modified") {
+        getCartsList();
+      }
+      if (change.type === "removed") {
+        getCartsList();
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
     const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
       if (change.type === "added") {
         getUsersList();
@@ -84,8 +102,9 @@ export default function cart({ route, navigation }) {
       total += parseInt(cartmoney[i]);
     }
     if (user[0].money >= total) {
-      setBuy("Succeeded");
+      setBuy("");
       let usermoney = 0;
+
       usermoney = user[0].money;
       editUser({ ...user[0], money: parseInt(usermoney) - total, sold: dataa });
 
@@ -96,31 +115,34 @@ export default function cart({ route, navigation }) {
       setBuy("You don't have enough money  ي شحات");
       alert("You don't have enough money  ي شحات");
     }
-  };
-
-  if (userr !== null) {
-    const email = userr.email;
-    let dataa = cart.filter((e) => e.username == email);
-    if (toggle) {
-      setCashData(dataa);
-      setToggle(false);
+    if (change.type === "modified") {
+      getUsersList();
     }
 
-    return (
-      <ScrollView>
-        <Text>heloll</Text>
-        <FlatList
-          data={dataa}
-          keyExtractor={cart.id}
-          renderItem={({ item }) => (
-            <CartItem navigation={navigation} item={item} />
-          )}
-        />
-        <Button title="cash" onPress={() => Cash()} />
-        <Text>{buy}</Text>
-      </ScrollView>
-    );
-  }
+    if (userr !== null) {
+      const email = userr.email;
+      let dataa = cart.filter((e) => e.username == email);
+      if (toggle) {
+        setCashData(dataa);
+        setToggle(false);
+      }
+
+      return (
+        <View style={styles.item}>
+          <Text>heloll</Text>
+          <FlatList
+            data={dataa}
+            keyExtractor={cart.id}
+            renderItem={({ item }) => (
+              <CartItem navigation={navigation} item={item} />
+            )}
+          />
+          <Button title="cash" onPress={() => Cash()} />
+          <Text>{buy}</Text>
+        </View>
+      );
+    }
+  };
 }
 
 const styles = StyleSheet.create({
@@ -129,5 +151,8 @@ const styles = StyleSheet.create({
     width: 200,
     backgroundColor: "red",
     margin: 10,
+  },
+  item: {
+    height: 500,
   },
 });

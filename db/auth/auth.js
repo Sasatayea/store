@@ -19,16 +19,24 @@ onAuthStateChanged(auth, (user) => {
   // Do other things
 });
 
-async function register(email, password) {
+async function register(email, password, username, country) {
   await createUserWithEmailAndPassword(auth, email, password);
-  addUser({email:email,password:password,money:50000,cart:[],sold:[]});
+  addUser({
+    name: username,
+    email: email,
+    password: password,
+    countryname: country,
+    money: 0,
+    sold: [],
+  });
 }
 
 async function login(email, password) {
   await signInWithEmailAndPassword(auth, email, password);
 }
+
 async function logout() {
   await auth.signOut();
 }
 
-export { register, login,logout };
+export { register, login, logout };

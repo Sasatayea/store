@@ -27,6 +27,7 @@ async function getCart() {
   });
   return cityList;
 }
+
 async function deleteCart(cartt) {
   try {
     await deleteDoc(doc(db, "cart", cartt));
@@ -66,6 +67,15 @@ async function addCart(cat) {
   }
 }
 
+async function addUser(userr) {
+  try {
+    const docRef = await addDoc(collection(db, "user"), userr);
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
+
 function subscribe(callback) {
   const unsubscribe = onSnapshot(
     query(collection(db, "products")),
@@ -96,4 +106,4 @@ function subscribeCart(callback) {
   return unsubscribe;
 }
 
-export { getCities, addCity, editCity, deleteCity, subscribe ,addCart ,getCart ,deleteCart,subscribeCart};
+export { getCities, addCity, editCity, deleteCity, subscribe ,addCart ,getCart ,deleteCart,subscribeCart ,addUser };

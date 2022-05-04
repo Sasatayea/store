@@ -81,35 +81,56 @@ export default function search({ navigation }) {
   if (!searchItem) {
     return (
       <View>
-        <TextInput
-          onChangeText={(e) => {
-            setsearchItem(e), search(e);
-          }}
-          style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
-        />
-        <Button title="search" onPress={() => search(searchItem)} />
-        <Text> nothing </Text>
+        <View style={styles.content}>
+          <View style={styles.input}>
+            <TextInput
+              onChangeText={(e) => {
+                setsearchItem(e), search(e);
+              }}
+              placeholder="Search"
+              //onChange ={()=>search(searchItem)}
+              // style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
+            />
+          </View>
+          <View style={styles.button}>
+            <Button
+              title="search"
+              color="#000"
+              onPress={() => search(searchItem)}
+            />
+          </View>
+        </View>
+        <View style={styles.text}>
+          <Text style={styles.text}> Nothing</Text>
+        </View>
       </View>
     );
   } else {
     return (
       <View>
-        <TextInput
-          onChangeText={(e) => {
-            setsearchItem(e), search(e);
-          }}
-          //onChange ={()=>search(searchItem)}
-          style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
-        />
-        <Button title="search" onPress={() => search(searchItem)} />
-
-        <View
-          style={{
-            height: 550,
-          }}
-        >
+        <View style={styles.content}>
+          <View style={styles.input}>
+            <TextInput
+              onChangeText={(e) => {
+                setsearchItem(e), search(e);
+              }}
+              placeholder="Search"
+              // //onChange ={()=>search(searchItem)}
+              // style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
+            />
+          </View>
+          <View style={styles.button}>
+            <Button
+              title="search"
+              color="#000"
+              onPress={() => search(searchItem)}
+            />
+          </View>
+        </View>
+        <View style={styles.item}>
           <FlatList
             data={dataa}
+            numColumns={2}
             keyExtractor={cities.id}
             renderItem={({ item }) => (
               <Pitem navigation={navigation} item={item} />
@@ -122,9 +143,33 @@ export default function search({ navigation }) {
 }
 const styles = StyleSheet.create({
   content: {
-    marginTop: 24,
-    padding: 20,
+    flexDirection: "row",
+    marginTop: 10,
+    padding: 10,
     paddingHorizontal: 20,
-    backgroundColor: "#FFFFFF",
+    // backgroundColor: "#fff",
+  },
+  input: {
+    flex: 2,
+    height: 40,
+    margin: 12,
+    borderWidth: 2,
+    borderColor: "black",
+    padding: 10,
+    width: 200,
+  },
+  button: {
+    borderRadius: 200,
+    flex: 1,
+    paddingTop: 15,
+  },
+  item: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: 500,
+  },
+  text: {
+    fontSize: 20,
+    alignItems: "center",
   },
 });
