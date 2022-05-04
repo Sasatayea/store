@@ -7,7 +7,6 @@ import {
   Image,
   Picker,
   StyleSheet,
-  Dimensions,
 } from "react-native";
 
 import { useEffect, useState } from "react";
@@ -20,13 +19,7 @@ import {
 } from "../../db/cities/cities";
 import { subscribeUser } from "../../db/cities/users";
 import Pitem from "../items/Pitem";
-import { editUser, getUsers } from "../../db/cities/users";
-import image1 from "../../assets/loginn.png";
-import EditCity from "./EditCity";
-import { TouchableOpacity } from "react-native-web";
-import { async } from "@firebase/util";
-import { getCart } from "../../db/cities/cities";
-const width = Dimensions.get("window").width;
+
 const CitiesList = ({ navigation }) => {
   const getCitiesList = async () => {
     const c = await getCities();
@@ -68,9 +61,8 @@ const CitiesList = ({ navigation }) => {
     console.log("done");
   }
 
-  return cityToEdit ? (
-    <EditCity city={cityToEdit} onSave={() => setCityToEdit(undefined)} />
-  ) : (
+  return  (
+    
     <View style={styles.container}>
       <View style={styles.search}>
         <Picker

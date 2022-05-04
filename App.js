@@ -1,7 +1,5 @@
 import { onAuthStateChanged } from "firebase/auth";
 import CitiesList from "./Components/Cities/CitiesList";
-import EditCity from "./Components/Cities/EditCity";
-import imm from "./assets/icon.png";
 import { auth } from "./db/Config";
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Button, Image } from "react-native";
@@ -12,19 +10,18 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import cart from "./Components/cart/cart";
 import { getAuth } from "firebase/auth";
-
+import Admin from "./Components/Admin/Admin";
+import EditP from "./Components/Admin/EditP";
+import Edit from "./Components/Admin/Edit";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-// import Cities from "./Components/Cities/Cities";
-// import GuessMyNumber from "./Components/GuessMyNumber";
+
 import fpage from "./Components/Cities/fpage";
 import product from "./Components/items/product";
 import profile from "./Components/Cities/profile";
 import search from "./Components/Cities/search";
+import AddP from "./Components/Admin/AddP";
 
-function Root() {
-  return <Stack.Navigator></Stack.Navigator>;
-}
 export default function App({ navigation }) {
   const auth = getAuth();
   const userr = auth.currentUser;
@@ -42,7 +39,16 @@ export default function App({ navigation }) {
     const email = userr.email;
     if (email == "sheeka@gamil.com") {
       console.log("app", email);
-      return <Text>admin</Text>;
+      return (
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Admin" component={Admin} options={{}} />
+            <Stack.Screen name="EditP" component={EditP} options={{}} />
+            <Stack.Screen name="AddP" component={AddP} options={{}} />
+            <Stack.Screen name="Edit" component={Edit} options={{}} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      );
     } else {
       return (
         <NavigationContainer>
