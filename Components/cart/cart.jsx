@@ -6,9 +6,10 @@ import {
   Button,
   TextInput,
   FlatList,
+  ScrollView,
 } from "react-native";
 import { useState, useEffect } from "react";
-import { ScrollView } from "react-native-web";
+
 import { deleteCart, getCart } from "../../db/cities/cities";
 import CartItem from "../items/CartItem";
 import { getAuth } from "firebase/auth";

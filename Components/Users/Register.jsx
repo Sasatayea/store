@@ -5,13 +5,13 @@ import {
   TextInput,
   Button,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import { React, useState } from "react";
 import { register } from "../../db/auth/auth";
 import loginn from "../../assets/loginn.png";
 import { addUser } from "../../db/cities/users.js";
 import fpage from "../Cities/fpage";
-import { TouchableOpacity } from "react-native-web";
 const Register = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
