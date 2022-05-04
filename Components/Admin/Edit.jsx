@@ -18,7 +18,7 @@ import {
     const [image, setImage] = useState("");
     const [name, setName] = useState("");
     const [size, setSize] = useState("");
-    const [type, setType] = useState("");
+    const [type, setType] = useState("chair");
     return (
       <View
         style={{
