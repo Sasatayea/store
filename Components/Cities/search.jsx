@@ -68,9 +68,8 @@ export default function search({ navigation }) {
     let k = 0;
     let data = [];
     for (let i = 0; i < cities.length; i++) {
-      const ddd = cities[i].name;
       for (let j = 0; j < x.length; j++) {
-        if (ddd == x[j]) {
+        if (cities[i].name == x[j]) {
           data[k] = cities[i];
           k++;
         }
@@ -86,7 +85,6 @@ export default function search({ navigation }) {
           onChangeText={(e) => {
             setsearchItem(e), search(e);
           }}
-          //onChange ={()=>search(searchItem)}
           style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
         />
         <Button title="search" onPress={() => search(searchItem)} />

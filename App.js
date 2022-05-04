@@ -26,6 +26,8 @@ function Root() {
   return <Stack.Navigator></Stack.Navigator>;
 }
 export default function App({ navigation }) {
+  const auth = getAuth();
+  const userr = auth.currentUser;
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => setUser(user));
     return () => {
@@ -34,33 +36,44 @@ export default function App({ navigation }) {
   }, []);
 
   const [user, setUser] = useState(undefined);
-
-  console.log(user);
-  if (user) {
-    return (
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Home" component={CitiesList} />
-          <Tab.Screen name="Cart" component={cart}/>
-          <Tab.Screen name="Profile" component={profile} />
-          <Tab.Screen name="product" component={product}
-           options = {{ tabBarButton: () => null,tabBarVisible: false,}} />
-          <Tab.Screen name="Search" component={search} />
-        </Tab.Navigator>
+  
+    
+    if (user) {
+      const email = userr.email;
+      if (email == "sheeka@gamil.com") {
+        console.log("app",email);
+        return (
+        <Text>admin</Text>
+        );
+      } else {
         
-      </NavigationContainer>
-    );
-  } else {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="fpage">
-          <Stack.Screen name="fpage" component={fpage} />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Register" component={Register} />
-        </Stack.Navigator>
-      </NavigationContainer>
-      //<fpage />
-    );
+        return (
+          <NavigationContainer>
+            <Tab.Navigator>
+              <Tab.Screen name="Home" component={CitiesList} />
+              <Tab.Screen name="Cart" component={cart} />
+              <Tab.Screen name="Profile" component={profile} />
+              <Tab.Screen
+                name="product"
+                component={product}
+                options={{ tabBarButton: () => null, tabBarVisible: false }}
+              />
+              <Tab.Screen name="Search" component={search} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        );
+       }
+    } else {
+      return (
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="fpage">
+            <Stack.Screen name="fpage" component={fpage} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Register" component={Register} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      );
+    }
   }
-}
+
 const styles = StyleSheet.create({});

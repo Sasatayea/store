@@ -24,6 +24,7 @@ import EditCity from "./EditCity";
 import { TouchableOpacity } from "react-native-web";
 import { async } from "@firebase/util";
 import { getCart } from "../../db/cities/cities";
+import { logout } from "../../db/auth/auth";
 const CitiesList = ({ navigation }) => {
   const getCitiesList = async () => {
     const c = await getCities();
@@ -59,11 +60,8 @@ const CitiesList = ({ navigation }) => {
   const [cityToEdit, setCityToEdit] = useState(undefined);
 
   const [selectedValue, setSelectedValue] = useState("All");
-  const [searchItem, setsearchItem] = useState("");
   
   let dataa = cities.filter((e)=>e.type== selectedValue);
-  //const [dataa, setDataa] = useState([]);
-  //setDataa = cities.filter((e)=>e.type== selectedValue);
   if(selectedValue == "All"){
     dataa = cities ;
     console.log("done");
@@ -73,6 +71,7 @@ const CitiesList = ({ navigation }) => {
     <EditCity city={cityToEdit} onSave={() => setCityToEdit(undefined)} />
   ) : (
     <View>
+      <Button onPress={()=> logout()}/>
       <View style={styles.container}>
         
         <Picker
@@ -101,7 +100,9 @@ const CitiesList = ({ navigation }) => {
             <Pitem navigation={navigation} item={item} />
           )}
         />
+        
       </View>
+      
     </View>
   );
 };
