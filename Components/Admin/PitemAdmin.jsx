@@ -53,13 +53,14 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 10,
-    fontWeight: 600,
+    
     textTransform: "uppercase",
+    
   },
 
   heading: {
     fontSize: 18,
-    fontWeight: "600",
+    
     marginBottom: 13,
   },
   card: {
