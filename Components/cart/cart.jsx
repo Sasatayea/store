@@ -2,31 +2,113 @@ import { StyleSheet, Text, View, TouchableOpacity,Button, TextInput  ,FlatList }
 import { useState ,useEffect } from "react";
 import { ScrollView } from "react-native-web";
 import {
+  deleteCart,
     getCart,
-    } from "../../db/cities/cities";
+    } from "../../db/cities/Cities";
   import CartItem from "../items/CartItem";
   import { getAuth } from "firebase/auth";
+  import { subscribeCart } from "../../db/cities/Cities";
+import { editUser,getUsers, subscribeUser } from "../../db/cities/Users";
 
   export default function cart({ route,navigation }) {
     //const { itemId, otherParam } = route.params;
+    const auth = getAuth();
+    const userr = auth.currentUser;
     const [cart, setCart] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [cashdata, setCashData] = useState([]);
+    const [toggle, setToggle] = useState(true);
+    const [buy, setBuy] = useState("");
     const getCartsList = async () => {
         const c = await getCart();
         setCart(c);
         console.log("carts", c);
       };
+      const getUsersList = async () => {
+        const u = await getUsers();
+        setUsers(u);
+        console.log("users: ", u);
+      };
       useEffect(() => {
         getCartsList();
+        getUsersList();
+      }, []);
+
+      useEffect(() => {
+        const unsubscribe = subscribeCart(({ change, snapshot }) => {
+          if (change.type === "added") {
+            getCartsList();
+          
+          }
+          if (change.type === "modified") {
+            getCartsList();
+          }
+          if (change.type === "removed") {
+            getCartsList();
+          }
+        });
+      
+        return () => {
+          unsubscribe();
+        };
       }, []);
       
-      const auth = getAuth();
-      const userr = auth.currentUser;
+
+      useEffect(() => {
+        const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
+          if (change.type === "added") {
+            getUsersList();
+          
+          }
+          if (change.type === "modified") {
+            getUsersList();
+          }
+          if (change.type === "removed") {
+            getUsersList();
+          }
+        });
+    
+        return () => {
+          unsubscribeUser();
+        };
+      }, []);
+
+      const Cash = ()=>{
+        let dataa = cart.filter((e)=>e.username == userr.email);
+        const cartmoney = dataa.map((e)=>(e.price));
+        let user = users.filter((e)=>e.email == userr.email);
+        let total = 0;
+        for (let i = 0; i < cartmoney.length; i++) {
+          total += parseInt(cartmoney[i]);
+        }
+        if(user[0].money>=total){
+          setBuy("");
+        let usermoney =0;
+        
+        usermoney = user[0].money;
+        editUser({ ...user[0], money: parseInt(usermoney) - total,sold:dataa });
+        
+        for (let j = 0; j < dataa.length; j++) {
+          deleteCart(dataa[j].id);
+          
+        }
+        
+      }else{
+        setBuy("You don't have enough money  ي شحات");
+        alert("You don't have enough money  ي شحات")
+      }
+      }
+      
       if (userr !== null) {
         const email = userr.email;
         let dataa = cart.filter((e)=>e.username == email);
-
+        if(toggle){
+          setCashData(dataa);
+          setToggle(false);
+        }
+        
     return (
-    <View> 
+    <View style={styles.item}> 
         <Text>heloll</Text> 
         <FlatList 
         data={dataa}
@@ -35,6 +117,8 @@ import {
           <CartItem navigation={navigation} item = {item} />
           )}
       />
+      <Button title="cash" onPress={()=>Cash()}/>
+      <Text>{buy}</Text>
     </View>
     );}
 }
@@ -47,4 +131,7 @@ const styles = StyleSheet.create({
         margin:10,
         
     },
+    item:{
+      height:500,
+    }
 });

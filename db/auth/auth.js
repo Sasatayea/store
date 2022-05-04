@@ -8,7 +8,7 @@ import {
   signInWithCredential,
   FacebookAuthProvider,
 } from "firebase/auth";
-import { addUser } from "../../db/cities/users";
+import { addUser } from "../cities/Users";
 // Listen for authentication state to change.
 onAuthStateChanged(auth, (user) => {
   if (user != null) {
@@ -18,13 +18,24 @@ onAuthStateChanged(auth, (user) => {
   // Do other things
 });
 
-async function register(email, password) {
+async function register(email, password, username, country) {
   await createUserWithEmailAndPassword(auth, email, password);
-  addUser({email:email,password:password,money:0,cart:[],sold:[]});
+  addUser({
+    name: username,
+    email: email,
+    password: password,
+    countryname: country,
+    money: 0,
+    sold: [],
+  });
 }
 
 async function login(email, password) {
   await signInWithEmailAndPassword(auth, email, password);
 }
 
-export { register, login };
+async function logout() {
+  await auth.signOut();
+}
+
+export { register, login, logout };

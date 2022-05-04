@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import { useState } from "react";
-import { editCity ,deleteCity } from "../../db/cities/cities";
+import { editCity ,deleteCity } from "../../db/cities/Cities";
 import CitiesList from './CitiesList';
 
 

@@ -1,4 +1,15 @@
-import { View, Text, Button, TextInput ,FlatList ,Image ,Picker ,StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  TextInput,
+  FlatList,
+  Image,
+  Picker,
+  StyleSheet,
+  Dimensions,
+} from "react-native";
+
 import { useEffect, useState } from "react";
 import {
   getCities,
@@ -6,109 +17,111 @@ import {
   addCart,
   deleteCity,
   subscribe,
-} from "../../db/cities/cities";
+} from "../../db/cities/Cities";
+import { subscribeUser } from "../../db/cities/Users";
 import Pitem from "../items/Pitem";
+import { editUser, getUsers } from "../../db/cities/Users";
 import image1 from "../../assets/loginn.png";
 import EditCity from "./EditCity";
 import { TouchableOpacity } from "react-native-web";
-
+import { async } from "@firebase/util";
+import { getCart } from "../../db/cities/Cities";
+const width = Dimensions.get("window").width;
 const CitiesList = ({ navigation }) => {
-  
   const getCitiesList = async () => {
     const c = await getCities();
-    setCities(c);
+    await setCities(c);
     console.log("products", c);
   };
-  
-  useEffect(() => {
-    getCitiesList();
-    
+
+  useEffect(async () => {
+    await getCitiesList();
   }, []);
-  
+
   useEffect(() => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
-      //   console.log("changes", change, snapshot, change.type);
-      // if (snapshot.metadata.hasPendingWrites) {
       if (change.type === "added") {
-        //console.log("New city: ", change.doc.data());
         getCitiesList();
       }
       if (change.type === "modified") {
-        console.log("Modified city: ", change.doc.data());
         getCitiesList();
       }
       if (change.type === "removed") {
-        console.log("Removed city: ", change.doc.data());
         getCitiesList();
       }
-      // }
     });
-    
+
     return () => {
       unsubscribe();
     };
   }, []);
 
   const [cities, setCities] = useState([]);
-  
+  const [users, setUsers] = useState([]);
   const [cityToEdit, setCityToEdit] = useState(undefined);
+
   const [selectedValue, setSelectedValue] = useState("All");
+  const [searchItem, setsearchItem] = useState("");
 
-  let dataa = cities.filter((e)=>e.type== selectedValue);
-  //const [dataa, setDataa] = useState([]);
-  //setDataa = cities.filter((e)=>e.type== selectedValue);
-  if(selectedValue == "All"){
-    dataa = cities ;
+  let dataa = cities.filter((e) => e.type == selectedValue);
+  if (selectedValue == "All") {
+    dataa = cities;
     console.log("done");
-    }
-    //console.log(selectedValue);
+  }
 
-    return cityToEdit ? (
-      <EditCity city={cityToEdit} onSave={()=>setCityToEdit(undefined)} />
-    ) : (
-
-    <View>
-
-      <Button
-        title="cart"
-        onPress={() => navigation.navigate('cart')}
-      />
-    
+  return cityToEdit ? (
+    <EditCity city={cityToEdit} onSave={() => setCityToEdit(undefined)} />
+  ) : (
     <View style={styles.container}>
-      <Picker
-        selectedValue={selectedValue}
-        style={{ height: 50, width: 150 }}
-        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-      >
-        <Picker.Item label="All" value="All" />
-        <Picker.Item label="chair" value="chair" />
-        <Picker.Item label="bed" value="bed" />
-        <Picker.Item label="sofa" value="sofa" />
-      </Picker>
-    </View>
-
-      <View
+      <View style={styles.search}>
+        <Picker
+          selectedValue={selectedValue}
           style={{
-            height:550,
-          }}>
-      <FlatList 
-        data={dataa}
-        keyExtractor={cities.id}
-        renderItem={({item})=>(
-          <Pitem navigation={navigation} item = {item} />
-          )}
-      />
+            height: 50,
+            width: 150,
+            backgroundColor: "#fff",
+          }}
+          onValueChange={(itemValue, itemIndex) => {
+            setSelectedValue(itemValue);
+          }}
+        >
+          <Picker.Item label="All" value="All" />
+          <Picker.Item label="chair" value="chair" />
+          <Picker.Item label="bed" value="bed" />
+          <Picker.Item label="sofa" value="sofa" />
+        </Picker>
+      </View>
+
+      <View style={styles.items}>
+        <FlatList
+          data={dataa}
+          numColumns={2}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => <Pitem item={item} />}
+        />
+      </View>
     </View>
-  </View>
-    
   );
 };
 
 export default CitiesList;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#D9D9D9",
+  },
+  search: {
+    // flex: 1,
     paddingTop: 10,
-    alignItems: "center"
-  }
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "center",
+  },
+  items: {
+    // paddingTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 500,
+  },
 });

@@ -27,6 +27,7 @@ async function getCart() {
   });
   return cityList;
 }
+
 async function deleteCart(cartt) {
   try {
     await deleteDoc(doc(db, "cart", cartt));
@@ -35,7 +36,6 @@ async function deleteCart(cartt) {
     console.error("Error deleting document: ", error);
   }
 }
-
 async function editCity(city) {
   console.log("at editCity", city);
   await setDoc(doc(db, "products", city.id), city);
@@ -67,6 +67,15 @@ async function addCart(cat) {
   }
 }
 
+async function addUser(userr) {
+  try {
+    const docRef = await addDoc(collection(db, "user"), userr);
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
+
 function subscribe(callback) {
   const unsubscribe = onSnapshot(
     query(collection(db, "products")),
@@ -82,4 +91,19 @@ function subscribe(callback) {
   return unsubscribe;
 }
 
-export { getCities, addCity, editCity, deleteCity, subscribe ,addCart ,getCart ,deleteCart};
+function subscribeCart(callback) {
+  const unsubscribe = onSnapshot(
+    query(collection(db, "cart")),
+    (snapshot) => {
+      const source = snapshot.metadata.hasPendingWrites ? "Local" : "Server";
+      snapshot.docChanges().forEach((change) => {
+        // console.log("changes", change, snapshot.metadata);
+        if (callback) callback({ change, snapshot });
+      });
+      // console.log(source, " data: ", snapshot.data());
+    }
+  );
+  return unsubscribe;
+}
+
+export { getCities, addCity, editCity, deleteCity, subscribe ,addCart ,getCart ,deleteCart,subscribeCart ,addUser };
