@@ -115,34 +115,30 @@ export default function cart({ route, navigation }) {
       setBuy("You don't have enough money  ي شحات");
       alert("You don't have enough money  ي شحات");
     }
-    if (change.type === "modified") {
-      getUsersList();
-    }
-
-    if (userr !== null) {
-      const email = userr.email;
-      let dataa = cart.filter((e) => e.username == email);
-      if (toggle) {
-        setCashData(dataa);
-        setToggle(false);
-      }
-
-      return (
-        <View style={styles.item}>
-          <Text>heloll</Text>
-          <FlatList
-            data={dataa}
-            keyExtractor={cart.id}
-            renderItem={({ item }) => (
-              <CartItem navigation={navigation} item={item} />
-            )}
-          />
-          <Button title="cash" onPress={() => Cash()} />
-          <Text>{buy}</Text>
-        </View>
-      );
-    }
   };
+  if (userr !== null) {
+    const email = userr.email;
+    let dataa = cart.filter((e) => e.username == email);
+    if (toggle) {
+      setCashData(dataa);
+      setToggle(false);
+    }
+
+    return (
+      <View style={styles.item}>
+        <Text>heloll</Text>
+        <FlatList
+          data={dataa}
+          keyExtractor={cart.id}
+          renderItem={({ item }) => (
+            <CartItem navigation={navigation} item={item} />
+          )}
+        />
+        <Button title="cash" onPress={() => Cash()} />
+        <Text>{buy}</Text>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
