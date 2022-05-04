@@ -8,23 +8,18 @@ import {
   Picker,
   StyleSheet,
 } from "react-native";
-
 import { useEffect, useState } from "react";
 import {
   getCities,
-  addCity,
-  addCart,
-  deleteCity,
   subscribe,
 } from "../../db/cities/cities";
-import { subscribeUser } from "../../db/cities/users";
 import Pitem from "../items/Pitem";
 
 const CitiesList = ({ navigation }) => {
   const getCitiesList = async () => {
     const c = await getCities();
     await setCities(c);
-    console.log("products", c);
+    // console.log("products", c);
   };
 
   useEffect(async () => {
@@ -50,29 +45,29 @@ const CitiesList = ({ navigation }) => {
   }, []);
 
   const [cities, setCities] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [cityToEdit, setCityToEdit] = useState(undefined);
-
+  
   const [selectedValue, setSelectedValue] = useState("All");
   
   let dataa = cities.filter((e)=>e.type== selectedValue);
   if(selectedValue == "All"){
     dataa = cities ;
-    console.log("done");
+    //console.log("done");
   }
 
   return  (
     
     <View style={styles.container}>
       <View style={styles.search}>
+        
         <Picker
           selectedValue={selectedValue}
           style={{
             height: 50,
             width: 150,
-            backgroundColor: "#fff",
+            backgroundColor: "red",
+            borderWidth: 2,
           }}
-          onValueChange={(itemValue, itemIndex) => {
+          onValueChange={(itemValue) => {
             setSelectedValue(itemValue);
           }}
         >
@@ -82,7 +77,7 @@ const CitiesList = ({ navigation }) => {
           <Picker.Item label="sofa" value="sofa" />
         </Picker>
       </View>
-
+      
       <View style={styles.items}>
         <FlatList
           data={dataa}
@@ -105,17 +100,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#D9D9D9",
   },
   search: {
-    // flex: 1,
     paddingTop: 10,
     flexDirection: "row",
     alignItems: "flex-start",
-    justifyContent: "center",
+    justifyContent: 'flex-end',
   },
   items: {
     // paddingTop: 10,
     flex:1,
     justifyContent: "center",
     alignItems: "center",
-
   },
 });

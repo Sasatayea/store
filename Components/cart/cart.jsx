@@ -127,7 +127,6 @@ export default function Cart({ route, navigation }) {
 
     return (
       <View style={styles.item}>
-        <Text>heloll</Text>
         <FlatList
           data={dataa}
           keyExtractor={cart.id}

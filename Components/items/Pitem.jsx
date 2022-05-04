@@ -21,7 +21,7 @@ export default function Pitem({ navigation, item }) {
 
   if (userr !== null) {
     const email = userr.email;
-    console.log("ssssssssss", email);
+    // console.log("ssssssssss", email);
     return (
       <View style={[styles.card, styles.shadowProp]}>
         <View>
@@ -29,12 +29,13 @@ export default function Pitem({ navigation, item }) {
             onPress={() => navigation.navigate("Product", { item: item })}
           >
             <Image
-              style={{ height: 150, width: 150, margin: 10 }}
+              style={{ height: 150, width: 150, margin: 10 ,borderRadius: 20 }}
               source={{ uri: item.image }}
             ></Image>
             <Text> {item.name} </Text>
             <Text>$ {item.price}</Text>
           </TouchableOpacity>
+          
           <View style={styles.button}>
             <Button
               title="Add to char"
@@ -58,43 +59,20 @@ export default function Pitem({ navigation, item }) {
 }
 
 const styles = StyleSheet.create({
-  content: {
-    flex: 1,
-    alignSelf: "stretch",
-    backgroundColor: "#fff",
-    borderRadius: 5,
-    borderWidth: 3,
-    borderColor: "#000",
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: 10,
-  },
-  button: {
-    borderRadius: 200,
-    flex: 1,
-    padding: 20,
-  },
-  text: {
-    fontSize: 10,
-    //fontWeight: 600,
-    textTransform: "uppercase",
-  },
 
-  heading: {
-    fontSize: 18,
-    //fontWeight: "600",
-    marginBottom: 13,
-  },
   card: {
     marginRight: 10,
 
     backgroundColor: "white",
     borderRadius: 8,
     paddingVertical: 45,
-    paddingHorizontal: 25,
+    paddingHorizontal: "3%",
     width: 200,
     height: 335,
     marginVertical: 10,
+  },
+  button: {
+    textAlign: 'center',
   },
   shadowProp: {
     shadowColor: "#171717",

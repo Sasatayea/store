@@ -22,94 +22,55 @@ const Register = ({ navigation }) => {
     <ImageBackground source={loginn} resizeMode="cover" style={styles.heder}>
       <View
         style={{
-          marginTop: "40%",
+          marginTop: "60%",
           backgroundColor: "white",
-          borderRadius: 20,
-          height: "58%",
+          borderRadius: 30,
+          height: "50%",
+          padding:5,
+          margin:10
         }}
       >
         <Text
           style={{
             padding: 2,
             textAlign: "center",
-            fontSize: 30,
-            //fontFamily: "bold",
+            fontSize: 35,
           }}
-        >
-          {" "}
-          Sign Up{" "}
-        </Text>
-        <View style={styles.in}>
+        > Sign Up </Text>
           <TextInput
             onChangeText={setusername}
             keyboardType="default"
             placeholder="User name"
-            style={{
-              flex: 2,
-              borderColor: "black",
-              borderWidth: 2,
-              height: 40,
-              // margin: 12,
-              borderWidth: 1,
-              padding: 10,
-            }}
+            style={styles.inpp}
           />
-        </View>
-        <View style={styles.in}>
+
           <TextInput
             onChangeText={setEmail}
             keyboardType="email-address"
             placeholder="email-address"
-            style={{
-              flex: 2,
-              borderColor: "black",
-              borderWidth: 2,
-              height: 40,
-              // margin: 12,
-              borderWidth: 1,
-              padding: 10,
-            }}
+            style={styles.inpp}
           />
-        </View>
-        <View style={styles.in}>
+
           <TextInput
             onChangeText={setpassword}
             keyboardType="visible-password"
             placeholder="password"
             secureTextEntry={true}
-            style={{
-              flex: 2,
-              borderColor: "black",
-              borderWidth: 2,
-              height: 40,
-              // margin: 12,
-              borderWidth: 1,
-              padding: 10,
-            }}
+            style={styles.inpp}
           />
-        </View>
 
-        <View style={styles.in}>
           <TextInput
             onChangeText={setcountry}
             keyboardType="default"
             placeholder="country name"
-            style={{
-              flex: 2,
-              borderColor: "black",
-              borderWidth: 2,
-              height: 40,
-              // margin: 12,
-              borderWidth: 1,
-              padding: 10,
-            }}
+            style={styles.inpp}
           />
-        </View>
 
         <View
           style={{
             width: 170,
             padding: 10,
+            marginLeft:'50%'
           }}
         >
           <Button
@@ -125,13 +86,14 @@ const Register = ({ navigation }) => {
           />
 
           <Text>{error}</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Fpage")}>
+          
+        </View>
+        <TouchableOpacity onPress={() => navigation.navigate("Fpage")}>
             <Text style={{ paddingTop: 10, paddingLeft: 5 }}>
               {" "}
               Go to Home page{" "}
             </Text>
           </TouchableOpacity>
-        </View>
       </View>
     </ImageBackground>
   );
@@ -144,8 +106,11 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-  in: {
+  inpp:{
+    flex:1 ,
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
     padding: 10,
-    borderRadius: 20,
-  },
+  }
 });

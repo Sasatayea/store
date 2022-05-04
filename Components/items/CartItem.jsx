@@ -17,36 +17,56 @@ export default function CartItem({ navigation ,item }) {
 
     if (userr !== null) {
       const email = userr.email;
-      console.log("ssssssssss",email);
-  return (
-    <View
-          style={styles.content}
-          >
-          <TouchableOpacity onPress={() =>navigation.navigate('product',{item:item})} >
-            <Image style = {{height:100,width:100, margin:10}} source={{uri:item.image}}></Image>
-            <Text> {item.name} </Text>
-            <Text>$ {item.price}</Text>
-          </TouchableOpacity>
-          {/* <Button title="Delete" onPress={() => deleteCity(item.id)} /> */}
-          {/* <Button title="Add to char" onPress={()=>AddToCart(item.id)}/> */}
-          <Button
+      //console.log("ssssssssss",email);
+  return (<View style={[styles.card, styles.shadowProp]}>
+    <View>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Product", { item: item })}
+      >
+        <Image
+          style={{ height: 150, width: 150, margin: 10 ,borderRadius: 20 }}
+          source={{ uri: item.image }}
+        ></Image>
+        <Text> {item.name} </Text>
+        <Text>$ {item.price}</Text>
+      </TouchableOpacity>
+      
+      <View style={styles.button}>
+      <Button
+          color="#000"
           title="dellet"
           onPress={() =>
             deleteCart(item.id)
           }
         />
-        </View>
+      </View>
+    </View>
+  </View>
   );
         }
 }
 
+
 const styles = StyleSheet.create({
-  content: {
-    
-        height:200,
-        width:200 ,
-        backgroundColor:'red',
-        margin:10,
-        
+
+  card: {
+    marginRight: 10,
+
+    backgroundColor: "white",
+    borderRadius: 8,
+    paddingVertical: 45,
+    paddingHorizontal: 25,
+    width: 200,
+    height: 335,
+    marginVertical: 10,
+  },
+  button: {
+    textAlign: 'center',
+  },
+  shadowProp: {
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
 });

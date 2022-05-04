@@ -7,6 +7,7 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
+import { StatusBar } from 'expo-status-bar';
 import { React, useState } from "react";
 import { login } from "../../db/auth/auth";
 import loginn from "../../assets/loginn.png";
@@ -28,71 +29,43 @@ const Login = ({ navigation }) => {
       resizeMode="cover"
       style={styles.heder}
     >
+      <StatusBar style="auto" />
       <View
         style={{
-          marginTop: "50%",
+          marginTop: "60%",
           backgroundColor: "white",
-          borderRadius: 20,
+          borderRadius: 30,
           height: "40%",
+          padding:5,
+          margin:10
         }}
       >
         <Text
           style={{
             padding: 2,
             textAlign: "center",
-            fontSize: 30,
-            //fontFamily: "bold",
+            fontSize: 35,
           }}
-        >
-          {" "}
-          Login
-        </Text>
-        <View
-          style={{
-            padding: 10,
-            borderRadius: 20,
-          }}
-        >
+        > Login </Text>
+
           <TextInput
             onChangeText={setEmail}
             keyboardType="email-address"
             placeholder="email-address"
-            style={{
-              flex: 2,
-              borderColor: "black",
-              borderWidth: 2,
-              height: 40,
-              // margin: 12,
-              borderWidth: 1,
-              padding: 10,
-            }}
+            style={styles.inpp}
           />
-        </View>
-
-        <View
-          style={{
-            padding: 10,
-            borderRadius: 20,
-          }}
-        >
           <TextInput
             onChangeText={setpassword}
             keyboardType="visible-password"
             placeholder="password"
             secureTextEntry={true}
-            style={{
-              flex: 2,
-              borderColor: "black",
-              borderWidth: 2,
-              height: 40,
-              padding: 10,
-            }}
+            style={styles.inpp}
           />
-        </View>
         <View
           style={{
             width: 150,
             padding: 10,
+            marginLeft:'50%'
           }}
         >
           <Button
@@ -105,10 +78,10 @@ const Login = ({ navigation }) => {
             }}
           />
           <Text>{error}</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+        </View>
+        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
             <Text style={{ paddingTop: 15 }}> Create an account </Text>
           </TouchableOpacity>
-        </View>
       </View>
     </ImageBackground>
   );
@@ -120,5 +93,18 @@ const styles = StyleSheet.create({
   heder: {
     height: "100%",
     width: "100%",
+  },
+  inpp:{
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  texttinput: {
+    borderWidth: 1,
+    borderColor: '#777',
+    padding: 8 ,
+    margin: 10 ,
+    width: 200,
   },
 });

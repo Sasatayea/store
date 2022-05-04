@@ -34,7 +34,7 @@ export default function App({ navigation }) {
 
   const [user, setUser] = useState(undefined);
 
-  console.log(user);
+  //console.log(user);
   if (user) {
     const email = userr.email;
     if (email == "sheeka@gamil.com") {
@@ -95,7 +95,7 @@ export default function App({ navigation }) {
               options={{
                 tabBarIcon: () => (
                   <Image
-                    source={require("./assets/user (1).png")}
+                    source={require("./assets/userrrr.png")}
                     style={{ width: 20, height: 20 }}
                   />
                 ),
