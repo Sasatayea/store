@@ -8,9 +8,9 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import { editCity } from "../../db/cities/cities";
+
 import { getAuth } from "firebase/auth";
-import imm from "../../assets/shopping-cart.png";
+
 import { useState, useEffect } from "react";
 import { addCity, addCart } from "../../db/cities/cities";
 export default function Pitem({ navigation, item }) {

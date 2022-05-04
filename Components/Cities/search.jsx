@@ -164,9 +164,10 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   item: {
+    flex:1,
     justifyContent: "center",
     alignItems: "center",
-    height: 500,
+    
   },
   text: {
     fontSize: 20,

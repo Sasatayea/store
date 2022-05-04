@@ -150,6 +150,6 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   item: {
-    height: 500,
+    flex:1,
   },
 });
