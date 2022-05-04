@@ -10,7 +10,7 @@ import { React, useState } from "react";
 import { register } from "../../db/auth/auth";
 import loginn from "../../assets/loginn.png";
 import { addUser } from "../../db/cities/users.js";
-import Login from "./Login";
+import fpage from "../Cities/fpage";
 import { TouchableOpacity } from "react-native-web";
 const Register = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -109,7 +109,7 @@ const Register = ({ navigation }) => {
 
         <View
           style={{
-            width: 150,
+            width: 170,
             padding: 10,
           }}
         >
@@ -126,10 +126,10 @@ const Register = ({ navigation }) => {
           />
 
           <Text>{error}</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Text style={{ paddingTop: 10, paddingLeft: 17 }}>
+          <TouchableOpacity onPress={() => navigation.navigate("fpage")}>
+            <Text style={{ paddingTop: 10, paddingLeft: 5 }}>
               {" "}
-              Go to Login{" "}
+              Go to Home page{" "}
             </Text>
           </TouchableOpacity>
         </View>
