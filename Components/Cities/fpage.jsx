@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Button, ImageBackground } from "react-native";
 import React from "react";
 import fpagee from "../../assets/fpagee.png";
-function fpage({ navigation }) {
+function Fpage({ navigation }) {
   return (
     <ImageBackground source={fpagee} resizeMode="cover" style={styles.heder}>
       <View style={styles.pp}>
@@ -22,7 +22,7 @@ function fpage({ navigation }) {
   );
 }
 
-export default fpage;
+export default Fpage;
 
 const styles = StyleSheet.create({
   heder: {

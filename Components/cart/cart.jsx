@@ -16,7 +16,7 @@ import { getAuth } from "firebase/auth";
 import { subscribeCart } from "../../db/cities/cities";
 import { editUser, getUsers, subscribeUser } from "../../db/cities/users";
 
-export default function cart({ route, navigation }) {
+export default function Cart({ route, navigation }) {
   //const { itemId, otherParam } = route.params;
   const auth = getAuth();
   const userr = auth.currentUser;
@@ -150,6 +150,6 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   item: {
-    height: 500,
+    flex:1,
   },
 });

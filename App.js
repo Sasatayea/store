@@ -8,7 +8,7 @@ import Register from "./Components/Users/Register";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import cart from "./Components/cart/cart";
+import Cart from "./Components/cart/Cart";
 import { getAuth } from "firebase/auth";
 import Admin from "./Components/Admin/Admin";
 import EditP from "./Components/Admin/EditP";
@@ -16,10 +16,10 @@ import Edit from "./Components/Admin/Edit";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-import fpage from "./Components/Cities/fpage";
-import product from "./Components/items/product";
-import profile from "./Components/Cities/profile";
-import search from "./Components/Cities/search";
+import Fpage from "./Components/Cities/Fpage";
+import Product from "./Components/items/Product";
+import Profile from "./Components/Cities/Profile";
+import Search from "./Components/Cities/Search";
 import AddP from "./Components/Admin/AddP";
 
 export default function App({ navigation }) {
@@ -67,7 +67,7 @@ export default function App({ navigation }) {
             />
             <Tab.Screen
               name="Search"
-              component={search}
+              component={Search}
               options={{
                 tabBarIcon: () => (
                   <Image
@@ -79,7 +79,7 @@ export default function App({ navigation }) {
             />
             <Tab.Screen
               name="Cart"
-              component={cart}
+              component={Cart}
               options={{
                 tabBarIcon: () => (
                   <Image
@@ -91,7 +91,7 @@ export default function App({ navigation }) {
             />
             <Tab.Screen
               name="Profile"
-              component={profile}
+              component={Profile}
               options={{
                 tabBarIcon: () => (
                   <Image
@@ -102,13 +102,13 @@ export default function App({ navigation }) {
               }}
             />
             <Tab.Screen
-              name="product"
-              component={product}
+              name="Product"
+              component={Product}
               options={{ tabBarButton: () => null, tabBarVisible: false }}
             />
             <Tab.Screen
-              name="fpage"
-              component={fpage}
+              name="Fpage"
+              component={Fpage}
               options={{ tabBarButton: () => null, tabBarVisible: false }}
             />
           </Tab.Navigator>
@@ -120,8 +120,8 @@ export default function App({ navigation }) {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="fpage"
-            component={fpage}
+            name="Fpage"
+            component={Fpage}
             options={{ headerShown: false }}
           />
           <Stack.Screen

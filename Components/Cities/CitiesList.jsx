@@ -88,7 +88,7 @@ const CitiesList = ({ navigation }) => {
           data={dataa}
           numColumns={2}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => <Pitem item={item} />}
+          renderItem={({ item }) => <Pitem navigation={navigation} item={item} />}
         />
         
       </View>
@@ -113,8 +113,9 @@ const styles = StyleSheet.create({
   },
   items: {
     // paddingTop: 10,
+    flex:1,
     justifyContent: "center",
     alignItems: "center",
-    height: 500,
+
   },
 });
