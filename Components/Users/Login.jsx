@@ -41,7 +41,7 @@ const Login = ({ navigation }) => {
             padding: 2,
             textAlign: "center",
             fontSize: 30,
-            fontFamily: "bold",
+            //fontFamily: "bold",
           }}
         >
           {" "}
