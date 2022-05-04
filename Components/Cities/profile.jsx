@@ -8,13 +8,13 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import fpage from "./fpage";
+import fpage from "./Fpage";
 import { getUsers, subscribeUser } from "../../db/cities/users";
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
-import ProfileItem from "./profileItem";
+import ProfileItem from "./ProfileItem";
 import { logout } from "../../db/auth/auth";
-export default function profile({ navigation }) {
+export default function Profile({ navigation }) {
   const getUserList = async () => {
     const c = await getUsers();
     await setusers(c);

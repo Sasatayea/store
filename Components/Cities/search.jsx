@@ -16,8 +16,8 @@ import {
   subscribe,
 } from "../../db/cities/cities";
 import { useEffect, useState } from "react";
-import Pitem from "./../items/Pitem";
-export default function search({ navigation }) {
+import Pitem from "../items/Pitem";
+export default function Search({ navigation }) {
   const getCitiesList = async () => {
     const c = await getCities();
     await setCities(c);

@@ -26,7 +26,7 @@ export default function Pitem({ navigation, item }) {
       <View style={[styles.card, styles.shadowProp]}>
         <View>
           <TouchableOpacity
-            onPress={() => navigation.navigate("product", { item: item })}
+            onPress={() => navigation.navigate("Product", { item: item })}
           >
             <Image
               style={{ height: 150, width: 150, margin: 10 }}
