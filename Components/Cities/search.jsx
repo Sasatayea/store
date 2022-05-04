@@ -90,7 +90,7 @@ export default function search({ navigation }) {
           style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
         />
         <Button title="search" onPress={() => search(searchItem)} />
-        <Text> nothing </Text>
+        <Text> Nothing</Text>
       </View>
     );
   } else {

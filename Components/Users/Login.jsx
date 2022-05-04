@@ -1,14 +1,17 @@
-import { StyleSheet, Text, View, TextInput, Button ,ImageBackground } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button ,ImageBackground} from "react-native";
 import { React, useState } from "react";
 import { login } from "../../db/auth/auth";
-import loginn from '../../assets/loginn.png'
+import loginn from '../../assets/loginn.png';
+import Register from "./Register";
+import { TouchableOpacity } from "react-native-web";
 import {
+
   getUsers,
   addUser,
   deleteUser,
   subscribe,
 } from "../../db/cities/users";
-const Login = () => {
+const Login = ({navigation}) => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
   const [error, setError] = useState("");
@@ -71,6 +74,9 @@ const Login = () => {
           
         />
         <Text>{error}</Text>
+        <TouchableOpacity  onPress={() => navigation.navigate('Register')}>
+        <Text  > Sign Up </Text>
+        </TouchableOpacity>
       </View>
       </View>
     </ImageBackground>

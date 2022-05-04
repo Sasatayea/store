@@ -2,9 +2,10 @@ import { StyleSheet, Text, View, TextInput, Button ,ImageBackground } from "reac
 import { React, useState } from "react";
 import { register } from "../../db/auth/auth";
 import loginn from '../../assets/loginn.png'
-
-
-const Register = () => {
+import {addUser}  from '../../db/cities/users.js'
+import Login from './Login';
+import { TouchableOpacity } from "react-native-web";
+const Register = ({navigation}) => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
   const [username, setusername] = useState("");
@@ -12,7 +13,6 @@ const Register = () => {
 
 
   const [error, setError] = useState("");
-  
   return (
     <ImageBackground source={loginn} resizeMode="cover"
       style={styles.heder}>
@@ -28,12 +28,7 @@ const Register = () => {
           textAlign:'center',
           fontSize:30
         }}> Sign Up </Text>
-      <View
-        style={{
-          padding: 10,
-          borderRadius:20,
-        }}
-      >
+      <View style={styles.in}>
         <TextInput
           onChangeText={setusername}
           keyboardType="default"
@@ -41,12 +36,7 @@ const Register = () => {
           style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
         />
       </View>
-      <View
-        style={{
-          padding: 10,
-          borderRadius:20,
-        }}
-      >
+      <View style={styles.in}>
         <TextInput
           onChangeText={setEmail}
           keyboardType="email-address"
@@ -54,12 +44,7 @@ const Register = () => {
           style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
         />
       </View>
-      <View
-        style={{
-          padding: 10,
-          borderRadius:20,
-        }}
-      >  
+      <View style={styles.in}>
         <TextInput
           onChangeText={setpassword}
           keyboardType="visible-password"
@@ -69,12 +54,7 @@ const Register = () => {
         />
       </View>
 
-      <View
-        style={{
-          padding: 10,
-          borderRadius:20,
-        }}
-      >
+      <View style={styles.in}>
         <TextInput
           onChangeText={setcountry}
           keyboardType="default"
@@ -91,7 +71,8 @@ const Register = () => {
           title="Register"
           onPress={() => {
             console.log(email, password);
-            register(email,password ,username )
+            
+            register(email,password,username,country )
               .then()
               .catch((e) => setError(e.message));
           }}
@@ -99,6 +80,9 @@ const Register = () => {
 
         <Text>{error}</Text>
       </View>
+      <TouchableOpacity  onPress={() => navigation.navigate('Login')}>
+        <Text  > Login </Text>
+        </TouchableOpacity>
       </View>
     </ImageBackground>
   );
@@ -111,4 +95,8 @@ const styles = StyleSheet.create({
     height:'100%',
     width:'100%',
   },
+  in:{
+    padding: 10,
+    borderRadius:20,
+  }
 });

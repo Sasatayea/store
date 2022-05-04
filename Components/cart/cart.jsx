@@ -84,6 +84,7 @@ import { editUser,getUsers, subscribeUser } from "../../db/cities/users";
         if(user[0].money>=total){
           setBuy("");
         let usermoney =0;
+        
         usermoney = user[0].money;
         editUser({ ...user[0], money: parseInt(usermoney) - total,sold:dataa });
         
@@ -97,7 +98,6 @@ import { editUser,getUsers, subscribeUser } from "../../db/cities/users";
         alert("You don't have enough money  ي شحات")
       }
       }
-
       
       if (userr !== null) {
         const email = userr.email;
@@ -108,7 +108,7 @@ import { editUser,getUsers, subscribeUser } from "../../db/cities/users";
         }
         
     return (
-    <View> 
+    <View style={styles.item}> 
         <Text>heloll</Text> 
         <FlatList 
         data={dataa}
@@ -131,4 +131,7 @@ const styles = StyleSheet.create({
         margin:10,
         
     },
+    item:{
+      height:500,
+    }
 });

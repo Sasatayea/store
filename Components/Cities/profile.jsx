@@ -1,15 +1,61 @@
-import { StyleSheet, Text, View, TouchableOpacity ,Button, TextInput  ,Image} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity ,Button, TextInput  ,Image ,FlatList} from "react-native";
 import fpage from './fpage';
-
+import { getUsers, subscribeUser } from "../../db/cities/users";
+import { getAuth } from "firebase/auth";
+import { useEffect, useState } from "react";
+import ProfileItem from "./profileItem";
+import { logout } from "../../db/auth/auth";
 export default function profile({ navigation }) {
+  
+  
+  const getUserList = async () => {
+    const c = await getUsers();
+    await setusers(c);
+    console.log("user", c);
+  };
+  
+  useEffect(async() => {
+    await getUserList();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = subscribeUser(({ change, snapshot }) => {
+      if (change.type === "added") {
+        getUserList();
+
+      }
+      if (change.type === "modified") {
+        getUserList();
+      }
+      if (change.type === "removed") {
+        getUserList();
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  const auth = getAuth();
+  const userr = auth.currentUser;
+  const [users, setusers] = useState([]);
+  console.log("gggggggggggggg",users);
+  if (userr !== null) {
+  let user = users.filter((e)=>e.email == userr.email);
 
   return (
     <View >
-                  <View style={{padding: 10}}>
-                <Button title={"Logout"} onPress={() => navigation.navigate('fpage')}/>
-            </View>
+    <FlatList
+    data={user}
+    keyExtractor={user.id}
+    renderItem={({ item }) => (
+      <ProfileItem item = {item} />
+    )}
+  />
+  <Button title="Logout" onPress={()=>logout()}/>
     </View>
   );
+}
 }
 
 const styles = StyleSheet.create({

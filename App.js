@@ -38,51 +38,94 @@ export default function App({ navigation }) {
   console.log(user);
   if (user) {
     return (
-      
-      <NavigationContainer >
-         
-        <Tab.Navigator >
-          <Tab.Screen name="Home" component={CitiesList} 
-          options={{
-            tabBarIcon: () => (<Image source={require("./assets/home.png")} 
-            style={{width: 20, height: 20 }} />)
-        }}
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen
+            name="Home"
+            component={CitiesList}
+            options={{
+              tabBarIcon: () => (
+                <Image
+                  source={require("./assets/home.png")}
+                  style={{ width: 20, height: 20 }}
+                />
+              ),
+            }}
           />
-                    <Tab.Screen name="Search" component={search} 
-          options={{
-            tabBarIcon: () => (<Image source={require("./assets/search.png")} 
-            style={{width: 20, height: 20}} />)
-        }}
+          <Tab.Screen
+            name="Search"
+            component={search}
+            options={{
+              tabBarIcon: () => (
+                <Image
+                  source={require("./assets/search.png")}
+                  style={{ width: 20, height: 20 }}
+                />
+              ),
+            }}
           />
-          <Tab.Screen name="Cart" component={cart}  
-          options={{
-            tabBarIcon: () => (<Image source={require("./assets/shopping-cart.png")} 
-            style={{width: 20, height: 20}} />)
-        }}
+          <Tab.Screen
+            name="Cart"
+            component={cart}
+            options={{
+              tabBarIcon: () => (
+                <Image
+                  source={require("./assets/shopping-cart.png")}
+                  style={{ width: 20, height: 20 }}
+                />
+              ),
+            }}
           />
-          <Tab.Screen name="Profile" component={profile} 
-          options={{
-            tabBarIcon: () => (<Image source={require("./assets/user (1).png")} 
-            style={{width: 20, height: 20}} />)
-        }}
+          <Tab.Screen
+            name="Profile"
+            component={profile}
+            options={{
+              tabBarIcon: () => (
+                <Image
+                  source={require("./assets/user (1).png")}
+                  style={{ width: 20, height: 20 }}
+                />
+              ),
+            }}
           />
-          <Tab.Screen name="product" component={product}
-           options = {{ tabBarButton: () => null,tabBarVisible: false,}} />
-          <Tab.Screen name="fpage" component={fpage}
-           options = {{ tabBarButton: () => null,tabBarVisible: false,}} />
-
-
-
+          <Tab.Screen
+            name="product"
+            component={product}
+            options={{ tabBarButton: () => null, tabBarVisible: false }}
+          />
+          <Tab.Screen
+            name="fpage"
+            component={fpage}
+            options={{ tabBarButton: () => null, tabBarVisible: false }}
+          />
         </Tab.Navigator>
       </NavigationContainer>
     );
   } else {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="fpage">
-          <Stack.Screen name="fpage" component={fpage} />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Register" component={Register} />
+        <Stack.Navigator>
+          <Stack.Screen
+            name="fpage"
+            component={fpage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              headerTransparent: true,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{
+              headerTransparent: true,
+              headerShown: false,
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
       //<fpage />
@@ -90,8 +133,7 @@ export default function App({ navigation }) {
   }
 }
 const styles = StyleSheet.create({
-  navbar:{
-    backgroundColor:'red',
-  }
-
+  navbar: {
+    backgroundColor: "red",
+  },
 });

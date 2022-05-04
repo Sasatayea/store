@@ -7,7 +7,9 @@ import {
   Image,
   Picker,
   StyleSheet,
+  Dimensions,
 } from "react-native";
+
 import { useEffect, useState } from "react";
 import {
   getCities,
@@ -24,7 +26,7 @@ import EditCity from "./EditCity";
 import { TouchableOpacity } from "react-native-web";
 import { async } from "@firebase/util";
 import { getCart } from "../../db/cities/cities";
-
+const width = Dimensions.get("window").width;
 const CitiesList = ({ navigation }) => {
   const getCitiesList = async () => {
     const c = await getCities();
@@ -32,7 +34,7 @@ const CitiesList = ({ navigation }) => {
     console.log("products", c);
   };
 
-  useEffect(async() => {
+  useEffect(async () => {
     await getCitiesList();
   }, []);
 
@@ -40,7 +42,6 @@ const CitiesList = ({ navigation }) => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
       if (change.type === "added") {
         getCitiesList();
-
       }
       if (change.type === "modified") {
         getCitiesList();
@@ -61,12 +62,12 @@ const CitiesList = ({ navigation }) => {
 
   const [selectedValue, setSelectedValue] = useState("All");
   const [searchItem, setsearchItem] = useState("");
-  
-  let dataa = cities.filter((e)=>e.type== selectedValue);
-  if(selectedValue == "All"){
-    dataa = cities ;
+
+  let dataa = cities.filter((e) => e.type == selectedValue);
+  if (selectedValue == "All") {
+    dataa = cities;
     console.log("done");
-    }
+  }
 
   return cityToEdit ? (
     <EditCity city={cityToEdit} onSave={() => setCityToEdit(undefined)} />
@@ -75,7 +76,11 @@ const CitiesList = ({ navigation }) => {
       <View style={styles.search}>
         <Picker
           selectedValue={selectedValue}
-          style={{ height: 50, width: 150 }}
+          style={{
+            height: 50,
+            width: 150,
+            backgroundColor: "#fff",
+          }}
           onValueChange={(itemValue, itemIndex) => {
             setSelectedValue(itemValue);
           }}
@@ -90,10 +95,9 @@ const CitiesList = ({ navigation }) => {
       <View style={styles.items}>
         <FlatList
           data={dataa}
-          keyExtractor={cities.id}
-          renderItem={({ item }) => (
-            <Pitem navigation={navigation} item={item} />
-          )}
+          numColumns={2}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => <Pitem item={item} />}
         />
       </View>
     </View>
@@ -101,21 +105,23 @@ const CitiesList = ({ navigation }) => {
 };
 
 export default CitiesList;
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:'#161F30',
-  },
-  search:{
     flex: 1,
+    backgroundColor: "#D9D9D9",
+  },
+  search: {
+    // flex: 1,
     paddingTop: 10,
     flexDirection: "row",
     alignItems: "flex-start",
-    justifyContent:"center",
+    justifyContent: "center",
   },
-  items:{
-    paddingTop: 10,
-    flexDirection: "row",
+  items: {
+    // paddingTop: 10,
+    justifyContent: "center",
     alignItems: "center",
- 
-  }
+    height: 500,
+  },
 });
