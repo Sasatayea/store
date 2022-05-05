@@ -46,66 +46,20 @@ const Login = ({ navigation }) => {
             textAlign: "center",
             fontSize: 35,
           }}
-<<<<<<< HEAD
         > Login </Text>
 
-=======
-        >
-          {" "}
-          Login
-        </Text>
-        <View
-          style={{
-            padding: 10,
-            borderRadius: 20,
-            height: 60,
-          }}
-        >
->>>>>>> f205de3c440b3d41af6adb724318e6c04fea2702
           <TextInput
             onChangeText={setEmail}
             keyboardType="email-address"
             placeholder="email-address"
-<<<<<<< HEAD
             style={styles.inpp}
           />
-=======
-            style={{
-              flex: 2,
-              borderColor: "black",
-              borderWidth: 1,
-              height: 90,
-              // margin: 12,
-              borderWidth: 1,
-              padding: 10,
-            }}
-          />
-        </View>
-
-        <View
-          style={{
-            padding: 10,
-            borderRadius: 20,
-            height: 60,
-          }}
-        >
->>>>>>> f205de3c440b3d41af6adb724318e6c04fea2702
           <TextInput
             onChangeText={setpassword}
             keyboardType="visible-password"
             placeholder="password"
             secureTextEntry={true}
-<<<<<<< HEAD
             style={styles.inpp}
-=======
-            style={{
-              flex: 2,
-              borderColor: "black",
-              borderWidth: 1,
-              height: 90,
-              padding: 10,
-            }}
->>>>>>> f205de3c440b3d41af6adb724318e6c04fea2702
           />
         <View
           style={{
@@ -124,14 +78,9 @@ const Login = ({ navigation }) => {
             }}
           />
           <Text>{error}</Text>
-<<<<<<< HEAD
         </View>
         <TouchableOpacity onPress={() => navigation.navigate("Register")}>
             <Text style={{ paddingTop: 15 }}> Create an account </Text>
-=======
-          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-            <Text style={{ paddingTop: 5 }}> Create an account </Text>
->>>>>>> f205de3c440b3d41af6adb724318e6c04fea2702
           </TouchableOpacity>
       </View>
     </ImageBackground>
