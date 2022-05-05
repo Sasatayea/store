@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 200,
-    flex: 1,
+    // flex: 1,
     padding: 20,
   },
   text: {
