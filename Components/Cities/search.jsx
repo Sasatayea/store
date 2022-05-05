@@ -130,8 +130,8 @@ export default function Search({ navigation }) {
         <View style={styles.item}>
           <FlatList
             data={dataa}
-            numColumns={2}
             keyExtractor={cities.id}
+            numColumns={2}
             renderItem={({ item }) => (
               <Pitem navigation={navigation} item={item} />
             )}
@@ -164,10 +164,8 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   item: {
-    flex:1,
     justifyContent: "center",
     alignItems: "center",
-    
   },
   text: {
     fontSize: 20,

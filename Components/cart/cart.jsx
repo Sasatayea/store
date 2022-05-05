@@ -149,6 +149,6 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   item: {
-    flex:1,
+    flex: 1,
   },
 });

@@ -59,6 +59,30 @@ export default function Pitem({ navigation, item }) {
 }
 
 const styles = StyleSheet.create({
+<<<<<<< HEAD
+=======
+  content: {
+    flex: 1,
+    alignSelf: "stretch",
+    backgroundColor: "#fff",
+    borderRadius: 5,
+    borderWidth: 3,
+    borderColor: "#000",
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 10,
+  },
+  button: {
+    borderRadius: 200,
+    // flex: 1,
+    padding: 20,
+  },
+  text: {
+    fontSize: 10,
+    //fontWeight: 600,
+    textTransform: "uppercase",
+  },
+>>>>>>> f205de3c440b3d41af6adb724318e6c04fea2702
 
   card: {
     marginRight: 10,

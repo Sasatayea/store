@@ -47,15 +47,22 @@ const CitiesList = ({ navigation }) => {
   const [cities, setCities] = useState([]);
   
   const [selectedValue, setSelectedValue] = useState("All");
+<<<<<<< HEAD
   
   let dataa = cities.filter((e)=>e.type== selectedValue);
   if(selectedValue == "All"){
     dataa = cities ;
     //console.log("done");
+=======
+
+  let dataa = cities.filter((e) => e.type == selectedValue);
+  if (selectedValue == "All") {
+    dataa = cities;
+    console.log("done");
+>>>>>>> f205de3c440b3d41af6adb724318e6c04fea2702
   }
 
-  return  (
-    
+  return (
     <View style={styles.container}>
       <View style={styles.search}>
         
@@ -83,11 +90,11 @@ const CitiesList = ({ navigation }) => {
           data={dataa}
           numColumns={2}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => <Pitem navigation={navigation} item={item} />}
+          renderItem={({ item }) => (
+            <Pitem navigation={navigation} item={item} />
+          )}
         />
-        
       </View>
-      
     </View>
   );
 };
@@ -107,7 +114,7 @@ const styles = StyleSheet.create({
   },
   items: {
     // paddingTop: 10,
-    flex:1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
