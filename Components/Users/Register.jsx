@@ -5,13 +5,12 @@ import {
   TextInput,
   Button,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import { React, useState } from "react";
 import { register } from "../../db/auth/auth";
 import loginn from "../../assets/loginn.png";
-import { addUser } from "../../db/cities/users.js";
-import fpage from "../Cities/fpage";
-import { TouchableOpacity } from "react-native-web";
+
 const Register = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
@@ -34,7 +33,7 @@ const Register = ({ navigation }) => {
             padding: 2,
             textAlign: "center",
             fontSize: 30,
-            fontFamily: "bold",
+            //fontFamily: "bold",
           }}
         >
           {" "}
@@ -126,7 +125,7 @@ const Register = ({ navigation }) => {
           />
 
           <Text>{error}</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("fpage")}>
+          <TouchableOpacity onPress={() => navigation.navigate("Fpage")}>
             <Text style={{ paddingTop: 10, paddingLeft: 5 }}>
               {" "}
               Go to Home page{" "}
@@ -148,5 +147,6 @@ const styles = StyleSheet.create({
   in: {
     padding: 10,
     borderRadius: 20,
+    height: 60,
   },
 });

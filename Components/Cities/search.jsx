@@ -16,8 +16,8 @@ import {
   subscribe,
 } from "../../db/cities/cities";
 import { useEffect, useState } from "react";
-import Pitem from "./../items/Pitem";
-export default function search({ navigation }) {
+import Pitem from "../items/Pitem";
+export default function Search({ navigation }) {
   const getCitiesList = async () => {
     const c = await getCities();
     await setCities(c);
@@ -68,9 +68,8 @@ export default function search({ navigation }) {
     let k = 0;
     let data = [];
     for (let i = 0; i < cities.length; i++) {
-      const ddd = cities[i].name;
       for (let j = 0; j < x.length; j++) {
-        if (ddd == x[j]) {
+        if (cities[i].name == x[j]) {
           data[k] = cities[i];
           k++;
         }
@@ -131,8 +130,8 @@ export default function search({ navigation }) {
         <View style={styles.item}>
           <FlatList
             data={dataa}
-            numColumns={2}
             keyExtractor={cities.id}
+            numColumns={2}
             renderItem={({ item }) => (
               <Pitem navigation={navigation} item={item} />
             )}
@@ -167,7 +166,6 @@ const styles = StyleSheet.create({
   item: {
     justifyContent: "center",
     alignItems: "center",
-    height: 500,
   },
   text: {
     fontSize: 20,
