@@ -5,12 +5,12 @@ import {
   TextInput,
   Button,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import { React, useState } from "react";
 import { login } from "../../db/auth/auth";
 import loginn from "../../assets/loginn.png";
 import Register from "./Register";
-import { TouchableOpacity } from "react-native-web";
 import {
   getUsers,
   addUser,
@@ -41,7 +41,7 @@ const Login = ({ navigation }) => {
             padding: 2,
             textAlign: "center",
             fontSize: 30,
-            fontFamily: "bold",
+            //fontFamily: "bold",
           }}
         >
           {" "}

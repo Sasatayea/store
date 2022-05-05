@@ -6,16 +6,17 @@ import {
   Button,
   TextInput,
   FlatList,
+  ScrollView,
 } from "react-native";
 import { useState, useEffect } from "react";
-import { ScrollView } from "react-native-web";
+
 import { deleteCart, getCart } from "../../db/cities/cities";
 import CartItem from "../items/CartItem";
 import { getAuth } from "firebase/auth";
 import { subscribeCart } from "../../db/cities/cities";
 import { editUser, getUsers, subscribeUser } from "../../db/cities/users";
 
-export default function cart({ route, navigation }) {
+export default function Cart({ route, navigation }) {
   //const { itemId, otherParam } = route.params;
   const auth = getAuth();
   const userr = auth.currentUser;
@@ -27,7 +28,7 @@ export default function cart({ route, navigation }) {
   const getCartsList = async () => {
     const c = await getCart();
     setCart(c);
-    console.log("carts", c);
+    console.log("carts: ", c);
   };
   const getUsersList = async () => {
     const u = await getUsers();
@@ -37,6 +38,24 @@ export default function cart({ route, navigation }) {
   useEffect(() => {
     getCartsList();
     getUsersList();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = subscribeCart(({ change, snapshot }) => {
+      if (change.type === "added") {
+        getCartsList();
+      }
+      if (change.type === "modified") {
+        getCartsList();
+      }
+      if (change.type === "removed") {
+        getCartsList();
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   useEffect(() => {
@@ -98,7 +117,6 @@ export default function cart({ route, navigation }) {
       alert("You don't have enough money  ي شحات");
     }
   };
-
   if (userr !== null) {
     const email = userr.email;
     let dataa = cart.filter((e) => e.username == email);
@@ -132,6 +150,6 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   item: {
-    height: 500,
+    flex: 1,
   },
 });

@@ -7,7 +7,6 @@ import {
   Image,
   Picker,
   StyleSheet,
-  Dimensions,
 } from "react-native";
 
 import { useEffect, useState } from "react";
@@ -20,13 +19,7 @@ import {
 } from "../../db/cities/cities";
 import { subscribeUser } from "../../db/cities/users";
 import Pitem from "../items/Pitem";
-import { editUser, getUsers } from "../../db/cities/users";
-import image1 from "../../assets/loginn.png";
-import EditCity from "./EditCity";
-import { TouchableOpacity } from "react-native-web";
-import { async } from "@firebase/util";
-import { getCart } from "../../db/cities/cities";
-const width = Dimensions.get("window").width;
+
 const CitiesList = ({ navigation }) => {
   const getCitiesList = async () => {
     const c = await getCities();
@@ -61,17 +54,15 @@ const CitiesList = ({ navigation }) => {
   const [cityToEdit, setCityToEdit] = useState(undefined);
 
   const [selectedValue, setSelectedValue] = useState("All");
-  const [searchItem, setsearchItem] = useState("");
-
-  let dataa = cities.filter((e) => e.type == selectedValue);
-  if (selectedValue == "All") {
-    dataa = cities;
+  
+  let dataa = cities.filter((e)=>e.type== selectedValue);
+  if(selectedValue == "All"){
+    dataa = cities ;
     console.log("done");
   }
 
-  return cityToEdit ? (
-    <EditCity city={cityToEdit} onSave={() => setCityToEdit(undefined)} />
-  ) : (
+  return  (
+    
     <View style={styles.container}>
       <View style={styles.search}>
         <Picker
@@ -97,9 +88,11 @@ const CitiesList = ({ navigation }) => {
           data={dataa}
           numColumns={2}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => <Pitem item={item} />}
+          renderItem={({ item }) => <Pitem navigation={navigation} item={item} />}
         />
+        
       </View>
+      
     </View>
   );
 };
@@ -120,8 +113,9 @@ const styles = StyleSheet.create({
   },
   items: {
     // paddingTop: 10,
+    flex:1,
     justifyContent: "center",
     alignItems: "center",
-    height: 500,
+
   },
 });
