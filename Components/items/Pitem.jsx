@@ -59,8 +59,6 @@ export default function Pitem({ navigation, item }) {
 }
 
 const styles = StyleSheet.create({
-<<<<<<< HEAD
-=======
   content: {
     flex: 1,
     alignSelf: "stretch",
@@ -82,7 +80,6 @@ const styles = StyleSheet.create({
     //fontWeight: 600,
     textTransform: "uppercase",
   },
->>>>>>> f205de3c440b3d41af6adb724318e6c04fea2702
 
   card: {
     marginRight: 10,

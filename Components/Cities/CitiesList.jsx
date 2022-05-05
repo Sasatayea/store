@@ -47,19 +47,11 @@ const CitiesList = ({ navigation }) => {
   const [cities, setCities] = useState([]);
   
   const [selectedValue, setSelectedValue] = useState("All");
-<<<<<<< HEAD
-  
-  let dataa = cities.filter((e)=>e.type== selectedValue);
-  if(selectedValue == "All"){
-    dataa = cities ;
-    //console.log("done");
-=======
 
   let dataa = cities.filter((e) => e.type == selectedValue);
   if (selectedValue == "All") {
     dataa = cities;
     console.log("done");
->>>>>>> f205de3c440b3d41af6adb724318e6c04fea2702
   }
 
   return (
