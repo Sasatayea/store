@@ -51,6 +51,7 @@ const Login = ({ navigation }) => {
           style={{
             padding: 10,
             borderRadius: 20,
+            height: 60,
           }}
         >
           <TextInput
@@ -60,8 +61,8 @@ const Login = ({ navigation }) => {
             style={{
               flex: 2,
               borderColor: "black",
-              borderWidth: 2,
-              height: 40,
+              borderWidth: 1,
+              height: 90,
               // margin: 12,
               borderWidth: 1,
               padding: 10,
@@ -73,6 +74,7 @@ const Login = ({ navigation }) => {
           style={{
             padding: 10,
             borderRadius: 20,
+            height: 60,
           }}
         >
           <TextInput
@@ -83,8 +85,8 @@ const Login = ({ navigation }) => {
             style={{
               flex: 2,
               borderColor: "black",
-              borderWidth: 2,
-              height: 40,
+              borderWidth: 1,
+              height: 90,
               padding: 10,
             }}
           />
@@ -106,7 +108,7 @@ const Login = ({ navigation }) => {
           />
           <Text>{error}</Text>
           <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-            <Text style={{ paddingTop: 15 }}> Create an account </Text>
+            <Text style={{ paddingTop: 5 }}> Create an account </Text>
           </TouchableOpacity>
         </View>
       </View>

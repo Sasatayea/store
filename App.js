@@ -37,7 +37,7 @@ export default function App({ navigation }) {
   console.log(user);
   if (user) {
     const email = userr.email;
-    if (email == "sheeka@gamil.com") {
+    if (email == "sheeka@gmail.com") {
       console.log("app", email);
       return (
         <NavigationContainer>
@@ -124,6 +124,7 @@ export default function App({ navigation }) {
             component={Fpage}
             options={{ headerShown: false }}
           />
+          {/* bhg */}
           <Stack.Screen
             name="Login"
             component={Login}
