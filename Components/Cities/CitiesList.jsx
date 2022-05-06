@@ -63,7 +63,7 @@ const CitiesList = ({ navigation }) => {
           style={{
             height: 50,
             width: 150,
-            backgroundColor: "red",
+            // backgroundColor: "red",
             borderWidth: 2,
           }}
           onValueChange={(itemValue) => {

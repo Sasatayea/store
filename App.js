@@ -13,14 +13,15 @@ import { getAuth } from "firebase/auth";
 import Admin from "./Components/Admin/Admin";
 import EditP from "./Components/Admin/EditP";
 import Edit from "./Components/Admin/Edit";
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
 
 import Fpage from "./Components/Cities/Fpage";
 import Product from "./Components/items/Product";
 import Profile from "./Components/Cities/Profile";
 import Search from "./Components/Cities/Search";
 import AddP from "./Components/Admin/AddP";
+
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App({ navigation }) {
   const auth = getAuth();
@@ -37,7 +38,7 @@ export default function App({ navigation }) {
   //console.log(user);
   if (user) {
     const email = userr.email;
-    if (email == "sheeka@gamil.com") {
+    if (email == "sheeka@gmail.com") {
       console.log("app", email);
       return (
         <NavigationContainer>
