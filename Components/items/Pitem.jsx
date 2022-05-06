@@ -12,16 +12,49 @@ import {
 import { getAuth } from "firebase/auth";
 
 import { useState, useEffect } from "react";
-import { addCity, addCart } from "../../db/cities/cities";
+import { addCity, addCart, editCity, getCities } from "../../db/cities/cities";
+import { subscribe } from "../../db/cities/cities";
+import { async } from "@firebase/util";
 export default function Pitem({ navigation, item }) {
-  const [productsCart, setProductsCart] = useState([]);
+  const unsubLike = async () => {
+    setLiked(item.liked);
+    setCurLike(liked.filter((e) => userr.email == e.email));
+    
+    if (curLike[0] == userr.email) setFlage(false);
+    else setFlage(true);
+
+  };
+  useEffect(async () => {
+    await unsubLike();
+  }, []);
 
   const auth = getAuth();
+  
   const userr = auth.currentUser;
+
+  
+  const [liked, setLiked] = useState(item.liked);
+  const liked1 = [...liked];
+  const [curLike, setCurLike] = useState(liked1.filter((e) => userr.email == e));
+  const [flag, setFlage] = useState(curLike[0] == userr.email);
+
 
   if (userr !== null) {
     const email = userr.email;
-    console.log("ssssssssss", email);
+
+    const Like = () => {
+      if (flag) {
+        editCity({ ...item, liked: [...liked, email] });
+        setFlage(false);
+      } else {
+        let arr = liked.filter((e) => e != email);
+        
+        console.log(arr);
+        editCity({ ...item, liked: arr });
+        setFlage(true);
+      }
+    };
+
     return (
       <View style={[styles.card, styles.shadowProp]}>
         <View>
@@ -50,6 +83,19 @@ export default function Pitem({ navigation, item }) {
                 })
               }
             />
+            <TouchableOpacity onPress={() => Like()}>
+              {flag ? (
+                <Image
+                  source={require("../../assets/like.png")}
+                  style={{ width: 30, height: 30, marginLeft: 10 }}
+                />
+              ) : (
+                <Image
+                  source={require("../../assets/like (1).png")}
+                  style={{ width: 30, height: 30, marginLeft: 10 }}
+                />
+              )}
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -70,9 +116,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   button: {
+    flexDirection: "row",
     borderRadius: 200,
-    flex: 1,
-    padding: 20,
+    padding: 15,
   },
   text: {
     fontSize: 10,
