@@ -17,9 +17,6 @@ import { subscribe } from "../../db/cities/cities";
 import { async } from "@firebase/util";
 export default function Pitem({ navigation, item }) {
   const unsubLike = async () => {
-    setLiked(item.liked);
-    setCurLike(liked.filter((e) => userr.email == e.email));
-    
     if (curLike[0] == userr.email) setFlage(false);
     else setFlage(true);
 
