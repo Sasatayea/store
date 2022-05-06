@@ -45,7 +45,7 @@ export default function Profile({ navigation }) {
   const auth = getAuth();
   const userr = auth.currentUser;
   const [users, setusers] = useState([]);
-  console.log("gggggggggggggg", users);
+
   if (userr !== null) {
     let user = users.filter((e) => e.email == userr.email);
 
