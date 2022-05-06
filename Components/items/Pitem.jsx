@@ -19,7 +19,7 @@ export default function Pitem({ navigation, item }) {
   const unsubLike = async () => {
     setLiked(item.liked);
     setCurLike(liked.filter((e) => userr.email == e.email));
-    console.log("cur: ", curLike);
+    
     if (curLike[0] == userr.email) setFlage(false);
     else setFlage(true);
 
@@ -28,13 +28,16 @@ export default function Pitem({ navigation, item }) {
     await unsubLike();
   }, []);
 
-  const [curLike, setCurLike] = useState([]);
-
-  const [flag, setFlage] = useState();
-  const [liked, setLiked] = useState([]);
-
   const auth = getAuth();
+  
   const userr = auth.currentUser;
+
+  
+  const [liked, setLiked] = useState(item.liked);
+  const liked1 = [...liked];
+  const [curLike, setCurLike] = useState(liked1.filter((e) => userr.email == e));
+  const [flag, setFlage] = useState(curLike[0] == userr.email);
+
 
   if (userr !== null) {
     const email = userr.email;
@@ -44,8 +47,9 @@ export default function Pitem({ navigation, item }) {
         editCity({ ...item, liked: [...liked, email] });
         setFlage(false);
       } else {
-        let arr = liked;
-        arr.filter((e) => e.email != email);
+        let arr = liked.filter((e) => e != email);
+        
+        console.log(arr);
         editCity({ ...item, liked: arr });
         setFlage(true);
       }
