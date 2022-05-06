@@ -22,7 +22,7 @@ export default function Pitem({ navigation, item }) {
     console.log("cur: ", curLike);
     if (curLike[0] == userr.email) setFlage(false);
     else setFlage(true);
-    console.log(liked);
+
   };
   useEffect(async () => {
     await unsubLike();
