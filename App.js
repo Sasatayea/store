@@ -124,6 +124,7 @@ export default function App({ navigation }) {
             component={Fpage}
             options={{ headerShown: false }}
           />
+          {/* bhg */}
           <Stack.Screen
             name="Login"
             component={Login}
