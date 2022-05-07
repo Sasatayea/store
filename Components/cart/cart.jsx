@@ -127,7 +127,10 @@ export default function Cart({ route, navigation }) {
 
     return (
       <View style={styles.item}>
+<<<<<<< HEAD
         <Text style={{ fontSize: 16, fontWeight: "bold" }}>Selected Items</Text>
+=======
+>>>>>>> 072ff98970e499f5ee976d2d1f3fc87fe00239bb
         <FlatList
           data={dataa}
           keyExtractor={cart.id}
