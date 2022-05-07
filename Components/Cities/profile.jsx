@@ -66,10 +66,7 @@ export default function Profile({ navigation }) {
 
 const styles = StyleSheet.create({
   content: {
-<<<<<<< HEAD
     flex: 1,
-=======
->>>>>>> 072ff98970e499f5ee976d2d1f3fc87fe00239bb
     fontSize: 30,
     marginTop: 24,
     padding: 20,
