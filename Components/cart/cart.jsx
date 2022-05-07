@@ -127,16 +127,19 @@ export default function Cart({ route, navigation }) {
 
     return (
       <View style={styles.item}>
-        <Text>heloll</Text>
+        <Text style={{ fontSize: 16, fontWeight: "bold" }}>Selected Items</Text>
         <FlatList
           data={dataa}
           keyExtractor={cart.id}
+          numColumns={2}
           renderItem={({ item }) => (
             <CartItem navigation={navigation} item={item} />
           )}
         />
-        <Button title="cash" onPress={() => Cash()} />
-        <Text>{buy}</Text>
+        <View style={styles.button}>
+          <Button title="cash" color="#000" onPress={() => Cash()} />
+          <Text>{buy}</Text>
+        </View>
       </View>
     );
   }
@@ -144,12 +147,21 @@ export default function Cart({ route, navigation }) {
 
 const styles = StyleSheet.create({
   content: {
-    height: 200,
-    width: 200,
+    flexDirection: "row",
+    // height: 500,
+    // width: 200,
     backgroundColor: "red",
     margin: 10,
   },
   item: {
     flex: 1,
+    // flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  button: {
+    // borderRadius: 100,
+    // flex: 1,
+    padding: 15,
   },
 });

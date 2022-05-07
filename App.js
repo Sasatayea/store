@@ -148,7 +148,7 @@ export default function App({ navigation }) {
   }
 }
 const styles = StyleSheet.create({
-  navbar: {
-    backgroundColor: "red",
-  },
+  // navbar: {
+  //   backgroundColor: "red",
+  // },
 });
