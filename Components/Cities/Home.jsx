@@ -14,7 +14,6 @@ import { getCities, subscribe } from "../../db/Data/products";
 import Pitem from "../items/Pitem";
 
 const Home = ({ navigation }) => {
-
   const getProduct = async () => {
     const c = await getCities();
     await setproduct(c);
@@ -57,12 +56,7 @@ const Home = ({ navigation }) => {
       <View style={styles.search}>
         <Picker
           selectedValue={selectedValue}
-          style={{
-            height: 50,
-            width: 150,
-            // backgroundColor: "red",
-            borderWidth: 2,
-          }}
+          style={styles.picker}
           onValueChange={(itemValue) => {
             setSelectedValue(itemValue);
           }}
@@ -78,7 +72,7 @@ const Home = ({ navigation }) => {
         <FlatList
           data={dataa}
           numColumns={2}
-          keyExtractor={(item,index) => index.toString()}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <Pitem navigation={navigation} item={item} />
           )}
@@ -106,5 +100,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  picker: {
+    height: 50,
+    width: 150,
+    backgroundColor: "#D9D9D9",
+    fontSize: 17,
+    fontStyle: "italic",
+    textShadowColor: "black",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
+
+    shadowColor: "black",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+
+    borderWidth: 2,
   },
 });
