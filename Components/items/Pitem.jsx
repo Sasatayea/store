@@ -62,7 +62,7 @@ export default function Pitem({ navigation, item }) {
               style={{ height: 150, width: 150, margin: 10 }}
               source={{ uri: item.image }}
             ></Image>
-            <Text> {item.name} </Text>
+            <Text> {item.name}{item.size} </Text>
             <Text>$ {item.price}</Text>
           </TouchableOpacity>
           <View style={styles.button}>
