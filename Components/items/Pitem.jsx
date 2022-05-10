@@ -12,9 +12,10 @@ import {
 import { getAuth } from "firebase/auth";
 
 import { useState, useEffect } from "react";
-import { addCity, addCart, editCity, getCities } from "../../db/cities/cities";
-import { subscribe } from "../../db/cities/cities";
+import { addCity, editCity, getCities } from "../../db/Data/products";
+import { editUser,getUserById } from "../../db/Data/Users";
 import { async } from "@firebase/util";
+
 export default function Pitem({ navigation, item }) {
   const unsubLike = async () => {
     if (curLike[0] == userr.email) setFlage(false);
@@ -22,6 +23,11 @@ export default function Pitem({ navigation, item }) {
   };
   useEffect(async () => {
     await unsubLike();
+    getUserById(userr.uid).then((user)=>{
+      const user1 = user;
+      const ucart = user1[0].cart;
+      setCart(ucart);
+    })
   }, []);
 
   const auth = getAuth();
@@ -29,13 +35,16 @@ export default function Pitem({ navigation, item }) {
   const userr = auth.currentUser;
 
   const [liked, setLiked] = useState(item.liked);
+  const [cart, setCart] = useState([]);
   const liked1 = [...liked];
+
   const [curLike, setCurLike] = useState(
     liked1.filter((e) => userr.email == e)
   );
   const [flag, setFlage] = useState(curLike[0] == userr.email);
 
   if (userr !== null) {
+
     const email = userr.email;
 
     const Like = () => {
@@ -50,6 +59,16 @@ export default function Pitem({ navigation, item }) {
         setFlage(true);
       }
     };
+    const addCart= async (item)=>{
+      
+      getUserById(userr.uid).then((user)=>{
+        const user1 = user;
+        const ucart = user1[0].cart;
+        setCart([...ucart,item]);
+        editUser({...user1[0],cart:[...ucart,item]});
+      })
+    }
+    console.log("cart",cart);
 
     return (
       <View style={[styles.card, styles.shadowProp]}>
@@ -58,10 +77,11 @@ export default function Pitem({ navigation, item }) {
             onPress={() => navigation.navigate("Product", { item: item })}
           >
             <Image
-              style={{ height: 150, width: 150, margin: 10, borderRadius: 20 }}
+              style={{ height: 150, width: 150 , borderRadius: 20, alignSelf:'center' }}
               source={{ uri: item.image }}
             ></Image>
-            <Text> {item.name}{item.size} </Text>
+            <Text> {item.name} </Text>
+            {item.size? <Text>{item.size  }</Text>:<Text>         </Text>}
             <Text>$ {item.price}</Text>
           </TouchableOpacity>
 
@@ -70,14 +90,7 @@ export default function Pitem({ navigation, item }) {
               title="Add to char"
               color="#000"
               onPress={() =>
-                addCart({
-                  username: email,
-                  name: item.name,
-                  size: item.size,
-                  type: item.type,
-                  image: item.image,
-                  price: item.price || "new city" + item.length,
-                })
+                addCart(item)
               }
             />
             <TouchableOpacity onPress={() => Like()}>
@@ -130,17 +143,17 @@ const styles = StyleSheet.create({
   },
   card: {
     marginRight: 10,
-
     backgroundColor: "white",
-    borderRadius: 8,
+    borderRadius: 12,
     paddingVertical: 45,
     paddingHorizontal: "3%",
-    width: 200,
-    height: 335,
+    width: 180,
+    height: 300,
     marginVertical: 10,
   },
   button: {
     textAlign: "center",
+    flexDirection:'row',
   },
   shadowProp: {
     shadowColor: "#171717",

@@ -8,7 +8,7 @@ import {
     ImageBackground,
     TouchableOpacity,
   } from "react-native";
-  import { editCity } from "../../db/cities/cities";
+  import { editCity } from "../../db/Data/products";
   import { React, useState } from "react";
   
   

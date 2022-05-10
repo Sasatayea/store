@@ -7,16 +7,11 @@ import {
   TextInput,
   Image,
 } from "react-native";
-import { editCity } from "../../db/cities/cities";
+import { editCity } from "../../db/Data/products";
 import { getAuth } from "firebase/auth";
 import { useState, useEffect } from "react";
-import {
-  addCity,
-  addCart,
-  deleteCart,
-  subscribe,
-} from "../../db/cities/cities";
-export default function CartItem({ navigation, item }) {
+
+export default function CartItem({ navigation, item,delet }) {
   const [productsCart, setProductsCart] = useState([]);
 
   const auth = getAuth();
@@ -38,13 +33,11 @@ export default function CartItem({ navigation, item }) {
             <Text> {item.name} </Text>
             <Text>$ {item.price}</Text>
           </TouchableOpacity>
-          {/* <Button title="Delete" onPress={() => deleteCity(item.id)} /> */}
-          {/* <Button title="Add to char" onPress={()=>AddToCart(item.id)}/> */}
           <View style={styles.button}>
             <Button
               title="Delete"
               color="red"
-              onPress={() => deleteCart(item.id)}
+              onPress={() => delet(item.id)}
             />
           </View>
         </View>

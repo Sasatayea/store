@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from "firebase/auth";
-import CitiesList from "./Components/Cities/CitiesList";
+import Home from "./Components/Cities/Home";
 import { auth } from "./db/Config";
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Button, Image } from "react-native";
@@ -56,7 +56,7 @@ export default function App({ navigation }) {
           <Tab.Navigator>
             <Tab.Screen
               name="Home"
-              component={CitiesList}
+              component={Home}
               options={{
                 tabBarIcon: () => (
                   <Image

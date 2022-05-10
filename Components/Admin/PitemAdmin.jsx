@@ -8,7 +8,7 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import { deleteCity } from "../../db/cities/cities";
+import { deleteCity } from "../../db/Data/products";
 
 import { useState, useEffect } from "react";
 

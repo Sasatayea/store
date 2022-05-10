@@ -10,14 +10,40 @@ import {
 import { React, useState } from "react";
 import { register } from "../../db/auth/auth";
 import loginn from "../../assets/loginn.png";
-
+import { getUserById,addUser } from "../../db/Data/Users";
+import { getUserUId } from "../../db/auth/auth";
 const Register = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
   const [username, setusername] = useState("");
   const [country, setcountry] = useState("");
-
+  
   const [error, setError] = useState("");
+  function registerUser() {
+    if (email === '' || password === '') {
+        alert("email or password is empty!");
+    } else {
+        register(email, password).then(() => {
+        
+
+          getUserUId().then((id) => {
+                // console.log(id);
+                
+                addUser({
+                  id: id,
+                  name: username,
+                  email: email,
+                  password: password,
+                  countryname: country,
+                  money: 0,
+                  cart:[],
+                  sold: []});
+            });
+        }).catch((e) => {
+            console.log(e.message)
+        });
+    }
+}
   return (
     <ImageBackground source={loginn} resizeMode="cover" style={styles.heder}>
       <View
@@ -80,13 +106,7 @@ const Register = ({ navigation }) => {
           <Button
             title="Register"
             color="#000"
-            onPress={() => {
-              console.log(email, password);
-
-              register(email, password, username, country)
-                .then()
-                .catch((e) => setError(e.message));
-            }}
+            onPress={registerUser}
           />
 
           <Text>{error}</Text>

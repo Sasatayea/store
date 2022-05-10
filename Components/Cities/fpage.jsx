@@ -4,7 +4,6 @@ import fpagee from "../../assets/fpagee.png";
 function Fpage({ navigation }) {
   return (
     <ImageBackground source={fpagee} resizeMode="cover" style={styles.heder}>
-      <StatusBar style="auto" />
       <View style={styles.pp}>
         <Button
           title="Login"

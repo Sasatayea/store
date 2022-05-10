@@ -9,7 +9,7 @@ import {
   FlatList,
 } from "react-native";
 import fpage from "./Fpage";
-import { getUsers, subscribeUser } from "../../db/cities/users";
+import { getUsers, subscribeUser } from "../../db/Data/Users";
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 import ProfileItem from "./ProfileItem";
