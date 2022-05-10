@@ -8,39 +8,33 @@ import {
   Picker,
   StyleSheet,
 } from "react-native";
-
 import { useEffect, useState } from "react";
-import {
-  getCities,
-  addCity,
-  addCart,
-  deleteCity,
-  subscribe,
-} from "../../db/cities/cities";
-import { subscribeUser } from "../../db/cities/users";
+import { getCities, subscribe } from "../../db/Data/products";
+
 import Pitem from "../items/Pitem";
 
-const CitiesList = ({ navigation }) => {
-  const getCitiesList = async () => {
+const Home = ({ navigation }) => {
+
+  const getProduct = async () => {
     const c = await getCities();
-    await setCities(c);
-    console.log("products", c);
+    await setproduct(c);
+    // console.log("products", c);
   };
 
   useEffect(async () => {
-    await getCitiesList();
+    await getProduct();
   }, []);
 
   useEffect(() => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
       if (change.type === "added") {
-        getCitiesList();
+        getProduct();
       }
       if (change.type === "modified") {
-        getCitiesList();
+        getProduct();
       }
       if (change.type === "removed") {
-        getCitiesList();
+        getProduct();
       }
     });
 
@@ -49,16 +43,13 @@ const CitiesList = ({ navigation }) => {
     };
   }, []);
 
-  const [cities, setCities] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [cityToEdit, setCityToEdit] = useState(undefined);
+  const [product, setproduct] = useState([]);
 
   const [selectedValue, setSelectedValue] = useState("All");
 
-  let dataa = cities.filter((e) => e.type == selectedValue);
+  let dataa = product.filter((e) => e.type == selectedValue);
   if (selectedValue == "All") {
-    dataa = cities;
-    console.log("done");
+    dataa = product;
   }
 
   return (
@@ -69,9 +60,10 @@ const CitiesList = ({ navigation }) => {
           style={{
             height: 50,
             width: 150,
-            backgroundColor: "#fff",
+            // backgroundColor: "red",
+            borderWidth: 2,
           }}
-          onValueChange={(itemValue, itemIndex) => {
+          onValueChange={(itemValue) => {
             setSelectedValue(itemValue);
           }}
         >
@@ -86,7 +78,7 @@ const CitiesList = ({ navigation }) => {
         <FlatList
           data={dataa}
           numColumns={2}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={(item,index) => index.toString()}
           renderItem={({ item }) => (
             <Pitem navigation={navigation} item={item} />
           )}
@@ -96,7 +88,7 @@ const CitiesList = ({ navigation }) => {
   );
 };
 
-export default CitiesList;
+export default Home;
 
 const styles = StyleSheet.create({
   container: {
@@ -104,11 +96,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#D9D9D9",
   },
   search: {
-    // flex: 1,
     paddingTop: 10,
     flexDirection: "row",
     alignItems: "flex-start",
-    justifyContent: "center",
+    justifyContent: "flex-end",
   },
   items: {
     // paddingTop: 10,

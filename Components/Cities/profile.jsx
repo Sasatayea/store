@@ -9,7 +9,7 @@ import {
   FlatList,
 } from "react-native";
 import fpage from "./Fpage";
-import { getUsers, subscribeUser } from "../../db/cities/users";
+import { getUsers, subscribeUser } from "../../db/Data/Users";
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 import ProfileItem from "./ProfileItem";
@@ -66,11 +66,17 @@ export default function Profile({ navigation }) {
 
 const styles = StyleSheet.create({
   content: {
+    flex: 1,
     fontSize: 30,
     marginTop: 24,
     padding: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#FFFFFF",
+    // backgroundColor: "#D9D9D9",
+  },
+  botton: {
+    width: 250,
+    padding: 10,
+    paddingLeft: 100,
   },
   botton: {
     width: 250,

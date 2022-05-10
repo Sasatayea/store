@@ -14,7 +14,7 @@ import {
   addCart,
   deleteCity,
   subscribe,
-} from "../../db/cities/cities";
+} from "../../db/Data/products";
 import { useEffect, useState } from "react";
 import Pitem from "../items/Pitem";
 export default function Search({ navigation }) {
@@ -50,32 +50,38 @@ export default function Search({ navigation }) {
 
   const [searchItem, setsearchItem] = useState("");
   const [dataa, setDataa] = useState(cities);
-  console.log("myci: ", cities);
+  console.log("myci: ", dataa);
 
   const search = (searchItem) => {
-    let x = [];
-    let s = "";
-    let h = 0;
-    for (let i = 0; i < cities.length; i++) {
-      s = cities[i].name;
-      if (s.match(searchItem)) {
-        if (s.match(searchItem).input != null) {
-          x[h] = s.match(searchItem).input;
-          h++;
+    if (searchItem.match(/\*/)||
+    searchItem.match(/\(/)||
+    searchItem.match(/\)/)||
+    searchItem.match(/\?/)) {
+    } else {
+      let x = [];
+      let s = "";
+      let h = 0;
+      for (let i = 0; i < cities.length; i++) {
+        s = cities[i].name;
+        if (s.match(searchItem)) {
+          if (s.match(searchItem).input != null) {
+            x[h] = s.match(searchItem).input;
+            h++;
+          }
         }
       }
-    }
-    let k = 0;
-    let data = [];
-    for (let i = 0; i < cities.length; i++) {
-      for (let j = 0; j < x.length; j++) {
-        if (cities[i].name == x[j]) {
-          data[k] = cities[i];
-          k++;
+      let k = 0;
+      let data = [];
+      for (let i = 0; i < cities.length; i++) {
+        for (let j = 0; j < x.length; j++) {
+          if (cities[i].name == x[j]) {
+            data[k] = cities[i];
+            k++;
+          }
         }
       }
+      setDataa(data);
     }
-    setDataa(data);
   };
 
   if (!searchItem) {
