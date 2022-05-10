@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
     padding: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "white",
   },
   items: {
     // paddingTop: 10,
@@ -72,4 +72,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
 
   },
+  
 });

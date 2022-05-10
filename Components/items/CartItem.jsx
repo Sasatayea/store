@@ -30,8 +30,8 @@ export default function CartItem({ navigation, item,delet }) {
               style={{ height: 150, width: 150, margin: 10 }}
               source={{ uri: item.image }}
             ></Image>
-            <Text> {item.name} </Text>
-            <Text>$ {item.price}</Text>
+            <Text style={styles.shadowText}> {item.name} </Text>
+            <Text style={styles.shadowText}>$ {item.price}</Text>
           </TouchableOpacity>
           <View style={styles.button}>
             <Button
@@ -76,5 +76,11 @@ const styles = StyleSheet.create({
     padding: 15,
     alignItems: "center",
     justifyContent: "center",
+  },
+  shadowText: {
+    fontStyle: "italic",
+    textShadowColor: "black",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
   },
 });

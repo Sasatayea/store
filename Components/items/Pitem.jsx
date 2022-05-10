@@ -13,7 +13,7 @@ import { getAuth } from "firebase/auth";
 
 import { useState, useEffect } from "react";
 import { addCity, editCity, getCities } from "../../db/Data/products";
-import { editUser,getUserById } from "../../db/Data/Users";
+import { editUser, getUserById } from "../../db/Data/Users";
 import { async } from "@firebase/util";
 
 export default function Pitem({ navigation, item }) {
@@ -23,11 +23,11 @@ export default function Pitem({ navigation, item }) {
   };
   useEffect(async () => {
     await unsubLike();
-    getUserById(userr.uid).then((user)=>{
+    getUserById(userr.uid).then((user) => {
       const user1 = user;
       const ucart = user1[0].cart;
       setCart(ucart);
-    })
+    });
   }, []);
 
   const auth = getAuth();
@@ -44,7 +44,6 @@ export default function Pitem({ navigation, item }) {
   const [flag, setFlage] = useState(curLike[0] == userr.email);
 
   if (userr !== null) {
-
     const email = userr.email;
 
     const Like = () => {
@@ -59,16 +58,15 @@ export default function Pitem({ navigation, item }) {
         setFlage(true);
       }
     };
-    const addCart= async (item)=>{
-      
-      getUserById(userr.uid).then((user)=>{
+    const addCart = async (item) => {
+      getUserById(userr.uid).then((user) => {
         const user1 = user;
         const ucart = user1[0].cart;
-        setCart([...ucart,item]);
-        editUser({...user1[0],cart:[...ucart,item]});
-      })
-    }
-    console.log("cart",cart);
+        setCart([...ucart, item]);
+        editUser({ ...user1[0], cart: [...ucart, item] });
+      });
+    };
+    console.log("cart", cart);
 
     return (
       <View style={[styles.card, styles.shadowProp]}>
@@ -77,21 +75,24 @@ export default function Pitem({ navigation, item }) {
             onPress={() => navigation.navigate("Product", { item: item })}
           >
             <Image
-              style={{ height: 150, width: 150 , borderRadius: 20, alignSelf:'center' }}
+              style={{
+                height: 150,
+                width: 150,
+                borderRadius: 20,
+                alignSelf: "center",
+              }}
               source={{ uri: item.image }}
             ></Image>
-            <Text> {item.name} </Text>
-            {item.size? <Text>{item.size  }</Text>:<Text>         </Text>}
-            <Text>$ {item.price}</Text>
+            <Text style={styles.shadowText}> {item.name} </Text>
+            {item.size ? <Text style={styles.shadowText}>{item.size}</Text> : <Text> </Text>}
+            <Text style={styles.shadowText}>$ {item.price}</Text>
           </TouchableOpacity>
 
           <View style={styles.button}>
             <Button
               title="Add to char"
               color="#000"
-              onPress={() =>
-                addCart(item)
-              }
+              onPress={() => addCart(item)}
             />
             <TouchableOpacity onPress={() => Like()}>
               {flag ? (
@@ -153,12 +154,18 @@ const styles = StyleSheet.create({
   },
   button: {
     textAlign: "center",
-    flexDirection:'row',
+    flexDirection: "row",
   },
   shadowProp: {
-    shadowColor: "#171717",
+    shadowColor: "black",
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
+  },
+  shadowText: {
+    fontStyle: "italic",
+    textShadowColor: "black",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
   },
 });
