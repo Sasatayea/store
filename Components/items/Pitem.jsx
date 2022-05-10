@@ -17,24 +17,23 @@ import { subscribe } from "../../db/cities/cities";
 import { async } from "@firebase/util";
 export default function Pitem({ navigation, item }) {
   const unsubLike = async () => {
-    setLiked(item.liked);
-    setCurLike(liked.filter((e) => userr.email == e.email));
-    console.log("cur: ", curLike);
     if (curLike[0] == userr.email) setFlage(false);
     else setFlage(true);
-    console.log(liked);
   };
   useEffect(async () => {
     await unsubLike();
   }, []);
 
-  const [curLike, setCurLike] = useState([]);
-
-  const [flag, setFlage] = useState();
-  const [liked, setLiked] = useState([]);
-
   const auth = getAuth();
+
   const userr = auth.currentUser;
+
+  const [liked, setLiked] = useState(item.liked);
+  const liked1 = [...liked];
+  const [curLike, setCurLike] = useState(
+    liked1.filter((e) => userr.email == e)
+  );
+  const [flag, setFlage] = useState(curLike[0] == userr.email);
 
   if (userr !== null) {
     const email = userr.email;
@@ -44,8 +43,9 @@ export default function Pitem({ navigation, item }) {
         editCity({ ...item, liked: [...liked, email] });
         setFlage(false);
       } else {
-        let arr = liked;
-        arr.filter((e) => e.email != email);
+        let arr = liked.filter((e) => e != email);
+
+        console.log(arr);
         editCity({ ...item, liked: arr });
         setFlage(true);
       }
@@ -58,12 +58,13 @@ export default function Pitem({ navigation, item }) {
             onPress={() => navigation.navigate("Product", { item: item })}
           >
             <Image
-              style={{ height: 150, width: 150, margin: 10 }}
+              style={{ height: 150, width: 150, margin: 10, borderRadius: 20 }}
               source={{ uri: item.image }}
             ></Image>
             <Text> {item.name} </Text>
             <Text>$ {item.price}</Text>
           </TouchableOpacity>
+
           <View style={styles.button}>
             <Button
               title="Add to char"
@@ -133,10 +134,13 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 8,
     paddingVertical: 45,
-    paddingHorizontal: 25,
+    paddingHorizontal: "3%",
     width: 200,
     height: 335,
     marginVertical: 10,
+  },
+  button: {
+    textAlign: "center",
   },
   shadowProp: {
     shadowColor: "#171717",

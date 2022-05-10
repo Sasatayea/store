@@ -7,6 +7,7 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { React, useState } from "react";
 import { login } from "../../db/auth/auth";
 import loginn from "../../assets/loginn.png";
@@ -28,12 +29,15 @@ const Login = ({ navigation }) => {
       resizeMode="cover"
       style={styles.heder}
     >
+      <StatusBar style="auto" />
       <View
         style={{
-          marginTop: "50%",
+          marginTop: "60%",
           backgroundColor: "white",
-          borderRadius: 20,
+          borderRadius: 30,
           height: "40%",
+          padding: 5,
+          margin: 10,
         }}
       >
         <Text
@@ -90,25 +94,29 @@ const Login = ({ navigation }) => {
               padding: 10,
             }}
           />
-        </View>
-        <View
-          style={{
-            width: 150,
-            padding: 10,
-          }}
-        >
-          <Button
-            title="Login"
-            color="#000"
-            onPress={() => {
-              login(email, password)
-                .then()
-                .catch((e) => setError(e.message));
+          <View
+            style={{
+              width: 150,
+              padding: 10,
+              marginLeft: "50%",
             }}
-          />
-          <Text>{error}</Text>
+          >
+            <Button
+              title="Login"
+              color="#000"
+              onPress={() => {
+                login(email, password)
+                  .then()
+                  .catch((e) => setError(e.message));
+              }}
+            />
+            <Text>{error}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+              <Text style={{ paddingTop: 5 }}> Create an account </Text>
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-            <Text style={{ paddingTop: 5 }}> Create an account </Text>
+            <Text style={{ paddingTop: 15 }}> Create an account </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -122,5 +130,18 @@ const styles = StyleSheet.create({
   heder: {
     height: "100%",
     width: "100%",
+  },
+  inpp: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  texttinput: {
+    borderWidth: 1,
+    borderColor: "#777",
+    padding: 8,
+    margin: 10,
+    width: 200,
   },
 });

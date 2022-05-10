@@ -22,10 +22,12 @@ const Register = ({ navigation }) => {
     <ImageBackground source={loginn} resizeMode="cover" style={styles.heder}>
       <View
         style={{
-          marginTop: "40%",
+          marginTop: "60%",
           backgroundColor: "white",
-          borderRadius: 20,
-          height: "58%",
+          borderRadius: 30,
+          height: "50%",
+          padding: 5,
+          margin: 10,
         }}
       >
         <Text
@@ -39,77 +41,40 @@ const Register = ({ navigation }) => {
           {" "}
           Sign Up{" "}
         </Text>
-        <View style={styles.in}>
-          <TextInput
-            onChangeText={setusername}
-            keyboardType="default"
-            placeholder="User name"
-            style={{
-              flex: 2,
-              borderColor: "black",
-              borderWidth: 2,
-              height: 40,
-              // margin: 12,
-              borderWidth: 1,
-              padding: 10,
-            }}
-          />
-        </View>
-        <View style={styles.in}>
-          <TextInput
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            placeholder="email-address"
-            style={{
-              flex: 2,
-              borderColor: "black",
-              borderWidth: 2,
-              height: 40,
-              // margin: 12,
-              borderWidth: 1,
-              padding: 10,
-            }}
-          />
-        </View>
-        <View style={styles.in}>
-          <TextInput
-            onChangeText={setpassword}
-            keyboardType="visible-password"
-            placeholder="password"
-            secureTextEntry={true}
-            style={{
-              flex: 2,
-              borderColor: "black",
-              borderWidth: 2,
-              height: 40,
-              // margin: 12,
-              borderWidth: 1,
-              padding: 10,
-            }}
-          />
-        </View>
+        <TextInput
+          onChangeText={setusername}
+          keyboardType="default"
+          placeholder="User name"
+          style={styles.inpp}
+        />
 
-        <View style={styles.in}>
-          <TextInput
-            onChangeText={setcountry}
-            keyboardType="default"
-            placeholder="country name"
-            style={{
-              flex: 2,
-              borderColor: "black",
-              borderWidth: 2,
-              height: 40,
-              // margin: 12,
-              borderWidth: 1,
-              padding: 10,
-            }}
-          />
-        </View>
+        <TextInput
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          placeholder="email-address"
+          style={styles.inpp}
+        />
+
+        <TextInput
+          onChangeText={setpassword}
+          keyboardType="visible-password"
+          placeholder="password"
+          secureTextEntry={true}
+          style={styles.inpp}
+        />
+
+        <TextInput
+          onChangeText={setcountry}
+          keyboardType="default"
+          placeholder="country name"
+          style={styles.inpp}
+        />
 
         <View
           style={{
             width: 170,
             padding: 10,
+            marginLeft: "50%",
           }}
         >
           <Button
@@ -144,7 +109,11 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-  in: {
+  inpp: {
+    flex: 1,
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
     padding: 10,
     borderRadius: 20,
     height: 60,
