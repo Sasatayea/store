@@ -11,15 +11,14 @@ import { editCity } from "../../db/Data/products";
 import { getAuth } from "firebase/auth";
 import { useState, useEffect } from "react";
 
-export default function CartItem({ navigation, item,delet,countn }) {
-  const [count, setCount] = useState(1);
+export default function CartItem({ navigation, item,delet,plus,minus }) {
+  const [count, setCount] = useState(0);
 
   const auth = getAuth();
   const userr = auth.currentUser;
 
   if (userr !== null) {
     const email = userr.email;
-    console.log("ssssssssss", email);
     return (
       <View style={[styles.card, styles.shadowProp]}>
         <View>
@@ -36,7 +35,7 @@ export default function CartItem({ navigation, item,delet,countn }) {
           <Button
               title="+"
               color="blue"
-              onPress={() => {setCount(count+1); countn(count)}}
+              onPress={() => {setCount(count+1); plus(count,item);}}
             />
           <View style={styles.button}>
             <Button
@@ -49,7 +48,7 @@ export default function CartItem({ navigation, item,delet,countn }) {
           <Button
               title="-"
               color="blue"
-              onPress={() => {if(count>1)setCount(count-1); countn(count)}}
+              onPress={() => {if(count>0)setCount(count-1); minus(count,item)}}
             />
         </View>
       </View>
