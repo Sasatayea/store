@@ -1,12 +1,9 @@
 import { StyleSheet, Text, View, Button, ImageBackground } from "react-native";
 import React from "react";
 import fpagee from "../../assets/fpagee.png";
-import { StatusBar } from 'expo-status-bar';
 function Fpage({ navigation }) {
   return (
-
     <ImageBackground source={fpagee} resizeMode="cover" style={styles.heder}>
-            <StatusBar style="auto" />
       <View style={styles.pp}>
         <Button
           title="Login"

@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from "firebase/auth";
-import CitiesList from "./Components/Cities/CitiesList";
+import Home from "./Components/Cities/Home";
 import { auth } from "./db/Config";
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Button, Image } from "react-native";
@@ -19,6 +19,7 @@ import Product from "./Components/items/Product";
 import Profile from "./Components/Cities/Profile";
 import Search from "./Components/Cities/Search";
 import AddP from "./Components/Admin/AddP";
+import { ImageBackground } from "react-native-web";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -43,10 +44,58 @@ export default function App({ navigation }) {
       return (
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen name="Admin" component={Admin} options={{}} />
-            <Stack.Screen name="EditP" component={EditP} options={{}} />
-            <Stack.Screen name="AddP" component={AddP} options={{}} />
-            <Stack.Screen name="Edit" component={Edit} options={{}} />
+            <Stack.Screen
+              name="Admin"
+              component={Admin}
+              options={{
+                
+                  
+                title:<Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80 ,alignSelf:'center'}}
+                    
+                  />
+                  
+                  
+                  
+                
+                
+              }}
+            />
+            <Stack.Screen
+              name="EditP"
+              component={EditP}
+              options={{
+                title:<Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80 ,alignSelf:'center'}}
+                
+              />
+              }}
+            />
+            <Stack.Screen
+              name="AddP"
+              component={AddP}
+              options={{
+                title:<Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80 ,alignSelf:'center'}}
+                
+              />
+              }}
+            />
+            <Stack.Screen
+              name="Edit"
+              component={Edit}
+              options={{
+                
+                title:<Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80 ,alignSelf:'center'}}
+                    
+                  />
+              }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       );
@@ -56,8 +105,16 @@ export default function App({ navigation }) {
           <Tab.Navigator>
             <Tab.Screen
               name="Home"
-              component={CitiesList}
+              component={Home}
               options={{
+                headerBackground: () => (
+                  <View style = {{backgroundColor: "white",}}>
+                    <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" ,}}
+                  />
+                  </View>
+                ),
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/home.png")}
@@ -70,6 +127,14 @@ export default function App({ navigation }) {
               name="Search"
               component={Search}
               options={{
+                headerBackground: () => (
+                  <View style = {{backgroundColor: "white",}}>
+                    <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" ,}}
+                  />
+                  </View>
+                ),
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/search.png")}
@@ -82,6 +147,14 @@ export default function App({ navigation }) {
               name="Cart"
               component={Cart}
               options={{
+                headerBackground: () => (
+                  <View style = {{backgroundColor: "white",}}>
+                    <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" ,}}
+                  />
+                  </View>
+                ),
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/shopping-cart.png")}
@@ -94,6 +167,14 @@ export default function App({ navigation }) {
               name="Profile"
               component={Profile}
               options={{
+                headerBackground: () => (
+                  <View style = {{backgroundColor: "white",}}>
+                    <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" ,}}
+                  />
+                  </View>
+                ),
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/userrrr.png")}
@@ -105,7 +186,18 @@ export default function App({ navigation }) {
             <Tab.Screen
               name="Product"
               component={Product}
-              options={{ tabBarButton: () => null, tabBarVisible: false }}
+              options={{
+                headerBackground: () => (
+                  <View style = {{backgroundColor: "white",}}>
+                    <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" ,}}
+                  />
+                  </View>
+                ),
+                tabBarButton: () => null,
+                tabBarVisible: false,
+              }}
             />
             <Tab.Screen
               name="Fpage"
@@ -148,7 +240,7 @@ export default function App({ navigation }) {
   }
 }
 const styles = StyleSheet.create({
-  navbar: {
-    backgroundColor: "red",
-  },
+  // navbar: {
+  //   backgroundColor: "red",
+  // },
 });

@@ -8,11 +8,11 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import { getCities } from "../../db/cities/cities";
+import { getCities } from "../../db/Data/products";
 import PitemAdmin from "./PitemAdmin";
-import { subscribe } from "../../db/cities/cities";
+import { subscribe } from "../../db/Data/products";
 import { useEffect, useState } from "react";
-import { editCity } from "../../db/cities/cities";
+import { editCity } from "../../db/Data/products";
 export default function EditP({ navigation }) {
   const getCitiesList = async () => {
     const c = await getCities();
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
     padding: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "white",
   },
   items: {
     // paddingTop: 10,
@@ -72,4 +72,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
 
   },
+  
 });

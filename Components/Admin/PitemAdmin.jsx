@@ -8,7 +8,7 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import { deleteCity } from "../../db/cities/cities";
+import { deleteCity } from "../../db/Data/products";
 
 import { useState, useEffect } from "react";
 
@@ -20,8 +20,8 @@ export default function PitemAdmin({ navigation, item }) {
           style={{ height: 150, width: 150, margin: 10 }}
           source={{ uri: item.image }}
         ></Image>
-        <Text> {item.name} </Text>
-        <Text>$ {item.price}</Text>
+        <Text style={styles.shadowText}> {item.name} </Text>
+        <Text style={styles.shadowText}>$ {item.price}</Text>
         <View style={styles.button}>
           <Button
             title="Delet"
@@ -65,13 +65,12 @@ const styles = StyleSheet.create({
   },
   card: {
     marginRight: 10,
-
-    backgroundColor: "white",
-    borderRadius: 8,
+    backgroundColor: "#D9D9D9",
+    borderRadius: 12,
     paddingVertical: 45,
-    paddingHorizontal: 25,
-    width: 200,
-    height: 335,
+    paddingHorizontal: "3%",
+    width: 180,
+    height: 300,
     marginVertical: 10,
   },
   shadowProp: {
@@ -79,5 +78,11 @@ const styles = StyleSheet.create({
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
+  },
+  shadowText: {
+    fontStyle: "italic",
+    textShadowColor: "black",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
   },
 });

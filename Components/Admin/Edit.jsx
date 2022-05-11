@@ -8,17 +8,17 @@ import {
     ImageBackground,
     TouchableOpacity,
   } from "react-native";
-  import { editCity } from "../../db/cities/cities";
+  import { editCity } from "../../db/Data/products";
   import { React, useState } from "react";
   
   
   const Edit = ({ navigation,route }) => {
     let item = route.params.item;
-    const [price, setPrice] = useState("");
-    const [image, setImage] = useState("");
-    const [name, setName] = useState("");
-    const [size, setSize] = useState("");
-    const [type, setType] = useState("chair");
+    const [price, setPrice] = useState(item.price);
+    const [image, setImage] = useState(item.image);
+    const [name, setName] = useState(item.name);
+    const [size, setSize] = useState(item.size);
+    const [type, setType] = useState(item.type);
     return (
       <View
         style={{
@@ -44,6 +44,7 @@ import {
             onChangeText={setName}
             keyboardType="default"
             placeholder="Product name"
+            value={name}
             style={{
               flex: 2,
               borderColor: "black",
@@ -60,6 +61,7 @@ import {
             onChangeText={setPrice}
             keyboardType="number-pad"
             placeholder="Price"
+            value={price}
             style={{
               flex: 2,
               borderColor: "black",
@@ -76,6 +78,7 @@ import {
             onChangeText={setImage}
             keyboardType="default"
             placeholder="Image"
+            value ={image}
             style={{
               flex: 2,
               borderColor: "black",
@@ -93,6 +96,7 @@ import {
             onChangeText={setSize}
             keyboardType="default"
             placeholder="Size"
+            value={size}
             style={{
               flex: 2,
               borderColor: "black",

@@ -3,15 +3,24 @@ import React from "react";
 
 const ProfileItem = ({ item }) => {
   return (
-    <View>
-      <Text>{item.name}</Text>
-      <Text>{item.email}</Text>
-      <Text>{item.countryname}</Text>
-      <Text>{item.money}</Text>
+    <View style={styles.profile}>
+      <Text style={styles.profile1}>Name: {item.name}</Text>
+      <Text style={styles.profile1}>Email: {item.email}</Text>
+      <Text style={styles.profile1}>Country name: {item.countryname}</Text>
+      <Text style={styles.profile1}>Balance: $ {item.money}</Text>
     </View>
   );
 };
 
 export default ProfileItem;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  profile: {
+    // backgroundColor: "#D9D9D9",
+  },
+  profile1: {
+    fontSize: 20,
+    fontStyle: "italic",
+    fontWeight: "bold",
+  },
+});

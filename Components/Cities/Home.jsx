@@ -9,33 +9,31 @@ import {
   StyleSheet,
 } from "react-native";
 import { useEffect, useState } from "react";
-import {
-  getCities,
-  subscribe,
-} from "../../db/cities/cities";
+import { getCities, subscribe } from "../../db/Data/products";
+
 import Pitem from "../items/Pitem";
 
-const CitiesList = ({ navigation }) => {
-  const getCitiesList = async () => {
+const Home = ({ navigation }) => {
+  const getProduct = async () => {
     const c = await getCities();
-    await setCities(c);
+    await setproduct(c);
     // console.log("products", c);
   };
 
   useEffect(async () => {
-    await getCitiesList();
+    await getProduct();
   }, []);
 
   useEffect(() => {
     const unsubscribe = subscribe(({ change, snapshot }) => {
       if (change.type === "added") {
-        getCitiesList();
+        getProduct();
       }
       if (change.type === "modified") {
-        getCitiesList();
+        getProduct();
       }
       if (change.type === "removed") {
-        getCitiesList();
+        getProduct();
       }
     });
 
@@ -44,28 +42,21 @@ const CitiesList = ({ navigation }) => {
     };
   }, []);
 
-  const [cities, setCities] = useState([]);
-  
+  const [product, setproduct] = useState([]);
+
   const [selectedValue, setSelectedValue] = useState("All");
 
-  let dataa = cities.filter((e) => e.type == selectedValue);
+  let dataa = product.filter((e) => e.type == selectedValue);
   if (selectedValue == "All") {
-    dataa = cities;
-    console.log("done");
+    dataa = product;
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.search}>
-        
         <Picker
           selectedValue={selectedValue}
-          style={{
-            height: 50,
-            width: 150,
-            // backgroundColor: "red",
-            borderWidth: 2,
-          }}
+          style={styles.picker}
           onValueChange={(itemValue) => {
             setSelectedValue(itemValue);
           }}
@@ -76,7 +67,7 @@ const CitiesList = ({ navigation }) => {
           <Picker.Item label="sofa" value="sofa" />
         </Picker>
       </View>
-      
+
       <View style={styles.items}>
         <FlatList
           data={dataa}
@@ -91,23 +82,40 @@ const CitiesList = ({ navigation }) => {
   );
 };
 
-export default CitiesList;
+export default Home;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#D9D9D9",
+    backgroundColor: "white",
   },
   search: {
     paddingTop: 10,
     flexDirection: "row",
     alignItems: "flex-start",
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   items: {
     // paddingTop: 10,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  picker: {
+    height: 50,
+    width: 150,
+    backgroundColor: "#D9D9D9",
+    fontSize: 17,
+    fontStyle: "italic",
+    textShadowColor: "black",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
+
+    shadowColor: "black",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+
+    borderWidth: 2,
   },
 });

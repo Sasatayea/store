@@ -10,82 +10,42 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 
-import { deleteCart, getCart } from "../../db/cities/cities";
+import { getUserById } from "../../db/Data/Users";
+import { deleteCart, getCart } from "../../db/Data/products";
 import CartItem from "../items/CartItem";
 import { getAuth } from "firebase/auth";
-import { subscribeCart } from "../../db/cities/cities";
-import { editUser, getUsers, subscribeUser } from "../../db/cities/users";
+import { subscribeCart } from "../../db/Data/products";
+import { editUser, getUsers, subscribeUser } from "../../db/Data/Users";
 
 export default function Cart({ route, navigation }) {
-  //const { itemId, otherParam } = route.params;
   const auth = getAuth();
   const userr = auth.currentUser;
   const [cart, setCart] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [cashdata, setCashData] = useState([]);
-  const [toggle, setToggle] = useState(true);
+  const [total, setTotal] = useState(0);
+
   const [buy, setBuy] = useState("");
-  const getCartsList = async () => {
-    const c = await getCart();
-    setCart(c);
-    console.log("carts: ", c);
-  };
-  const getUsersList = async () => {
-    const u = await getUsers();
-    setUsers(u);
-    console.log("users: ", u);
+
+  const getCartList = async () => {
+    getUserById(userr.uid).then((user) => {
+      const user1 = user;
+      const ucart = user1[0].cart;
+      setCart(ucart);
+    });
   };
   useEffect(() => {
-    getCartsList();
-    getUsersList();
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = subscribeCart(({ change, snapshot }) => {
-      if (change.type === "added") {
-        getCartsList();
-      }
-      if (change.type === "modified") {
-        getCartsList();
-      }
-      if (change.type === "removed") {
-        getCartsList();
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = subscribeCart(({ change, snapshot }) => {
-      if (change.type === "added") {
-        getCartsList();
-      }
-      if (change.type === "modified") {
-        getCartsList();
-      }
-      if (change.type === "removed") {
-        getCartsList();
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
+    getCartList();
   }, []);
 
   useEffect(() => {
     const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
       if (change.type === "added") {
-        getUsersList();
+        getCartList();
       }
       if (change.type === "modified") {
-        getUsersList();
+        getCartList();
       }
       if (change.type === "removed") {
-        getUsersList();
+        getCartList();
       }
     });
 
@@ -94,61 +54,84 @@ export default function Cart({ route, navigation }) {
     };
   }, []);
 
-  const Cash = () => {
-    let dataa = cart.filter((e) => e.username == userr.email);
-    const cartmoney = dataa.map((e) => e.price);
-    let user = users.filter((e) => e.email == userr.email);
-    let total = 0;
-    for (let i = 0; i < cartmoney.length; i++) {
-      total += parseInt(cartmoney[i]);
-    }
-    if (user[0].money >= total) {
-      setBuy("");
-      let usermoney = 0;
+  const delet = (id) => {
+    let carttt = cart.filter((e) => e.id != id);
 
-      usermoney = user[0].money;
-      editUser({ ...user[0], money: parseInt(usermoney) - total, sold: dataa });
-
-      for (let j = 0; j < dataa.length; j++) {
-        deleteCart(dataa[j].id);
-      }
-    } else {
-      setBuy("You don't have enough money  ي شحات");
-      alert("You don't have enough money  ي شحات");
+    getUserById(userr.uid).then((user) => {
+      const user1 = user;
+      editUser({ ...user1[0], cart: carttt });
+    });
+  };
+  const plus = (count, item) => {
+    let price = parseInt(item.price);
+    setTotal(total + price);
+    console.log("cart :",total);
+  };
+  const minus = (count, item) => {
+    if (count > 0) {
+      let price = parseInt(item.price);
+      setTotal(total - price);
+      console.log("cart :",total);
     }
   };
-  if (userr !== null) {
-    const email = userr.email;
-    let dataa = cart.filter((e) => e.username == email);
-    if (toggle) {
-      setCashData(dataa);
-      setToggle(false);
-    }
 
-    return (
-      <View style={styles.item}>
-        <FlatList
-          data={dataa}
-          keyExtractor={cart.id}
-          renderItem={({ item }) => (
-            <CartItem navigation={navigation} item={item} />
-          )}
-        />
-        <Button title="cash" onPress={() => Cash()} />
+
+  const Cash = () => {
+    getUserById(userr.uid).then((user) => {
+      const user1 = user;
+      let money = user1[0].money;
+      if (money >= total) {
+        editUser({ ...user1[0], money: money - total,cart:[] });
+        
+        console.log("cart :",total);
+      } else {
+        setBuy("You don't have enough money  ي شحات");
+        alert("You don't have enough money  ي شحات");
+      }
+    });
+  };
+  return (
+    <View style={styles.item}>
+      <Text style={{ fontSize: 16, fontWeight: "bold" }}>Selected Items</Text>
+      <FlatList
+        data={cart}
+        keyExtractor={cart.id}
+        numColumns={2}
+        renderItem={({ item }) => (
+          <CartItem
+            navigation={navigation}
+            item={item}
+            delet={delet}
+            minus={minus}
+            plus={plus}
+          />
+        )}
+      />
+      <View style={styles.button}>
+        <Button title="cash" color="#000" onPress={() => Cash()} />
         <Text>{buy}</Text>
       </View>
-    );
-  }
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   content: {
-    height: 200,
-    width: 200,
+    flexDirection: "row",
+    // height: 500,
+    // width: 200,
     backgroundColor: "red",
     margin: 10,
   },
   item: {
     flex: 1,
+    // flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  button: {
+    // borderRadius: 100,
+    // flex: 1,
+    padding: 15,
   },
 });
