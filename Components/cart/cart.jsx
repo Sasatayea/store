@@ -65,11 +65,13 @@ export default function Cart({ route, navigation }) {
   const plus = (count, item) => {
     let price = parseInt(item.price);
     setTotal(total + price);
+    console.log("cart :",total);
   };
   const minus = (count, item) => {
     if (count > 0) {
       let price = parseInt(item.price);
       setTotal(total - price);
+      console.log("cart :",total);
     }
   };
 
@@ -79,12 +81,9 @@ export default function Cart({ route, navigation }) {
       const user1 = user;
       let money = user1[0].money;
       if (money >= total) {
-        editUser({ ...user1[0], money: money - total });
-        for (let i = 0; i < cart.length; i++) {
-          delet(cart[i].id);
-          
-        }
-        console.log("cart :",cart);
+        editUser({ ...user1[0], money: money - total,cart:[] });
+        
+        console.log("cart :",total);
       } else {
         setBuy("You don't have enough money  ي شحات");
         alert("You don't have enough money  ي شحات");
