@@ -11,8 +11,8 @@ import { editCity } from "../../db/Data/products";
 import { getAuth } from "firebase/auth";
 import { useState, useEffect } from "react";
 
-export default function CartItem({ navigation, item,delet }) {
-  const [productsCart, setProductsCart] = useState([]);
+export default function CartItem({ navigation, item,delet,countn }) {
+  const [count, setCount] = useState(1);
 
   const auth = getAuth();
   const userr = auth.currentUser;
@@ -33,13 +33,24 @@ export default function CartItem({ navigation, item,delet }) {
             <Text style={styles.shadowText}> {item.name} </Text>
             <Text style={styles.shadowText}>$ {item.price}</Text>
           </TouchableOpacity>
+          <Button
+              title="+"
+              color="blue"
+              onPress={() => {setCount(count+1); countn(count)}}
+            />
           <View style={styles.button}>
             <Button
               title="Delete"
               color="red"
               onPress={() => delet(item.id)}
             />
+            <Text>{count}</Text>
           </View>
+          <Button
+              title="-"
+              color="blue"
+              onPress={() => {if(count>1)setCount(count-1); countn(count)}}
+            />
         </View>
       </View>
     );
