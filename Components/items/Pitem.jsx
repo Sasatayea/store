@@ -14,7 +14,6 @@ import { getAuth } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { addCity, editCity, getCities } from "../../db/Data/products";
 import { editUser, getUserById } from "../../db/Data/Users";
-import { async } from "@firebase/util";
 
 export default function Pitem({ navigation, item }) {
   const unsubLike = async () => {
@@ -62,11 +61,16 @@ export default function Pitem({ navigation, item }) {
       getUserById(userr.uid).then((user) => {
         const user1 = user;
         const ucart = user1[0].cart;
-        setCart([...ucart, item]);
-        editUser({ ...user1[0], cart: [...ucart, item] });
+        let flag = true;
+        for (let i = 0; i < ucart.length; i++) {
+          if (ucart[i].id == item.id) flag = false;
+        }
+        if (flag) {
+          setCart([...ucart, item]);
+          editUser({ ...user1[0], cart: [...ucart, item] });
+        }
       });
     };
-    console.log("cart", cart);
 
     return (
       <View style={[styles.card, styles.shadowProp]}>
@@ -84,16 +88,39 @@ export default function Pitem({ navigation, item }) {
               source={{ uri: item.image }}
             ></Image>
             <Text style={styles.shadowText}> {item.name} </Text>
-            {item.size ? <Text style={styles.shadowText}>{item.size}</Text> : <Text> </Text>}
+            {item.size ? (
+              <Text style={styles.shadowText}>{item.size}</Text>
+            ) : (
+              <Text> </Text>
+            )}
             <Text style={styles.shadowText}>$ {item.price}</Text>
           </TouchableOpacity>
 
           <View style={styles.button}>
-            <Button
-              title="Add to char"
-              color="#000"
-              onPress={() => addCart(item)}
-            />
+            <TouchableOpacity onPress={() => addCart(item)}>
+              <View
+                style={{
+                  borderRadius: 20,
+                  height: 40,
+                  width: 120,
+                  backgroundColor: "#0D1F2B",
+                }}
+              >
+                <Text
+                  style={{
+                    fontStyle: "italic",
+                    color: "white",
+                    textShadowOffset: { width: 2, height: 2 },
+                    textShadowRadius: 5,
+                    textShadowColor: "white",
+                    marginTop: 8,
+                  }}
+                >
+                  Add To Cart
+                </Text>
+              </View>
+            </TouchableOpacity>
+
             <TouchableOpacity onPress={() => Like()}>
               {flag ? (
                 <Image
@@ -128,7 +155,7 @@ const styles = StyleSheet.create({
   },
   button: {
     flexDirection: "row",
-    borderRadius: 200,
+
     padding: 15,
   },
   text: {

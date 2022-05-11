@@ -22,9 +22,8 @@ export default function Cart({ route, navigation }) {
   const auth = getAuth();
   const userr = auth.currentUser;
   const [cart, setCart] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [cashdata, setCashData] = useState([]);
-  const [toggle, setToggle] = useState(true);
+  
+  
   const [buy, setBuy] = useState("");
 
   const getCartList = async () => {
@@ -67,6 +66,9 @@ export default function Cart({ route, navigation }) {
     })
     
   }
+  const countn = (count)=>{
+    
+  }
 
   // const Cash = () => {
   //   let dataa = cart.filter((e) => e.username == userr.email);
@@ -107,7 +109,7 @@ export default function Cart({ route, navigation }) {
           keyExtractor={cart.id}
           numColumns={2}
           renderItem={({ item }) => (
-            <CartItem navigation={navigation} item={item} delet={delet} />
+            <CartItem navigation={navigation} item={item} delet={delet} countn = {countn}/>
           )}
         />
         <View style={styles.button}>
