@@ -48,40 +48,40 @@ export default function App({ navigation }) {
               name="Admin"
               component={Admin}
               options={{
-                headerBackground: () => (
-                  <View style = {{backgroundColor: "white",}}>
-                    <Image
+                
+                  
+                title:<Image
                     source={require("./assets/megan.png")}
-                    style={{ width: 80, height: 80, alignSelf: "center" ,}}
+                    style={{ width: 80, height: 80 ,alignSelf:'center'}}
+                    
                   />
-                  </View>
-                ),
+                  
+                  
+                  
+                
+                
               }}
             />
             <Stack.Screen
               name="EditP"
               component={EditP}
               options={{
-                headerBackground: () => (
-                  <View style = {{backgroundColor: "white",}}>
-                    <Image
-                    source={require("./assets/megan.png")}
-                    style={{ width: 80, height: 80, alignSelf: "center" ,}}
-                  />
-                  </View>
-                ),
+                title:<Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80 ,alignSelf:'center'}}
+                
+              />
               }}
             />
             <Stack.Screen
               name="AddP"
               component={AddP}
               options={{
-                headerBackground: () => (
-                  <Image
-                    source={require("./assets/megan.png")}
-                    style={{ width: 80, height: 80, alignSelf: "center" }}
-                  />
-                ),
+                title:<Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80 ,alignSelf:'center'}}
+                
+              />
               }}
             />
             <Stack.Screen
@@ -89,15 +89,11 @@ export default function App({ navigation }) {
               component={Edit}
               options={{
                 
-                headerBackground: () => (
-                  <View style = {{backgroundColor: "red",}}>
-                    <Image
+                title:<Image
                     source={require("./assets/megan.png")}
-                    style={{ width: 80, height: 80, alignSelf: "center" ,}}
+                    style={{ width: 80, height: 80 ,alignSelf:'center'}}
+                    
                   />
-                  </View>
-                  
-                ),
               }}
             />
           </Stack.Navigator>
