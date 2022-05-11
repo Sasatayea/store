@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import { useEffect, useState } from "react";
 import { getCities, subscribe } from "../../db/Data/products";
-
 import Pitem from "../items/Pitem";
+import SlideshowTest from './SlideshowTest ';
 
 const Home = ({ navigation }) => {
   const getProduct = async () => {
@@ -36,7 +36,6 @@ const Home = ({ navigation }) => {
         getProduct();
       }
     });
-
     return () => {
       unsubscribe();
     };
@@ -50,7 +49,7 @@ const Home = ({ navigation }) => {
   if (selectedValue == "All") {
     dataa = product;
   }
-
+//console.log(dataa);
   return (
     <View style={styles.container}>
       <View style={styles.search}>
@@ -66,6 +65,10 @@ const Home = ({ navigation }) => {
           <Picker.Item label="bed" value="bed" />
           <Picker.Item label="sofa" value="sofa" />
         </Picker>
+      </View>
+
+      <View>
+      <SlideshowTest/>
       </View>
 
       <View style={styles.items}>

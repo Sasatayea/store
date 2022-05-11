@@ -13,7 +13,6 @@ import { getAuth } from "firebase/auth";
 import Admin from "./Components/Admin/Admin";
 import EditP from "./Components/Admin/EditP";
 import Edit from "./Components/Admin/Edit";
-
 import Fpage from "./Components/Cities/Fpage";
 import Product from "./Components/items/Product";
 import Profile from "./Components/Cities/Profile";
@@ -24,7 +23,8 @@ import { ImageBackground } from "react-native-web";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-export default function App({ navigation }) {
+
+export default function App ({ navigation }) {
   const auth = getAuth();
   const userr = auth.currentUser;
   useEffect(() => {

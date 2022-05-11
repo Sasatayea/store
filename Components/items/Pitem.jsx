@@ -8,9 +8,7 @@ import {
   Image,
   Pressable,
 } from "react-native";
-
 import { getAuth } from "firebase/auth";
-
 import { useState, useEffect } from "react";
 import { addCity, editCity, getCities } from "../../db/Data/products";
 import { editUser, getUserById } from "../../db/Data/Users";
@@ -87,13 +85,13 @@ export default function Pitem({ navigation, item }) {
               }}
               source={{ uri: item.image }}
             ></Image>
-            <Text style={styles.shadowText}> {item.name} </Text>
+            <Text > {item.name} </Text>
             {item.size ? (
-              <Text style={styles.shadowText}>{item.size}</Text>
+              <Text >{item.size}</Text>
             ) : (
               <Text> </Text>
             )}
-            <Text style={styles.shadowText}>$ {item.price}</Text>
+            <Text >$ {item.price}</Text>
           </TouchableOpacity>
 
           <View style={styles.button}>
@@ -110,9 +108,6 @@ export default function Pitem({ navigation, item }) {
                   style={{
                     fontStyle: "italic",
                     color: "white",
-                    textShadowOffset: { width: 2, height: 2 },
-                    textShadowRadius: 5,
-                    textShadowColor: "white",
                     marginTop: 8,
                   }}
                 >
