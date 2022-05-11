@@ -18,26 +18,23 @@ import { subscribeCart } from "../../db/Data/products";
 import { editUser, getUsers, subscribeUser } from "../../db/Data/Users";
 
 export default function Cart({ route, navigation }) {
-
   const auth = getAuth();
   const userr = auth.currentUser;
   const [cart, setCart] = useState([]);
-  
-  
+  const [total, setTotal] = useState(0);
+
   const [buy, setBuy] = useState("");
 
   const getCartList = async () => {
-    getUserById(userr.uid).then((user)=>{
+    getUserById(userr.uid).then((user) => {
       const user1 = user;
       const ucart = user1[0].cart;
       setCart(ucart);
-    })
+    });
   };
   useEffect(() => {
     getCartList();
   }, []);
-  
-  
 
   useEffect(() => {
     const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
@@ -57,69 +54,67 @@ export default function Cart({ route, navigation }) {
     };
   }, []);
 
-  const delet = (id)=>{
-    let carttt = cart.filter((e)=>(e.id != id));
+  const delet = (id) => {
+    let carttt = cart.filter((e) => e.id != id);
 
-    getUserById(userr.uid).then((user)=>{
+    getUserById(userr.uid).then((user) => {
       const user1 = user;
-      editUser({...user1[0],cart:carttt});
-    })
-    
-  }
-  const countn = (count)=>{
-    
-  }
+      editUser({ ...user1[0], cart: carttt });
+    });
+  };
+  const plus = (count, item) => {
+    let price = parseInt(item.price);
+    setTotal(total + price);
+  };
+  const minus = (count, item) => {
+    if (count > 0) {
+      let price = parseInt(item.price);
+      setTotal(total - price);
+    }
+  };
 
-  // const Cash = () => {
-  //   let dataa = cart.filter((e) => e.username == userr.email);
-  //   const cartmoney = dataa.map((e) => e.price);
-  //   let user = users.filter((e) => e.email == userr.email);
-  //   let total = 0;
-  //   for (let i = 0; i < cartmoney.length; i++) {
-  //     total += parseInt(cartmoney[i]);
-  //   }
-  //   if (user[0].money >= total) {
-  //     setBuy("");
-  //     let usermoney = 0;
 
-  //     usermoney = user[0].money;
-  //     editUser({ ...user[0], money: parseInt(usermoney) - total, sold: dataa });
-
-  //     for (let j = 0; j < dataa.length; j++) {
-  //       deleteCart(dataa[j].id);
-  //     }
-  //   } else {
-  //     setBuy("You don't have enough money  ي شحات");
-  //     alert("You don't have enough money  ي شحات");
-  //   }
-  // };
-  // if (userr !== null) {
-  //   const email = userr.email;
-  //   let dataa = cart.filter((e) => e.username == email);
-  //   if (toggle) {
-  //     setCashData(dataa);
-  //     setToggle(false);
-  //   }
-
-    return (
-      <View style={styles.item}>
-        <Text style={{ fontSize: 16, fontWeight: "bold" }}>Selected Items</Text>
-        <FlatList
-          data={cart}
-          keyExtractor={cart.id}
-          numColumns={2}
-          renderItem={({ item }) => (
-            <CartItem navigation={navigation} item={item} delet={delet} countn = {countn}/>
-          )}
-        />
-        <View style={styles.button}>
-          {/* <Button title="cash" color="#000" onPress={() => Cash()} /> */}
-          <Text>{buy}</Text>
-        </View>
+  const Cash = () => {
+    getUserById(userr.uid).then((user) => {
+      const user1 = user;
+      let money = user1[0].money;
+      if (money >= total) {
+        editUser({ ...user1[0], money: money - total });
+        for (let i = 0; i < cart.length; i++) {
+          delet(cart[i].id);
+          
+        }
+        console.log("cart :",cart);
+      } else {
+        setBuy("You don't have enough money  ي شحات");
+        alert("You don't have enough money  ي شحات");
+      }
+    });
+  };
+  return (
+    <View style={styles.item}>
+      <Text style={{ fontSize: 16, fontWeight: "bold" }}>Selected Items</Text>
+      <FlatList
+        data={cart}
+        keyExtractor={cart.id}
+        numColumns={2}
+        renderItem={({ item }) => (
+          <CartItem
+            navigation={navigation}
+            item={item}
+            delet={delet}
+            minus={minus}
+            plus={plus}
+          />
+        )}
+      />
+      <View style={styles.button}>
+        <Button title="cash" color="#000" onPress={() => Cash()} />
+        <Text>{buy}</Text>
       </View>
-    );
-  }
-
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   content: {
