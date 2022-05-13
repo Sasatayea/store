@@ -15,7 +15,7 @@ import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { getUserById } from "../../db/Data/Users";
 
-const Profile = (props, { navigation }) => {
+const Profile = (props) => {
   const getUserList = async () => {
     const auth = getAuth();
     const userr = auth.currentUser;
@@ -94,7 +94,8 @@ const Profile = (props, { navigation }) => {
         </Button>
       </Container>
       <Container useThemeGutterPadding={true} elevation={0}>
-        <Touchable
+        
+        <Touchable onPress ={()=>props.navigation.navigate("ProfileItem",user)}
           style={StyleSheet.flatten([
             styles.touchableOk,
             { borderColor: theme.colors.divider },
