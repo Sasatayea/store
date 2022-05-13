@@ -7,6 +7,7 @@ import {
   Image,
   Picker,
   StyleSheet,
+  ImageBackground,
 } from "react-native";
 import { useEffect, useState } from "react";
 import { getCities, subscribe } from "../../db/cities/cities";
@@ -53,8 +54,17 @@ const CitiesList = ({ navigation }) => {
   }
 
   return (
+    // <ImageBackground
+    //   source={require("../../assets/homePage.PNG")}
+    //   resizeMode="cover"
+    //   style={styles.heder}
+    // >
     <View style={styles.container}>
       <View style={styles.search}>
+        <Image
+          style={styles.tinyLogo}
+          source={require("../../assets/logo.PNG")}
+        />
         <Picker
           selectedValue={selectedValue}
           style={{
@@ -91,15 +101,26 @@ const CitiesList = ({ navigation }) => {
 export default CitiesList;
 
 const styles = StyleSheet.create({
+  // heder: {
+  //   height: "100%",
+  //   width: "100%",
+  //   // marginTop: "5%",
+  // },
   container: {
     flex: 1,
-    backgroundColor: "#D9D9D9",
+    backgroundColor: "#D2D6DA",
+    // marginTop: "5%",
   },
   search: {
     paddingTop: 10,
     flexDirection: "row",
     alignItems: "flex-start",
-    justifyContent: "flex-end",
+    justifyContent: "space-around",
+  },
+  tinyLogo: {
+    width: 50,
+    height: 50,
+    paddingRight: "5%",
   },
   items: {
     // paddingTop: 10,

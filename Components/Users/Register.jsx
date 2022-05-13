@@ -22,12 +22,11 @@ const Register = ({ navigation }) => {
     <ImageBackground source={loginn} resizeMode="cover" style={styles.heder}>
       <View
         style={{
-          marginTop: "60%",
-          backgroundColor: "white",
-          borderRadius: 30,
-          height: "50%",
-          padding: 5,
-          margin: 10,
+          marginTop: "50%",
+
+          // height: "50%",
+          // padding: 5,
+          // margin: 10,
         }}
       >
         <Text
@@ -35,51 +34,80 @@ const Register = ({ navigation }) => {
             padding: 2,
             textAlign: "center",
             fontSize: 30,
+            color: "#fff",
             //fontFamily: "bold",
           }}
         >
           {" "}
           Sign Up{" "}
         </Text>
-        <TextInput
-          onChangeText={setusername}
-          keyboardType="default"
-          placeholder="User name"
-          style={styles.inpp}
-        />
-
-        <TextInput
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          placeholder="email-address"
-          style={styles.inpp}
-        />
-
-        <TextInput
-          onChangeText={setpassword}
-          keyboardType="visible-password"
-          placeholder="password"
-          secureTextEntry={true}
-          style={styles.inpp}
-        />
-
-        <TextInput
-          onChangeText={setcountry}
-          keyboardType="default"
-          placeholder="country name"
-          style={styles.inpp}
-        />
-
         <View
           style={{
-            width: 170,
-            padding: 10,
-            marginLeft: "50%",
+            // borderRadius: 30,
+            height: 45,
+            alignItems: "center",
+            marginTop: "5%",
           }}
         >
-          <Button
-            title="Register"
-            color="#000"
+          <TextInput
+            onChangeText={setusername}
+            keyboardType="default"
+            placeholder="User name"
+            placeholderTextColor="#fff"
+            style={styles.inpp}
+          />
+        </View>
+        <View
+          style={{
+            // borderRadius: 30,
+            height: 45,
+            alignItems: "center",
+            marginTop: "5%",
+          }}
+        >
+          <TextInput
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            placeholder="email-address"
+            placeholderTextColor="#fff"
+            style={styles.inpp}
+          />
+        </View>
+        <View
+          style={{
+            // borderRadius: 30,
+            height: 45,
+            alignItems: "center",
+            marginTop: "5%",
+          }}
+        >
+          <TextInput
+            onChangeText={setpassword}
+            keyboardType="visible-password"
+            placeholder="password"
+            placeholderTextColor="#fff"
+            secureTextEntry={true}
+            style={styles.inpp}
+          />
+        </View>
+        <View
+          style={{
+            // borderRadius: 30,
+            height: 45,
+            alignItems: "center",
+            marginTop: "5%",
+          }}
+        >
+          <TextInput
+            onChangeText={setcountry}
+            keyboardType="default"
+            placeholder="country name"
+            placeholderTextColor="#fff"
+            style={styles.inpp}
+          />
+        </View>
+        <View style={styles.pp}>
+          <TouchableOpacity
             onPress={() => {
               console.log(email, password);
 
@@ -87,16 +115,17 @@ const Register = ({ navigation }) => {
                 .then()
                 .catch((e) => setError(e.message));
             }}
-          />
-
-          <Text>{error}</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Fpage")}>
-            <Text style={{ paddingTop: 10, paddingLeft: 5 }}>
-              {" "}
-              Go to Home page{" "}
-            </Text>
+          >
+            <Text style={{ color: "#fff" }}> Register </Text>
           </TouchableOpacity>
         </View>
+        <Text>{error}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Fpage")}>
+          <Text style={{ marginTop: "5%", marginLeft: "15%", color: "#fff" }}>
+            {" "}
+            Go to Home page{" "}
+          </Text>
+        </TouchableOpacity>
       </View>
     </ImageBackground>
   );
@@ -110,12 +139,25 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   inpp: {
+    width: "70%",
     flex: 1,
-    height: 40,
-    margin: 12,
+    color: "#fff",
+    borderRadius: 25,
+    borderColor: "black",
+    height: 90,
     borderWidth: 1,
-    padding: 10,
-    borderRadius: 20,
-    height: 60,
+    backgroundColor: "#011F26",
+    paddingLeft: "5%",
+  },
+  pp: {
+    marginLeft: "15%",
+    width: "30%",
+    borderRadius: 25,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: "5%",
+
+    backgroundColor: "#011F26",
   },
 });

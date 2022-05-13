@@ -137,7 +137,11 @@ export default function Cart({ route, navigation }) {
           )}
         />
         <View style={styles.button}>
-          <Button title="cash" color="#000" onPress={() => Cash()} />
+          <View style={styles.pp}>
+            <TouchableOpacity onPress={() => Cash()}>
+              <Text style={{ color: "#fff", padding: 5 }}> Cash</Text>
+            </TouchableOpacity>
+          </View>
           <Text>{buy}</Text>
         </View>
       </View>
@@ -160,8 +164,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    // borderRadius: 100,
-    // flex: 1,
-    padding: 15,
+    // flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "2%",
+  },
+  pp: {
+    // marginTop: "90%",
+    // marginLeft: "10%",
+    width: "200%",
+    borderRadius: 25,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#011F26",
   },
 });

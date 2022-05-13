@@ -35,17 +35,23 @@ export default function CartItem({ navigation, item }) {
               style={{ height: 150, width: 150, margin: 10 }}
               source={{ uri: item.image }}
             ></Image>
-            <Text> {item.name} </Text>
-            <Text>$ {item.price}</Text>
+            <Text style={{ paddingLeft: "5%", fontWeight: "700" }}>
+              {" "}
+              {item.name}{" "}
+            </Text>
+            <Text style={{ paddingLeft: "5%", fontWeight: "700" }}>
+              {" "}
+              ${item.price}
+            </Text>
           </TouchableOpacity>
           {/* <Button title="Delete" onPress={() => deleteCity(item.id)} /> */}
           {/* <Button title="Add to char" onPress={()=>AddToCart(item.id)}/> */}
           <View style={styles.button}>
-            <Button
-              title="Delete"
-              color="red"
-              onPress={() => deleteCart(item.id)}
-            />
+            <View style={styles.pp}>
+              <TouchableOpacity onPress={() => deleteCart(item.id)}>
+                <Text style={{ color: "#fff" }}> Delete</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
@@ -62,13 +68,12 @@ const styles = StyleSheet.create({
   },
   card: {
     marginRight: 10,
-
     backgroundColor: "white",
     borderRadius: 8,
-    paddingVertical: 45,
-    paddingHorizontal: 25,
-    width: 200,
-    height: 335,
+    paddingVertical: "5%",
+    // paddingHorizontal: "3%",
+    width: 170,
+    height: 300,
     marginVertical: 10,
   },
   shadowProp: {
@@ -83,5 +88,15 @@ const styles = StyleSheet.create({
     padding: 15,
     alignItems: "center",
     justifyContent: "center",
+  },
+  pp: {
+    // marginTop: "90%",
+    // marginLeft: "10%",
+    width: "70%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "red",
   },
 });

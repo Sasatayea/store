@@ -58,6 +58,7 @@ export default function App({ navigation }) {
               name="Home"
               component={CitiesList}
               options={{
+                // headerShown: false,
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/home.png")}

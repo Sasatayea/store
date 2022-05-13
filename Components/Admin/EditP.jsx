@@ -43,16 +43,17 @@ export default function EditP({ navigation }) {
   }, []);
 
   const [cities, setCities] = useState([]);
-  
+
   return (
-    <View >
-        
+    <View>
       <View style={styles.items}>
         <FlatList
           data={cities}
           numColumns={2}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => <PitemAdmin navigation={navigation} item={item} />}
+          renderItem={({ item }) => (
+            <PitemAdmin navigation={navigation} item={item} />
+          )}
         />
       </View>
     </View>
@@ -70,6 +71,5 @@ const styles = StyleSheet.create({
     // paddingTop: 10,
     justifyContent: "center",
     alignItems: "center",
-
   },
 });

@@ -10,7 +10,6 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { React, useState } from "react";
 import { login } from "../../db/auth/auth";
-import loginn from "../../assets/loginn.png";
 import Register from "./Register";
 import {
   getUsers,
@@ -32,12 +31,12 @@ const Login = ({ navigation }) => {
       <StatusBar style="auto" />
       <View
         style={{
-          marginTop: "60%",
-          backgroundColor: "white",
-          borderRadius: 30,
-          height: "40%",
-          padding: 5,
-          margin: 10,
+          marginTop: "55%",
+          // backgroundColor: "white",
+          // borderRadius: 30,
+          // height: "40%",
+          // padding: 5,
+          // margin: 10,
         }}
       >
         <Text
@@ -45,7 +44,8 @@ const Login = ({ navigation }) => {
             padding: 2,
             textAlign: "center",
             fontSize: 30,
-            //fontFamily: "bold",
+            // fontFamily: "bold",
+            color: "#fff",
           }}
         >
           {" "}
@@ -53,72 +53,79 @@ const Login = ({ navigation }) => {
         </Text>
         <View
           style={{
-            padding: 10,
-            borderRadius: 20,
-            height: 60,
+            // borderRadius: 30,
+            height: 45,
+            alignItems: "center",
+            marginTop: "5%",
           }}
         >
           <TextInput
-            onChangeText={setEmail}
             keyboardType="email-address"
             placeholder="email-address"
+            placeholderTextColor="#fff"
+            onChangeText={setEmail}
             style={{
-              flex: 2,
+              width: "70%",
+              flex: 1,
+              color: "#fff",
+              borderRadius: 25,
               borderColor: "black",
-              borderWidth: 1,
               height: 90,
-              // margin: 12,
               borderWidth: 1,
-              padding: 10,
+              backgroundColor: "#011F26",
+              paddingLeft: "5%",
             }}
           />
         </View>
 
         <View
           style={{
-            padding: 10,
-            borderRadius: 20,
-            height: 60,
+            borderRadius: 30,
+            height: 45,
+            alignItems: "center",
+            marginTop: "5%",
           }}
         >
           <TextInput
             onChangeText={setpassword}
             keyboardType="visible-password"
             placeholder="password"
+            placeholderTextColor="#fff"
+            color="white"
             secureTextEntry={true}
             style={{
-              flex: 2,
+              width: "70%",
+              flex: 1,
+              color: "#fff",
+              borderRadius: 30,
               borderColor: "black",
-              borderWidth: 1,
               height: 90,
-              padding: 10,
+              borderWidth: 1,
+              backgroundColor: "#011F26",
+              paddingLeft: "5%",
             }}
           />
-          <View
-            style={{
-              width: 150,
-              padding: 10,
-              marginLeft: "50%",
+        </View>
+
+        <View style={styles.pp}>
+          <TouchableOpacity
+            onPress={() => {
+              login(email, password)
+                .then()
+                .catch((e) => setError(e.message));
             }}
           >
-            <Button
-              title="Login"
-              color="#000"
-              onPress={() => {
-                login(email, password)
-                  .then()
-                  .catch((e) => setError(e.message));
-              }}
-            />
-            <Text>{error}</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-              <Text style={{ paddingTop: 5 }}> Create an account </Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-            <Text style={{ paddingTop: 15 }}> Create an account </Text>
+            <Text style={{ color: "#fff" }}> Login</Text>
           </TouchableOpacity>
+          <Text>{error}</Text>
         </View>
+
+        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+          <Text style={{ marginTop: "5%", marginLeft: "15%", color: "#fff" }}>
+            {" "}
+            Create an account{" "}
+          </Text>
+        </TouchableOpacity>
       </View>
     </ImageBackground>
   );
@@ -143,5 +150,16 @@ const styles = StyleSheet.create({
     padding: 8,
     margin: 10,
     width: 200,
+  },
+  pp: {
+    marginLeft: "15%",
+    width: "30%",
+    borderRadius: 25,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: "5%",
+
+    backgroundColor: "#011F26",
   },
 });

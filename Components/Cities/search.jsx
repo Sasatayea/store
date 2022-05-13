@@ -80,7 +80,7 @@ export default function Search({ navigation }) {
 
   if (!searchItem) {
     return (
-      <View>
+      <View style={styles.page}>
         <View style={styles.content}>
           <View style={styles.input}>
             <TextInput
@@ -93,11 +93,12 @@ export default function Search({ navigation }) {
             />
           </View>
           <View style={styles.button}>
-            <Button
-              title="search"
-              color="#000"
-              onPress={() => search(searchItem)}
-            />
+            <TouchableOpacity onPress={() => search(searchItem)}>
+              <Image
+                style={{ width: 30, height: 30, marginLeft: 10 }}
+                source={require("../../assets/magnifying-glass.png")}
+              />
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.text}>
@@ -107,7 +108,7 @@ export default function Search({ navigation }) {
     );
   } else {
     return (
-      <View>
+      <View style={styles.page}>
         <View style={styles.content}>
           <View style={styles.input}>
             <TextInput
@@ -120,11 +121,12 @@ export default function Search({ navigation }) {
             />
           </View>
           <View style={styles.button}>
-            <Button
-              title="search"
-              color="#000"
-              onPress={() => search(searchItem)}
-            />
+            <TouchableOpacity onPress={() => search(searchItem)}>
+              <Image
+                style={{ width: 30, height: 30, marginLeft: 10 }}
+                source={require("../../assets/magnifying-glass.png")}
+              />
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.item}>
@@ -142,33 +144,41 @@ export default function Search({ navigation }) {
   }
 }
 const styles = StyleSheet.create({
+  page: {
+    backgroundColor: "#D2D6DA",
+    height: "100%",
+  },
   content: {
     flexDirection: "row",
     marginTop: 10,
     padding: 10,
     paddingHorizontal: 20,
-    // backgroundColor: "#fff",
+    // backgroundColor: "#D2D6DA",
   },
   input: {
     flex: 2,
     height: 40,
-    margin: 12,
+    // margin: 12,
+    marginLeft: "15%",
     borderWidth: 2,
     borderColor: "black",
     padding: 10,
     width: 200,
+    // backgroundColor: "#D2D6DA",
   },
   button: {
     borderRadius: 200,
     flex: 1,
-    paddingTop: 15,
+    paddingTop: "2%",
   },
   item: {
     justifyContent: "center",
     alignItems: "center",
+    // backgroundColor: "#D2D6DA",
   },
   text: {
     fontSize: 20,
     alignItems: "center",
+    // backgroundColor: "#D2D6DA",
   },
 });
