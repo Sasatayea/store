@@ -57,7 +57,11 @@ export default function Profile({ navigation }) {
           renderItem={({ item }) => <ProfileItem item={item} />}
         />
         <View style={styles.botton}>
-          <Button color="#000" title="[-> Logout" onPress={() => logout()} />
+          <View style={styles.pp}>
+            <TouchableOpacity onPress={() => logout()}>
+              <Text style={{ color: "#fff" }}> Logout</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
@@ -73,14 +77,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     // backgroundColor: "#D9D9D9",
   },
+  // botton: {
+  //   width: 250,
+  //   padding: 10,
+  //   paddingLeft: 100,
+  // },
   botton: {
-    width: 250,
-    padding: 10,
-    paddingLeft: 100,
+    marginLeft: "30%",
   },
-  botton: {
-    width: 250,
-    padding: 10,
-    paddingLeft: 100,
+  pp: {
+    // marginTop: "90%",
+    // marginLeft: "10%",
+    width: "60%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#011F26",
   },
 });
