@@ -67,17 +67,19 @@ const Home = ({ navigation }) => {
         </Picker>
       </View>
 
-      <View>
-      <SlideshowTest/>
-      </View>
-
+      
+      
+      <SlideshowTest item = {product}/>
+      
       <View style={styles.items}>
         <FlatList
           data={dataa}
           numColumns={2}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
+            <>
             <Pitem navigation={navigation} item={item} />
+            </>
           )}
         />
       </View>

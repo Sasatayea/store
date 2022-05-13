@@ -21,7 +21,7 @@ export default function Search({ navigation }) {
   const getCitiesList = async () => {
     const c = await getCities();
     await setCities(c);
-    console.log("products", c);
+    //console.log("products", c);
   };
 
   useEffect(async () => {

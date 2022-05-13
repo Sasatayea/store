@@ -74,8 +74,6 @@ export default function Cart({ route, navigation }) {
       console.log("cart :",total);
     }
   };
-
-
   const Cash = () => {
     getUserById(userr.uid).then((user) => {
       const user1 = user;
