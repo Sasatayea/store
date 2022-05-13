@@ -66,9 +66,6 @@ const Home = ({ navigation }) => {
           <Picker.Item label="sofa" value="sofa" />
         </Picker>
       </View>
-
-      
-      
       <SlideshowTest item = {product}/>
       
       <View style={styles.items}>
@@ -120,7 +117,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
-
+    
     borderWidth: 2,
   },
 });

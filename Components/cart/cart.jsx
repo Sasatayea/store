@@ -18,6 +18,7 @@ import { subscribeCart } from "../../db/Data/products";
 import { editUser, getUsers, subscribeUser } from "../../db/Data/Users";
 
 export default function Cart({ route, navigation }) {
+
   const auth = getAuth();
   const userr = auth.currentUser;
   const [cart, setCart] = useState([]);
@@ -65,13 +66,13 @@ export default function Cart({ route, navigation }) {
   const plus = (count, item) => {
     let price = parseInt(item.price);
     setTotal(total + price);
-    console.log("cart :",total);
+    console.log("total :",total);
   };
   const minus = (count, item) => {
     if (count > 0) {
       let price = parseInt(item.price);
       setTotal(total - price);
-      console.log("cart :",total);
+      console.log("total :",total);
     }
   };
   const Cash = () => {
@@ -79,19 +80,21 @@ export default function Cart({ route, navigation }) {
       const user1 = user;
       let money = user1[0].money;
       let sold = user1[0].sold;
+      console.log("soled " , sold)
+      let carr = cart ;
       if (money >= total) {
-        editUser({ ...user1[0],sold:[...sold,...cart] });
-        editUser({ ...user1[0], money: money - total,cart:[]});
-        console.log("cart :",total);
+        editUser({ ...user1[0], money: money - total,cart:[], sold:[...carr  ,...sold]});
+        setTotal(0);
+        console.log("total :",total);
       } else {
-        setBuy("You don't have enough money  ي شحات");
-        alert("You don't have enough money  ي شحات");
+        setBuy("You don't have enough money ");
+        alert("You don't have enough money  ");
       }
     });
   };
   return (
     <View style={styles.item}>
-      <Text style={{ fontSize: 16, fontWeight: "bold" }}>Selected Items</Text>
+      <Text style={{marginTop:10 , fontSize: 16, fontWeight: "bold" }}>Selected Items</Text>
       <FlatList
         data={cart}
         keyExtractor={cart.id}
@@ -106,9 +109,10 @@ export default function Cart({ route, navigation }) {
           />
         )}
       />
+
+      <Text style={{fontSize:24}}>total price = {total}</Text>
       <View style={styles.button}>
         <Button title="cash" color="#000" onPress={() => Cash()} />
-        <Text>{buy}</Text>
       </View>
     </View>
   );
@@ -130,9 +134,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    // borderRadius: 100,
-    // flex: 1,
-    
     padding: 15,
   },
 });

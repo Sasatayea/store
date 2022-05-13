@@ -4,17 +4,19 @@ import { FlatList, TouchableOpacity } from 'react-native-web';
 
 const OrderHistory = (items) => {
     let item = items.route.params;
-    console.log(item.sold);
+    console.log("iteem",item);
     if(item.sold.length != 0){
         return (
             <View>
+              <Text styles={{marginButton:30}}> Your Order History That You Buy </Text>  
+              <Text>       </Text>            
               <FlatList
         data={item.sold}
-        keyExtractor={item.id}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity>
               <Text>
-                {item.name}
+                  Product name :  {item.name}
               </Text>
           </TouchableOpacity>
         )}

@@ -21,6 +21,8 @@ import Search from "./Components/Cities/Search";
 import AddP from "./Components/Admin/AddP";
 import { ImageBackground } from "react-native-web";
 import OrderHistory from "./Components/Cities/OrderHistory";
+import UserEditInPro from './Components/Cities/UserEditInPro';
+import EditUserInfo from "./Components/Admin/EditUserInfo";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -41,7 +43,7 @@ export default function App ({ navigation }) {
   //console.log(user);
   if (user) {
     const email = userr.email;
-    if (email == "sheeka@gmail.com") {
+    if (email == "admin@gmail.com") {
       console.log("app", email);
       return (
         <NavigationContainer>
@@ -85,6 +87,18 @@ export default function App ({ navigation }) {
             <Stack.Screen
               name="Edit"
               component={Edit}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="EditUserInfo"
+              component={EditUserInfo}
               options={{
                 title: (
                   <Image
@@ -186,6 +200,15 @@ export default function App ({ navigation }) {
             <Tab.Screen
               name="OrderHistory"
               component={props => <OrderHistory {...props} />}
+              options={{
+                headerShown: false,
+                tabBarButton: () => null,
+                tabBarVisible: false,
+              }}
+            />
+            <Tab.Screen
+              name="UserEditInPro"
+              component={props => <UserEditInPro {...props} />}
               options={{
                 headerShown: false,
                 tabBarButton: () => null,
