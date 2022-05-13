@@ -57,7 +57,7 @@ export default function Profile({ navigation }) {
           renderItem={({ item }) => <ProfileItem item={item} />}
         />
         <View style={styles.botton}>
-          <Button color="#000" title="Logout" onPress={() => logout()} />
+          <Button color="#000" title="[-> Logout" onPress={() => logout()} />
         </View>
       </View>
     );
