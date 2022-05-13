@@ -127,12 +127,14 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     // flexDirection: "row",
+    backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
   },
   button: {
     // borderRadius: 100,
     // flex: 1,
+    
     padding: 15,
   },
 });
