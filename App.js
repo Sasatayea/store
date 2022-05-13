@@ -57,7 +57,6 @@ export default function App({ navigation }) {
                   />
                   
                   
-                  
                 
                 
               }}
@@ -167,14 +166,7 @@ export default function App({ navigation }) {
               name="Profile"
               component={Profile}
               options={{
-                headerBackground: () => (
-                  <View style = {{backgroundColor: "white",}}>
-                    <Image
-                    source={require("./assets/megan.png")}
-                    style={{ width: 80, height: 80, alignSelf: "center" ,}}
-                  />
-                  </View>
-                ),
+                headerShown: false,
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/userrrr.png")}
