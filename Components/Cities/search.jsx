@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 10,
     paddingHorizontal: 20,
+    backgroundColor: "white",
     // backgroundColor: "#fff",
   },
   input: {
@@ -172,9 +173,11 @@ const styles = StyleSheet.create({
   item: {
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
   },
   text: {
     fontSize: 20,
     alignItems: "center",
+    backgroundColor: "white",
   },
 });

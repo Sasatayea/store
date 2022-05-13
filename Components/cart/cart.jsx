@@ -80,9 +80,10 @@ export default function Cart({ route, navigation }) {
     getUserById(userr.uid).then((user) => {
       const user1 = user;
       let money = user1[0].money;
+      let sold = user1[0].sold;
       if (money >= total) {
-        editUser({ ...user1[0], money: money - total,cart:[] });
-        
+        editUser({ ...user1[0],sold:[...sold,...cart] });
+        editUser({ ...user1[0], money: money - total,cart:[]});
         console.log("cart :",total);
       } else {
         setBuy("You don't have enough money  ي شحات");
@@ -126,12 +127,14 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     // flexDirection: "row",
+    backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
   },
   button: {
     // borderRadius: 100,
     // flex: 1,
+    
     padding: 15,
   },
 });
