@@ -14,17 +14,16 @@ import { getUsers, subscribeUser } from "../../db/Data/Users";
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { getUserById } from "../../db/Data/Users";
+import OrderHistory from "./OrderHistory";
 
 const Profile = (props) => {
   const getUserList = async () => {
     const auth = getAuth();
     const userr = auth.currentUser;
-    await getUserById(userr.uid).then((u)=>{
+    await getUserById(userr.uid).then((u) => {
       setuser(u[0]);
       console.log("user", u);
     });
-    
-    
   };
 
   useEffect(async () => {
@@ -89,13 +88,17 @@ const Profile = (props) => {
         >
           {user.name}
         </Text>
-        <Button style={styles.buttonP2} type="outline">
+        <Button
+          style={styles.buttonP2}
+          type="outline"
+          onPress={() => props.navigation.navigate("UserEditInPro", user)}
+        >
           Edit Profile
         </Button>
       </Container>
       <Container useThemeGutterPadding={true} elevation={0}>
-        
-        <Touchable onPress ={()=>props.navigation.navigate("ProfileItem",user)}
+        <Touchable
+          onPress={() => props.navigation.navigate("ProfileItem", user)}
           style={StyleSheet.flatten([
             styles.touchableOk,
             { borderColor: theme.colors.divider },
@@ -127,7 +130,9 @@ const Profile = (props) => {
             />
           </View>
         </Touchable>
+
         <Touchable
+          onPress={() => props.navigation.navigate("OrderHistory", user)}
           style={StyleSheet.flatten([
             styles.touchableBp,
             { borderColor: theme.colors.divider },

@@ -32,24 +32,28 @@ export default function CartItem({ navigation, item,delet,plus,minus }) {
             <Text style={styles.shadowText}> {item.name} </Text>
             <Text style={styles.shadowText}>$ {item.price}</Text>
           </TouchableOpacity>
-          <Button
-              title="+"
-              color="blue"
-              onPress={() => {setCount(count+1); plus(count,item);}}
-            />
-          <View style={styles.button}>
+          <Text>       </Text>
+            <View style={{flexDirection:'row'}}>
+            <View style={styles.button}>
             <Button
               title="Delete"
               color="red"
               onPress={() => delet(item.id)}
             />
-            <Text>{count}</Text>
           </View>
+            <Button
+              title="+"
+              color="blue"
+              onPress={() => {setCount(count+1); plus(count,item);}}
+            />
+          <Text>{count}</Text>
+
           <Button
               title="-"
               color="blue"
               onPress={() => {if(count>0)setCount(count-1); minus(count,item)}}
             />
+        </View>
         </View>
       </View>
     );
@@ -83,8 +87,8 @@ const styles = StyleSheet.create({
   button: {
     flexDirection: "row",
     borderRadius: 200,
-    padding: 15,
     alignItems: "center",
+    marginRight:10 ,
     justifyContent: "center",
   },
   shadowText: {

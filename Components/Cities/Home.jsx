@@ -7,11 +7,12 @@ import {
   Image,
   Picker,
   StyleSheet,
+  ScrollView,
 } from "react-native";
 import { useEffect, useState } from "react";
 import { getCities, subscribe } from "../../db/Data/products";
-
 import Pitem from "../items/Pitem";
+import SlideshowTest from "./SlideshowTest ";
 
 const Home = ({ navigation }) => {
   const getProduct = async () => {
@@ -36,7 +37,6 @@ const Home = ({ navigation }) => {
         getProduct();
       }
     });
-
     return () => {
       unsubscribe();
     };
@@ -50,10 +50,11 @@ const Home = ({ navigation }) => {
   if (selectedValue == "All") {
     dataa = product;
   }
-
+  //console.log(dataa);
   return (
     <View style={styles.container}>
       <View style={styles.search}>
+        <Text style={{fontSize:27}}>Select Section: </Text>
         <Picker
           selectedValue={selectedValue}
           style={styles.picker}
@@ -68,16 +69,23 @@ const Home = ({ navigation }) => {
         </Picker>
       </View>
 
-      <View style={styles.items}>
-        <FlatList
-          data={dataa}
-          numColumns={2}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
-            <Pitem navigation={navigation} item={item} />
-          )}
-        />
-      </View>
+      <ScrollView>
+        <View style = {styles.slide}>
+          <SlideshowTest  item={product} />
+        </View>
+        <View style={styles.items}>
+          <FlatList
+            data={dataa}
+            numColumns={2}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <>
+                <Pitem navigation={navigation} item={item} />
+              </>
+            )}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -89,11 +97,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
+  slide:{
+    borderColor:"#D9D9D9",
+    borderWidth:6,
+  },
   search: {
     paddingTop: 10,
     flexDirection: "row",
-    alignItems: "flex-start",
-    justifyContent: "flex-end",
+    
+   
   },
   items: {
     // paddingTop: 10,
@@ -110,7 +122,7 @@ const styles = StyleSheet.create({
     textShadowColor: "black",
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
-
+    marginLeft:70,
     shadowColor: "black",
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
