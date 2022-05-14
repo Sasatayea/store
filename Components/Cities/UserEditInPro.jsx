@@ -82,13 +82,32 @@ const UserEditInPro = (items) => {
 export default UserEditInPro;
 
 const styles = StyleSheet.create({
+  heder: {
+    height: "100%",
+    width: "100%",
+  },
   inpp: {
-    flex: 1,
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    borderRadius: 20,
-    height: 60,
+  },
+  texttinput: {
+    borderWidth: 1,
+    borderColor: "#777",
+    padding: 8,
+    margin: 10,
+    width: 200,
+  },
+  pp: {
+    marginLeft: "15%",
+    width: "30%",
+    borderRadius: 25,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: "5%",
+
+    backgroundColor: "#011F26",
   },
 });

@@ -1,22 +1,19 @@
-import { StyleSheet, Text, View, Button, ImageBackground } from "react-native";
+import { StyleSheet, Text, View, Button, ImageBackground,TouchableOpacity } from "react-native";
 import React from "react";
 import fpagee from "../../assets/fpagee.png";
 function Fpage({ navigation }) {
   return (
     <ImageBackground source={fpagee} resizeMode="cover" style={styles.heder}>
       <View style={styles.pp}>
-        <Button
-          title="Login"
-          color="#011F26"
-          onPress={() => navigation.navigate("Login")}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <Text style={{ color: "#fff" }}> Login</Text>
+        </TouchableOpacity>
       </View>
+
       <View style={styles.pp2}>
-        <Button
-          title="Sign Up"
-          color="#011F26"
-          onPress={() => navigation.navigate("Register")}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+          <Text style={{ color: "#fff" }}> Sign Up</Text>
+        </TouchableOpacity>
       </View>
     </ImageBackground>
   );
@@ -31,12 +28,22 @@ const styles = StyleSheet.create({
   },
   pp: {
     marginTop: "90%",
-    paddingLeft: "10%",
-    paddingRight: "10%",
+    marginLeft: "10%",
+    width: "80%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#011F26",
   },
   pp2: {
-    paddingTop: "5%",
-    paddingLeft: "10%",
-    paddingRight: "10%",
+    marginLeft: "10%",
+    width: "80%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: "5%",
+    backgroundColor: "#011F26",
   },
 });

@@ -54,7 +54,7 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.search}>
-        <Text style={{fontSize:27}}>Select Section: </Text>
+        
         <Picker
           selectedValue={selectedValue}
           style={styles.picker}
