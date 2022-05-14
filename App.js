@@ -227,6 +227,7 @@ export default function App ({ navigation }) {
                     />
                   </View>
                 ),
+                headerTitle:()=>null,
                 tabBarButton: () => null,
                 tabBarVisible: false,
               }}

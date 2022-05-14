@@ -86,7 +86,7 @@ export default function Search({ navigation }) {
 
   if (!searchItem) {
     return (
-      <View>
+      <View style = {{backgroundColor:"white"}}>
         <View style={styles.content}>
           <View style={styles.input}>
             <TextInput
@@ -164,11 +164,13 @@ const styles = StyleSheet.create({
     borderColor: "black",
     padding: 10,
     width: 200,
+    backgroundColor: "white",
   },
   button: {
     borderRadius: 200,
     flex: 1,
     paddingTop: 15,
+    backgroundColor: "white",
   },
   item: {
     justifyContent: "center",
