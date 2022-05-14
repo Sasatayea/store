@@ -85,16 +85,17 @@ export default function Pitem({ navigation, item }) {
               }}
               source={{ uri: item.image }}
             ></Image>
-            <Text > {item.name} </Text>
+            <Text style = {{fontWeight:"bold",}}> {item.name} </Text>
             {item.size ? (
-              <Text >{item.size}</Text>
+              <Text style = {{fontWeight:"bold",}}> {item.size}</Text>
             ) : (
               <Text> </Text>
             )}
-            <Text >$ {item.price}</Text>
+            <Text style = {{fontWeight:"bold",}}> $ {item.price}</Text>
           </TouchableOpacity>
 
           <View style={styles.button}>
+            <View style={styles.pp}>
             <TouchableOpacity onPress={() => addCart(item)}>
               <View
                 style={{
@@ -106,7 +107,7 @@ export default function Pitem({ navigation, item }) {
               >
                 <Text
                   style={{
-                    fontStyle: "italic",
+                    fontWeight:"bold",
                     color: "white",
                     marginTop: 8,
                   }}
@@ -115,7 +116,8 @@ export default function Pitem({ navigation, item }) {
                 </Text>
               </View>
             </TouchableOpacity>
-
+            </View>
+            <View style={styles.react}>
             <TouchableOpacity onPress={() => Like()}>
               {flag ? (
                 <Image
@@ -129,6 +131,7 @@ export default function Pitem({ navigation, item }) {
                 />
               )}
             </TouchableOpacity>
+          </View>
           </View>
         </View>
       </View>
@@ -149,9 +152,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   button: {
+    marginLeft: "5%",
+    marginTop: "5%",
+    // textAlign: "center",
     flexDirection: "row",
-
-    padding: 15,
   },
   text: {
     fontSize: 10,
@@ -168,15 +172,16 @@ const styles = StyleSheet.create({
     marginRight: 10,
     backgroundColor: "#D9D9D9",
     borderRadius: 12,
-    paddingVertical: 45,
-    paddingHorizontal: "3%",
-    width: 180,
+    paddingVertical: "5%",
+    //paddingHorizontal: "3%",
+    width: 170,
     height: 300,
     marginVertical: 10,
   },
   button: {
     textAlign: "center",
     flexDirection: "row",
+    
   },
   shadowProp: {
     shadowColor: "black",
@@ -189,5 +194,19 @@ const styles = StyleSheet.create({
     textShadowColor: "black",
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 5,
+  },
+  pp: {
+    // marginTop: "90%",
+    // marginLeft: "10%",
+    
+    width: "70%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#011F26",
+  },
+  react: {
+    marginTop: "5%",
   },
 });
