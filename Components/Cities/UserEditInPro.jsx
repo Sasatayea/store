@@ -29,52 +29,84 @@ const UserEditInPro = (items) => {
     });
   };
   return (
-    <View>
-      <Text>UserEditInPro</Text>
+    <View
+      style={{
+        marginTop: "40%",
+        backgroundColor: "white",
+        borderRadius: 20,
+        height: "58%",
+      }}
+    >
+      <Text
+        style={{
+          padding: 2,
+          textAlign: "center",
+          fontSize: 30,
+          //fontFamily: "bold",
+        }}
+      >
+        Profile Edit
+      </Text>
       <Text> </Text>
-
+<View style={{ alignSelf:"center"}}>
       <View style={{ flexDirection: "row" }}>
-        <Text>Set you name</Text>
-        <TextInput
-          onChangeText={setName}
-          keyboardType="default"
-          placeholder="user name"
-          value={name}
-          style={styles.inpp}
-        />
+        
+        <View style={styles.in}>
+          <TextInput
+            onChangeText={setName}
+            keyboardType="default"
+            placeholder="user name"
+            value={name}
+            style={styles.inpp}
+          />
+        </View>
       </View>
       <View style={{ flexDirection: "row" }}>
-        <Text>Set you imge</Text>
-        <TextInput
-          onChangeText={setImage}
-          keyboardType="default"
-          placeholder="Image"
-          value={image}
-          style={styles.inpp}
-        />
+        
+        <View style={styles.in}>
+          <TextInput
+            onChangeText={setImage}
+            keyboardType="default"
+            placeholder="Image"
+            value={image}
+            style={styles.inpp}
+          />
+        </View>
       </View>
       <View style={{ flexDirection: "row" }}>
-        <Text>Set you pass</Text>
-        <TextInput
-          onChangeText={setpass}
-          keyboardType="default"
-          placeholder="Image"
-          value={pass}
-          style={styles.inpp}
-        />
+        
+        <View style={styles.in}>
+          <TextInput
+            onChangeText={setpass}
+            keyboardType="password"
+            placeholder="password"
+            value={pass}
+            style={styles.inpp}
+          />
+        </View>
       </View>
       <View style={{ flexDirection: "row" }}>
-        <Text>Set you pass</Text>
-        <TextInput
-          onChangeText={setcountryname}
-          keyboardType="default"
-          placeholder="Image"
-          value={countryname}
-          style={styles.inpp}
-        />
+        
+        <View style={styles.in}>
+          <TextInput
+            onChangeText={setcountryname}
+            keyboardType="default"
+            placeholder="countr yname"
+            value={countryname}
+            style={styles.inpp}
+          />
+        </View>
       </View>
-
-      <Button title="done" onPress={change} />
+      </View>
+      <View
+        style={{
+          width: 170,
+          padding: 10,
+          alignSelf:"center",
+        }}
+      >
+        <Button color="#000" title="done" onPress={change} />
+      </View>
     </View>
   );
 };

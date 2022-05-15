@@ -8,12 +8,13 @@ import {
   Picker,
   StyleSheet,
   ScrollView,
+  ImageBackground
 } from "react-native";
 import { useEffect, useState } from "react";
 import { getCities, subscribe } from "../../db/Data/products";
 import Pitem from "../items/Pitem";
 import SlideshowTest from "./SlideshowTest ";
-
+import bc from "../../assets/bc.jpg";
 const Home = ({ navigation }) => {
   const getProduct = async () => {
     const c = await getCities();
@@ -52,7 +53,9 @@ const Home = ({ navigation }) => {
   }
   //console.log(dataa);
   return (
+    
     <View style={styles.container}>
+      {/* <ImageBackground source={bc} resizeMode="cover" style={styles.heder}> */}
       <View style={styles.search}>
         
         <Picker
@@ -86,7 +89,9 @@ const Home = ({ navigation }) => {
           />
         </View>
       </ScrollView>
+      {/* </ImageBackground> */}
     </View>
+    
   );
 };
 
@@ -96,6 +101,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
+  },
+  heder: {
+    height: "100%",
+    width: "100%",
   },
   slide:{
     borderColor:"#D9D9D9",
