@@ -8,13 +8,11 @@ import {
   Image,
   Pressable,
 } from "react-native";
-
 import { getAuth } from "firebase/auth";
-
 import { useState, useEffect } from "react";
-import { addCity, addCart, editCity, getCities } from "../../db/cities/cities";
-import { subscribe } from "../../db/cities/cities";
-import { async } from "@firebase/util";
+import { addCity, editCity, getCities } from "../../db/Data/products";
+import { editUser, getUserById } from "../../db/Data/Users";
+
 export default function Pitem({ navigation, item }) {
   const unsubLike = async () => {
     if (curLike[0] == userr.email) setFlage(false);
@@ -22,6 +20,11 @@ export default function Pitem({ navigation, item }) {
   };
   useEffect(async () => {
     await unsubLike();
+    getUserById(userr.uid).then((user) => {
+      const user1 = user;
+      const ucart = user1[0].cart;
+      setCart(ucart);
+    });
   }, []);
 
   const auth = getAuth();
@@ -29,7 +32,9 @@ export default function Pitem({ navigation, item }) {
   const userr = auth.currentUser;
 
   const [liked, setLiked] = useState(item.liked);
+  const [cart, setCart] = useState([]);
   const liked1 = [...liked];
+
   const [curLike, setCurLike] = useState(
     liked1.filter((e) => userr.email == e)
   );
@@ -48,6 +53,20 @@ export default function Pitem({ navigation, item }) {
         setFlage(true);
       }
     };
+    const addCart = async (item) => {
+      getUserById(userr.uid).then((user) => {
+        const user1 = user;
+        const ucart = user1[0].cart;
+        let flag = true;
+        for (let i = 0; i < ucart.length; i++) {
+          if (ucart[i].id == item.id) flag = false;
+        }
+        if (flag) {
+          setCart([...ucart, item]);
+          editUser({ ...user1[0], cart: [...ucart, item] });
+        }
+      });
+    };
 
     return (
       <View style={[styles.card, styles.shadowProp]}>
@@ -56,7 +75,12 @@ export default function Pitem({ navigation, item }) {
             onPress={() => navigation.navigate("Product", { item: item })}
           >
             <Image
-              style={{ height: 150, width: 150, margin: 10, borderRadius: 20 }}
+              style={{
+                height: 150,
+                width: 150,
+                borderRadius: 20,
+                alignSelf: "center",
+              }}
               source={{ uri: item.image }}
             ></Image>
             <Text style={{ paddingLeft: "5%", fontWeight: "700" }}>
@@ -153,7 +177,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   shadowProp: {
-    shadowColor: "#171717",
+    shadowColor: "black",
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,

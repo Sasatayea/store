@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from "firebase/auth";
-import CitiesList from "./Components/Cities/CitiesList";
+import Home from "./Components/Cities/Home";
 import { auth } from "./db/Config";
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Button, Image } from "react-native";
@@ -13,12 +13,16 @@ import { getAuth } from "firebase/auth";
 import Admin from "./Components/Admin/Admin";
 import EditP from "./Components/Admin/EditP";
 import Edit from "./Components/Admin/Edit";
-
+import ProfileItem from "./Components/Cities/ProfileItem";
 import Fpage from "./Components/Cities/Fpage";
 import Product from "./Components/items/Product";
 import Profile from "./Components/Cities/Profile";
 import Search from "./Components/Cities/Search";
 import AddP from "./Components/Admin/AddP";
+import { ImageBackground } from "react-native-web";
+import OrderHistory from "./Components/Cities/OrderHistory";
+import UserEditInPro from "./Components/Cities/UserEditInPro";
+import EditUserInfo from "./Components/Admin/EditUserInfo";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -38,15 +42,71 @@ export default function App({ navigation }) {
   //console.log(user);
   if (user) {
     const email = userr.email;
-    if (email == "sheeka@gmail.com") {
+    if (email == "admin@gmail.com") {
       console.log("app", email);
       return (
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen name="Admin" component={Admin} options={{}} />
-            <Stack.Screen name="EditP" component={EditP} options={{}} />
-            <Stack.Screen name="AddP" component={AddP} options={{}} />
-            <Stack.Screen name="Edit" component={Edit} options={{}} />
+            <Stack.Screen
+              name="Admin"
+              component={Admin}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="EditP"
+              component={EditP}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="AddP"
+              component={AddP}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="Edit"
+              component={Edit}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="EditUserInfo"
+              component={EditUserInfo}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       );
@@ -56,9 +116,16 @@ export default function App({ navigation }) {
           <Tab.Navigator>
             <Tab.Screen
               name="Home"
-              component={CitiesList}
+              component={Home}
               options={{
-                // headerShown: false,
+                headerBackground: () => (
+                  <View style={{ backgroundColor: "white" }}>
+                    <Image
+                      source={require("./assets/megan.png")}
+                      style={{ width: 80, height: 80, alignSelf: "center" }}
+                    />
+                  </View>
+                ),
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/home.png")}
@@ -71,6 +138,14 @@ export default function App({ navigation }) {
               name="Search"
               component={Search}
               options={{
+                headerBackground: () => (
+                  <View style={{ backgroundColor: "white" }}>
+                    <Image
+                      source={require("./assets/megan.png")}
+                      style={{ width: 80, height: 80, alignSelf: "center" }}
+                    />
+                  </View>
+                ),
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/search.png")}
@@ -83,6 +158,14 @@ export default function App({ navigation }) {
               name="Cart"
               component={Cart}
               options={{
+                headerBackground: () => (
+                  <View style={{ backgroundColor: "white" }}>
+                    <Image
+                      source={require("./assets/megan.png")}
+                      style={{ width: 80, height: 80, alignSelf: "center" }}
+                    />
+                  </View>
+                ),
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/shopping-cart.png")}
@@ -95,6 +178,7 @@ export default function App({ navigation }) {
               name="Profile"
               component={Profile}
               options={{
+                headerShown: false,
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/userrrr.png")}
@@ -104,9 +188,48 @@ export default function App({ navigation }) {
               }}
             />
             <Tab.Screen
+              name="ProfileItem"
+              component={(props) => <ProfileItem {...props} />}
+              options={{
+                headerShown: false,
+                tabBarButton: () => null,
+                tabBarVisible: false,
+              }}
+            />
+            <Tab.Screen
+              name="OrderHistory"
+              component={(props) => <OrderHistory {...props} />}
+              options={{
+                headerShown: false,
+                tabBarButton: () => null,
+                tabBarVisible: false,
+              }}
+            />
+            <Tab.Screen
+              name="UserEditInPro"
+              component={(props) => <UserEditInPro {...props} />}
+              options={{
+                headerShown: false,
+                tabBarButton: () => null,
+                tabBarVisible: false,
+              }}
+            />
+            <Tab.Screen
               name="Product"
               component={Product}
-              options={{ tabBarButton: () => null, tabBarVisible: false }}
+              options={{
+                headerBackground: () => (
+                  <View style={{ backgroundColor: "white" }}>
+                    <Image
+                      source={require("./assets/megan.png")}
+                      style={{ width: 80, height: 80, alignSelf: "center" }}
+                    />
+                  </View>
+                ),
+                headerTitle: () => null,
+                tabBarButton: () => null,
+                tabBarVisible: false,
+              }}
             />
             <Tab.Screen
               name="Fpage"

@@ -10,7 +10,12 @@ import {
   where,
   onSnapshot,
 } from "firebase/firestore";
+
+import { getFirestore } from "firebase/firestore";
 // Get a list of cities from your database
+import { app } from "../Config";
+
+const firestoreDB = getFirestore(app);
 async function getUsers() {
   const usersCol = collection(db, "users");
   const userSnapshot = await getDocs(usersCol);
@@ -18,6 +23,15 @@ async function getUsers() {
     return { id: doc.id, ...doc.data() };
   });
   return userList;
+}
+
+  async function getUserById(id) {
+  const usersRef = collection(firestoreDB, "users");
+  const q = query(usersRef, where("id", "==", id));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map((doc) => {
+      return {id: doc.id, ...doc.data()};
+  });
 }
 
 async function editUser(user) {
@@ -34,13 +48,10 @@ async function deleteUser(user) {
   }
 }
 
+
+
 async function addUser(user) {
-  try {
-    const docRef = await addDoc(collection(db, "users"), user);
-    console.log("Document written with ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
+  await setDoc(doc(firestoreDB, "users", user.id), user);
 }
 
 function subscribeUser(callback) {
@@ -58,4 +69,4 @@ function subscribeUser(callback) {
   return unsubscribe;
 }
 
-export { getUsers, addUser, editUser, deleteUser, subscribeUser };
+export { getUsers, addUser, editUser, deleteUser, subscribeUser,getUserById };

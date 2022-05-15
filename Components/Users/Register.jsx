@@ -10,7 +10,8 @@ import {
 import { React, useState } from "react";
 import { register } from "../../db/auth/auth";
 import loginn from "../../assets/loginn.png";
-
+import { getUserById, addUser } from "../../db/Data/Users";
+import { getUserUId } from "../../db/auth/auth";
 const Register = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
@@ -18,12 +19,39 @@ const Register = ({ navigation }) => {
   const [country, setcountry] = useState("");
 
   const [error, setError] = useState("");
+  function registerUser() {
+    if (email === "" || password === "") {
+      alert("email or password is empty!");
+    } else {
+      register(email, password)
+        .then(() => {
+          getUserUId().then((id) => {
+            // console.log(id);
+
+            addUser({
+              id: id,
+              name: username,
+              email: email,
+              password: password,
+              countryname: country,
+              money: 0,
+              cart: [],
+              sold: [],
+              image: "",
+              background: "",
+            });
+          });
+        })
+        .catch((e) => {
+          console.log(e.message);
+        });
+    }
+  }
   return (
     <ImageBackground source={loginn} resizeMode="cover" style={styles.heder}>
       <View
         style={{
           marginTop: "50%",
-
           // height: "50%",
           // padding: 5,
           // margin: 10,

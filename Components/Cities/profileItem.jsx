@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const ProfileItem = ({ item }) => {
+const ProfileItem = (items) => {
+  let item = items.route.params;
   return (
     <View style={styles.profile}>
       <Text style={styles.profile1}>Name: {item.name}</Text>

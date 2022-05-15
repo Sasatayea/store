@@ -7,6 +7,7 @@ export default function Admin({ navigation }) {
     <View style={styles.content}>
         <Button title="Edit Products" onPress={()=>navigation.navigate("EditP")}/>
         <Button title="Add Product" onPress={()=>navigation.navigate("AddP")}/>
+        <Button title="EditUserInfo" onPress={()=>navigation.navigate("EditUserInfo")}/>
         <View style={styles.botton}>
           <Button color="#000" title="Logout" onPress={() => logout()} />
         </View>
