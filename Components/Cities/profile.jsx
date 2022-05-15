@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
   pp: {
     // marginTop: "90%",
     // marginLeft: "10%",
+
     width: "60%",
     borderRadius: 25,
     height: 50,
