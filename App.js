@@ -23,6 +23,7 @@ import { ImageBackground } from "react-native-web";
 import OrderHistory from "./Components/Cities/OrderHistory";
 import UserEditInPro from './Components/Cities/UserEditInPro';
 import EditUserInfo from "./Components/Admin/EditUserInfo";
+import UserSite from './Components/Admin/UserSite';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -63,6 +64,18 @@ export default function App ({ navigation }) {
             <Stack.Screen
               name="EditP"
               component={EditP}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="UserSite"
+              component={UserSite}
               options={{
                 title: (
                   <Image

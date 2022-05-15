@@ -1,20 +1,19 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View ,TouchableOpacity ,Image} from "react-native";
 import React from "react";
 import { getAuth } from "firebase/auth";
-import { editUser, getUserById, subscribeUser } from "../../db/Data/Users";
+import { editUser, getUserById, getUsers, subscribeUser } from "../../db/Data/Users";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Button } from "react-native";
 import { TextInput } from "react-native";
+import { FlatList } from 'react-native-web';
 
-const EditUserInfo = () => {
+const EditUserInfo = ({navigation}) => {
+
   const getUserList = async () => {
-    const auth = getAuth();
-    const userr = auth.currentUser;
-    await getUserById(userr.uid).then((u) => {
-      setuser(u[0]);
-      //console.log("useruuuu", u);
-    });
+    const c = await getUsers();
+    await setuser(c);
+    // console.log("products", c);
   };
 
   useEffect(async () => {
@@ -38,70 +37,42 @@ const EditUserInfo = () => {
     };
   }, []);
 
-  const auth = getAuth();
-  const userr = auth.currentUser;
-  const [user, setuser] = useState({});
-  const [image, setImage] = useState();
-  const [pass, setpass] = useState();
-  const [countryname, setcountryname] = useState();
-  const [name, setName] = useState();
-  const [mony, setmony] = useState();
-  const [id, setId] = useState(0);
-  const change = () => {
-    console.log("nin", user);
-  };
+  const [user, setuser] = useState([]);
+
+
   return (
     <View>
-      <Text>AdminEditInPro</Text>
       <Text> </Text>
-      <View style={{ flexDirection: "row" }}>
-        <Text>Enter User Id</Text>
-        <TextInput
-          onChangeText={setId}
-          keyboardType="default"
-          placeholder="Image"
-          style={styles.inpp}
+      <View>
+        <Text styles={{ marginButton: 30 }}>
+        AdminEditInPro
+                </Text>
+        <Text> </Text>
+        <FlatList
+          data={user}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("UserSite", { item: item })}
+              style={[styles.card, styles.shadowProp]}
+            >
+              <View>
+                <Image
+                  style={{ height: 100, width: 100 }}
+                  source={{ uri: item.image }}
+                />
+              </View>
+              <View style={{ flexDirection: "column" }}>
+                <Text>Name : {item.name}</Text>
+                <Text>money : {item.money}</Text>
+                <Text>countryname :{item.countryname}</Text>
+                <Text>email :{item.email}</Text>
+                <Text>password :{item.password}</Text>
+              </View>
+            </TouchableOpacity>
+          )}
         />
       </View>
-
-      <View style={{ flexDirection: "row" }}>
-        <Text>Enter User name</Text>
-        <TextInput
-          onChangeText={setName}
-          keyboardType="default"
-          placeholder="user name"
-          style={styles.inpp}
-        />
-      </View>
-      <View style={{ flexDirection: "row" }}>
-        <Text>Enter User image</Text>
-        <TextInput
-          onChangeText={setImage}
-          keyboardType="default"
-          placeholder="Image"
-          style={styles.inpp}
-        />
-      </View>
-      <View style={{ flexDirection: "row" }}>
-        <Text>Enter User pass</Text>
-        <TextInput
-          onChangeText={setpass}
-          keyboardType="default"
-          placeholder="Image"
-          style={styles.inpp}
-        />
-      </View>
-      <View style={{ flexDirection: "row" }}>
-        <Text>Enter User money</Text>
-        <TextInput
-          onChangeText={setmony}
-          keyboardType="default"
-          placeholder="Image"
-          style={styles.inpp}
-        />
-      </View>
-
-      <Button title="done" onPress={change} />
     </View>
   );
 };
@@ -117,5 +88,22 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
     height: 60,
+  },
+  card: {
+    flexDirection: "row",
+    backgroundColor: "#D9D9D9",
+    borderRadius: 12,
+    paddingVertical: 10,
+    paddingHorizontal: "3%",
+    width: 350,
+    height: 120,
+    alignSelf: "center",
+    marginVertical: 10,
+  },
+  shadowProp: {
+    shadowColor: "black",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
 });
