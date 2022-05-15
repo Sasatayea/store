@@ -47,7 +47,6 @@ const EditUserInfo = () => {
   const [name, setName] = useState();
   const [mony, setmony] = useState();
   const [id, setId] = useState(0);
-
   const change = () => {
     console.log("nin", user);
   };

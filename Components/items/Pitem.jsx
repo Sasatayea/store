@@ -85,6 +85,7 @@ export default function Pitem({ navigation, item }) {
               }}
               source={{ uri: item.image }}
             ></Image>
+            
             <Text > {item.name} </Text>
             {item.size ? (
               <Text >{item.size}</Text>
