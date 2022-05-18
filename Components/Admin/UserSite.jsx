@@ -4,69 +4,33 @@ import { Button } from 'react-native';
 import { TextInput } from 'react-native';
 import { useState } from 'react';
 import { getUserById } from '../../db/Data/Users';
+import { editUser } from '../../db/Data/Users';
 
 const UserSite = ({navigation ,route}) => {
     let item = route.params.item;
 
     const change = () => {
-        getUserById(item.uid).then((user) => {
+        getUserById(item.id).then((user) => {
           const user1 = user;
           editUser({
             ...user1[0],
-            name: name,
-            image: image,
-            password: pass,
-            countryname: countryname,
-            mony:mony,
+            money:money,
 
           });
         });
       };
 
-      const [image, setImage] = useState();
-      const [pass, setpass] = useState();
-      const [countryname, setcountryname] = useState();
-      const [name, setName] = useState();
-      const [mony, setmony] = useState();
-      const [id, setId] = useState(0);
+      
+      const [money, setmoney] = useState(item.money);
+    
 
   return (
     <View>
-      <View style={styles.in}>
-          <TextInput
-            onChangeText={setName}
-            keyboardType="default"
-            placeholder="user name"
-            value={item.name}
-            style={styles.inpp}
-          />
-        </View>
         <TextInput
-            onChangeText={setmony}
+            onChangeText={setmoney}
             keyboardType="default"
             placeholder="user name"
-            value={item.money}
-            style={styles.inpp}
-          />
-        <TextInput
-            onChangeText={setcountryname}
-            keyboardType="default"
-            placeholder="user name"
-            value={item.countryname}
-            style={styles.inpp}
-          />
-          <TextInput
-            // onChangeText={setName}
-            keyboardType="default"
-            placeholder="user name"
-            value={item.email}
-            style={styles.inpp}
-          />
-          <TextInput
-            onChangeText={setpass}
-            keyboardType="default"
-            placeholder="user name"
-            value={item.password}
+            value={money}
             style={styles.inpp}
           />
       <Button title="done" onPress={change} />

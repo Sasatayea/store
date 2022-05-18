@@ -82,9 +82,9 @@ const Home = ({ navigation }) => {
             numColumns={2}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
-              <>
+              
                 <Pitem navigation={navigation} item={item} />
-              </>
+              
             )}
           />
         </View>
