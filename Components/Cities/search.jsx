@@ -7,6 +7,7 @@ import {
   TextInput,
   Image,
   FlatList,
+  ScrollView,
 } from "react-native";
 import {
   getCities,
@@ -58,27 +59,18 @@ export default function Search({ navigation }) {
     searchItem.match(/\)/)||
     searchItem.match(/\?/)) {
     } else {
-      let x = [];
+      
       let s = "";
+      s = searchItem;
       let h = 0;
-      for (let i = 0; i < cities.length; i++) {
-        s = cities[i].name;
-        if (s.match(searchItem)) {
-          if (s.match(searchItem).input != null) {
-            x[h] = s.match(searchItem).input;
-            h++;
-          }
-        }
-      }
-      let k = 0;
+      
       let data = [];
       for (let i = 0; i < cities.length; i++) {
-        for (let j = 0; j < x.length; j++) {
-          if (cities[i].name == x[j]) {
-            data[k] = cities[i];
-            k++;
-          }
+        if(cities[i].name.match(s)){
+          data[h] = cities[i]; 
+          h++
         }
+          
       }
       setDataa(data);
     }
@@ -86,7 +78,7 @@ export default function Search({ navigation }) {
 
   if (!searchItem) {
     return (
-      <View style = {{backgroundColor:"white"}}>
+      <View >
         <View style={styles.content}>
           <View style={styles.input}>
             <TextInput
@@ -133,16 +125,17 @@ export default function Search({ navigation }) {
             />
           </View>
         </View>
+
         <View style={styles.item}>
           <FlatList
             data={dataa}
-            keyExtractor={cities.id}
+            keyExtractor={(item, index) => index.toString()}
             numColumns={2}
             renderItem={({ item }) => (
               <Pitem navigation={navigation} item={item} />
             )}
           />
-        </View>
+          </View>
       </View>
     );
   }
@@ -157,7 +150,6 @@ const styles = StyleSheet.create({
     // backgroundColor: "#fff",
   },
   input: {
-    flex: 2,
     height: 40,
     margin: 12,
     borderWidth: 2,
