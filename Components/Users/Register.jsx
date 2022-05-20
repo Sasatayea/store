@@ -135,15 +135,7 @@ const Register = ({ navigation }) => {
           />
         </View>
         <View style={styles.pp}>
-          <TouchableOpacity
-            onPress={() => {
-              console.log(email, password);
-
-              register(email, password, username, country)
-                .then()
-                .catch((e) => setError(e.message));
-            }}
-          >
+          <TouchableOpacity onPress={registerUser}>
             <Text style={{ color: "#fff" }}> Register </Text>
           </TouchableOpacity>
         </View>

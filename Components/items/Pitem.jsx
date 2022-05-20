@@ -30,7 +30,7 @@ export default function Pitem({ navigation, item }) {
   const auth = getAuth();
 
   const userr = auth.currentUser;
-
+  console.log(userr);
   const [liked, setLiked] = useState(item.liked);
   const [cart, setCart] = useState([]);
   const liked1 = [...liked];
