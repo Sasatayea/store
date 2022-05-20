@@ -9,6 +9,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Cart from "./Components/cart/Cart";
+import Adress from "./Components/cart/Adress";
 import { getAuth } from "firebase/auth";
 import Admin from "./Components/Admin/Admin";
 import EditP from "./Components/Admin/EditP";
@@ -186,6 +187,22 @@ export default function App ({ navigation }) {
                     style={{ width: 20, height: 20 }}
                   />
                 ),
+              }}
+            />
+            <Tab.Screen
+              name="Adress"
+              component={Adress}
+              options={{
+                headerBackground: () => (
+                  <View style={{ backgroundColor: "white" }}>
+                    <Image
+                      source={require("./assets/megan.png")}
+                      style={{ width: 80, height: 80, alignSelf: "center" }}
+                    />
+                  </View>
+                ),
+                tabBarButton: () => null,
+                tabBarVisible: false,
               }}
             />
             <Tab.Screen

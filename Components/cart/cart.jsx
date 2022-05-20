@@ -79,12 +79,9 @@ export default function Cart({ route, navigation }) {
     getUserById(userr.uid).then((user) => {
       const user1 = user;
       let money = user1[0].money;
-      let sold = user1[0].sold;
-      console.log("soled " , sold)
-      let carr = cart ;
       if (money >= total) {
-        editUser({ ...user1[0], money: money - total,cart:[], sold:[...carr  ,...sold]});
-        setTotal(0);
+        navigation.navigate("Adress", {total:total,cart:cart});
+        //editUser({ ...user1[0], money: money - total,cart:[], sold:[...carr  ,...sold]});
         console.log("total :",total);
       } else {
         setBuy("You don't have enough money ");
@@ -112,7 +109,7 @@ export default function Cart({ route, navigation }) {
 
       <Text style={{fontSize:24}}>total price = {total}</Text>
       <View style={styles.button}>
-        <Button title="cash" color="#000" onPress={() => Cash()} />
+        <Button title="cash" color="#000" onPress={() => Cash()}/>
       </View>
     </View>
   );
