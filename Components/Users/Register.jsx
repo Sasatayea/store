@@ -10,7 +10,8 @@ import {
 import { React, useState } from "react";
 import { register } from "../../db/auth/auth";
 import loginn from "../../assets/loginn.png";
-
+import { getUserById, addUser } from "../../db/Data/Users";
+import { getUserUId } from "../../db/auth/auth";
 const Register = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
@@ -18,12 +19,41 @@ const Register = ({ navigation }) => {
   const [country, setcountry] = useState("");
 
   const [error, setError] = useState("");
+  function registerUser() {
+    if (email === "" || password === "") {
+      alert("email or password is empty!");
+    } else {
+      register(email, password)
+        .then(() => {
+          getUserUId().then((id) => {
+            // console.log(id);
+
+            addUser({
+              id: id,
+              name: username,
+              email: email,
+              password: password,
+              countryname: country,
+              money: 0,
+              cart: [],
+              sold: [],
+              image: "",
+              background: "",
+            });
+          });
+        })
+        .catch((e) => {
+          console.log(e.message);
+        });
+    }
+  }
   return (
     <ImageBackground source={loginn} resizeMode="cover" style={styles.heder}>
       <View
         style={{
           marginTop: "50%",
-
+          // backgroundColor: "white",
+          // borderRadius: 30,
           // height: "50%",
           // padding: 5,
           // margin: 10,
@@ -53,7 +83,6 @@ const Register = ({ navigation }) => {
             onChangeText={setusername}
             keyboardType="default"
             placeholder="User name"
-            placeholderTextColor="#fff"
             style={styles.inpp}
           />
         </View>
@@ -69,7 +98,6 @@ const Register = ({ navigation }) => {
             onChangeText={setEmail}
             keyboardType="email-address"
             placeholder="email-address"
-            placeholderTextColor="#fff"
             style={styles.inpp}
           />
         </View>
@@ -85,7 +113,6 @@ const Register = ({ navigation }) => {
             onChangeText={setpassword}
             keyboardType="visible-password"
             placeholder="password"
-            placeholderTextColor="#fff"
             secureTextEntry={true}
             style={styles.inpp}
           />
@@ -102,30 +129,24 @@ const Register = ({ navigation }) => {
             onChangeText={setcountry}
             keyboardType="default"
             placeholder="country name"
-            placeholderTextColor="#fff"
             style={styles.inpp}
           />
         </View>
-        <View style={styles.pp}>
-          <TouchableOpacity
-            onPress={() => {
-              console.log(email, password);
-
-              register(email, password, username, country)
-                .then()
-                .catch((e) => setError(e.message));
-            }}
-          >
-            <Text style={{ color: "#fff" }}> Register </Text>
+        <View style={{ flexDirection: "row" }}>
+          <View style={styles.pp}>
+            <TouchableOpacity onPress={registerUser}>
+              <Text style={{ color: "#fff" }}> Register </Text>
+            </TouchableOpacity>
+          </View>
+          <Text>{error}</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Fpage")}>
+            <Text
+              style={{ marginTop: "20%", marginLeft: "30%", color: "#fff" }}
+            >
+              Go to Home page
+            </Text>
           </TouchableOpacity>
         </View>
-        <Text>{error}</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Fpage")}>
-          <Text style={{ marginTop: "5%", marginLeft: "15%", color: "#fff" }}>
-            {" "}
-            Go to Home page{" "}
-          </Text>
-        </TouchableOpacity>
       </View>
     </ImageBackground>
   );

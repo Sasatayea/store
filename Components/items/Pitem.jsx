@@ -8,13 +8,11 @@ import {
   Image,
   Pressable,
 } from "react-native";
-
 import { getAuth } from "firebase/auth";
-
 import { useState, useEffect } from "react";
-import { addCity, addCart, editCity, getCities } from "../../db/cities/cities";
-import { subscribe } from "../../db/cities/cities";
-import { async } from "@firebase/util";
+import { addCity, editCity, getCities } from "../../db/Data/products";
+import { editUser, getUserById } from "../../db/Data/Users";
+
 export default function Pitem({ navigation, item }) {
   const unsubLike = async () => {
     if (curLike[0] == userr.email) setFlage(false);
@@ -22,6 +20,11 @@ export default function Pitem({ navigation, item }) {
   };
   useEffect(async () => {
     await unsubLike();
+    getUserById(userr.uid).then((user) => {
+      const user1 = user;
+      const ucart = user1[0].cart;
+      setCart(ucart);
+    });
   }, []);
 
   const auth = getAuth();
@@ -29,7 +32,9 @@ export default function Pitem({ navigation, item }) {
   const userr = auth.currentUser;
 
   const [liked, setLiked] = useState(item.liked);
+  const [cart, setCart] = useState([]);
   const liked1 = [...liked];
+
   const [curLike, setCurLike] = useState(
     liked1.filter((e) => userr.email == e)
   );
@@ -48,6 +53,20 @@ export default function Pitem({ navigation, item }) {
         setFlage(true);
       }
     };
+    const addCart = async (item) => {
+      getUserById(userr.uid).then((user) => {
+        const user1 = user;
+        const ucart = user1[0].cart;
+        let flag = true;
+        for (let i = 0; i < ucart.length; i++) {
+          if (ucart[i].id == item.id) flag = false;
+        }
+        if (flag) {
+          setCart([...ucart, item]);
+          editUser({ ...user1[0], cart: [...ucart, item] });
+        }
+      });
+    };
 
     return (
       <View style={[styles.card, styles.shadowProp]}>
@@ -56,34 +75,44 @@ export default function Pitem({ navigation, item }) {
             onPress={() => navigation.navigate("Product", { item: item })}
           >
             <Image
-              style={{ height: 150, width: 150, margin: 10, borderRadius: 20 }}
+              style={{
+                height: 150,
+                width: 150,
+                borderRadius: 20,
+                alignSelf: "center",
+              }}
               source={{ uri: item.image }}
             ></Image>
-            <Text style={{ paddingLeft: "5%", fontWeight: "700" }}>
-              {" "}
-              {item.name}{" "}
-            </Text>
-            <Text style={{ paddingLeft: "5%", fontWeight: "700" }}>
-              {" "}
-              ${item.price}
-            </Text>
+            <Text style={{ fontWeight: "bold" }}> {item.name} </Text>
+            {item.size ? (
+              <Text style={{ fontWeight: "bold" }}> {item.size}</Text>
+            ) : (
+              <Text> </Text>
+            )}
+            <Text style={{ fontWeight: "bold" }}> $ {item.price}</Text>
           </TouchableOpacity>
 
           <View style={styles.button}>
             <View style={styles.pp}>
-              <TouchableOpacity
-                onPress={() =>
-                  addCart({
-                    username: email,
-                    name: item.name,
-                    size: item.size,
-                    type: item.type,
-                    image: item.image,
-                    price: item.price || "new city" + item.length,
-                  })
-                }
-              >
-                <Text style={{ color: "#fff" }}> Add to char</Text>
+              <TouchableOpacity onPress={() => addCart(item)}>
+                <View
+                  style={{
+                    borderRadius: 20,
+                    height: 40,
+                    width: 120,
+                    backgroundColor: "#0D1F2B",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                      color: "white",
+                      marginTop: 8,
+                    }}
+                  >
+                    Add To Cart
+                  </Text>
+                </View>
               </TouchableOpacity>
             </View>
             <View style={styles.react}>
@@ -120,11 +149,12 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginTop: 10,
   },
-  // button: {
-  //   flexDirection: "row",
-  //   borderRadius: 200,
-  //   paddingLeft: "30%",
-  // },
+  button: {
+    marginLeft: "5%",
+    marginTop: "5%",
+    // textAlign: "center",
+    flexDirection: "row",
+  },
   text: {
     fontSize: 10,
     //fontWeight: 600,
@@ -138,29 +168,34 @@ const styles = StyleSheet.create({
   },
   card: {
     marginRight: 10,
-    backgroundColor: "white",
-    borderRadius: 8,
+    backgroundColor: "#D9D9D9",
+    borderRadius: 12,
     paddingVertical: "5%",
-    // paddingHorizontal: "3%",
+    //paddingHorizontal: "3%",
     width: 170,
     height: 300,
     marginVertical: 10,
   },
   button: {
-    marginLeft: "5%",
-    marginTop: "5%",
-    // textAlign: "center",
+    textAlign: "center",
     flexDirection: "row",
   },
   shadowProp: {
-    shadowColor: "#171717",
+    shadowColor: "black",
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
+  shadowText: {
+    fontStyle: "italic",
+    textShadowColor: "black",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
+  },
   pp: {
     // marginTop: "90%",
     // marginLeft: "10%",
+
     width: "70%",
     borderRadius: 25,
     height: 50,

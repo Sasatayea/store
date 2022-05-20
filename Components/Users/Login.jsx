@@ -10,13 +10,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { React, useState } from "react";
 import { login } from "../../db/auth/auth";
-import Register from "./Register";
-import {
-  getUsers,
-  addUser,
-  deleteUser,
-  subscribe,
-} from "../../db/cities/users";
+
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");

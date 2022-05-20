@@ -7,6 +7,7 @@ import {
   TextInput,
   Image,
   FlatList,
+  ScrollView,
 } from "react-native";
 import {
   getCities,
@@ -14,14 +15,14 @@ import {
   addCart,
   deleteCity,
   subscribe,
-} from "../../db/cities/cities";
+} from "../../db/Data/products";
 import { useEffect, useState } from "react";
 import Pitem from "../items/Pitem";
 export default function Search({ navigation }) {
   const getCitiesList = async () => {
     const c = await getCities();
     await setCities(c);
-    console.log("products", c);
+    //console.log("products", c);
   };
 
   useEffect(async () => {
@@ -50,32 +51,28 @@ export default function Search({ navigation }) {
 
   const [searchItem, setsearchItem] = useState("");
   const [dataa, setDataa] = useState(cities);
-  console.log("myci: ", cities);
 
   const search = (searchItem) => {
-    let x = [];
-    let s = "";
-    let h = 0;
-    for (let i = 0; i < cities.length; i++) {
-      s = cities[i].name;
-      if (s.match(searchItem)) {
-        if (s.match(searchItem).input != null) {
-          x[h] = s.match(searchItem).input;
+    if (
+      searchItem.match(/\*/) ||
+      searchItem.match(/\(/) ||
+      searchItem.match(/\)/) ||
+      searchItem.match(/\?/)
+    ) {
+    } else {
+      let s = "";
+      s = searchItem;
+      let h = 0;
+
+      let data = [];
+      for (let i = 0; i < cities.length; i++) {
+        if (cities[i].name.match(s)) {
+          data[h] = cities[i];
           h++;
         }
       }
+      setDataa(data);
     }
-    let k = 0;
-    let data = [];
-    for (let i = 0; i < cities.length; i++) {
-      for (let j = 0; j < x.length; j++) {
-        if (cities[i].name == x[j]) {
-          data[k] = cities[i];
-          k++;
-        }
-      }
-    }
-    setDataa(data);
   };
 
   if (!searchItem) {
@@ -129,10 +126,11 @@ export default function Search({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
+
         <View style={styles.item}>
           <FlatList
             data={dataa}
-            keyExtractor={cities.id}
+            keyExtractor={(item, index) => index.toString()}
             numColumns={2}
             renderItem={({ item }) => (
               <Pitem navigation={navigation} item={item} />
@@ -153,10 +151,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 10,
     paddingHorizontal: 20,
-    // backgroundColor: "#D2D6DA",
+    backgroundColor: "white",
+    // backgroundColor: "#fff",
   },
   input: {
-    flex: 2,
     height: 40,
     // margin: 12,
     marginLeft: "15%",
@@ -164,21 +162,22 @@ const styles = StyleSheet.create({
     borderColor: "black",
     padding: 10,
     width: 200,
-    // backgroundColor: "#D2D6DA",
+    backgroundColor: "white",
   },
   button: {
     borderRadius: 200,
     flex: 1,
-    paddingTop: "2%",
+    paddingTop: 15,
+    backgroundColor: "white",
   },
   item: {
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "#D2D6DA",
+    backgroundColor: "white",
   },
   text: {
     fontSize: 20,
     alignItems: "center",
-    // backgroundColor: "#D2D6DA",
+    backgroundColor: "white",
   },
 });
