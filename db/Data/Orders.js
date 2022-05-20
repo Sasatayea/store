@@ -24,7 +24,7 @@ async function getOrders() {
 
 async function editOrder(city) {
   console.log("at editCity", city);
-  await setDoc(doc(db, "products", city.id), city);
+  await setDoc(doc(db, "orders", city.id), city);
 }
 
 async function deleteOrder(city) {
@@ -47,7 +47,7 @@ async function addOrder(city) {
 
 function subscribeOrders(callback) {
   const unsubscribe = onSnapshot(
-    query(collection(db, "products")),
+    query(collection(db, "orders")),
     (snapshot) => {
       const source = snapshot.metadata.hasPendingWrites ? "Local" : "Server";
       snapshot.docChanges().forEach((change) => {
