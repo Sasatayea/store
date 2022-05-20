@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from "firebase/auth";
-import Home from "./Components/Cities/Home";
+import Home from "./Components/Pages/Home";
 import { auth } from "./db/Config";
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Button, Image } from "react-native";
@@ -13,15 +13,15 @@ import { getAuth } from "firebase/auth";
 import Admin from "./Components/Admin/Admin";
 import EditP from "./Components/Admin/EditP";
 import Edit from "./Components/Admin/Edit";
-import ProfileItem from "./Components/Cities/ProfileItem";
-import Fpage from "./Components/Cities/Fpage";
+import ProfileItem from "./Components/Pages/ProfileItem";
+import Fpage from "./Components/Pages/Fpage";
 import Product from "./Components/items/Product";
-import Profile from "./Components/Cities/Profile";
-import Search from "./Components/Cities/Search";
+import Profile from "./Components/Pages/Profile";
+import Search from "./Components/Pages/Search";
 import AddP from "./Components/Admin/AddP";
 import { ImageBackground } from "react-native-web";
-import OrderHistory from "./Components/Cities/OrderHistory";
-import UserEditInPro from './Components/Cities/UserEditInPro';
+import OrderHistory from "./Components/Pages/OrderHistory";
+import UserEditInPro from './Components/Pages/UserEditInPro';
 import EditUserInfo from "./Components/Admin/EditUserInfo";
 import UserSite from './Components/Admin/UserSite';
 

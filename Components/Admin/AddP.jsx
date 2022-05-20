@@ -10,10 +10,6 @@ import {
 } from "react-native";
 import { addCity } from "../../db/Data/products";
 import { React, useState } from "react";
-import { register } from "../../db/auth/auth";
-import loginn from "../../assets/loginn.png";
-import { addUser } from "../../db/Data/Users.js";
-import fpage from "../Cities/Fpage";
 
 const AddP = ({ navigation }) => {
   const [price, setPrice] = useState("");
