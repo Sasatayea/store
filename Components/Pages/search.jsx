@@ -51,7 +51,6 @@ export default function Search({ navigation }) {
 
   const [searchItem, setsearchItem] = useState("");
   const [dataa, setDataa] = useState(cities);
-  console.log("myci: ", dataa);
 
   const search = (searchItem) => {
     if (searchItem.match(/\*/)||
