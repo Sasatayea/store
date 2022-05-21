@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#D2D6DA",
     height: "100%",
   },
-  content: {
+  contentS: {
     flexDirection: "row",
     marginTop: 10,
     padding: 10,

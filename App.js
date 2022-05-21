@@ -131,14 +131,15 @@ export default function App({ navigation }) {
               name="Home"
               component={Home}
               options={{
-                headerBackground: () => (
-                  <View style={{ backgroundColor: "white" }}>
-                    <Image
-                      source={require("./assets/megan.png")}
-                      style={{ width: 80, height: 80, alignSelf: "center" }}
-                    />
-                  </View>
-                ),
+                headerShown: false,
+                // headerBackground: () => (
+                //   // <View style={{ backgroundColor: "white" }}>
+                //   //   <Image
+                //   //     source={require("./assets/megan.png")}
+                //   //     style={{ width: 80, height: 80, alignSelf: "center" }}
+                //   //   />
+                //   // </View>
+                // ),
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/home.png")}
@@ -151,14 +152,15 @@ export default function App({ navigation }) {
               name="Search"
               component={Search}
               options={{
-                headerBackground: () => (
-                  <View style={{ backgroundColor: "white" }}>
-                    <Image
-                      source={require("./assets/megan.png")}
-                      style={{ width: 80, height: 80, alignSelf: "center" }}
-                    />
-                  </View>
-                ),
+                headerShown: false,
+                // headerBackground: () => (
+                //   // <View style={{ backgroundColor: "white" }}>
+                //   //   <Image
+                //   //     source={require("./assets/megan.png")}
+                //   //     style={{ width: 80, height: 80, alignSelf: "center" }}
+                //   //   />
+                //   // </View>
+                // ),
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/search.png")}
@@ -171,14 +173,15 @@ export default function App({ navigation }) {
               name="Cart"
               component={Cart}
               options={{
-                headerBackground: () => (
-                  <View style={{ backgroundColor: "white" }}>
-                    <Image
-                      source={require("./assets/megan.png")}
-                      style={{ width: 80, height: 80, alignSelf: "center" }}
-                    />
-                  </View>
-                ),
+                headerShown: false,
+                // headerBackground: () => (
+                //   <View style={{ backgroundColor: "white" }}>
+                //     <Image
+                //       source={require("./assets/megan.png")}
+                //       style={{ width: 80, height: 80, alignSelf: "center" }}
+                //     />
+                //   </View>
+                // ),
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/shopping-cart.png")}
@@ -231,14 +234,15 @@ export default function App({ navigation }) {
               name="Product"
               component={Product}
               options={{
-                headerBackground: () => (
-                  <View style={{ backgroundColor: "white" }}>
-                    <Image
-                      source={require("./assets/megan.png")}
-                      style={{ width: 80, height: 80, alignSelf: "center" }}
-                    />
-                  </View>
-                ),
+                headerShown: false,
+                // headerBackground: () => (
+                //   <View style={{ backgroundColor: "white" }}>
+                //     <Image
+                //       source={require("./assets/megan.png")}
+                //       style={{ width: 80, height: 80, alignSelf: "center" }}
+                //     />
+                //   </View>
+                // ),
                 headerTitle: () => null,
                 tabBarButton: () => null,
                 tabBarVisible: false,

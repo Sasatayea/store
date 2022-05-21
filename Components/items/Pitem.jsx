@@ -39,6 +39,7 @@ export default function Pitem({ navigation, item }) {
     liked1.filter((e) => userr.email == e)
   );
   const [flag, setFlage] = useState();
+  const [cartI, setCartI] = useState();
 
   if (userr !== null) {
     const email = userr.email;
@@ -65,6 +66,11 @@ export default function Pitem({ navigation, item }) {
           setCart([...ucart, item]);
           editUser({ ...user1[0], cart: [...ucart, item] });
         }
+        if (cartI) {
+          setCartI(false);
+        } else {
+          setCartI(true);
+        }
       });
     };
 
@@ -85,7 +91,7 @@ export default function Pitem({ navigation, item }) {
             ></Image>
             <Text style={{ fontWeight: "bold" }}> {item.name} </Text>
             {item.size ? (
-              <Text style={{ fontWeight: "bold" }}> {item.size}</Text>
+              <Text style={{ fontWeight: "bold" }}>{item.size}</Text>
             ) : (
               <Text> </Text>
             )}
@@ -95,36 +101,49 @@ export default function Pitem({ navigation, item }) {
           <View style={styles.button}>
             <View style={styles.pp}>
               <TouchableOpacity onPress={() => addCart(item)}>
-                <View
+                {/* <View
                   style={{
                     borderRadius: 20,
                     height: 40,
                     width: 120,
                     backgroundColor: "#0D1F2B",
                   }}
-                >
+                > */}
+                <View style={{ flexDirection: "row" }}>
+                  {cartI ? (
+                    <Image
+                      source={require("../../assets/shopping-cart (2).png")}
+                      style={{ width: 25, height: 25, margintop: "5%" }}
+                    />
+                  ) : (
+                    <Image
+                      source={require("../../assets/shopping-cart (1).png")}
+                      style={{ width: 25, height: 25, margintop: "5%" }}
+                    />
+                  )}
                   <Text
                     style={{
                       fontWeight: "bold",
-                      color: "white",
-                      marginTop: 8,
+                      paddingTop: "5%",
+                      color: "#F9FFB7",
                     }}
                   >
-                    Add To Cart
+                    Add to Cart
                   </Text>
                 </View>
+                {/* </View> */}
               </TouchableOpacity>
             </View>
             <View style={styles.react}>
               <TouchableOpacity onPress={() => Like()}>
                 {flag ? (
                   <Image
-                    source={require("../../assets/like.png")}
+                    source={require("../../assets/heart.png")}
                     style={{ width: 30, height: 30, marginLeft: 10 }}
                   />
                 ) : (
                   <Image
-                    source={require("../../assets/like (1).png")}
+                    source={require("../../assets/heart (1).png")}
                     style={{ width: 30, height: 30, marginLeft: 10 }}
                   />
                 )}
@@ -168,18 +187,18 @@ const styles = StyleSheet.create({
   },
   card: {
     marginRight: 10,
-    backgroundColor: "#D9D9D9",
-    borderRadius: 12,
+    backgroundColor: "#E7E9EB",
+    borderRadius: 8,
     paddingVertical: "5%",
-    //paddingHorizontal: "3%",
-    width: 170,
+    // paddingHorizontal: "3%",
+    width: 175,
     height: 300,
     marginVertical: 10,
   },
-  button: {
-    textAlign: "center",
-    flexDirection: "row",
-  },
+  // button: {
+  //   textAlign: "center",
+  //   flexDirection: "row",
+  // },
   shadowProp: {
     shadowColor: "black",
     shadowOffset: { width: -2, height: 4 },
@@ -187,21 +206,21 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   shadowText: {
-    fontStyle: "italic",
-    textShadowColor: "black",
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 5,
+    shadowColor: "black",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   pp: {
     // marginTop: "90%",
     // marginLeft: "10%",
 
-    width: "70%",
-    borderRadius: 25,
+    width: "72%",
+    borderRadius: 20,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#011F26",
+    backgroundColor: "#2DCCA9",
   },
   react: {
     marginTop: "5%",
