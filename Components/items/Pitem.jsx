@@ -60,21 +60,10 @@ export default function Pitem({ navigation, item }) {
       if (flag) {
         editCity({ ...item, liked: [...liked, email] });
         setFlage(false);
-        getUserById(userr.uid).then((user) => {
-          const user1 = user;
-          const fav = user1[0].favourite;
-          editUser({ ...user1[0], favourite: [...fav, item] });
-        });
       } else {
         let arr = liked.filter((e) => e != email);
         editCity({ ...item, liked: arr });
         setFlage(true);
-        getUserById(userr.uid).then((user) => {
-          const user1 = user;
-          const fav = user1[0].favourite;
-          let arr2 = fav.filter((e) => e.id != item.id);
-          editUser({ ...user1[0], favourite: [...arr2] });
-        });
       }
     };
     const addCart = async (item) => {
@@ -117,7 +106,11 @@ export default function Pitem({ navigation, item }) {
       <View style={[styles.card, styles.shadowProp]}>
         <View>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Product", { item: item })}
+            onPress={() =>
+              navigation.navigate("Product", {
+                item: item,
+              })
+            }
           >
             <Image
               style={{
@@ -277,9 +270,6 @@ const styles = StyleSheet.create({
     marginLeft: "5%",
   },
   pp2: {
-    // marginTop: "90%",
-    // marginLeft: "10%",
-
     width: "100%",
     borderRadius: 20,
     height: 50,

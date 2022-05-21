@@ -32,6 +32,9 @@ const Register = ({ navigation }) => {
               id: id,
               name: username,
               email: email,
+              image:"",
+              background:"",
+              favourite:[],
               password: password,
               countryname: country,
               money: 0,
@@ -39,7 +42,8 @@ const Register = ({ navigation }) => {
               sold: [],
               image: "",
               background: "",
-              adress:"",
+              adress:[],
+
             });
           });
         })

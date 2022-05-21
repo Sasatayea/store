@@ -17,6 +17,9 @@ const AddP = ({ navigation }) => {
   const [name, setName] = useState("");
   const [size, setSize] = useState("");
   const [type, setType] = useState("chair");
+  const [description, setDescription] = useState("");
+  const [image2, setImage2] = useState("");
+  const [image3, setImage3] = useState("");
   return (
     <View
       style={{
@@ -39,9 +42,26 @@ const AddP = ({ navigation }) => {
       </Text>
       <View style={styles.in}>
         <TextInput
-          onChangeText={setName}
+          onChangeText={(e)=>{ setName(e)}}
           keyboardType="default"
           placeholder="Product name"
+          style={{
+            flex: 2,
+            borderColor: "black",
+            borderWidth: 2,
+            height: 40,
+            // margin: 12,
+            borderWidth: 1,
+            padding: 10,
+          }}
+        />
+      </View>
+      <View style={styles.in}>
+        <TextInput
+          onChangeText={setDescription}
+          keyboardType="default"
+          placeholder="Description"
+          value={description}
           style={{
             flex: 2,
             borderColor: "black",
@@ -85,7 +105,40 @@ const AddP = ({ navigation }) => {
           }}
         />
       </View>
-
+      <View style={styles.in}>
+        <TextInput
+          onChangeText={setImage2}
+          keyboardType="default"
+          placeholder="Image2"
+          value={image2}
+          style={{
+            flex: 2,
+            borderColor: "black",
+            borderWidth: 2,
+            height: 40,
+            // margin: 12,
+            borderWidth: 1,
+            padding: 10,
+          }}
+        />
+      </View>
+      <View style={styles.in}>
+        <TextInput
+          onChangeText={setImage3}
+          keyboardType="default"
+          placeholder="Image3"
+          value={image3}
+          style={{
+            flex: 2,
+            borderColor: "black",
+            borderWidth: 2,
+            height: 40,
+            // margin: 12,
+            borderWidth: 1,
+            padding: 10,
+          }}
+        />
+      </View>
       <View style={styles.row}>
         <TextInput
           onChangeText={setSize}
@@ -130,11 +183,16 @@ const AddP = ({ navigation }) => {
           color="#000"
           onPress={() =>
             addCity({
+              id:item.id,
               name: name,
               price: price,
               size: size,
               type: type,
               image: image,
+              image2: image2,
+              image3: image3,
+              description: description,
+              liked: [],
             })
           }
         />
