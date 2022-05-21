@@ -151,6 +151,23 @@ const ProfileNave = () => {
         }}
       />
       <Stack.Screen
+        name="Product"
+        component={Product}
+        options={{
+          headerBackground: () => (
+            <View style={{ backgroundColor: "white" }}>
+              <Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80, alignSelf: "center" }}
+              />
+            </View>
+          ),
+          headerTitle: () => null,
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+      <Stack.Screen
         name="OrderHistory"
         component={(props) => <OrderHistory {...props} />}
         options={{
@@ -315,14 +332,7 @@ export default function App() {
               name="CartNav"
               component={CartNav}
               options={{
-                // headerBackground: () => (
-                //   <View style={{ backgroundColor: "white" }}>
-                //     <Image
-                //       source={require("./assets/megan.png")}
-                //       style={{ width: 80, height: 80, alignSelf: "center" }}
-                //     />
-                //   </View>
-                // ),
+                
                 headerShown: false,
                 tabBarIcon: () => (
                   <Image
@@ -332,22 +342,7 @@ export default function App() {
                 ),
               }}
             />
-            <Tab.Screen
-              name="Adress"
-              component={Adress}
-              options={{
-                headerBackground: () => (
-                  <View style={{ backgroundColor: "white" }}>
-                    <Image
-                      source={require("./assets/megan.png")}
-                      style={{ width: 80, height: 80, alignSelf: "center" }}
-                    />
-                  </View>
-                ),
-                tabBarButton: () => null,
-                tabBarVisible: false,
-              }}
-            />
+            
             <Tab.Screen
               name="ProfileNave"
               component={ProfileNave}
@@ -361,55 +356,8 @@ export default function App() {
                 ),
               }}
             />
-            {/* <Tab.Screen
-              name="ProfileItem"
-              component={(props) => <ProfileItem {...props} />}
-              options={{
-                headerShown: false,
-                tabBarButton: () => null,
-                tabBarVisible: false,
-              }}
-            />
-            <Tab.Screen
-              name="OrderHistory"
-              component={(props) => <OrderHistory {...props} />}
-              options={{
-                headerShown: false,
-                tabBarButton: () => null,
-                tabBarVisible: false,
-              }}
-            />
-            <Tab.Screen
-              name="UserEditInPro"
-              component={(props) => <UserEditInPro {...props} />}
-              options={{
-                headerShown: false,
-                tabBarButton: () => null,
-                tabBarVisible: false,
-              }}
-            /> */}
-            <Tab.Screen
-              name="Product"
-              component={Product}
-              options={{
-                headerBackground: () => (
-                  <View style={{ backgroundColor: "white" }}>
-                    <Image
-                      source={require("./assets/megan.png")}
-                      style={{ width: 80, height: 80, alignSelf: "center" }}
-                    />
-                  </View>
-                ),
-                headerTitle: () => null,
-                tabBarButton: () => null,
-                tabBarVisible: false,
-              }}
-            />
-            <Tab.Screen
-              name="Fpage"
-              component={Fpage}
-              options={{ tabBarButton: () => null, tabBarVisible: false }}
-            />
+          
+            
           </Tab.Navigator>
         </NavigationContainer>
       );
