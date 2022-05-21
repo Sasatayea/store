@@ -106,7 +106,17 @@ export default function Pitem({ navigation, item }) {
       <View style={[styles.card, styles.shadowProp]}>
         <View>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Product", { item: item })}
+            onPress={() =>
+              navigation.navigate("Product", {
+                item: item,
+                addCart: addCart,
+                Like: Like,
+                flag: flag,
+                isInCart: isInCart,
+                cartI:cartI,
+                userr:userr,
+              })
+            }
           >
             <Image
               style={{
@@ -135,21 +145,19 @@ export default function Pitem({ navigation, item }) {
                       addCart(item), isInCart();
                     }}
                   >
-                    
-                      <Image
-                        source={require("../../assets/shopping-cart (2).png")}
-                        style={{ width: 25, height: 25, margintop: "5%" }}
-                      />
-                      <Text
-                        style={{
-                          fontWeight: "bold",
-                          paddingTop: "5%",
-                          color: "#F9FFB7",
-                        }}
-                      >
-                        Delet from Cart
-                      </Text>
-                    
+                    <Image
+                      source={require("../../assets/shopping-cart (2).png")}
+                      style={{ width: 25, height: 25, margintop: "5%" }}
+                    />
+                    <Text
+                      style={{
+                        fontWeight: "bold",
+                        paddingTop: "5%",
+                        color: "#F9FFB7",
+                      }}
+                    >
+                      Delet from Cart
+                    </Text>
                   </TouchableOpacity>
                 </View>
               ) : (
@@ -159,21 +167,19 @@ export default function Pitem({ navigation, item }) {
                       addCart(item), isInCart();
                     }}
                   >
-                    
-                      <Image
-                        source={require("../../assets/shopping-cart (1).png")}
-                        style={{ width: 25, height: 25, margintop: "5%" }}
-                      />
-                      <Text
-                        style={{
-                          fontWeight: "bold",
-                          paddingTop: "5%",
-                          color: "#F9FFB7",
-                        }}
-                      >
-                        Add to The Cart
-                      </Text>
-                    
+                    <Image
+                      source={require("../../assets/shopping-cart (1).png")}
+                      style={{ width: 25, height: 25, margintop: "5%" }}
+                    />
+                    <Text
+                      style={{
+                        fontWeight: "bold",
+                        paddingTop: "5%",
+                        color: "#F9FFB7",
+                      }}
+                    >
+                      Add to The Cart
+                    </Text>
                   </TouchableOpacity>
                 </View>
               )}
@@ -262,19 +268,16 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 20,
     height: 50,
-    marginRight:10,
+    marginRight: 10,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#2DCCA9",
   },
   pp2: {
-    // marginTop: "90%",
-    // marginLeft: "10%",
-
     width: "100%",
     borderRadius: 20,
     height: 50,
-    marginRight:10,
+    marginRight: 10,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "red",
