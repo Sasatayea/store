@@ -274,6 +274,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#2DCCA9",
     flexDirection: "row",
+    marginLeft: "5%",
   },
   pp2: {
     // marginTop: "90%",
@@ -287,6 +288,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "red",
     flexDirection: "row",
+    marginLeft: "5%",
   },
   react: {
     marginTop: "5%",

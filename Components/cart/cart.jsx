@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   item: {
+    marginRight: "5%",
     flex: 1,
     // flexDirection: "row",
     backgroundColor: "white",

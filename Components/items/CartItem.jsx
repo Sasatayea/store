@@ -30,16 +30,26 @@ export default function CartItem({ navigation, item, delet, plus, minus }) {
               source={{ uri: item.image }}
             ></Image>
             <Text style={styles.shadowText}> {item.name} </Text>
-            <Text style={styles.shadowText}>$ {item.price}</Text>
+            <Text style={styles.shadowText}> ${item.price}</Text>
           </TouchableOpacity>
           <Text> </Text>
           <View style={{ flexDirection: "row" }}>
             <View style={styles.button}>
-              <Button
+              <TouchableOpacity
                 title="Delete"
                 color="red"
                 onPress={() => delet(item.id)}
-              />
+              >
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    // paddingTop: "5%",
+                    color: "#F9FFB7",
+                  }}
+                >
+                  Delete
+                </Text>
+              </TouchableOpacity>
             </View>
             <Button
               title="+"
@@ -51,7 +61,7 @@ export default function CartItem({ navigation, item, delet, plus, minus }) {
             />
             <Text>{count}</Text>
             {count == 1 ? (
-              <TouchableOpacity onPress={()=>delet(item.id)}>
+              <TouchableOpacity onPress={() => delet(item.id)}>
                 <Image
                   source={require("../../assets/delete.png")}
                   style={{ width: 25, height: 25, margintop: "5%" }}
@@ -79,11 +89,10 @@ const styles = StyleSheet.create({
     height: 200,
     width: 200,
     backgroundColor: "red",
-    margin: 10,
   },
   card: {
-    marginRight: 10,
-    backgroundColor: "white",
+    marginLeft: "1%",
+    backgroundColor: "#E7E9EB",
     borderRadius: 8,
     paddingVertical: "5%",
     // paddingHorizontal: "3%",
@@ -92,17 +101,27 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   shadowProp: {
-    shadowColor: "#171717",
+    shadowColor: "black",
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
+  // shadowText: {
+  //   shadowColor: "black",
+  //   shadowOffset: { width: -2, height: 4 },
+  //   shadowOpacity: 0.2,
+  //   shadowRadius: 3,
+  // },
   button: {
-    flexDirection: "row",
-    borderRadius: 200,
-    alignItems: "center",
+    width: "40%",
+    borderRadius: 20,
+    height: 50,
     marginRight: 10,
+    alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "red",
+    flexDirection: "row",
+    marginLeft: "5%",
   },
   pp: {
     // marginTop: "90%",
