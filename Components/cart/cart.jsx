@@ -105,7 +105,14 @@ export default function Cart({ route, navigation }) {
   };
   return (
     <View style={styles.item}>
-      <Text style={{ marginTop: 10, fontSize: 16, fontWeight: "bold" }}>
+      <Text
+        style={{
+          marginTop: "5%",
+          fontSize: 16,
+          fontWeight: "bold",
+          paddingLeft: "35%",
+        }}
+      >
         Selected Items
       </Text>
       <FlatList
@@ -123,9 +130,21 @@ export default function Cart({ route, navigation }) {
         )}
       />
 
-      <Text style={{ fontSize: 24 }}>total price = {total}</Text>
+      <Text style={{ fontSize: 22, fontWeight: "bold", paddingLeft: "22%" }}>
+        Total price = {total}
+      </Text>
       <View style={styles.button}>
-        <Button title="cash" color="#000" onPress={() => Cash()} />
+        <TouchableOpacity title="cash" color="#000" onPress={() => Cash()}>
+          <Text
+            style={{
+              fontWeight: "bold",
+              // paddingTop: "5%",
+              color: "#F9FFB7",
+            }}
+          >
+            Cash
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -149,10 +168,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   button: {
-    // flexDirection: "row",
+    width: "25%",
+    borderRadius: 20,
+    height: 50,
+    marginLeft: "40%",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: "2%",
+    backgroundColor: "#2DCCA9",
+    flexDirection: "row",
   },
   pp: {
     // marginTop: "90%",
