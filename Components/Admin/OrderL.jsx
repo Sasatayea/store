@@ -1,10 +1,7 @@
-import { View, Text ,  StyleSheet ,Button } from 'react-native'
+import { View, Text ,  StyleSheet ,Button,TouchableOpacity,FlatList } from 'react-native'
 import React from 'react'
 import { deleteOrder, editOrder, getOrders, subscribeOrders } from '../../db/Data/Orders';
-import { useEffect } from 'react';
-import { FlatList } from 'react-native';
-import { useState } from 'react';
-import { TouchableOpacity } from 'react-native-web';
+import { useEffect,useState } from 'react';
 import { addHistory } from '../../db/Data/History';
 
 const OrderL = ({navigation}) => {
