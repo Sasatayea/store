@@ -62,7 +62,7 @@ export default function search({ route, navigation }) {
       </Text>
       <FlatList
         data={fav}
-        keyExtractor={fav.id}
+        keyExtractor={(item, index) => item.id}
         numColumns={2}
         renderItem={({ item }) => (
           <Searchitem navigation={navigation} item={item} />
