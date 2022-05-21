@@ -6,7 +6,6 @@ export default function Admin({ navigation }) {
   return (
     <View style={styles.content}>
         <Button title="Edit Products" onPress={()=>navigation.navigate("EditP")}/>
-        <Button title="Add Product" onPress={()=>navigation.navigate("AddP")}/>
         <Button title="EditUserInfo" onPress={()=>navigation.navigate("EditUserInfo")}/>
         <Button title="OrderL" onPress={()=>navigation.navigate("OrderL")}/>
         <View style={styles.botton}>

@@ -46,6 +46,7 @@ export default function EditP({ navigation }) {
 
   return (
     <View>
+              <Button title="Add Product" onPress={()=>navigation.navigate("AddP")}/>
       <View style={styles.items}>
         <FlatList
           data={cities}

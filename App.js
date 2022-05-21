@@ -26,7 +26,7 @@ import UserEditInPro from "./Components/Pages/UserEditInPro";
 import EditUserInfo from "./Components/Admin/EditUserInfo";
 import UserSite from "./Components/Admin/UserSite";
 import OrderL from './Components/Admin/OrderL';
-import Hestory from './Components/Admin/Hestory';
+import History from './Components/Admin/History';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -294,8 +294,8 @@ export default function App() {
               }}
             />
             <Stack.Screen
-              name="Hestory"
-              component={Hestory}
+              name="History"
+              component={History}
               options={{
                 title: (
                   <Image

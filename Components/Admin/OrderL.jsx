@@ -1,10 +1,11 @@
 import { View, Text ,  StyleSheet ,Button } from 'react-native'
 import React from 'react'
-import { editOrder, getOrders, subscribeOrders } from '../../db/Data/Orders';
+import { deleteOrder, editOrder, getOrders, subscribeOrders } from '../../db/Data/Orders';
 import { useEffect } from 'react';
 import { FlatList } from 'react-native';
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native-web';
+import { addHistory } from '../../db/Data/History';
 
 const OrderL = ({navigation}) => {
     const getOrder = async () => {
@@ -36,7 +37,7 @@ const OrderL = ({navigation}) => {
     
     const [Orders, setOrders] = useState([]);    
     console.log(Orders) ;
-
+  
     const changeAcc =(id)=>{
         console.log(id);
         let Myorder = Orders.filter((e) => e.id == id);
@@ -48,12 +49,18 @@ const OrderL = ({navigation}) => {
         })
     }
     const complete =(id)=>{
-        console.log(id);
+      let Myorder = Orders.filter((e) => e.id == id);
+        // console.log(id);
+
+        addHistory({
+          ...Myorder
+    })
+    deleteOrder(id);
     }
 return (
     <View>
         <Text>Orders</Text>
-        <Button title="Hestory" onPress={()=>navigation.navigate("Hestory")}/>
+        <Button title="Hestory" onPress={()=>navigation.navigate("History")}/>
         <FlatList
             data={Orders}
             keyExtractor={(item, index) => index.toString()}
@@ -69,13 +76,12 @@ return (
                   </View>
                   </View>
               </TouchableOpacity>
-              
             )} 
           /> 
     </View>
   )
 }
-
+  
 export default OrderL
 const styles = StyleSheet.create({
     Buttonn:{

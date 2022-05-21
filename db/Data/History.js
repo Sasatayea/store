@@ -20,8 +20,6 @@ async function getHistory() {
   return cityList;
 }
 
-
-
 async function editHistory(city) {
   console.log("at editCity", city);
   await setDoc(doc(db, "history", city.id), city);
