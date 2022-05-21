@@ -16,15 +16,10 @@ import CartItem from "../items/CartItem";
 import { getAuth } from "firebase/auth";
 import { subscribeCart } from "../../db/Data/products";
 import { editUser, getUsers, subscribeUser } from "../../db/Data/Users";
+import { async } from "@firebase/util";
 
 export default function Cart({ route, navigation }) {
-  const auth = getAuth();
-  const userr = auth.currentUser;
   const [cart, setCart] = useState([]);
-  const [total, setTotal] = useState(0);
-
-  const [buy, setBuy] = useState("");
-
   const getCartList = async () => {
     getUserById(userr.uid).then((user) => {
       const user1 = user;
@@ -32,9 +27,29 @@ export default function Cart({ route, navigation }) {
       setCart(ucart);
     });
   };
-  useEffect(() => {
-    getCartList();
+  useEffect(async () => {
+    await getCartList();
   }, []);
+  const [total, setTotal] = useState(0);
+  const init = () => {
+    getUserById(userr.uid).then((user) => {
+      const user1 = user;
+      const ucart = user1[0].cart;
+      let t = 0;
+      for (let i = 0; i < ucart.length; i++) {
+        t += parseInt(ucart[i].price);
+      }
+      setTotal(t);
+      console.log(t);
+    });
+  };
+  useEffect(async () => {
+    await init();
+  }, []);
+  const auth = getAuth();
+  const userr = auth.currentUser;
+
+  const [buy, setBuy] = useState("");
 
   useEffect(() => {
     const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
@@ -79,9 +94,13 @@ export default function Cart({ route, navigation }) {
       const user1 = user;
       let money = user1[0].money;
       if (money >= total) {
+<<<<<<< HEAD
         navigation.navigate("Adress", {total:total,user1:user1});
+=======
+        navigation.navigate("Adress", { total: total, cart: cart });
+>>>>>>> 42135e1a0d7856145f8bed363036ba9796ece72b
         //editUser({ ...user1[0], money: money - total,cart:[], sold:[...carr  ,...sold]});
-        console.log("total :",total);
+        console.log("total :", total);
       } else {
         setBuy("You don't have enough money ");
         alert("You don't have enough money  ");
@@ -110,7 +129,7 @@ export default function Cart({ route, navigation }) {
 
       <Text style={{ fontSize: 24 }}>total price = {total}</Text>
       <View style={styles.button}>
-        <Button title="cash" color="#000" onPress={() => Cash()}/>
+        <Button title="cash" color="#000" onPress={() => Cash()} />
       </View>
     </View>
   );
