@@ -12,7 +12,7 @@ import { getAuth } from "firebase/auth";
 import { useState, useEffect } from "react";
 
 export default function CartItem({ navigation, item, delet, plus, minus }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   const auth = getAuth();
   const userr = auth.currentUser;
@@ -50,15 +50,23 @@ export default function CartItem({ navigation, item, delet, plus, minus }) {
               }}
             />
             <Text>{count}</Text>
-
-            <Button
-              title="-"
-              color="blue"
-              onPress={() => {
-                if (count > 0) setCount(count - 1);
-                minus(count, item);
-              }}
-            />
+            {count == 1 ? (
+              <TouchableOpacity onPress={()=>delet(item.id)}>
+                <Image
+                  source={require("../../assets/delete.png")}
+                  style={{ width: 25, height: 25, margintop: "5%" }}
+                />
+              </TouchableOpacity>
+            ) : (
+              <Button
+                title="-"
+                color="blue"
+                onPress={() => {
+                  if (count > 0) setCount(count - 1);
+                  minus(count, item);
+                }}
+              />
+            )}
           </View>
         </View>
       </View>
