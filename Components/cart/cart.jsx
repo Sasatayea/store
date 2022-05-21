@@ -140,12 +140,13 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   item: {
-    marginRight: "5%",
     flex: 1,
-    // flexDirection: "row",
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
+    alignSelf: "stretch",
+    backgroundColor: "#fff",
+
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 10,
   },
   button: {
     // flexDirection: "row",

@@ -51,32 +51,38 @@ export default function CartItem({ navigation, item, delet, plus, minus }) {
                 </Text>
               </TouchableOpacity>
             </View>
-            <Button
-              title="+"
-              color="blue"
-              onPress={() => {
-                setCount(count + 1);
-                plus(count, item);
-              }}
-            />
-            <Text>{count}</Text>
-            {count == 1 ? (
-              <TouchableOpacity onPress={() => delet(item.id)}>
-                <Image
-                  source={require("../../assets/delete.png")}
-                  style={{ width: 25, height: 25, margintop: "5%" }}
+            <View style={styles.row}>
+              <View style={{ height: "60%" }}>
+                <Button
+                  title="+"
+                  color="blue"
+                  onPress={() => {
+                    setCount(count + 1);
+                    plus(count, item);
+                  }}
                 />
-              </TouchableOpacity>
-            ) : (
-              <Button
-                title="-"
-                color="blue"
-                onPress={() => {
-                  if (count > 0) setCount(count - 1);
-                  minus(count, item);
-                }}
-              />
-            )}
+              </View>
+              <Text>{count}</Text>
+              {count == 1 ? (
+                <TouchableOpacity onPress={() => delet(item.id)}>
+                  <Image
+                    source={require("../../assets/delete.png")}
+                    style={{ width: 25, height: 30, margintop: "5%" }}
+                  />
+                </TouchableOpacity>
+              ) : (
+                <View style={{ height: "60%" }}>
+                  <Button
+                    title="-"
+                    color="blue"
+                    onPress={() => {
+                      if (count > 0) setCount(count - 1);
+                      minus(count, item);
+                    }}
+                  />
+                </View>
+              )}
+            </View>
           </View>
         </View>
       </View>
@@ -90,6 +96,12 @@ const styles = StyleSheet.create({
     width: 200,
     backgroundColor: "red",
   },
+  row: {
+    flexDirection: "row",
+    borderRadius: 20,
+    height: "50%",
+    marginTop: "5%",
+  },
   card: {
     marginLeft: "1%",
     backgroundColor: "#E7E9EB",
@@ -98,6 +110,7 @@ const styles = StyleSheet.create({
     // paddingHorizontal: "3%",
     width: 170,
     height: 300,
+    marginLeft: "2%",
     marginVertical: 10,
   },
   shadowProp: {
