@@ -78,25 +78,10 @@ export default function Cart({ route, navigation }) {
     getUserById(userr.uid).then((user) => {
       const user1 = user;
       let money = user1[0].money;
-<<<<<<< HEAD
       if (money >= total) {
         navigation.navigate("Adress", {total:total,cart:cart});
         //editUser({ ...user1[0], money: money - total,cart:[], sold:[...carr  ,...sold]});
         console.log("total :",total);
-=======
-      let sold = user1[0].sold;
-      console.log("soled ", sold);
-      let carr = cart;
-      if (money >= total) {
-        editUser({
-          ...user1[0],
-          money: money - total,
-          cart: [],
-          sold: [...carr, ...sold],
-        });
-        setTotal(0);
-        console.log("total :", total);
->>>>>>> b67814c9e3c913c65ac13024849fad5792294b72
       } else {
         setBuy("You don't have enough money ");
         alert("You don't have enough money  ");

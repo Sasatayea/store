@@ -125,7 +125,6 @@ const HomeNav = () => {
   );
 };
 
-<<<<<<< HEAD
 const ProfileNave = () => {
   return (
     <Stack.Navigator>
@@ -190,9 +189,6 @@ const ProfileNave = () => {
   );
 };
 export default function App() {
-=======
-export default function App({ navigation }) {
->>>>>>> b67814c9e3c913c65ac13024849fad5792294b72
   const auth = getAuth();
   const userr = auth.currentUser;
   useEffect(() => {
@@ -295,7 +291,6 @@ export default function App({ navigation }) {
               name="HomeNav"
               component={HomeNav}
               options={{
-<<<<<<< HEAD
                 headerBackground: () => (
                   <View style={{ backgroundColor: "white" }}>
                     <Image
@@ -305,17 +300,6 @@ export default function App({ navigation }) {
                   </View>
                 ),
                 headerShown: false,
-=======
-                headerShown: false,
-                // headerBackground: () => (
-                //   // <View style={{ backgroundColor: "white" }}>
-                //   //   <Image
-                //   //     source={require("./assets/megan.png")}
-                //   //     style={{ width: 80, height: 80, alignSelf: "center" }}
-                //   //   />
-                //   // </View>
-                // ),
->>>>>>> b67814c9e3c913c65ac13024849fad5792294b72
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/home.png")}
@@ -349,20 +333,8 @@ export default function App({ navigation }) {
               name="CartNav"
               component={CartNav}
               options={{
-<<<<<<< HEAD
                 
                 headerShown: false,
-=======
-                headerShown: false,
-                // headerBackground: () => (
-                //   <View style={{ backgroundColor: "white" }}>
-                //     <Image
-                //       source={require("./assets/megan.png")}
-                //       style={{ width: 80, height: 80, alignSelf: "center" }}
-                //     />
-                //   </View>
-                // ),
->>>>>>> b67814c9e3c913c65ac13024849fad5792294b72
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/shopping-cart.png")}
@@ -385,61 +357,8 @@ export default function App({ navigation }) {
                 ),
               }}
             />
-<<<<<<< HEAD
           
             
-=======
-            <Tab.Screen
-              name="ProfileItem"
-              component={(props) => <ProfileItem {...props} />}
-              options={{
-                headerShown: false,
-                tabBarButton: () => null,
-                tabBarVisible: false,
-              }}
-            />
-            <Tab.Screen
-              name="OrderHistory"
-              component={(props) => <OrderHistory {...props} />}
-              options={{
-                headerShown: false,
-                tabBarButton: () => null,
-                tabBarVisible: false,
-              }}
-            />
-            <Tab.Screen
-              name="UserEditInPro"
-              component={(props) => <UserEditInPro {...props} />}
-              options={{
-                headerShown: false,
-                tabBarButton: () => null,
-                tabBarVisible: false,
-              }}
-            />
-            <Tab.Screen
-              name="Product"
-              component={Product}
-              options={{
-                headerShown: false,
-                // headerBackground: () => (
-                //   <View style={{ backgroundColor: "white" }}>
-                //     <Image
-                //       source={require("./assets/megan.png")}
-                //       style={{ width: 80, height: 80, alignSelf: "center" }}
-                //     />
-                //   </View>
-                // ),
-                headerTitle: () => null,
-                tabBarButton: () => null,
-                tabBarVisible: false,
-              }}
-            />
-            <Tab.Screen
-              name="Fpage"
-              component={Fpage}
-              options={{ tabBarButton: () => null, tabBarVisible: false }}
-            />
->>>>>>> b67814c9e3c913c65ac13024849fad5792294b72
           </Tab.Navigator>
         </NavigationContainer>
       );
