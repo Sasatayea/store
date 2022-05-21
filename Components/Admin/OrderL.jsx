@@ -53,6 +53,7 @@ const OrderL = ({navigation}) => {
 return (
     <View>
         <Text>Orders</Text>
+        <Button title="Hestory" onPress={()=>navigation.navigate("Hestory")}/>
         <FlatList
             data={Orders}
             keyExtractor={(item, index) => index.toString()}

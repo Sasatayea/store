@@ -24,7 +24,7 @@ export default function Adress({ navigation, route }) {
   // console.log("fffffffffff",user1[0].adress);
   const [isSelected, setSelected] = useState("");
   const [newA, setNewA] = useState("");
-  
+
   const Cash = () => {
   const carr = user1[0].cart ;
   const sold = user1[0].sold ;
@@ -49,7 +49,6 @@ export default function Adress({ navigation, route }) {
   };
   return (
     <View>
-      
       <View style={styles.inpp}>
         <View style={styles.input}>
           <TextInput onChangeText={setNewA} placeholder="New Adress" />
