@@ -94,11 +94,7 @@ export default function Cart({ route, navigation }) {
       const user1 = user;
       let money = user1[0].money;
       if (money >= total) {
-<<<<<<< HEAD
-        navigation.navigate("Adress", {total:total,user1:user1});
-=======
         navigation.navigate("Adress", { total: total, cart: cart });
->>>>>>> 42135e1a0d7856145f8bed363036ba9796ece72b
         //editUser({ ...user1[0], money: money - total,cart:[], sold:[...carr  ,...sold]});
         console.log("total :", total);
       } else {
