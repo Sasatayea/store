@@ -109,6 +109,7 @@ export default function Pitem({ navigation, item }) {
             onPress={() =>
               navigation.navigate("Product", {
                 item: item,
+
               })
             }
           >
