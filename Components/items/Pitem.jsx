@@ -15,7 +15,6 @@ import { editUser, getUserById, subscribeUser } from "../../db/Data/Users";
 
 export default function Pitem({ navigation, item }) {
   const isInCart = () => {
-    
     getUserById(userr.uid).then((user) => {
       const user1 = user;
       const ucart = user1[0].cart;
@@ -128,15 +127,15 @@ export default function Pitem({ navigation, item }) {
           </TouchableOpacity>
 
           <View style={styles.button}>
-            <View style={styles.pp}>
-              <TouchableOpacity
-                onPress={() => {
-                  addCart(item), isInCart();
-                }}
-              >
-                <View style={{ flexDirection: "row" }}>
-                  {cartI ? (
-                    <View>
+            <View style={{ flexDirection: "row" }}>
+              {cartI ? (
+                <View style={styles.pp2}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      addCart(item), isInCart();
+                    }}
+                  >
+                    
                       <Image
                         source={require("../../assets/shopping-cart (2).png")}
                         style={{ width: 25, height: 25, margintop: "5%" }}
@@ -150,9 +149,17 @@ export default function Pitem({ navigation, item }) {
                       >
                         Delet from Cart
                       </Text>
-                    </View>
-                  ) : (
-                    <View>
+                    
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <View style={styles.pp}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      addCart(item), isInCart();
+                    }}
+                  >
+                    
                       <Image
                         source={require("../../assets/shopping-cart (1).png")}
                         style={{ width: 25, height: 25, margintop: "5%" }}
@@ -164,13 +171,12 @@ export default function Pitem({ navigation, item }) {
                           color: "#F9FFB7",
                         }}
                       >
-                        Add to Cart
+                        Add to The Cart
                       </Text>
-                    </View>
-                  )}
+                    
+                  </TouchableOpacity>
                 </View>
-                {/* </View> */}
-              </TouchableOpacity>
+              )}
             </View>
             <View style={styles.react}>
               <TouchableOpacity onPress={() => Like()}>
@@ -253,12 +259,25 @@ const styles = StyleSheet.create({
     // marginTop: "90%",
     // marginLeft: "10%",
 
-    width: "72%",
+    width: "100%",
     borderRadius: 20,
     height: 50,
+    marginRight:10,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#2DCCA9",
+  },
+  pp2: {
+    // marginTop: "90%",
+    // marginLeft: "10%",
+
+    width: "100%",
+    borderRadius: 20,
+    height: 50,
+    marginRight:10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "red",
   },
   react: {
     marginTop: "5%",
