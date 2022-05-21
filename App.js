@@ -337,14 +337,15 @@ export default function App() {
               name="Search"
               component={Search}
               options={{
-                headerBackground: () => (
-                  <View style={{ backgroundColor: "white" }}>
-                    <Image
-                      source={require("./assets/megan.png")}
-                      style={{ width: 80, height: 80, alignSelf: "center" }}
-                    />
-                  </View>
-                ),
+                headerShown: false,
+                // headerBackground: () => (
+                //   // <View style={{ backgroundColor: "white" }}>
+                //   //   <Image
+                //   //     source={require("./assets/megan.png")}
+                //   //     style={{ width: 80, height: 80, alignSelf: "center" }}
+                //   //   />
+                //   // </View>
+                // ),
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/search.png")}

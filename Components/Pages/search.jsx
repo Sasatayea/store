@@ -53,23 +53,23 @@ export default function Search({ navigation }) {
   const [dataa, setDataa] = useState(cities);
 
   const search = (searchItem) => {
-    if (searchItem.match(/\*/)||
-    searchItem.match(/\(/)||
-    searchItem.match(/\)/)||
-    searchItem.match(/\?/)) {
+    if (
+      searchItem.match(/\*/) ||
+      searchItem.match(/\(/) ||
+      searchItem.match(/\)/) ||
+      searchItem.match(/\?/)
+    ) {
     } else {
-      
       let s = "";
       s = searchItem;
       let h = 0;
-      
+
       let data = [];
       for (let i = 0; i < cities.length; i++) {
-        if(cities[i].name.match(s)){
-          data[h] = cities[i]; 
-          h++
+        if (cities[i].name.match(s)) {
+          data[h] = cities[i];
+          h++;
         }
-          
       }
       setDataa(data);
     }
@@ -77,7 +77,7 @@ export default function Search({ navigation }) {
 
   if (!searchItem) {
     return (
-      <View >
+      <View style={styles.page}>
         <View style={styles.content}>
           <View style={styles.input}>
             <TextInput
@@ -90,11 +90,12 @@ export default function Search({ navigation }) {
             />
           </View>
           <View style={styles.button}>
-            <Button
-              title="search"
-              color="#000"
-              onPress={() => search(searchItem)}
-            />
+            <TouchableOpacity onPress={() => search(searchItem)}>
+              <Image
+                style={{ width: 30, height: 30, marginLeft: 10 }}
+                source={require("../../assets/magnifying-glass.png")}
+              />
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.text}>
@@ -104,7 +105,7 @@ export default function Search({ navigation }) {
     );
   } else {
     return (
-      <View>
+      <View style={styles.page}>
         <View style={styles.content}>
           <View style={styles.input}>
             <TextInput
@@ -117,11 +118,12 @@ export default function Search({ navigation }) {
             />
           </View>
           <View style={styles.button}>
-            <Button
-              title="search"
-              color="#000"
-              onPress={() => search(searchItem)}
-            />
+            <TouchableOpacity onPress={() => search(searchItem)}>
+              <Image
+                style={{ width: 30, height: 30, marginLeft: 10 }}
+                source={require("../../assets/magnifying-glass.png")}
+              />
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -134,13 +136,17 @@ export default function Search({ navigation }) {
               <Pitem navigation={navigation} item={item} />
             )}
           />
-          </View>
+        </View>
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
-  content: {
+  page: {
+    backgroundColor: "#D2D6DA",
+    height: "100%",
+  },
+  contentS: {
     flexDirection: "row",
     marginTop: 10,
     padding: 10,
@@ -150,7 +156,8 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    margin: 12,
+    // margin: 12,
+    marginLeft: "15%",
     borderWidth: 2,
     borderColor: "black",
     padding: 10,
