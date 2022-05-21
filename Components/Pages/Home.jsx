@@ -81,47 +81,51 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
       {/* <ImageBackground source={bc} resizeMode="cover" style={styles.heder}> */}
 
-      <Image
-        source={require("../../assets/megan.png")}
-        style={{ width: 80, height: 80, alignSelf: "center", marginTop: "5%" }}
-      />
-
-      <View style={styles.search}>
-        <Picker
-          selectedValue={selectedValue}
-          style={styles.picker}
-          onValueChange={(itemValue) => {
-            setSelectedValue(itemValue);
+      <ScrollView>
+        <Image
+          source={require("../../assets/megan.png")}
+          style={{
+            width: 80,
+            height: 80,
+            alignSelf: "center",
+            marginTop: "1%",
           }}
-        >
-          <Picker.Item label="All" value="All" />
-          <Picker.Item label="chair" value="chair" />
-          <Picker.Item label="bed" value="bed" />
-          <Picker.Item label="sofa" value="sofa" />
-        </Picker>
-        <View style={styles.contentS}>
-          <View style={styles.input}>
-            <TextInput
-              onChangeText={(e) => {
-                setsearchItem(e), search(e);
-              }}
-              placeholder="Search"
-              // //onChange ={()=>search(searchItem)}
-              // style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
-            />
-          </View>
-          <View style={styles.button}>
-            <TouchableOpacity onPress={() => search(searchItem)}>
-              <Image
-                style={{ width: 30, height: 30, marginLeft: 10 }}
-                source={require("../../assets/search.png")}
+        />
+
+        <View style={styles.search}>
+          <Picker
+            selectedValue={selectedValue}
+            style={styles.picker}
+            onValueChange={(itemValue) => {
+              setSelectedValue(itemValue);
+            }}
+          >
+            <Picker.Item label="All" value="All" />
+            <Picker.Item label="chair" value="chair" />
+            <Picker.Item label="bed" value="bed" />
+            <Picker.Item label="sofa" value="sofa" />
+          </Picker>
+          <View style={styles.contentS}>
+            <View style={styles.input}>
+              <TextInput
+                onChangeText={(e) => {
+                  setsearchItem(e), search(e);
+                }}
+                placeholder="Search"
+                // //onChange ={()=>search(searchItem)}
+                // style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
               />
-            </TouchableOpacity>
+            </View>
+            <View style={styles.button}>
+              <TouchableOpacity onPress={() => search(searchItem)}>
+                <Image
+                  style={{ width: 30, height: 30, marginLeft: 10 }}
+                  source={require("../../assets/search.png")}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
-
-      <ScrollView>
         <View style={styles.slide}>
           <SlideshowTest item={slide} />
         </View>

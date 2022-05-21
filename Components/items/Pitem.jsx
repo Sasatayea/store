@@ -140,53 +140,49 @@ export default function Pitem({ navigation, item }) {
           <View style={styles.button}>
             <View style={{ flexDirection: "row" }}>
               {cartI ? (
-                <View style={styles.pp2}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      addCart(item), isInCart();
-                    }}
-                  >
-                    
-                      <Image
-                        source={require("../../assets/shopping-cart (2).png")}
-                        style={{ width: 25, height: 25, margintop: "5%" }}
-                      />
-                      <Text
-                        style={{
-                          fontWeight: "bold",
-                          paddingTop: "5%",
-                          color: "#F9FFB7",
-                        }}
-                      >
-                        Delet from Cart
-                      </Text>
-                    
-                  </TouchableOpacity>
-                </View>
+                <TouchableOpacity
+                  onPress={() => {
+                    addCart(item), isInCart();
+                  }}
+                >
+                  <View style={styles.pp2}>
+                    <Text
+                      style={{
+                        fontWeight: "bold",
+                        // paddingTop: "5%",
+                        color: "#F9FFB7",
+                      }}
+                    >
+                      Delete
+                    </Text>
+                    <Image
+                      source={require("../../assets/shopping-cart (2).png")}
+                      style={{ width: 25, height: 25, margintop: "5%" }}
+                    />
+                  </View>
+                </TouchableOpacity>
               ) : (
-                <View style={styles.pp}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      addCart(item), isInCart();
-                    }}
-                  >
-                    
-                      <Image
-                        source={require("../../assets/shopping-cart (1).png")}
-                        style={{ width: 25, height: 25, margintop: "5%" }}
-                      />
-                      <Text
-                        style={{
-                          fontWeight: "bold",
-                          paddingTop: "5%",
-                          color: "#F9FFB7",
-                        }}
-                      >
-                        Add to The Cart
-                      </Text>
-                    
-                  </TouchableOpacity>
-                </View>
+                <TouchableOpacity
+                  onPress={() => {
+                    addCart(item), isInCart();
+                  }}
+                >
+                  <View style={styles.pp}>
+                    <Text
+                      style={{
+                        fontWeight: "bold",
+                        // paddingTop: "5%",
+                        color: "#F9FFB7",
+                      }}
+                    >
+                      Add to
+                    </Text>
+                    <Image
+                      source={require("../../assets/shopping-cart (1).png")}
+                      style={{ width: 25, height: 25, margintop: "5%" }}
+                    />
+                  </View>
+                </TouchableOpacity>
               )}
             </View>
             <View style={styles.react}>
@@ -273,10 +269,11 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 20,
     height: 50,
-    marginRight:10,
+    marginRight: 10,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#2DCCA9",
+    flexDirection: "row",
   },
   pp2: {
     // marginTop: "90%",
@@ -285,12 +282,14 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 20,
     height: 50,
-    marginRight:10,
+    marginRight: 10,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "red",
+    flexDirection: "row",
   },
   react: {
     marginTop: "5%",
+    marginLeft: "13%",
   },
 });
