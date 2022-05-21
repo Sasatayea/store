@@ -22,7 +22,9 @@ export default function Adress({ navigation, route }) {
   const total = item.total;
   const [adress, setAdress] = useState([]);
   const [isSelected, setSelected] = useState("");
+  const [error2, setError2] = useState("");
   const [newA, setNewA] = useState("");
+  const [error, setError] = useState("");
   const auth = getAuth();
   const userr = auth.currentUser;
   const getAdress = () => {
@@ -34,7 +36,6 @@ export default function Adress({ navigation, route }) {
         adress2[i] = { adress: adress[i], isSelected: false };
       }
       setAdress(adress2);
-      console.log(adress2);
     });
   };
   useEffect(() => {
@@ -59,44 +60,65 @@ export default function Adress({ navigation, route }) {
     };
   }, []);
   const Cash = () => {
-    getUserById(userr.uid).then((user) => {
-      const user1 = user;
-      let money = user1[0].money;
-      let sold = user1[0].sold;
-      console.log("soled ", cartt);
-      let carr = cartt;
-      addOrder({order:cartt,adress:isSelected,client:user1[0].name,clientId:user1[0].id,cost:total});
-      editUser({
-        ...user1[0],
-        money: money - total,
-        cart: [],
-        sold: [...carr, ...sold],
-      }).then(navigation.navigate("Cart"));
-    });
+    if(isSelected!=""){
+      if(total!=0){
+        getUserById(userr.uid).then((user) => {
+          const user1 = user;
+          let money = user1[0].money;
+          let sold = user1[0].sold;
+          console.log("soled ", cartt);
+          let carr = cartt;
+          addOrder({
+            order: cartt,
+            adress: isSelected,
+            client: user1[0].name,
+            clientId: user1[0].id,
+            cost: total,
+          });
+          editUser({
+            ...user1[0],
+            money: money - total,
+            cart: [],
+            sold: [...carr, ...sold],
+          }).then(navigation.navigate("Cart"));
+        });
+      }else{
+        setError("The cart is emtpty");
+      }
+    }else{
+      setError2("Please choose an adress");
+    }
+    
+    
   };
   const AddAdress = () => {
-    getUserById(userr.uid).then((user) => {
-      const user1 = user;
-      let adress = user1[0].adress;
-      adress[adress.length] = newA;
-      
-      editUser({
-        ...user1[0],
-        adress: adress,
+    if (newA.length > 12) {
+      getUserById(userr.uid).then((user) => {
+        const user1 = user;
+        let adress = user1[0].adress;
+        adress[adress.length] = newA;
+
+        editUser({
+          ...user1[0],
+          adress: adress,
+        });
       });
-    });
+    }else{
+      setError("The adress should be at least 13 character");
+    }
   };
   return (
     <View>
-      
       <View style={styles.inpp}>
         <View style={styles.input}>
           <TextInput onChangeText={setNewA} placeholder="New Adress" />
         </View>
+        <Text>{error}</Text>
         <Button title="Add" color="#000" onPress={() => AddAdress()} />
       </View>
       <Button title="cash" color="#000" onPress={() => Cash()} />
       <ScrollView>
+        <Text>{error2}</Text>
         <FlatList
           data={adress}
           keyExtractor={(item, index) => index.toString()}

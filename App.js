@@ -26,6 +26,8 @@ import OrderHistory from "./Components/Pages/OrderHistory";
 import UserEditInPro from "./Components/Pages/UserEditInPro";
 import EditUserInfo from "./Components/Admin/EditUserInfo";
 import UserSite from "./Components/Admin/UserSite";
+import OrderL from './Components/Admin/OrderL';
+import History from './Components/Admin/History';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -181,7 +183,6 @@ const ProfileNave = () => {
         name="UserEditInPro"
         component={(props) => <UserEditInPro {...props} />}
         options={{
-          
           tabBarButton: () => null,
           tabBarVisible: false,
         }}
@@ -272,6 +273,30 @@ export default function App() {
             <Stack.Screen
               name="EditUserInfo"
               component={EditUserInfo}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="OrderL"
+              component={OrderL}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="History"
+              component={History}
               options={{
                 title: (
                   <Image
