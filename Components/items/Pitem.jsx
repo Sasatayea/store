@@ -11,9 +11,22 @@ import {
 import { getAuth } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { addCity, editCity, getCities } from "../../db/Data/products";
-import { editUser, getUserById } from "../../db/Data/Users";
+import { editUser, getUserById, subscribeUser } from "../../db/Data/Users";
 
 export default function Pitem({ navigation, item }) {
+  const isInCart = () => {
+    
+    getUserById(userr.uid).then((user) => {
+      const user1 = user;
+      const ucart = user1[0].cart;
+      setCartI(false);
+      for (let i = 0; i < ucart.length; i++) {
+        if (ucart[i].id == item.id) {
+          setCartI(true);
+        }
+      }
+    });
+  };
   const unsubLike = async () => {
     if (curLike[0] == userr.email) setFlage(false);
     else setFlage(true);
@@ -65,15 +78,31 @@ export default function Pitem({ navigation, item }) {
         if (flag) {
           setCart([...ucart, item]);
           editUser({ ...user1[0], cart: [...ucart, item] });
-        }
-        if (cartI) {
-          setCartI(false);
         } else {
-          setCartI(true);
+          let arr = ucart.filter((e) => e.id != item.id);
+          setCart([...arr]);
+          editUser({ ...user1[0], cart: [...arr] });
         }
       });
     };
 
+    useEffect(() => {
+      const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
+        if (change.type === "added") {
+          isInCart();
+        }
+        if (change.type === "modified") {
+          isInCart();
+        }
+        if (change.type === "removed") {
+          isInCart();
+        }
+      });
+
+      return () => {
+        unsubscribeUser();
+      };
+    }, []);
     return (
       <View style={[styles.card, styles.shadowProp]}>
         <View>
@@ -100,36 +129,45 @@ export default function Pitem({ navigation, item }) {
 
           <View style={styles.button}>
             <View style={styles.pp}>
-              <TouchableOpacity onPress={() => addCart(item)}>
-                {/* <View
-                  style={{
-                    borderRadius: 20,
-                    height: 40,
-                    width: 120,
-                    backgroundColor: "#0D1F2B",
-                  }}
-                > */}
+              <TouchableOpacity
+                onPress={() => {
+                  addCart(item), isInCart();
+                }}
+              >
                 <View style={{ flexDirection: "row" }}>
                   {cartI ? (
-                    <Image
-                      source={require("../../assets/shopping-cart (2).png")}
-                      style={{ width: 25, height: 25, margintop: "5%" }}
-                    />
+                    <View>
+                      <Image
+                        source={require("../../assets/shopping-cart (2).png")}
+                        style={{ width: 25, height: 25, margintop: "5%" }}
+                      />
+                      <Text
+                        style={{
+                          fontWeight: "bold",
+                          paddingTop: "5%",
+                          color: "#F9FFB7",
+                        }}
+                      >
+                        Delet from Cart
+                      </Text>
+                    </View>
                   ) : (
-                    <Image
-                      source={require("../../assets/shopping-cart (1).png")}
-                      style={{ width: 25, height: 25, margintop: "5%" }}
-                    />
+                    <View>
+                      <Image
+                        source={require("../../assets/shopping-cart (1).png")}
+                        style={{ width: 25, height: 25, margintop: "5%" }}
+                      />
+                      <Text
+                        style={{
+                          fontWeight: "bold",
+                          paddingTop: "5%",
+                          color: "#F9FFB7",
+                        }}
+                      >
+                        Add to Cart
+                      </Text>
+                    </View>
                   )}
-                  <Text
-                    style={{
-                      fontWeight: "bold",
-                      paddingTop: "5%",
-                      color: "#F9FFB7",
-                    }}
-                  >
-                    Add to Cart
-                  </Text>
                 </View>
                 {/* </View> */}
               </TouchableOpacity>
