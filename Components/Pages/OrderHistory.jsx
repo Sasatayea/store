@@ -1,18 +1,26 @@
-import { StyleSheet, Text, View, Image,FlatList, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 
-
-const OrderHistory = ({route,navigation}) => {
+const OrderHistory = ({ route, navigation }) => {
   let item = route.params;
 
   console.log("iteem", item);
   if (item.sold.length != 0) {
     return (
-      <View>
-        <Text styles={{ marginButton: 30 }}>
-          Your Order History That You Buy
-        </Text>
-        <Text> </Text>
+      <View style={styles.contant}>
+        <View style={{ paddingLeft: "30%", marginTop: "5%" }}>
+          <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+            Order History
+          </Text>
+        </View>
+
         <FlatList
           data={item.sold}
           keyExtractor={(item, index) => index.toString()}
@@ -23,13 +31,24 @@ const OrderHistory = ({route,navigation}) => {
             >
               <View>
                 <Image
-                  style={{ height: 100, width: 100 }}
+                  style={{ height: 135, width: 120, borderRadius: 15 }}
                   source={{ uri: item.image }}
                 />
               </View>
-              <View style={{ flexDirection: "column" }}>
-                <Text>Name : {item.name}</Text>
-                <Text>Price : {item.price}</Text>
+              <View
+                style={{
+                  flexDirection: "column",
+                  marginTop: "10%",
+                  paddingLeft: "3%",
+                }}
+              >
+                <Text style={{ fontWeight: "bold" }}>Name : {item.name}</Text>
+                <Text> </Text>
+                <Text style={{ fontWeight: "bold" }}>{item.size}</Text>
+                <Text> </Text>
+                <Text style={{ fontWeight: "bold" }}>
+                  Price :$ {item.price}
+                </Text>
               </View>
             </TouchableOpacity>
           )}
@@ -44,14 +63,18 @@ const OrderHistory = ({route,navigation}) => {
 export default OrderHistory;
 
 const styles = StyleSheet.create({
+  contant: {
+    backgroundColor: "#fff",
+    height: "100%",
+  },
   card: {
     flexDirection: "row",
-    backgroundColor: "#D9D9D9",
+    backgroundColor: "#E7E9EB",
     borderRadius: 12,
     paddingVertical: 10,
     paddingHorizontal: "3%",
     width: 350,
-    height: 120,
+    height: 155,
     alignSelf: "center",
     marginVertical: 10,
   },

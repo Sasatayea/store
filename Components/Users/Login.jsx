@@ -11,7 +11,6 @@ import { StatusBar } from "expo-status-bar";
 import { React, useState } from "react";
 import { login } from "../../db/auth/auth";
 
-
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
@@ -101,26 +100,29 @@ const Login = ({ navigation }) => {
             }}
           />
         </View>
+        <View style={styles.ppp}>
+          <View style={styles.pp}>
+            <TouchableOpacity
+              onPress={() => {
+                login(email, password)
+                  .then()
+                  .catch((e) => setError(e.message));
+              }}
+            >
+              <Text style={{ color: "#fff" }}> Login</Text>
+            </TouchableOpacity>
+            <Text>{error}</Text>
+          </View>
 
-        <View style={styles.pp}>
-          <TouchableOpacity
-            onPress={() => {
-              login(email, password)
-                .then()
-                .catch((e) => setError(e.message));
-            }}
-          >
-            <Text style={{ color: "#fff" }}> Login</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+            <Text
+              style={{ marginTop: "40%", paddingLeft: "6%", color: "#fff" }}
+            >
+              {" "}
+              Sign up?{" "}
+            </Text>
           </TouchableOpacity>
-          <Text>{error}</Text>
         </View>
-
-        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-          <Text style={{ marginTop: "5%", marginLeft: "15%", color: "#fff" }}>
-            {" "}
-            Create an account{" "}
-          </Text>
-        </TouchableOpacity>
       </View>
     </ImageBackground>
   );
@@ -147,6 +149,7 @@ const styles = StyleSheet.create({
     width: 200,
   },
   pp: {
+    flexDirection: "row",
     marginLeft: "15%",
     width: "30%",
     borderRadius: 25,
@@ -156,5 +159,9 @@ const styles = StyleSheet.create({
     marginTop: "5%",
 
     backgroundColor: "#011F26",
+  },
+  ppp: {
+    flexDirection: "row",
+    marginLeft: "30%",
   },
 });

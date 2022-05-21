@@ -18,7 +18,6 @@ import { subscribeCart } from "../../db/Data/products";
 import { editUser, getUsers, subscribeUser } from "../../db/Data/Users";
 
 export default function Cart({ route, navigation }) {
-
   const auth = getAuth();
   const userr = auth.currentUser;
   const [cart, setCart] = useState([]);
@@ -66,23 +65,38 @@ export default function Cart({ route, navigation }) {
   const plus = (count, item) => {
     let price = parseInt(item.price);
     setTotal(total + price);
-    console.log("total :",total);
+    console.log("total :", total);
   };
   const minus = (count, item) => {
     if (count > 0) {
       let price = parseInt(item.price);
       setTotal(total - price);
-      console.log("total :",total);
+      console.log("total :", total);
     }
   };
   const Cash = () => {
     getUserById(userr.uid).then((user) => {
       const user1 = user;
       let money = user1[0].money;
+<<<<<<< HEAD
       if (money >= total) {
         navigation.navigate("Adress", {total:total,cart:cart});
         //editUser({ ...user1[0], money: money - total,cart:[], sold:[...carr  ,...sold]});
         console.log("total :",total);
+=======
+      let sold = user1[0].sold;
+      console.log("soled ", sold);
+      let carr = cart;
+      if (money >= total) {
+        editUser({
+          ...user1[0],
+          money: money - total,
+          cart: [],
+          sold: [...carr, ...sold],
+        });
+        setTotal(0);
+        console.log("total :", total);
+>>>>>>> b67814c9e3c913c65ac13024849fad5792294b72
       } else {
         setBuy("You don't have enough money ");
         alert("You don't have enough money  ");
@@ -91,7 +105,9 @@ export default function Cart({ route, navigation }) {
   };
   return (
     <View style={styles.item}>
-      <Text style={{marginTop:10 , fontSize: 16, fontWeight: "bold" }}>Selected Items</Text>
+      <Text style={{ marginTop: 10, fontSize: 16, fontWeight: "bold" }}>
+        Selected Items
+      </Text>
       <FlatList
         data={cart}
         keyExtractor={cart.id}
@@ -107,7 +123,7 @@ export default function Cart({ route, navigation }) {
         )}
       />
 
-      <Text style={{fontSize:24}}>total price = {total}</Text>
+      <Text style={{ fontSize: 24 }}>total price = {total}</Text>
       <View style={styles.button}>
         <Button title="cash" color="#000" onPress={() => Cash()}/>
       </View>
@@ -131,6 +147,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    padding: 15,
+    // flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "2%",
+  },
+  pp: {
+    // marginTop: "90%",
+    // marginLeft: "10%",
+    width: "200%",
+    borderRadius: 25,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#011F26",
   },
 });

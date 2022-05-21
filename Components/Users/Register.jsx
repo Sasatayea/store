@@ -133,19 +133,22 @@ const Register = ({ navigation }) => {
             style={styles.inpp}
           />
         </View>
-        <View style={{flexDirection:"row"}}>
+        <View style={{ flexDirection: "row" }}>
           <View style={styles.pp}>
             <TouchableOpacity onPress={registerUser}>
               <Text style={{ color: "#fff" }}> Register </Text>
             </TouchableOpacity>
-            </View>
-            <Text>{error}</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Fpage")}>
-              <Text style={{ marginTop: "20%",marginLeft:"30%", color: "#fff" }}>Go to Home page</Text>
-            </TouchableOpacity>
-            </View>
+          </View>
+          <Text>{error}</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Fpage")}>
+            <Text
+              style={{ marginTop: "20%", marginLeft: "30%", color: "#fff" }}
+            >
+              Go to Home page
+            </Text>
+          </TouchableOpacity>
         </View>
-      
+      </View>
     </ImageBackground>
   );
 };
