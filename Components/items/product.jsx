@@ -7,32 +7,48 @@ import {
   TextInput,
   Image,
   ScrollView,
-  RefreshControl
 } from "react-native";
 import { subscribeUser } from "../../db/Data/Users";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import Slideshow from "react-native-image-slider-show";
 import { getUserById } from "../../db/Data/Users";
 import { editCity } from "../../db/Data/products";
 import { editUser } from "../../db/Data/Users";
-const wait = (timeout) => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-}
-
+import { getAuth } from "firebase/auth";
 export default function Product({ navigation, route }) {
   let item = route.params.item;
 
-  let addCart = route.params.addCart;
-  let userr = route.params.userr;
+  const auth = getAuth();
+
+  const userr = auth.currentUser;
   const [liked, setLiked] = useState(item.liked);
   const liked1 = [...liked];
   const [flag, setFlage] = useState();
   const [cartI, setCartI] = useState();
+  const [cart, setCart] = useState([]);
   //let isInCart = route.params.isInCart;
   const [curLike, setCurLike] = useState(
     liked1.filter((e) => userr.email == e)
   );
+  const addCart = async (item) => {
+    getUserById(userr.uid).then((user) => {
+      const user1 = user;
+      const ucart = user1[0].cart;
+      let flag = true;
+      for (let i = 0; i < ucart.length; i++) {
+        if (ucart[i].id == item.id) flag = false;
+      }
+      if (flag) {
+        setCart([...ucart, item]);
+        editUser({ ...user1[0], cart: [...ucart, item] });
+      } else {
+        let arr = ucart.filter((e) => e.id != item.id);
+        setCart([...arr]);
+        editUser({ ...user1[0], cart: [...arr] });
+      }
+    });
+  };
   const isInCart = () => {
     getUserById(userr.uid).then((user) => {
       const user1 = user;
@@ -45,6 +61,7 @@ export default function Product({ navigation, route }) {
       }
     });
   };
+  
   const unsubLike = async () => {
     if (curLike[0] == userr.email) setFlage(false);
     else setFlage(true);
@@ -56,13 +73,24 @@ export default function Product({ navigation, route }) {
     if (flag) {
       editCity({ ...item, liked: [...liked, userr.email] });
       setFlage(false);
+      getUserById(userr.uid).then((user) => {
+        const user1 = user;
+        const fav = user1[0].favourite;
+        editUser({ ...user1[0], favourite: [...fav, item] });
+      });
     } else {
-      let arr = liked.filter((e) => e != email);
+      let arr = liked.filter((e) => e != userr.email);
       editCity({ ...item, liked: arr });
       setFlage(true);
+      getUserById(userr.uid).then((user) => {
+        const user1 = user;
+        const fav = user1[0].favourite;
+        let arr2 = fav.filter((e) => e.id != item.id);
+        editUser({ ...user1[0], favourite: [...arr2] });
+      });
     }
   };
-  
+
   useEffect(() => {
     const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
       if (change.type === "added") {
@@ -80,27 +108,14 @@ export default function Product({ navigation, route }) {
       unsubscribeUser();
     };
   }, []);
-  const [refreshing, setRefreshing] = useState(false);
-
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
-  }, []);
+  
   return (
     <View style={styles.page}>
       <Image
         source={require("../../assets/megan.png")}
         style={{ width: 80, height: 80, alignSelf: "center", marginTop: "5%" }}
       />
-      <ScrollView
-      refreshControl={
-        <RefreshControl
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-        />
-      }
-      >
-        
+      <ScrollView>
         <View style={styles.slide}>
           <Slideshow
             dataSource={[
@@ -244,3 +259,4 @@ const styles = StyleSheet.create({
     marginTop: "5%",
   },
 });
+

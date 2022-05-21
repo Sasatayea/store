@@ -5,179 +5,102 @@ import {
   TouchableOpacity,
   Button,
   TextInput,
-  Image,
   FlatList,
   ScrollView,
 } from "react-native";
-import {
-  getCities,
-  addCity,
-  addCart,
-  deleteCity,
-  subscribe,
-} from "../../db/Data/products";
-import { useEffect, useState } from "react";
-import Pitem from "../items/Pitem";
-export default function Search({ navigation }) {
-  const getCitiesList = async () => {
-    const c = await getCities();
-    await setCities(c);
-    //console.log("products", c);
-  };
+import { useState, useEffect } from "react";
 
-  useEffect(async () => {
-    await getCitiesList();
+import { getUserById } from "../../db/Data/Users";
+import { deleteCart, getCart } from "../../db/Data/products";
+import searchitem from "./Searchitem";
+import { getAuth } from "firebase/auth";
+import { subscribeCart } from "../../db/Data/products";
+import { editUser, getUsers, subscribeUser } from "../../db/Data/Users";
+import Pitem from "./../items/Pitem";
+import Searchitem from "./Searchitem";
+
+export default function search({ route, navigation }) {
+  const auth = getAuth();
+  const userr = auth.currentUser;
+  const [fav, setfav] = useState([]);
+
+  const getFavtList = async () => {
+    getUserById(userr.uid).then((user) => {
+      const user1 = user;
+      const favo = user1[0].favourite;
+      setfav(favo);
+    });
+  };
+  useEffect(() => {
+    getFavtList();
   }, []);
 
   useEffect(() => {
-    const unsubscribe = subscribe(({ change, snapshot }) => {
+    const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
       if (change.type === "added") {
-        getCitiesList();
+        getFavtList();
       }
       if (change.type === "modified") {
-        getCitiesList();
+        getFavtList();
       }
       if (change.type === "removed") {
-        getCitiesList();
+        getFavtList();
       }
     });
 
     return () => {
-      unsubscribe();
+      unsubscribeUser();
     };
   }, []);
 
-  const [cities, setCities] = useState([]);
+  console.log(fav);
 
-  const [searchItem, setsearchItem] = useState("");
-  const [dataa, setDataa] = useState(cities);
-
-  const search = (searchItem) => {
-    if (
-      searchItem.match(/\*/) ||
-      searchItem.match(/\(/) ||
-      searchItem.match(/\)/) ||
-      searchItem.match(/\?/)
-    ) {
-    } else {
-      let s = "";
-      s = searchItem;
-      let h = 0;
-
-      let data = [];
-      for (let i = 0; i < cities.length; i++) {
-        if (cities[i].name.match(s)) {
-          data[h] = cities[i];
-          h++;
-        }
-      }
-      setDataa(data);
-    }
-  };
-
-  if (!searchItem) {
-    return (
-      <View style={styles.page}>
-        <View style={styles.content}>
-          <View style={styles.input}>
-            <TextInput
-              onChangeText={(e) => {
-                setsearchItem(e), search(e);
-              }}
-              placeholder="Search"
-              //onChange ={()=>search(searchItem)}
-              // style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
-            />
-          </View>
-          <View style={styles.button}>
-            <TouchableOpacity onPress={() => search(searchItem)}>
-              <Image
-                style={{ width: 30, height: 30, marginLeft: 10 }}
-                source={require("../../assets/magnifying-glass.png")}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.text}>
-          <Text style={styles.text}> Nothing</Text>
-        </View>
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.page}>
-        <View style={styles.content}>
-          <View style={styles.input}>
-            <TextInput
-              onChangeText={(e) => {
-                setsearchItem(e), search(e);
-              }}
-              placeholder="Search"
-              // //onChange ={()=>search(searchItem)}
-              // style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
-            />
-          </View>
-          <View style={styles.button}>
-            <TouchableOpacity onPress={() => search(searchItem)}>
-              <Image
-                style={{ width: 30, height: 30, marginLeft: 10 }}
-                source={require("../../assets/magnifying-glass.png")}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={styles.item}>
-          <FlatList
-            data={dataa}
-            keyExtractor={(item, index) => index.toString()}
-            numColumns={2}
-            renderItem={({ item }) => (
-              <Pitem navigation={navigation} item={item} />
-            )}
-          />
-        </View>
-      </View>
-    );
-  }
+  return (
+    <View style={styles.item}>
+      <Text style={{ marginTop: 10, fontSize: 16, fontWeight: "bold" }}>
+        Selected Items
+      </Text>
+      <FlatList
+        data={fav}
+        keyExtractor={(item, index) => item.id}
+        numColumns={2}
+        renderItem={({ item }) => (
+          <Searchitem navigation={navigation} item={item} />
+        )}
+      />
+    </View>
+  );
 }
+
 const styles = StyleSheet.create({
-  page: {
-    backgroundColor: "#D2D6DA",
-    height: "100%",
-  },
-  contentS: {
+  content: {
     flexDirection: "row",
-    marginTop: 10,
-    padding: 10,
-    paddingHorizontal: 20,
-    backgroundColor: "white",
-    // backgroundColor: "#fff",
-  },
-  input: {
-    height: 40,
-    // margin: 12,
-    marginLeft: "15%",
-    borderWidth: 2,
-    borderColor: "black",
-    padding: 10,
-    width: 200,
-    backgroundColor: "white",
-  },
-  button: {
-    borderRadius: 200,
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: "white",
+    // height: 500,
+    // width: 200,
+    backgroundColor: "red",
+    margin: 10,
   },
   item: {
+    flex: 1,
+    // flexDirection: "row",
+    backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
   },
-  text: {
-    fontSize: 20,
+  button: {
+    // flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "white",
+    justifyContent: "center",
+    marginBottom: "2%",
+  },
+  pp: {
+    // marginTop: "90%",
+    // marginLeft: "10%",
+    width: "200%",
+    borderRadius: 25,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#011F26",
   },
 });
