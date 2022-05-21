@@ -21,7 +21,7 @@ export default function Adress({ navigation, route }) {
   const user1 = item.user1;
   const total = item.total;
   const [adress, setAdress] = useState(user1[0].adress);
-  // console.log("fffffffffff",user1[0].adress);
+  
   const [isSelected, setSelected] = useState("");
   const [newA, setNewA] = useState("");
 
@@ -47,6 +47,7 @@ export default function Adress({ navigation, route }) {
         adress:[...lastaddr ,newA],
       });
   };
+  
   return (
     <View>
       <View style={styles.inpp}>
