@@ -22,15 +22,156 @@ import Search from "./Components/Pages/Search";
 import AddP from "./Components/Admin/AddP";
 import { ImageBackground } from "react-native-web";
 import OrderHistory from "./Components/Pages/OrderHistory";
-import UserEditInPro from './Components/Pages/UserEditInPro';
+import UserEditInPro from "./Components/Pages/UserEditInPro";
 import EditUserInfo from "./Components/Admin/EditUserInfo";
-import UserSite from './Components/Admin/UserSite';
+import UserSite from "./Components/Admin/UserSite";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+const CartNav = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Cart"
+        component={Cart}
+        options={{
+          headerBackground: () => (
+            <View style={{ backgroundColor: "white" }}>
+              <Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80, alignSelf: "center" }}
+              />
+            </View>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Product"
+        component={Product}
+        options={{
+          headerBackground: () => (
+            <View style={{ backgroundColor: "white" }}>
+              <Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80, alignSelf: "center" }}
+              />
+            </View>
+          ),
+          headerTitle: () => null,
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+      <Tab.Screen
+        name="Adress"
+        component={Adress}
+        options={{
+          headerBackground: () => (
+            <View style={{ backgroundColor: "white" }}>
+              <Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80, alignSelf: "center" }}
+              />
+            </View>
+          ),
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+const HomeNav = () => {
+  return (
+    <Stack.Navigator>
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerBackground: () => (
+            <View style={{ backgroundColor: "white" }}>
+              <Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80, alignSelf: "center" }}
+              />
+            </View>
+          ),
+          tabBarIcon: () => (
+            <Image
+              source={require("./assets/home.png")}
+              style={{ width: 20, height: 20 }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Product"
+        component={Product}
+        options={{
+          headerBackground: () => (
+            <View style={{ backgroundColor: "white" }}>
+              <Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80, alignSelf: "center" }}
+              />
+            </View>
+          ),
+          headerTitle: () => null,
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
 
-
-export default function App ({ navigation }) {
+const ProfileNave = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false,
+          tabBarIcon: () => (
+            <Image
+              source={require("./assets/userrrr.png")}
+              style={{ width: 20, height: 20 }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="ProfileItem"
+        component={(props) => <ProfileItem {...props} />}
+        options={{
+          
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="OrderHistory"
+        component={(props) => <OrderHistory {...props} />}
+        options={{
+          
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="UserEditInPro"
+        component={(props) => <UserEditInPro {...props} />}
+        options={{
+          
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+export default function App() {
   const auth = getAuth();
   const userr = auth.currentUser;
   useEffect(() => {
@@ -130,8 +271,8 @@ export default function App ({ navigation }) {
         <NavigationContainer>
           <Tab.Navigator>
             <Tab.Screen
-              name="Home"
-              component={Home}
+              name="HomeNav"
+              component={HomeNav}
               options={{
                 headerBackground: () => (
                   <View style={{ backgroundColor: "white" }}>
@@ -141,6 +282,7 @@ export default function App ({ navigation }) {
                     />
                   </View>
                 ),
+                headerShown: false,
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/home.png")}
@@ -170,17 +312,18 @@ export default function App ({ navigation }) {
               }}
             />
             <Tab.Screen
-              name="Cart"
-              component={Cart}
+              name="CartNav"
+              component={CartNav}
               options={{
-                headerBackground: () => (
-                  <View style={{ backgroundColor: "white" }}>
-                    <Image
-                      source={require("./assets/megan.png")}
-                      style={{ width: 80, height: 80, alignSelf: "center" }}
-                    />
-                  </View>
-                ),
+                // headerBackground: () => (
+                //   <View style={{ backgroundColor: "white" }}>
+                //     <Image
+                //       source={require("./assets/megan.png")}
+                //       style={{ width: 80, height: 80, alignSelf: "center" }}
+                //     />
+                //   </View>
+                // ),
+                headerShown: false,
                 tabBarIcon: () => (
                   <Image
                     source={require("./assets/shopping-cart.png")}
@@ -206,8 +349,8 @@ export default function App ({ navigation }) {
               }}
             />
             <Tab.Screen
-              name="Profile"
-              component={Profile}
+              name="ProfileNave"
+              component={ProfileNave}
               options={{
                 headerShown: false,
                 tabBarIcon: () => (
@@ -218,9 +361,9 @@ export default function App ({ navigation }) {
                 ),
               }}
             />
-            <Tab.Screen
+            {/* <Tab.Screen
               name="ProfileItem"
-              component={props => <ProfileItem {...props} />}
+              component={(props) => <ProfileItem {...props} />}
               options={{
                 headerShown: false,
                 tabBarButton: () => null,
@@ -229,7 +372,7 @@ export default function App ({ navigation }) {
             />
             <Tab.Screen
               name="OrderHistory"
-              component={props => <OrderHistory {...props} />}
+              component={(props) => <OrderHistory {...props} />}
               options={{
                 headerShown: false,
                 tabBarButton: () => null,
@@ -238,13 +381,13 @@ export default function App ({ navigation }) {
             />
             <Tab.Screen
               name="UserEditInPro"
-              component={props => <UserEditInPro {...props} />}
+              component={(props) => <UserEditInPro {...props} />}
               options={{
                 headerShown: false,
                 tabBarButton: () => null,
                 tabBarVisible: false,
               }}
-            />
+            /> */}
             <Tab.Screen
               name="Product"
               component={Product}
@@ -257,7 +400,7 @@ export default function App ({ navigation }) {
                     />
                   </View>
                 ),
-                headerTitle:()=>null,
+                headerTitle: () => null,
                 tabBarButton: () => null,
                 tabBarVisible: false,
               }}
