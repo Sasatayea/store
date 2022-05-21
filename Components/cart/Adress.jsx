@@ -18,73 +18,34 @@ import { editUser, getUsers, subscribeUser } from "../../db/Data/Users";
 import AdressItem from "../items/AdressItem";
 export default function Adress({ navigation, route }) {
   const item = route.params;
-  const cartt = item.cart;
+  const user1 = item.user1;
   const total = item.total;
-  const [adress, setAdress] = useState([]);
+  const [adress, setAdress] = useState(user1[0].adress);
+  // console.log("fffffffffff",user1[0].adress);
   const [isSelected, setSelected] = useState("");
   const [newA, setNewA] = useState("");
-  const auth = getAuth();
-  const userr = auth.currentUser;
-  const getAdress = () => {
-    getUserById(userr.uid).then((user) => {
-      const user1 = user;
-      let adress = user1[0].adress;
-      let adress2 = [];
-      for (let i = 0; i < adress.length; i++) {
-        adress2[i] = { adress: adress[i], isSelected: false };
-      }
-      setAdress(adress2);
-      console.log(adress2);
-    });
-  };
-  useEffect(() => {
-    getAdress();
-  }, []);
-
-  useEffect(() => {
-    const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
-      if (change.type === "added") {
-        getAdress();
-      }
-      if (change.type === "modified") {
-        getAdress();
-      }
-      if (change.type === "removed") {
-        getAdress();
-      }
-    });
-
-    return () => {
-      unsubscribeUser();
-    };
-  }, []);
+  
   const Cash = () => {
-    getUserById(userr.uid).then((user) => {
-      const user1 = user;
-      let money = user1[0].money;
-      let sold = user1[0].sold;
-      console.log("soled ", cartt);
-      let carr = cartt;
-      addOrder({order:cartt,adress:isSelected,client:user1[0].name,clientId:user1[0].id,cost:total});
+  const carr = user1[0].cart ;
+  const sold = user1[0].sold ;
+  const money = user1[0].money ;
+      addOrder({order:carr,adress:isSelected,client:user1[0],cost:total ,Accept :0});
       editUser({
         ...user1[0],
         money: money - total,
         cart: [],
         sold: [...carr, ...sold],
-      }).then(navigation.navigate("Cart"));
-    });
+      }).then(navigation.navigate("Home"));
   };
+
   const AddAdress = () => {
-    getUserById(userr.uid).then((user) => {
-      const user1 = user;
-      let adress = user1[0].adress;
-      adress[adress.length] = newA;
-      
+
+    console.log("El user =>" ,user1[0].adress);
+      let lastaddr = user1[0].adress ;
       editUser({
         ...user1[0],
-        adress: adress,
+        adress:[...lastaddr ,newA],
       });
-    });
   };
   return (
     <View>
@@ -102,11 +63,11 @@ export default function Adress({ navigation, route }) {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <View style={{ flexDirection: "row" }}>
-              <Text>{item.adress}</Text>
+              <Text>{item}</Text>
               <RadioButton
-                value={item.adress}
-                status={isSelected === item.adress ? "checked" : "unchecked"}
-                onPress={() => setSelected(item.adress)}
+                value={item}
+                status={isSelected === item ? "checked" : "unchecked"}
+                onPress={() => setSelected(item)}
               />
             </View>
           )}

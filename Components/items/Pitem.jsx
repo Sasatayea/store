@@ -96,15 +96,14 @@ export default function Pitem({ navigation, item }) {
 
           <View style={styles.button}>
             <View style={styles.pp}>
-            <TouchableOpacity onPress={() => addCart(item)}>
-              <View
-                style={{
+            <TouchableOpacity 
+              style={{
                   borderRadius: 20,
                   height: 40,
                   width: 120,
                   backgroundColor: "#0D1F2B",
-                }}
-              >
+                }} onPress={() => addCart(item)}>
+              
                 <Text
                   style={{
                     fontWeight:"bold",
@@ -114,7 +113,6 @@ export default function Pitem({ navigation, item }) {
                 >
                   Add To Cart
                 </Text>
-              </View>
             </TouchableOpacity>
             </View>
             <View style={styles.react}>

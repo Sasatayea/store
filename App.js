@@ -25,6 +25,7 @@ import OrderHistory from "./Components/Pages/OrderHistory";
 import UserEditInPro from "./Components/Pages/UserEditInPro";
 import EditUserInfo from "./Components/Admin/EditUserInfo";
 import UserSite from "./Components/Admin/UserSite";
+import OrderL from './Components/Admin/OrderL';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -271,6 +272,18 @@ export default function App() {
             <Stack.Screen
               name="EditUserInfo"
               component={EditUserInfo}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="OrderL"
+              component={OrderL}
               options={{
                 title: (
                   <Image

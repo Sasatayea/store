@@ -39,7 +39,7 @@ const Register = ({ navigation }) => {
               sold: [],
               image: "",
               background: "",
-              adress:"",
+              adress:[],
             });
           });
         })
