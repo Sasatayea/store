@@ -15,19 +15,34 @@ import { useState, useEffect } from "react";
 export default function PitemAdmin({ navigation, item }) {
   return (
     <View style={[styles.card, styles.shadowProp]}>
-      <TouchableOpacity onPress={()=>navigation.navigate("Edit",{item:item})}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Edit", { item: item })}
+      >
         <Image
-          style={{ height: 150, width: 150, margin: 10 }}
+          style={{
+            height: 150,
+            width: 150,
+            borderRadius: 20,
+            alignSelf: "center",
+          }}
           source={{ uri: item.image }}
         ></Image>
-        <Text style={styles.shadowText}> {item.name} </Text>
-        <Text style={styles.shadowText}>$ {item.price}</Text>
+        <Text style={{ fontWeight: "bold" }}> {item.name} </Text>
+        <Text style={{ fontWeight: "bold" }}> ${item.price}</Text>
         <View style={styles.button}>
-          <Button
-            title="Delet"
-            color="#000"
-            onPress={() => deleteCity(item.id)}
-          />
+          <TouchableOpacity onPress={() => deleteCity(item.id)}>
+            <View style={styles.pp2}>
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  // paddingTop: "5%",
+                  color: "#F9FFB7",
+                }}
+              >
+                Delete
+              </Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </TouchableOpacity>
     </View>
@@ -47,42 +62,52 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   button: {
+    width: "50%",
     borderRadius: 200,
     flex: 1,
-    padding: 20,
+    marginLeft: "20%",
+    marginTop: "5%",
   },
   text: {
     fontSize: 10,
-    
+
     textTransform: "uppercase",
-    
   },
 
   heading: {
     fontSize: 18,
-    
+
     marginBottom: 13,
   },
   card: {
     marginRight: 10,
-    backgroundColor: "#D9D9D9",
-    borderRadius: 12,
-    paddingVertical: 45,
-    paddingHorizontal: "3%",
-    width: 180,
+    backgroundColor: "#E7E9EB",
+    borderRadius: 8,
+    paddingVertical: "5%",
+    // paddingHorizontal: "3%",
+    width: 175,
     height: 300,
     marginVertical: 10,
   },
+  // button: {
+  //   textAlign: "center",
+  //   flexDirection: "row",
+  // },
   shadowProp: {
-    shadowColor: "#171717",
+    shadowColor: "black",
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
-  shadowText: {
-    fontStyle: "italic",
-    textShadowColor: "black",
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 5,
+  pp2: {
+    width: "100%",
+    borderRadius: 20,
+    height: 50,
+    marginRight: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "red",
+    flexDirection: "row",
+    marginLeft: "5%",
   },
 });

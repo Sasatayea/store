@@ -253,18 +253,7 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name="Admin" component={Admin} options={{}} />
-            <Stack.Screen
-              name="EditP"
-              component={EditP}
-              options={{
-                title: (
-                  <Image
-                    source={require("./assets/megan.png")}
-                    style={{ width: 80, height: 80, alignSelf: "center" }}
-                  />
-                ),
-              }}
-            />
+            <Stack.Screen name="EditP" component={EditP} options={{}} />
             <Stack.Screen
               name="UserSite"
               component={UserSite}
@@ -313,30 +302,8 @@ export default function App() {
                 ),
               }}
             />
-            <Stack.Screen
-              name="OrderL"
-              component={OrderL}
-              options={{
-                title: (
-                  <Image
-                    source={require("./assets/megan.png")}
-                    style={{ width: 80, height: 80, alignSelf: "center" }}
-                  />
-                ),
-              }}
-            />
-            <Stack.Screen
-              name="History"
-              component={History}
-              options={{
-                title: (
-                  <Image
-                    source={require("./assets/megan.png")}
-                    style={{ width: 80, height: 80, alignSelf: "center" }}
-                  />
-                ),
-              }}
-            />
+            <Stack.Screen name="OrderL" component={OrderL} options={{}} />
+            <Stack.Screen name="History" component={History} options={{}} />
           </Stack.Navigator>
         </NavigationContainer>
       );

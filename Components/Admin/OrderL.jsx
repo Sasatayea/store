@@ -5,6 +5,7 @@ import {
   Button,
   TouchableOpacity,
   FlatList,
+  Image,
 } from "react-native";
 import React from "react";
 import {
@@ -51,6 +52,7 @@ const OrderL = ({ navigation }) => {
     console.log(id);
     let Myorder = Orders.filter((e) => e.id == id);
     let Allorder = Orders.filter((e) => e.id != id);
+
     editOrder({
       ...Myorder[0],
       Accept: 1,
@@ -67,8 +69,29 @@ const OrderL = ({ navigation }) => {
   };
   return (
     <View>
-      <Text>Orders</Text>
-      <Button title="Hestory" onPress={() => navigation.navigate("History")} />
+      <Image
+        source={require("../../assets/megan.png")}
+        style={{
+          width: 80,
+          height: 80,
+          alignSelf: "center",
+          marginTop: "1%",
+        }}
+      />
+      <TouchableOpacity onPress={() => navigation.navigate("History")}>
+        <View style={styles.pp}>
+          <Text
+            style={{
+              fontWeight: "bold",
+              // paddingTop: "5%",
+              color: "#F9FFB7",
+            }}
+          >
+            History
+          </Text>
+        </View>
+      </TouchableOpacity>
+
       <FlatList
         data={Orders}
         keyExtractor={(item, index) => index.toString()}
@@ -76,17 +99,47 @@ const OrderL = ({ navigation }) => {
           <TouchableOpacity>
             <View
               style={{
-                borderColor: item.Accept == 0 ? "red" : "green",
-                borderWidth: 2,
+                borderColor: item.Accept == 1 ? "green" : "red",
+                borderWidth: 3,
                 margin: 3,
               }}
             >
-              <Text>Client name : {item.client}</Text>
-              <Text>total cost : {item.cost}</Text>
-              <Text>Address : {item.adress}</Text>
+              <View style={{ marginTop: "2%", marginBottom: "2%" }}>
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 19,
+                    paddingLeft: "4%",
+                  }}
+                >
+                  Client name : {item.client}
+                </Text>
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 19,
+                    paddingLeft: "4%",
+                  }}
+                >
+                  total cost : {item.cost}
+                </Text>
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 19,
+                    paddingLeft: "4%",
+                  }}
+                >
+                  Address : {item.adress}
+                </Text>
+              </View>
               <View style={styles.Buttonn}>
                 <Button title="Accept" onPress={() => changeAcc(item.id)} />
-                <Button title="complete" onPress={() => complete(item)} />
+                <Button
+                  title="complete"
+                  style={{ marginLeft: "4%" }}
+                  onPress={() => complete(item)}
+                />
               </View>
             </View>
           </TouchableOpacity>
@@ -100,6 +153,20 @@ export default OrderL;
 const styles = StyleSheet.create({
   Buttonn: {
     flexDirection: "row",
-    marginLeft: 110,
+    marginLeft: "30%",
+  },
+  pp: {
+    // marginTop: "90%",
+    // marginLeft: "10%",
+
+    width: "70%",
+    borderRadius: 20,
+    height: 50,
+
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#2DCCA9",
+    flexDirection: "row",
+    marginLeft: "15%",
   },
 });
