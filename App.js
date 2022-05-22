@@ -28,7 +28,7 @@ import EditUserInfo from "./Components/Admin/EditUserInfo";
 import UserSite from "./Components/Admin/UserSite";
 import OrderL from './Components/Admin/OrderL';
 import History from './Components/Admin/History';
-
+import ResetPassword from "./Components/Users/ResetPassword";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const CartNav = () => {
@@ -409,6 +409,14 @@ export default function App() {
           <Stack.Screen
             name="Register"
             component={Register}
+            options={{
+              headerTransparent: true,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="ResetPassword"
+            component={ResetPassword}
             options={{
               headerTransparent: true,
               headerShown: false,
