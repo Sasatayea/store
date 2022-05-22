@@ -17,10 +17,10 @@ import searchitem from "./Searchitem";
 import { getAuth } from "firebase/auth";
 import { subscribeCart } from "../../db/Data/products";
 import { editUser, getUsers, subscribeUser } from "../../db/Data/Users";
-import Pitem from "./../items/Pitem";
+import Pitem from "../items/Pitem";
 import Searchitem from "./Searchitem";
 
-export default function search({ route, navigation }) {
+export default function Search({ route, navigation }) {
   const auth = getAuth();
   const userr = auth.currentUser;
   const [fav, setfav] = useState([]);
