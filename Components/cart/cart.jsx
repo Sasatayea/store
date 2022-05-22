@@ -41,7 +41,6 @@ export default function Cart({ route, navigation }) {
         t += parseInt(ucart[i].price);
       }
       setTotal(t);
-      console.log(t);
     });
   };
   useEffect(async () => {
@@ -56,12 +55,15 @@ export default function Cart({ route, navigation }) {
     const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
       if (change.type === "added") {
         getCartList();
+        init();
       }
       if (change.type === "modified") {
         getCartList();
+        init();
       }
       if (change.type === "removed") {
         getCartList();
+        init();
       }
     });
 
