@@ -26,8 +26,8 @@ import OrderHistory from "./Components/Pages/OrderHistory";
 import UserEditInPro from "./Components/Pages/UserEditInPro";
 import EditUserInfo from "./Components/Admin/EditUserInfo";
 import UserSite from "./Components/Admin/UserSite";
-import OrderL from './Components/Admin/OrderL';
-import History from './Components/Admin/History';
+import OrderL from "./Components/Admin/OrderL";
+import History from "./Components/Admin/History";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -148,7 +148,6 @@ const ProfileNave = () => {
         name="ProfileItem"
         component={(props) => <ProfileItem {...props} />}
         options={{
-          
           tabBarButton: () => null,
           tabBarVisible: false,
         }}
@@ -174,7 +173,6 @@ const ProfileNave = () => {
         name="OrderHistory"
         component={(props) => <OrderHistory {...props} />}
         options={{
-          
           tabBarButton: () => null,
           tabBarVisible: false,
         }}
@@ -210,18 +208,7 @@ export default function App() {
       return (
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen
-              name="Admin"
-              component={Admin}
-              options={{
-                title: (
-                  <Image
-                    source={require("./assets/megan.png")}
-                    style={{ width: 80, height: 80, alignSelf: "center" }}
-                  />
-                ),
-              }}
-            />
+            <Stack.Screen name="Admin" component={Admin} options={{}} />
             <Stack.Screen
               name="EditP"
               component={EditP}
@@ -359,7 +346,6 @@ export default function App() {
               name="CartNav"
               component={CartNav}
               options={{
-                
                 headerShown: false,
                 tabBarIcon: () => (
                   <Image
@@ -369,7 +355,7 @@ export default function App() {
                 ),
               }}
             />
-            
+
             <Tab.Screen
               name="ProfileNave"
               component={ProfileNave}
@@ -383,8 +369,6 @@ export default function App() {
                 ),
               }}
             />
-          
-            
           </Tab.Navigator>
         </NavigationContainer>
       );
