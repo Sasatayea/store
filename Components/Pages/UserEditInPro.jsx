@@ -4,8 +4,9 @@ import { useState } from "react";
 import { editUser, getUserById } from "../../db/Data/Users";
 import { getAuth } from "firebase/auth";
 
-const UserEditInPro = (items) => {
-  let item = items.route.params;
+const UserEditInPro = ({navigation,route}) => {
+  let item = route.params;
+  console.log(route)
   console.log("user info", item);
   const auth = getAuth();
   const userr = auth.currentUser;
@@ -26,7 +27,7 @@ const UserEditInPro = (items) => {
         countryname: countryname,
         background:background,
       });
-    });
+    }).then(navigation.navigate("Profile"));
   };
   return (
     <View
