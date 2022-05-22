@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, Image } from "react-native";
 import React from "react";
 import {
   getHistory,
@@ -47,7 +47,15 @@ const History = () => {
   };
   return (
     <View>
-      <Text>Hestory</Text>
+      <Image
+        source={require("../../assets/megan.png")}
+        style={{
+          width: 80,
+          height: 80,
+          alignSelf: "center",
+          marginTop: "1%",
+        }}
+      />
       <FlatList
         data={History}
         keyExtractor={(item, index) => index.toString()}
@@ -60,9 +68,35 @@ const History = () => {
                 margin: 3,
               }}
             >
-              <Text>Client name : {item.client}</Text>
-              <Text>total cost : {item.cost}</Text>
-              <Text>Address : {item.adress}</Text>
+              <View>
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 19,
+                    paddingLeft: "4%",
+                  }}
+                >
+                  Client name : {item.client}
+                </Text>
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 19,
+                    paddingLeft: "4%",
+                  }}
+                >
+                  total cost : {item.cost}
+                </Text>
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 19,
+                    paddingLeft: "4%",
+                  }}
+                >
+                  Address : {item.adress}
+                </Text>
+              </View>
               <View style={styles.Buttonn}>
                 <Button title="dellete" onPress={() => dellete(item.id)} />
               </View>
