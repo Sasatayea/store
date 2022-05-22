@@ -7,13 +7,14 @@ import { getCities, subscribe } from "../../db/Data/products";
 const SlideshowTest = (item) => {
   const data = item.item;
   const arr2 = [...data];
+
   const sort = (arr) => {
     let arr1 = [];
     arr1 = arr;
     arr1.sort((a, b) => b.liked.length - a.liked.length);
     return arr1;
   };
-
+  
   const arr = sort(arr2);
   //   console.log("data",arr);
   if (arr.length != 0) {

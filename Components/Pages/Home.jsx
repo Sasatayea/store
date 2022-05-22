@@ -80,7 +80,6 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {/* <ImageBackground source={bc} resizeMode="cover" style={styles.heder}> */}
-
       <ScrollView>
         <Image
           source={require("../../assets/megan.png")}
@@ -127,7 +126,9 @@ const Home = ({ navigation }) => {
           </View>
         </View>
         <View style={styles.slide}>
+
           <SlideshowTest item={slide} />
+          
         </View>
         <View style={styles.items}>
           <FlatList
