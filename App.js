@@ -127,6 +127,50 @@ const HomeNav = () => {
     </Stack.Navigator>
   );
 };
+const Favorite = () => {
+  return (
+    <Stack.Navigator>
+      <Tab.Screen
+        name="Favorite"
+        component={Search}
+        options={{
+          headerShown: false,
+          // headerBackground: () => (
+          //   // <View style={{ backgroundColor: "white" }}>
+          //   //   <Image
+          //   //     source={require("./assets/megan.png")}
+          //   //     style={{ width: 80, height: 80, alignSelf: "center" }}
+          //   //   />
+          //   // </View>
+          // ),
+          tabBarIcon: () => (
+            <Image
+              source={require("./assets/love.png")}
+              style={{ width: 20, height: 20 }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Product"
+        component={Product}
+        options={{
+          headerBackground: () => (
+            <View style={{ backgroundColor: "white" }}>
+              <Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80, alignSelf: "center" }}
+              />
+            </View>
+          ),
+          headerTitle: () => null,
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const ProfileNave = () => {
   return (
@@ -301,7 +345,7 @@ export default function App() {
         <NavigationContainer>
           <Tab.Navigator>
             <Tab.Screen
-              name="HomeNav"
+              name="Home."
               component={HomeNav}
               options={{
                 headerBackground: () => (
@@ -322,8 +366,8 @@ export default function App() {
               }}
             />
             <Tab.Screen
-              name="Search"
-              component={Search}
+              name="Favorite"
+              component={Favorite}
               options={{
                 headerShown: false,
                 // headerBackground: () => (
@@ -336,14 +380,14 @@ export default function App() {
                 // ),
                 tabBarIcon: () => (
                   <Image
-                    source={require("./assets/search.png")}
+                    source={require("./assets/love.png")}
                     style={{ width: 20, height: 20 }}
                   />
                 ),
               }}
             />
             <Tab.Screen
-              name="CartNav"
+              name="Cart."
               component={CartNav}
               options={{
                 headerShown: false,
@@ -357,7 +401,7 @@ export default function App() {
             />
 
             <Tab.Screen
-              name="ProfileNave"
+              name="Profile."
               component={ProfileNave}
               options={{
                 headerShown: false,
