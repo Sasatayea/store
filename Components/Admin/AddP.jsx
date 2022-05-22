@@ -20,6 +20,12 @@ const AddP = ({ navigation }) => {
   const [description, setDescription] = useState("");
   const [image2, setImage2] = useState("");
   const [image3, setImage3] = useState("");
+  const [priceerr, setPriceerr] = useState("");
+  const [imageerr, setImageerr] = useState("");
+  const [nameerr, setNameerr] = useState("");
+  const [descriptionerr, setDescriptionerr] = useState("");
+  const [image2err, setImage2err] = useState("");
+  const [image3err, setImage3err] = useState("");
   return (
     <View
       style={{
@@ -42,7 +48,9 @@ const AddP = ({ navigation }) => {
       </Text>
       <View style={styles.in}>
         <TextInput
-          onChangeText={(e)=>{ setName(e)}}
+          onChangeText={(e) => {
+            setName(e);
+          }}
           keyboardType="default"
           placeholder="Product name"
           style={{
@@ -55,6 +63,7 @@ const AddP = ({ navigation }) => {
             padding: 10,
           }}
         />
+        <Text>{nameerr}</Text>
       </View>
       <View style={styles.in}>
         <TextInput
@@ -72,6 +81,7 @@ const AddP = ({ navigation }) => {
             padding: 10,
           }}
         />
+        <Text>{descriptionerr}</Text>
       </View>
       <View style={styles.in}>
         <TextInput
@@ -88,6 +98,7 @@ const AddP = ({ navigation }) => {
             padding: 10,
           }}
         />
+        <Text>{priceerr}</Text>
       </View>
       <View style={styles.in}>
         <TextInput
@@ -104,6 +115,7 @@ const AddP = ({ navigation }) => {
             padding: 10,
           }}
         />
+        <Text>{imageerr}</Text>
       </View>
       <View style={styles.in}>
         <TextInput
@@ -121,6 +133,7 @@ const AddP = ({ navigation }) => {
             padding: 10,
           }}
         />
+        <Text>{image2err}</Text>
       </View>
       <View style={styles.in}>
         <TextInput
@@ -138,6 +151,7 @@ const AddP = ({ navigation }) => {
             padding: 10,
           }}
         />
+        <Text>{image3err}</Text>
       </View>
       <View style={styles.row}>
         <TextInput
@@ -181,20 +195,32 @@ const AddP = ({ navigation }) => {
         <Button
           title="Add"
           color="#000"
-          onPress={() =>
-            addCity({
-              id:item.id,
-              name: name,
-              price: price,
-              size: size,
-              type: type,
-              image: image,
-              image2: image2,
-              image3: image3,
-              description: description,
-              liked: [],
-            })
-          }
+          onPress={() => {
+            if (name.length < 3) setNameerr("This name less than 3 characters");
+            else if (description.length < 12) {
+              setDescriptionerr("This description less than 12 characters");
+            } else if (price == "") {
+              setPriceerr("Enter the price");
+            } else if (image == "") {
+              setImageerr("Please uplode an Image1");
+            } else if (image2 == "") {
+              setImage2err("Please uplode an Image2");
+            } else if (image3 == "") {
+              setImage3err("Please uplode an Image3");
+            } else {
+              addCity({
+                name: name,
+                price: price,
+                size: size,
+                type: type,
+                image: image,
+                image2: image2,
+                image3: image3,
+                description: description,
+                liked: [],
+              }).then(navigation.navigate("EditP"));
+            }
+          }}
         />
       </View>
     </View>
