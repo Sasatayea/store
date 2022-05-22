@@ -37,9 +37,12 @@ async function register(email, password) {
 async function login(email, password) {
   await signInWithEmailAndPassword(auth, email, password);
 }
-
+async function sendPassword(email){
+  console.log(email);
+  sendPasswordResetEmail(auth,email);
+}
 async function logout() {
   await auth.signOut();
 }
 
-export { register, login, logout,getUserUId };
+export { register, login, logout,getUserUId,sendPassword };

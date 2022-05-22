@@ -17,7 +17,7 @@ const UserSite = ({navigation ,route}) => {
             money:money,
 
           });
-        });
+        }).then(navigation.navigate("EditUserInfo"));
       };
 
       
@@ -33,7 +33,7 @@ const UserSite = ({navigation ,route}) => {
             value={money}
             style={styles.inpp}
           />
-      <Button title="done" onPress={change} />
+      <Button title="done" onPress={()=>{change()}} />
 
     </View>
   )

@@ -58,12 +58,23 @@ export default function Pitem({ navigation, item }) {
 
     const Like = () => {
       if (flag) {
-        editCity({ ...item, liked: [...liked, email] });
+        editCity({ ...item, liked: [...liked, userr.email] });
         setFlage(false);
+        getUserById(userr.uid).then((user) => {
+          const user1 = user;
+          const fav = user1[0].favourite;
+          editUser({ ...user1[0], favourite: [...fav, item] });
+        });
       } else {
-        let arr = liked.filter((e) => e != email);
+        let arr = liked.filter((e) => e != userr.email);
         editCity({ ...item, liked: arr });
         setFlage(true);
+        getUserById(userr.uid).then((user) => {
+          const user1 = user;
+          const fav = user1[0].favourite;
+          let arr2 = fav.filter((e) => e.id != item.id);
+          editUser({ ...user1[0], favourite: [...arr2] });
+        });
       }
     };
     const addCart = async (item) => {

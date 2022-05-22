@@ -13,13 +13,19 @@ import { React, useState } from "react";
 
 const AddP = ({ navigation }) => {
   const [price, setPrice] = useState("");
+  const [priceerr, setPriceerr] = useState("");
   const [image, setImage] = useState("");
+  const [imageerr, setImageerr] = useState("");
   const [name, setName] = useState("");
+  const [nameerr, setnameerr] = useState("");
   const [size, setSize] = useState("");
   const [type, setType] = useState("chair");
   const [description, setDescription] = useState("");
+  const [descriptionerr, setDescriptionerr] = useState("");
   const [image2, setImage2] = useState("");
+  const [image2err, setImage2err] = useState("");
   const [image3, setImage3] = useState("");
+  const [image3err, setImage3err] = useState("");
   return (
     <View
       style={{
@@ -42,7 +48,9 @@ const AddP = ({ navigation }) => {
       </Text>
       <View style={styles.in}>
         <TextInput
-          onChangeText={(e)=>{ setName(e)}}
+          onChangeText={(e) => {
+            setName(e);
+          }}
           keyboardType="default"
           placeholder="Product name"
           style={{
@@ -55,10 +63,13 @@ const AddP = ({ navigation }) => {
             padding: 10,
           }}
         />
+        <Text>{nameerr}</Text>
       </View>
       <View style={styles.in}>
         <TextInput
-          onChangeText={setDescription}
+          onChangeText={(e) => {
+            setDescription(e);
+          }}
           keyboardType="default"
           placeholder="Description"
           value={description}
@@ -72,11 +83,14 @@ const AddP = ({ navigation }) => {
             padding: 10,
           }}
         />
+        <Text>{descriptionerr}</Text>
       </View>
       <View style={styles.in}>
         <TextInput
-          onChangeText={setPrice}
-          keyboardType="number-pad"
+          onChangeText={(e) => {
+            setPrice(e);
+          }}
+          keyboardType="numeric"
           placeholder="Price"
           style={{
             flex: 2,
@@ -88,10 +102,13 @@ const AddP = ({ navigation }) => {
             padding: 10,
           }}
         />
+        <Text>{priceerr}</Text>
       </View>
       <View style={styles.in}>
         <TextInput
-          onChangeText={setImage}
+          onChangeText={(e) => {
+            setImage(e);
+          }}
           keyboardType="default"
           placeholder="Image"
           style={{
@@ -104,10 +121,13 @@ const AddP = ({ navigation }) => {
             padding: 10,
           }}
         />
+        <Text>{imageerr}</Text>
       </View>
       <View style={styles.in}>
         <TextInput
-          onChangeText={setImage2}
+          onChangeText={(e) => {
+            setImage2(e);
+          }}
           keyboardType="default"
           placeholder="Image2"
           value={image2}
@@ -121,10 +141,13 @@ const AddP = ({ navigation }) => {
             padding: 10,
           }}
         />
+        <Text>{image2err}</Text>
       </View>
       <View style={styles.in}>
         <TextInput
-          onChangeText={setImage3}
+          onChangeText={(e) => {
+            setImage3(e);
+          }}
           keyboardType="default"
           placeholder="Image3"
           value={image3}
@@ -138,6 +161,7 @@ const AddP = ({ navigation }) => {
             padding: 10,
           }}
         />
+        <Text>{image3err}</Text>
       </View>
       <View style={styles.row}>
         <TextInput
@@ -181,20 +205,35 @@ const AddP = ({ navigation }) => {
         <Button
           title="Add"
           color="#000"
-          onPress={() =>
-            addCity({
-              id:item.id,
-              name: name,
-              price: price,
-              size: size,
-              type: type,
-              image: image,
-              image2: image2,
-              image3: image3,
-              description: description,
-              liked: [],
-            })
-          }
+          onPress={() => {
+            if (name.length < 5) {
+              setnameerr("At leas 5 characters");
+            } else if (description.length < 12) {
+              setDescriptionerr("At leas 13 characters");
+            } else if (price == "") {
+              console.log("Enter a valid price");
+              setPriceerr("Enter a valid price");
+            } else if (image == "") {
+              setImageerr("Please add a valid image");
+            } else if (image2 == "") {
+              setImage2err("Please add a valid image2");
+            } else if (image3 == "") {
+              setImage3err("Please add a valid image3");
+            } else {
+              addCity({
+              
+                name: name,
+                price: price,
+                size: size,
+                type: type,
+                image: image,
+                image2: image2,
+                image3: image3,
+                description: description,
+                liked: [],
+              });
+            }
+          }}
         />
       </View>
     </View>

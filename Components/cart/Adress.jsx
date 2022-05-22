@@ -66,7 +66,6 @@ export default function Adress({ navigation, route }) {
           const user1 = user;
           let money = user1[0].money;
           let sold = user1[0].sold;
-          console.log("soled ", cartt);
           let carr = cartt;
           addOrder({
             order: cartt,
