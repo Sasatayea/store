@@ -335,7 +335,7 @@ export default function App() {
               }}
             />
             <Tab.Screen
-              name="Search"
+              name="favourite"
               component={Search}
               options={{
                 headerShown: false,
@@ -349,7 +349,7 @@ export default function App() {
                 // ),
                 tabBarIcon: () => (
                   <Image
-                    source={require("./assets/search.png")}
+                    source={require("./assets/love.png")}
                     style={{ width: 20, height: 20 }}
                   />
                 ),

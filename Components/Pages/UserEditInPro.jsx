@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { editUser, getUserById } from "../../db/Data/Users";
 import { getAuth } from "firebase/auth";
+import { ScrollView } from "react-native-web";
 
 const UserEditInPro = ({navigation,route}) => {
   let item = route.params;
@@ -30,14 +31,15 @@ const UserEditInPro = ({navigation,route}) => {
     }).then(navigation.navigate("Profile"));
   };
   return (
+    <ScrollView>
     <View
       style={{
         marginTop: "40%",
         backgroundColor: "white",
         borderRadius: 20,
-        height: "58%",
+        height: "100%",
       }}
-    >
+      >
       <Text
         style={{
           padding: 2,
@@ -49,10 +51,10 @@ const UserEditInPro = ({navigation,route}) => {
         Profile Edit
       </Text>
       <Text> </Text>
-<View style={{ alignSelf:"center"}}>
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ alignSelf:"center"}}>
         
         <View style={styles.in}>
+          <Text style={{ marginTop:20}}> Edit name </Text>
           <TextInput
             onChangeText={setName}
             keyboardType="default"
@@ -60,11 +62,10 @@ const UserEditInPro = ({navigation,route}) => {
             value={name}
             style={styles.inpp}
           />
-        </View>
       </View>
-      
         
         <View style={styles.in}>
+        <Text style={{ marginTop:20}}> Edit Image </Text>
           <TextInput
             onChangeText={setImage}
             keyboardType="default"
@@ -74,6 +75,7 @@ const UserEditInPro = ({navigation,route}) => {
           />
         </View>
         <View style={styles.in}>
+        <Text style={{ marginTop:20}}> Edit Image Background </Text>
           <TextInput
             onChangeText={setBackground}
             keyboardType="default"
@@ -82,22 +84,9 @@ const UserEditInPro = ({navigation,route}) => {
             style={styles.inpp}
           />
         </View>
-      
-      <View style={{ flexDirection: "row" }}>
         
         <View style={styles.in}>
-          <TextInput
-            onChangeText={setpass}
-            keyboardType="password"
-            placeholder="password"
-            value={pass}
-            style={styles.inpp}
-          />
-        </View>
-      </View>
-      <View style={{ flexDirection: "row" }}>
-        
-        <View style={styles.in}>
+        <Text style={{ marginTop:20}}> Edit countryname </Text>
           <TextInput
             onChangeText={setcountryname}
             keyboardType="default"
@@ -105,7 +94,6 @@ const UserEditInPro = ({navigation,route}) => {
             value={countryname}
             style={styles.inpp}
           />
-        </View>
       </View>
       </View>
       <View
@@ -118,6 +106,7 @@ const UserEditInPro = ({navigation,route}) => {
         <Button color="#000" title="done" onPress={change} />
       </View>
     </View>
+    </ScrollView>
   );
 };
 
@@ -133,6 +122,9 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+  },
+  in:{
+    flexDirection:'row'
   },
   texttinput: {
     borderWidth: 1,
