@@ -15,6 +15,15 @@ const OrderHistory = ({ route, navigation }) => {
   if (item.sold.length != 0) {
     return (
       <View style={styles.contant}>
+        <Image
+          source={require("../../assets/megan.png")}
+          style={{
+            width: 80,
+            height: 80,
+            alignSelf: "center",
+            marginTop: "1%",
+          }}
+        />
         <View style={{ paddingLeft: "30%", marginTop: "5%" }}>
           <Text style={{ fontSize: 25, fontWeight: "bold" }}>
             Order History
@@ -56,6 +65,15 @@ const OrderHistory = ({ route, navigation }) => {
       </View>
     );
   } else {
+    <Image
+      source={require("../../assets/megan.png")}
+      style={{
+        width: 80,
+        height: 80,
+        alignSelf: "center",
+        marginTop: "1%",
+      }}
+    />;
     return <Text> NoThing</Text>;
   }
 };

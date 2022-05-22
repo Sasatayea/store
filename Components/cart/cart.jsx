@@ -7,6 +7,7 @@ import {
   TextInput,
   FlatList,
   ScrollView,
+  Image,
 } from "react-native";
 import { useState, useEffect } from "react";
 
@@ -105,6 +106,15 @@ export default function Cart({ route, navigation }) {
   };
   return (
     <View style={styles.item}>
+      <Image
+        source={require("../../assets/megan.png")}
+        style={{
+          width: 80,
+          height: 80,
+          alignSelf: "center",
+          marginTop: "1%",
+        }}
+      />
       <Text
         style={{
           marginTop: "5%",

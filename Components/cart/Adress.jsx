@@ -8,6 +8,7 @@ import {
   FlatList,
   ScrollView,
   CheckBox,
+  Image,
 } from "react-native";
 import { useState, useEffect } from "react";
 import { RadioButton } from "react-native-paper";
@@ -107,6 +108,15 @@ export default function Adress({ navigation, route }) {
   };
   return (
     <View>
+      <Image
+        source={require("../../assets/megan.png")}
+        style={{
+          width: 80,
+          height: 80,
+          alignSelf: "center",
+          marginTop: "1%",
+        }}
+      />
       <View style={styles.inpp}>
         <View style={styles.input}>
           <TextInput onChangeText={setNewA} placeholder="New Adress" />
