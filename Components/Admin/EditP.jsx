@@ -46,7 +46,28 @@ export default function EditP({ navigation }) {
 
   return (
     <View>
-              <Button title="Add Product" onPress={()=>navigation.navigate("AddP")}/>
+      <Image
+        source={require("../../assets/megan.png")}
+        style={{
+          width: 80,
+          height: 80,
+          alignSelf: "center",
+          marginTop: "1%",
+        }}
+      />
+      <TouchableOpacity onPress={() => navigation.navigate("AddP")}>
+        <View style={styles.pp}>
+          <Text
+            style={{
+              fontWeight: "bold",
+              // paddingTop: "5%",
+              color: "#F9FFB7",
+            }}
+          >
+            Add Product
+          </Text>
+        </View>
+      </TouchableOpacity>
       <View style={styles.items}>
         <FlatList
           data={cities}
@@ -73,5 +94,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  
+  pp: {
+    // marginTop: "90%",
+    // marginLeft: "10%",
+
+    width: "70%",
+    borderRadius: 20,
+    height: 50,
+
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#2DCCA9",
+    flexDirection: "row",
+    marginLeft: "15%",
+  },
 });

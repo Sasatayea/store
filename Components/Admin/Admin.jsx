@@ -18,7 +18,7 @@ export default function Admin({ navigation }) {
           width: 80,
           height: 80,
           alignSelf: "center",
-          marginTop: "1%",
+          marginTop: "10%",
         }}
       />
       <View style={{ marginBottom: "12%" }}>
