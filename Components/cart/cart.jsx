@@ -7,6 +7,7 @@ import {
   TextInput,
   FlatList,
   ScrollView,
+  Image,
 } from "react-native";
 import { useState, useEffect } from "react";
 
@@ -105,7 +106,23 @@ export default function Cart({ route, navigation }) {
   };
   return (
     <View style={styles.item}>
-      <Text style={{ marginTop: 10, fontSize: 16, fontWeight: "bold" }}>
+      <Image
+        source={require("../../assets/megan.png")}
+        style={{
+          width: 80,
+          height: 80,
+          alignSelf: "center",
+          marginTop: "1%",
+        }}
+      />
+      <Text
+        style={{
+          marginTop: "5%",
+          fontSize: 16,
+          fontWeight: "bold",
+          paddingLeft: "35%",
+        }}
+      >
         Selected Items
       </Text>
       <FlatList
@@ -123,9 +140,28 @@ export default function Cart({ route, navigation }) {
         )}
       />
 
-      <Text style={{ fontSize: 24 }}>total price = {total}</Text>
+      <Text
+        style={{
+          fontSize: 22,
+          fontWeight: "bold",
+          paddingLeft: "22%",
+          marginBottom: "3%",
+        }}
+      >
+        Total price = {total}
+      </Text>
       <View style={styles.button}>
-        <Button title="cash" color="#000" onPress={() => Cash()} />
+        <TouchableOpacity title="cash" color="#000" onPress={() => Cash()}>
+          <Text
+            style={{
+              fontWeight: "bold",
+              // paddingTop: "5%",
+              color: "#F9FFB7",
+            }}
+          >
+            Cash
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -141,16 +177,23 @@ const styles = StyleSheet.create({
   },
   item: {
     flex: 1,
-    // flexDirection: "row",
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
+    alignSelf: "stretch",
+    backgroundColor: "#fff",
+
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 10,
   },
   button: {
-    // flexDirection: "row",
+    width: "25%",
+    borderRadius: 20,
+    height: 50,
+    marginLeft: "40%",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: "2%",
+    backgroundColor: "#2DCCA9",
+    flexDirection: "row",
+    marginBottom: "5%",
   },
   pp: {
     // marginTop: "90%",

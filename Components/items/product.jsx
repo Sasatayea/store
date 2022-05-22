@@ -61,7 +61,7 @@ export default function Product({ navigation, route }) {
       }
     });
   };
-  
+
   const unsubLike = async () => {
     if (curLike[0] == userr.email) setFlage(false);
     else setFlage(true);
@@ -108,12 +108,17 @@ export default function Product({ navigation, route }) {
       unsubscribeUser();
     };
   }, []);
-  
+
   return (
     <View style={styles.page}>
       <Image
         source={require("../../assets/megan.png")}
-        style={{ width: 80, height: 80, alignSelf: "center", marginTop: "5%" }}
+        style={{
+          width: 80,
+          height: 80,
+          alignSelf: "center",
+          marginTop: "1%",
+        }}
       />
       <ScrollView>
         <View style={styles.slide}>
@@ -141,49 +146,49 @@ export default function Product({ navigation, route }) {
         <View style={styles.button}>
           <View style={{ flexDirection: "row" }}>
             {cartI ? (
-              <View style={styles.pp2}>
-                <TouchableOpacity
-                  onPress={() => {
-                    addCart(item), isInCart();
-                  }}
-                >
+              <TouchableOpacity
+                onPress={() => {
+                  addCart(item), isInCart();
+                }}
+              >
+                <View style={styles.pp2}>
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                      // paddingTop: "5%",
+                      color: "#F9FFB7",
+                    }}
+                  >
+                    Delete
+                  </Text>
                   <Image
                     source={require("../../assets/shopping-cart (2).png")}
                     style={{ width: 25, height: 25, margintop: "5%" }}
                   />
+                </View>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                onPress={() => {
+                  addCart(item), isInCart();
+                }}
+              >
+                <View style={styles.pp}>
                   <Text
                     style={{
                       fontWeight: "bold",
-                      paddingTop: "5%",
+                      // paddingTop: "5%",
                       color: "#F9FFB7",
                     }}
                   >
-                    Delet from Cart
+                    Add to
                   </Text>
-                </TouchableOpacity>
-              </View>
-            ) : (
-              <View style={styles.pp}>
-                <TouchableOpacity
-                  onPress={() => {
-                    addCart(item), isInCart();
-                  }}
-                >
                   <Image
                     source={require("../../assets/shopping-cart (1).png")}
                     style={{ width: 25, height: 25, margintop: "5%" }}
                   />
-                  <Text
-                    style={{
-                      fontWeight: "bold",
-                      paddingTop: "5%",
-                      color: "#F9FFB7",
-                    }}
-                  >
-                    Add to The Cart
-                  </Text>
-                </TouchableOpacity>
-              </View>
+                </View>
+              </TouchableOpacity>
             )}
           </View>
           <View style={styles.react}>
@@ -223,8 +228,9 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   button: {
-    marginLeft: "5%",
+    marginLeft: "30%",
     marginTop: "5%",
+    marginBottom: "5%",
     // textAlign: "center",
     flexDirection: "row",
   },
@@ -239,6 +245,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#2DCCA9",
+    flexDirection: "row",
+    marginLeft: "5%",
   },
   pp2: {
     width: "100%",
@@ -248,9 +256,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "red",
+    flexDirection: "row",
+    marginLeft: "5%",
   },
   react: {
     marginTop: "5%",
+    marginLeft: "5%",
   },
   slide: {
     width: "100%",
@@ -259,4 +270,3 @@ const styles = StyleSheet.create({
     marginTop: "5%",
   },
 });
-
