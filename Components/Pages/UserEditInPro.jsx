@@ -1,17 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View,Button,TextInput } from "react-native";
 import React from "react";
 import { useState } from "react";
-import { TextInput } from "react-native";
-import { Button } from "react-native-web";
 import { editUser, getUserById } from "../../db/Data/Users";
 import { getAuth } from "firebase/auth";
 
-const UserEditInPro = (items) => {
-  let item = items.route.params;
+const UserEditInPro = ({navigation,route}) => {
+  let item = route.params;
+  console.log(route)
   console.log("user info", item);
   const auth = getAuth();
   const userr = auth.currentUser;
   const [image, setImage] = useState(item.image);
+  const [background, setBackground] = useState(item.background);
   const [pass, setpass] = useState(item.password);
   const [countryname, setcountryname] = useState(item.countryname);
 
@@ -25,8 +25,9 @@ const UserEditInPro = (items) => {
         image: image,
         password: pass,
         countryname: countryname,
+        background:background,
       });
-    });
+    }).then(navigation.navigate("Profile"));
   };
   return (
     <View
@@ -61,7 +62,7 @@ const UserEditInPro = (items) => {
           />
         </View>
       </View>
-      <View style={{ flexDirection: "row" }}>
+      
         
         <View style={styles.in}>
           <TextInput
@@ -72,7 +73,16 @@ const UserEditInPro = (items) => {
             style={styles.inpp}
           />
         </View>
-      </View>
+        <View style={styles.in}>
+          <TextInput
+            onChangeText={setBackground}
+            keyboardType="default"
+            placeholder="background"
+            value={background}
+            style={styles.inpp}
+          />
+        </View>
+      
       <View style={{ flexDirection: "row" }}>
         
         <View style={styles.in}>

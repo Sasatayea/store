@@ -1,5 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import Home from "./Components/Pages/Home";
+//ddddd
 import { auth } from "./db/Config";
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, Button, Image } from "react-native";
@@ -27,7 +28,7 @@ import EditUserInfo from "./Components/Admin/EditUserInfo";
 import UserSite from "./Components/Admin/UserSite";
 import OrderL from './Components/Admin/OrderL';
 import History from './Components/Admin/History';
-
+import ResetPassword from "./Components/Users/ResetPassword";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const CartNav = () => {
@@ -408,6 +409,14 @@ export default function App() {
           <Stack.Screen
             name="Register"
             component={Register}
+            options={{
+              headerTransparent: true,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="ResetPassword"
+            component={ResetPassword}
             options={{
               headerTransparent: true,
               headerShown: false,

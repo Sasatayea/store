@@ -6,14 +6,46 @@ import {
   Button,
   TextInput,
   Image,
-  Pressable,
 } from "react-native";
+
 import { getAuth } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { addCity, editCity, getCities } from "../../db/Data/products";
 import { editUser, getUserById, subscribeUser } from "../../db/Data/Users";
 
-export default function Pitem({ navigation, item }) {
+export default function Searchitem({ navigation, item }) {
+  const [count, setCount] = useState(0);
+
+  const auth = getAuth();
+
+  const userr = auth.currentUser;
+  const [liked, setLiked] = useState(item.liked);
+  const liked1 = [...liked];
+  const [flag, setFlage] = useState();
+  const [cartI, setCartI] = useState();
+  const [cart, setCart] = useState([]);
+  //let isInCart = route.params.isInCart;
+  const [curLike, setCurLike] = useState(
+    liked1.filter((e) => userr.email == e)
+  );
+  const addCart = async (item) => {
+    getUserById(userr.uid).then((user) => {
+      const user1 = user;
+      const ucart = user1[0].cart;
+      let flag = true;
+      for (let i = 0; i < ucart.length; i++) {
+        if (ucart[i].id == item.id) flag = false;
+      }
+      if (flag) {
+        setCart([...ucart, item]);
+        editUser({ ...user1[0], cart: [...ucart, item] });
+      } else {
+        let arr = ucart.filter((e) => e.id != item.id);
+        setCart([...arr]);
+        editUser({ ...user1[0], cart: [...arr] });
+      }
+    });
+  };
   const isInCart = () => {
     getUserById(userr.uid).then((user) => {
       const user1 = user;
@@ -26,93 +58,56 @@ export default function Pitem({ navigation, item }) {
       }
     });
   };
+
   const unsubLike = async () => {
     if (curLike[0] == userr.email) setFlage(false);
     else setFlage(true);
   };
   useEffect(async () => {
     await unsubLike();
-    getUserById(userr.uid).then((user) => {
-      const user1 = user;
-      const ucart = user1[0].cart;
-      setCart(ucart);
-    });
   }, []);
+  const Like = () => {
+    if (flag) {
+      editCity({ ...item, liked: [...liked, userr.email] });
+      setFlage(false);
+      getUserById(userr.uid).then((user) => {
+        const user1 = user;
+        const fav = user1[0].favourite;
+        editUser({ ...user1[0], favourite: [...fav, item] });
+      });
+    } else {
+      let arr = liked.filter((e) => e != userr.email);
+      editCity({ ...item, liked: arr });
+      setFlage(true);
+      getUserById(userr.uid).then((user) => {
+        const user1 = user;
+        const fav = user1[0].favourite;
+        let arr2 = fav.filter((e) => e.id != item.id);
+        editUser({ ...user1[0], favourite: [...arr2] });
+      });
+    }
+  };
 
-  const auth = getAuth();
+  useEffect(() => {
+    const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
+      if (change.type === "added") {
+        isInCart();
+      }
+      if (change.type === "modified") {
+        isInCart();
+      }
+      if (change.type === "removed") {
+        isInCart();
+      }
+    });
 
-  const userr = auth.currentUser;
-
-  const [liked, setLiked] = useState(item.liked);
-  const [cart, setCart] = useState([]);
-  const liked1 = [...liked];
-
-  const [curLike, setCurLike] = useState(
-    liked1.filter((e) => userr.email == e)
-  );
-  const [flag, setFlage] = useState();
-  const [cartI, setCartI] = useState();
+    return () => {
+      unsubscribeUser();
+    };
+  }, []);
 
   if (userr !== null) {
     const email = userr.email;
-
-    const Like = () => {
-      if (flag) {
-        editCity({ ...item, liked: [...liked, userr.email] });
-        setFlage(false);
-        getUserById(userr.uid).then((user) => {
-          const user1 = user;
-          const fav = user1[0].favourite;
-          editUser({ ...user1[0], favourite: [...fav, item] });
-        });
-      } else {
-        let arr = liked.filter((e) => e != userr.email);
-        editCity({ ...item, liked: arr });
-        setFlage(true);
-        getUserById(userr.uid).then((user) => {
-          const user1 = user;
-          const fav = user1[0].favourite;
-          let arr2 = fav.filter((e) => e.id != item.id);
-          editUser({ ...user1[0], favourite: [...arr2] });
-        });
-      }
-    };
-    const addCart = async (item) => {
-      getUserById(userr.uid).then((user) => {
-        const user1 = user;
-        const ucart = user1[0].cart;
-        let flag = true;
-        for (let i = 0; i < ucart.length; i++) {
-          if (ucart[i].id == item.id) flag = false;
-        }
-        if (flag) {
-          setCart([...ucart, item]);
-          editUser({ ...user1[0], cart: [...ucart, item] });
-        } else {
-          let arr = ucart.filter((e) => e.id != item.id);
-          setCart([...arr]);
-          editUser({ ...user1[0], cart: [...arr] });
-        }
-      });
-    };
-
-    useEffect(() => {
-      const unsubscribeUser = subscribeUser(({ change, snapshot }) => {
-        if (change.type === "added") {
-          isInCart();
-        }
-        if (change.type === "modified") {
-          isInCart();
-        }
-        if (change.type === "removed") {
-          isInCart();
-        }
-      });
-
-      return () => {
-        unsubscribeUser();
-      };
-    }, []);
     return (
       <View style={[styles.card, styles.shadowProp]}>
         <View>
@@ -140,7 +135,7 @@ export default function Pitem({ navigation, item }) {
             )}
             <Text style={{ fontWeight: "bold" }}> $ {item.price}</Text>
           </TouchableOpacity>
-
+          <Text> </Text>
           <View style={styles.button}>
             <View style={{ flexDirection: "row" }}>
               {cartI ? (
@@ -189,21 +184,6 @@ export default function Pitem({ navigation, item }) {
                 </TouchableOpacity>
               )}
             </View>
-            <View style={styles.react}>
-              <TouchableOpacity onPress={() => Like()}>
-                {flag ? (
-                  <Image
-                    source={require("../../assets/heart.png")}
-                    style={{ width: 30, height: 30, marginLeft: 10 }}
-                  />
-                ) : (
-                  <Image
-                    source={require("../../assets/heart (1).png")}
-                    style={{ width: 30, height: 30, marginLeft: 10 }}
-                  />
-                )}
-              </TouchableOpacity>
-            </View>
           </View>
         </View>
       </View>
@@ -213,32 +193,10 @@ export default function Pitem({ navigation, item }) {
 
 const styles = StyleSheet.create({
   content: {
-    flex: 1,
-    alignSelf: "stretch",
-    backgroundColor: "#fff",
-    borderRadius: 5,
-    borderWidth: 3,
-    borderColor: "#000",
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: 10,
-  },
-  button: {
-    marginLeft: "5%",
-    marginTop: "5%",
-    // textAlign: "center",
-    flexDirection: "row",
-  },
-  text: {
-    fontSize: 10,
-    //fontWeight: 600,
-    textTransform: "uppercase",
-  },
-
-  heading: {
-    fontSize: 18,
-    //fontWeight: "600",
-    marginBottom: 13,
+    height: 200,
+    width: 200,
+    backgroundColor: "red",
+    margin: 10,
   },
   card: {
     marginRight: 10,
@@ -260,12 +218,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
-  shadowText: {
-    shadowColor: "black",
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-  },
+
   pp: {
     // marginTop: "90%",
     // marginLeft: "10%",
@@ -291,8 +244,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginLeft: "5%",
   },
-  react: {
-    marginTop: "5%",
-    marginLeft: "13%",
+  button: {
+    marginLeft: "20%",
+
+    // textAlign: "center",
+    width: "50%",
+    flexDirection: "row",
   },
 });

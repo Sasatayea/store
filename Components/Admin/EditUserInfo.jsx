@@ -1,12 +1,9 @@
-import { StyleSheet, Text, View ,TouchableOpacity ,Image} from "react-native";
+import { StyleSheet, Text, View ,TouchableOpacity ,Image,FlatList} from "react-native";
 import React from "react";
 import { getAuth } from "firebase/auth";
 import { editUser, getUserById, getUsers, subscribeUser } from "../../db/Data/Users";
-import { useEffect } from "react";
-import { useState } from "react";
-import { Button } from "react-native";
-import { TextInput } from "react-native";
-import { FlatList } from 'react-native-web';
+import { useEffect,useState } from "react";
+
 
 const EditUserInfo = ({navigation}) => {
 
