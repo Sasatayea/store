@@ -60,8 +60,8 @@ export default function Adress({ navigation, route }) {
     };
   }, []);
   const Cash = () => {
-    if(isSelected!=""){
-      if(total!=0){
+    if (isSelected != "") {
+      if (total != 0) {
         getUserById(userr.uid).then((user) => {
           const user1 = user;
           let money = user1[0].money;
@@ -82,14 +82,12 @@ export default function Adress({ navigation, route }) {
             sold: [...carr, ...sold],
           }).then(navigation.navigate("Cart"));
         });
-      }else{
+      } else {
         setError("The cart is emtpty");
       }
-    }else{
+    } else {
       setError2("Please choose an adress");
     }
-    
-    
   };
   const AddAdress = () => {
     if (newA.length > 12) {
@@ -103,7 +101,7 @@ export default function Adress({ navigation, route }) {
           adress: adress,
         });
       });
-    }else{
+    } else {
       setError("The adress should be at least 13 character");
     }
   };
@@ -113,42 +111,104 @@ export default function Adress({ navigation, route }) {
         <View style={styles.input}>
           <TextInput onChangeText={setNewA} placeholder="New Adress" />
         </View>
-        <Text>{error}</Text>
-        <Button title="Add" color="#000" onPress={() => AddAdress()} />
       </View>
-      <Button title="cash" color="#000" onPress={() => Cash()} />
+      <Text>{error}</Text>
+      <View
+        style={{ flexDirection: "row", marginLeft: "30%", marginTop: "5%" }}
+      >
+        <View style={styles.pp}>
+          <TouchableOpacity
+            title="Add"
+            color="#000"
+            onPress={() => AddAdress()}
+          >
+            <Text
+              style={{
+                fontWeight: "bold",
+                // paddingTop: "5%",
+                color: "#F9FFB7",
+              }}
+            >
+              Add
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.pp}>
+          <TouchableOpacity title="cash" color="#000" onPress={() => Cash()}>
+            <Text
+              style={{
+                fontWeight: "bold",
+                // paddingTop: "5%",
+                color: "#F9FFB7",
+              }}
+            >
+              Cash
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
       <ScrollView>
-        <Text>{error2}</Text>
         <FlatList
           data={adress}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
-            <View style={{ flexDirection: "row" }}>
-              <Text>{item.adress}</Text>
-              <RadioButton
-                value={item.adress}
-                status={isSelected === item.adress ? "checked" : "unchecked"}
-                onPress={() => setSelected(item.adress)}
-              />
+            <View
+              style={{
+                flexDirection: "row",
+                marginLeft: "5%",
+                marginTop: "5%",
+                marginRight: "5%",
+                backgroundColor: "#E7E9EB",
+                borderRadius: 18,
+              }}
+            >
+              <Text style={{ marginTop: "2%", paddingLeft: "3%" }}>
+                {item.adress}
+              </Text>
+              <View style={{ marginLeft: "50%" }}>
+                <RadioButton
+                  value={item.adress}
+                  status={isSelected === item.adress ? "checked" : "unchecked"}
+                  onPress={() => setSelected(item.adress)}
+                />
+              </View>
             </View>
           )}
         />
       </ScrollView>
+      <Text style={{}}>{error2}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   input: {
-    height: 60,
-    margin: 12,
+    height: 40,
+    borderRadius: 20,
+
     borderWidth: 2,
     borderColor: "black",
-    padding: 10,
-    width: 200,
+    paddingLeft: "3%",
+    paddingTop: "2%",
+    width: 250,
     backgroundColor: "white",
   },
   inpp: {
+    marginLeft: "17%",
+    marginTop: "5%",
+  },
+  pp: {
+    // marginTop: "90%",
+    // marginLeft: "10%",
+
+    width: "20%",
+    borderRadius: 20,
+    height: 50,
+    marginRight: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#2DCCA9",
     flexDirection: "row",
+    marginLeft: "5%",
   },
 });

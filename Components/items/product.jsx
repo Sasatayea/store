@@ -61,7 +61,7 @@ export default function Product({ navigation, route }) {
       }
     });
   };
-  
+
   const unsubLike = async () => {
     if (curLike[0] == userr.email) setFlage(false);
     else setFlage(true);
@@ -108,12 +108,17 @@ export default function Product({ navigation, route }) {
       unsubscribeUser();
     };
   }, []);
-  
+
   return (
     <View style={styles.page}>
       <Image
         source={require("../../assets/megan.png")}
-        style={{ width: 80, height: 80, alignSelf: "center", marginTop: "5%" }}
+        style={{
+          width: 80,
+          height: 80,
+          alignSelf: "center",
+          marginTop: "1%",
+        }}
       />
       <ScrollView>
         <View style={styles.slide}>
@@ -259,4 +264,3 @@ const styles = StyleSheet.create({
     marginTop: "5%",
   },
 });
-
