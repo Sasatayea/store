@@ -130,7 +130,14 @@ export default function Cart({ route, navigation }) {
         )}
       />
 
-      <Text style={{ fontSize: 22, fontWeight: "bold", paddingLeft: "22%" }}>
+      <Text
+        style={{
+          fontSize: 22,
+          fontWeight: "bold",
+          paddingLeft: "22%",
+          marginBottom: "3%",
+        }}
+      >
         Total price = {total}
       </Text>
       <View style={styles.button}>
@@ -176,6 +183,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#2DCCA9",
     flexDirection: "row",
+    marginBottom: "5%",
   },
   pp: {
     // marginTop: "90%",

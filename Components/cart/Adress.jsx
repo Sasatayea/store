@@ -111,12 +111,7 @@ export default function Adress({ navigation, route }) {
         <View style={styles.input}>
           <TextInput onChangeText={setNewA} placeholder="New Adress" />
         </View>
-      </View>
-      <Text>{error}</Text>
-      <View
-        style={{ flexDirection: "row", marginLeft: "30%", marginTop: "5%" }}
-      >
-        <View style={styles.pp}>
+        <View style={styles.pp2}>
           <TouchableOpacity
             title="Add"
             color="#000"
@@ -133,12 +128,16 @@ export default function Adress({ navigation, route }) {
             </Text>
           </TouchableOpacity>
         </View>
+      </View>
+      <Text>{error}</Text>
+      <View style={{ marginLeft: "33%", marginTop: "5%" }}>
         <View style={styles.pp}>
           <TouchableOpacity title="cash" color="#000" onPress={() => Cash()}>
             <Text
               style={{
                 fontWeight: "bold",
                 // paddingTop: "5%",
+                fontSize: 17,
                 color: "#F9FFB7",
               }}
             >
@@ -146,6 +145,11 @@ export default function Adress({ navigation, route }) {
             </Text>
           </TouchableOpacity>
         </View>
+      </View>
+      <View style={{}}>
+        <Text style={{ fontSize: 15, color: "red", paddingLeft: "30%" }}>
+          {error2}
+        </Text>
       </View>
       <ScrollView>
         <FlatList
@@ -176,14 +180,13 @@ export default function Adress({ navigation, route }) {
           )}
         />
       </ScrollView>
-      <Text style={{}}>{error2}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   input: {
-    height: 40,
+    height: 45,
     borderRadius: 20,
 
     borderWidth: 2,
@@ -194,10 +197,25 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   inpp: {
-    marginLeft: "17%",
+    marginLeft: "6%",
     marginTop: "5%",
+    flexDirection: "row",
   },
   pp: {
+    // marginTop: "90%",
+    // marginLeft: "10%",
+
+    width: "40%",
+    borderRadius: 20,
+    height: 50,
+    marginRight: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#2DCCA9",
+    flexDirection: "row",
+    marginLeft: "5%",
+  },
+  pp2: {
     // marginTop: "90%",
     // marginLeft: "10%",
 
