@@ -1,74 +1,128 @@
-import { StyleSheet, Text, View, TextInput, Button ,ImageBackground } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { React, useState } from "react";
 import { login } from "../../db/auth/auth";
-import loginn from '../../assets/loginn.png'
-import {
-  getUsers,
-  addUser,
-  deleteUser,
-  subscribe,
-} from "../../db/cities/users";
-const Login = () => {
+
+const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
   const [error, setError] = useState("");
-  
+
   return (
-    <ImageBackground source={require('../../assets/loginn.png')} resizeMode="cover"
-      style={styles.heder}>
-        <View style={{
-          marginTop:'50%',
-          backgroundColor:'white',
-          borderRadius:20,
-          height:'40%'
-        }}>
-      <Text  style={{
-          padding: 2,
-          textAlign:'center',
-          fontSize:30
-        }}> Welcome </Text>
+    <ImageBackground
+      source={require("../../assets/loginn.png")}
+      resizeMode="cover"
+      style={styles.heder}
+    >
+      <StatusBar style="auto" />
       <View
         style={{
-          padding: 10,
-          borderRadius:20,
+          marginTop: "55%",
+          // backgroundColor: "white",
+          // borderRadius: 30,
+          // height: "40%",
+          // padding: 5,
+          // margin: 10,
         }}
       >
-        <TextInput
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          style={{ flex: 2, borderColor: "black", borderWidth: 2  }}
-        />
-      </View>
-      
-      <View
-        style={{
-          padding: 10,
-          borderRadius:20
-        }}
-      >
-        <TextInput
-          onChangeText={setpassword}
-          keyboardType="visible-password"
-          secureTextEntry={true}
-          style={{ flex: 2, borderColor: "black", borderWidth: 2 }}
-        />
-      </View>
-      <View style={{
-          width:100,
-          padding:10,
-        }}>
-        <Button
-          title="Login"
-          onPress={() => {
-            
-            login(email,password)
-              .then()
-              .catch((e) => setError(e.message));
+        <Text
+          style={{
+            padding: 2,
+            textAlign: "center",
+            fontSize: 30,
+            // fontFamily: "bold",
+            color: "#fff",
           }}
-          
-        />
-        <Text>{error}</Text>
-      </View>
+        >
+          {" "}
+          Login
+        </Text>
+        <View
+          style={{
+            // borderRadius: 30,
+            height: 45,
+            alignItems: "center",
+            marginTop: "5%",
+          }}
+        >
+          <TextInput
+            keyboardType="email-address"
+            placeholder="email-address"
+            placeholderTextColor="#fff"
+            onChangeText={setEmail}
+            style={{
+              width: "70%",
+              flex: 1,
+              color: "#fff",
+              borderRadius: 25,
+              borderColor: "black",
+              height: 90,
+              borderWidth: 1,
+              backgroundColor: "#011F26",
+              paddingLeft: "5%",
+            }}
+          />
+        </View>
+
+        <View
+          style={{
+            borderRadius: 30,
+            height: 45,
+            alignItems: "center",
+            marginTop: "5%",
+          }}
+        >
+          <TextInput
+            onChangeText={setpassword}
+            keyboardType="visible-password"
+            placeholder="password"
+            placeholderTextColor="#fff"
+            color="white"
+            secureTextEntry={true}
+            style={{
+              width: "70%",
+              flex: 1,
+              color: "#fff",
+              borderRadius: 30,
+              borderColor: "black",
+              height: 90,
+              borderWidth: 1,
+              backgroundColor: "#011F26",
+              paddingLeft: "5%",
+            }}
+          />
+        </View>
+        <View style={styles.ppp}>
+          <View style={styles.pp}>
+            <TouchableOpacity
+              onPress={() => {
+                login(email, password)
+                  .then()
+                  .catch((e) => setError(e.message));
+              }}
+            >
+              <Text style={{ color: "#fff" }}> Login</Text>
+            </TouchableOpacity>
+            <Text>{error}</Text>
+          </View>
+
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+            <Text
+              style={{ marginTop: "40%", paddingLeft: "6%", color: "#fff" }}
+            >
+              {" "}
+              Sign up?{" "}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ImageBackground>
   );
@@ -77,8 +131,37 @@ const Login = () => {
 export default Login;
 
 const styles = StyleSheet.create({
-  heder:{
-    height:'100%',
-    width:'100%',
+  heder: {
+    height: "100%",
+    width: "100%",
+  },
+  inpp: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  texttinput: {
+    borderWidth: 1,
+    borderColor: "#777",
+    padding: 8,
+    margin: 10,
+    width: 200,
+  },
+  pp: {
+    flexDirection: "row",
+    marginLeft: "15%",
+    width: "30%",
+    borderRadius: 25,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: "5%",
+
+    backgroundColor: "#011F26",
+  },
+  ppp: {
+    flexDirection: "row",
+    marginLeft: "30%",
   },
 });

@@ -11,8 +11,8 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 // Get a list of cities from your database
-async function getUsers() {
-  const citiesCol = collection(db, "products");
+async function getHistory() {
+  const citiesCol = collection(db, "history");
   const citySnapshot = await getDocs(citiesCol);
   const cityList = citySnapshot.docs.map((doc) => {
     return { id: doc.id, ...doc.data() };
@@ -20,32 +20,32 @@ async function getUsers() {
   return cityList;
 }
 
-async function editUser(user) {
-  console.log("at editCity", user);
-  await setDoc(doc(db, "users", user.id), user);
+async function editHistory(city) {
+  console.log("at editCity", city);
+  await setDoc(doc(db, "history", city.id), city);
 }
 
-async function deleteUser(user) {
+async function deleteHistory(city) {
   try {
-    await deleteDoc(doc(db, "users", user));
-    console.log("Document deleted with ID: ", user);
+    await deleteDoc(doc(db, "history", city));
+    console.log("Document deleted with ID: ", city);
   } catch (error) {
     console.error("Error deleting document: ", error);
   }
 }
 
-async function addUser(user) {
+async function addHistory(city) {
   try {
-    const docRef = await addDoc(collection(db, "users"), user);
+    const docRef = await addDoc(collection(db, "history"), city);
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);
   }
 }
 
-function subscribe(callback) {
+function subscribehistory(callback) {
   const unsubscribe = onSnapshot(
-    query(collection(db, "users")),
+    query(collection(db, "history")),
     (snapshot) => {
       const source = snapshot.metadata.hasPendingWrites ? "Local" : "Server";
       snapshot.docChanges().forEach((change) => {
@@ -58,4 +58,6 @@ function subscribe(callback) {
   return unsubscribe;
 }
 
-export { getUsers, addUser, editUser, deleteUser, subscribe };
+
+
+export { getHistory,editHistory, deleteHistory,addHistory,subscribehistory};

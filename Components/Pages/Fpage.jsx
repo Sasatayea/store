@@ -1,11 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  ImageBackground,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, Button, ImageBackground,TouchableOpacity } from "react-native";
 import React from "react";
 import fpagee from "../../assets/fpagee.png";
 function Fpage({ navigation }) {

@@ -1,81 +1,455 @@
 import { onAuthStateChanged } from "firebase/auth";
-import CitiesList from "./Components/Cities/CitiesList";
-import EditCity from "./Components/Cities/EditCity";
-import imm from "./assets/icon.png";
+import Home from "./Components/Pages/Home";
+//ddddd
 import { auth } from "./db/Config";
-import { useState, useEffect} from "react";
-import { StyleSheet, Text, View, TextInput, Button ,Image } from "react-native";
+import { useState, useEffect } from "react";
+import { StyleSheet, Text, View, TextInput, Button, Image } from "react-native";
 import Login from "./Components/Users/Login";
 import Register from "./Components/Users/Register";
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import cart from "./Components/Cart/cart";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Cart from "./Components/cart/Cart";
+import Adress from "./Components/cart/Adress";
+import { getAuth } from "firebase/auth";
+import Admin from "./Components/Admin/Admin";
+import EditP from "./Components/Admin/EditP";
+import Edit from "./Components/Admin/Edit";
+import ProfileItem from "./Components/Pages/ProfileItem";
+import Fpage from "./Components/Pages/Fpage";
+import Product from "./Components/items/Product";
+import Profile from "./Components/Pages/Profile";
+import Search from "./Components/Pages/Search";
+import AddP from "./Components/Admin/AddP";
+import { ImageBackground } from "react-native-web";
+import OrderHistory from "./Components/Pages/OrderHistory";
+import UserEditInPro from "./Components/Pages/UserEditInPro";
+import EditUserInfo from "./Components/Admin/EditUserInfo";
+import UserSite from "./Components/Admin/UserSite";
+import OrderL from "./Components/Admin/OrderL";
+import History from "./Components/Admin/History";
 
 const Stack = createNativeStackNavigator();
-// import Cities from "./Components/Cities/Cities";
-// import GuessMyNumber from "./Components/GuessMyNumber";
-import fpage from './Components/Cities/fpage';
-import product from './Components/items/product';
-function Root() {
+const Tab = createBottomTabNavigator();
+const CartNav = () => {
   return (
-    <Stack.Navigator >
-
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Cart"
+        component={Cart}
+        options={{
+          headerBackground: () => (
+            <View style={{ backgroundColor: "white" }}>
+              <Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80, alignSelf: "center" }}
+              />
+            </View>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Product"
+        component={Product}
+        options={{
+          headerBackground: () => (
+            <View style={{ backgroundColor: "white" }}>
+              <Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80, alignSelf: "center" }}
+              />
+            </View>
+          ),
+          headerTitle: () => null,
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+      <Tab.Screen
+        name="Adress"
+        component={Adress}
+        options={{
+          headerBackground: () => (
+            <View style={{ backgroundColor: "white" }}>
+              <Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80, alignSelf: "center" }}
+              />
+            </View>
+          ),
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
     </Stack.Navigator>
   );
-}
-export default function App({navigation}) {
+};
+const HomeNav = () => {
+  return (
+    <Stack.Navigator>
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerBackground: () => (
+            <View style={{ backgroundColor: "white" }}>
+              <Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80, alignSelf: "center" }}
+              />
+            </View>
+          ),
+          tabBarIcon: () => (
+            <Image
+              source={require("./assets/home.png")}
+              style={{ width: 20, height: 20 }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Product"
+        component={Product}
+        options={{
+          headerBackground: () => (
+            <View style={{ backgroundColor: "white" }}>
+              <Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80, alignSelf: "center" }}
+              />
+            </View>
+          ),
+          headerTitle: () => null,
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+const Favorite = () => {
+  return (
+    <Stack.Navigator>
+      <Tab.Screen
+        name="Favorite"
+        component={Search}
+        options={{
+          headerShown: false,
+          // headerBackground: () => (
+          //   // <View style={{ backgroundColor: "white" }}>
+          //   //   <Image
+          //   //     source={require("./assets/megan.png")}
+          //   //     style={{ width: 80, height: 80, alignSelf: "center" }}
+          //   //   />
+          //   // </View>
+          // ),
+          tabBarIcon: () => (
+            <Image
+              source={require("./assets/love.png")}
+              style={{ width: 20, height: 20 }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Product"
+        component={Product}
+        options={{
+          headerBackground: () => (
+            <View style={{ backgroundColor: "white" }}>
+              <Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80, alignSelf: "center" }}
+              />
+            </View>
+          ),
+          headerTitle: () => null,
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const ProfileNave = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false,
+          tabBarIcon: () => (
+            <Image
+              source={require("./assets/userrrr.png")}
+              style={{ width: 20, height: 20 }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="ProfileItem"
+        component={(props) => <ProfileItem {...props} />}
+        options={{
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="Product"
+        component={Product}
+        options={{
+          headerBackground: () => (
+            <View style={{ backgroundColor: "white" }}>
+              <Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80, alignSelf: "center" }}
+              />
+            </View>
+          ),
+          headerTitle: () => null,
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="OrderHistory"
+        component={(props) => <OrderHistory {...props} />}
+        options={{
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="UserEditInPro"
+        component={(props) => <UserEditInPro {...props} />}
+        options={{
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+export default function App() {
+  const auth = getAuth();
+  const userr = auth.currentUser;
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => setUser(user));
     return () => {
       unsub();
     };
   }, []);
-  
+
   const [user, setUser] = useState(undefined);
 
-      // user ? <CitiesList /> : <Register/>
+  //console.log(user);
+  if (user) {
+    const email = userr.email;
+    if (email == "admin@gmail.com") {
+      console.log("app", email);
+      return (
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Admin" component={Admin} options={{}} />
+            <Stack.Screen
+              name="EditP"
+              component={EditP}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="UserSite"
+              component={UserSite}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="AddP"
+              component={AddP}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="Edit"
+              component={Edit}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="EditUserInfo"
+              component={EditUserInfo}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="OrderL"
+              component={OrderL}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="History"
+              component={History}
+              options={{
+                title: (
+                  <Image
+                    source={require("./assets/megan.png")}
+                    style={{ width: 80, height: 80, alignSelf: "center" }}
+                  />
+                ),
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      );
+    } else {
+      return (
+        <NavigationContainer>
+          <Tab.Navigator>
+            <Tab.Screen
+              name="Home."
+              component={HomeNav}
+              options={{
+                headerBackground: () => (
+                  <View style={{ backgroundColor: "white" }}>
+                    <Image
+                      source={require("./assets/megan.png")}
+                      style={{ width: 80, height: 80, alignSelf: "center" }}
+                    />
+                  </View>
+                ),
+                headerShown: false,
+                tabBarIcon: () => (
+                  <Image
+                    source={require("./assets/home.png")}
+                    style={{ width: 20, height: 20 }}
+                  />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Favorite"
+              component={Favorite}
+              options={{
+                headerShown: false,
+                // headerBackground: () => (
+                //   // <View style={{ backgroundColor: "white" }}>
+                //   //   <Image
+                //   //     source={require("./assets/megan.png")}
+                //   //     style={{ width: 80, height: 80, alignSelf: "center" }}
+                //   //   />
+                //   // </View>
+                // ),
+                tabBarIcon: () => (
+                  <Image
+                    source={require("./assets/love.png")}
+                    style={{ width: 20, height: 20 }}
+                  />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Cart."
+              component={CartNav}
+              options={{
+                headerShown: false,
+                tabBarIcon: () => (
+                  <Image
+                    source={require("./assets/shopping-cart.png")}
+                    style={{ width: 20, height: 20 }}
+                  />
+                ),
+              }}
+            />
 
-      if(user){
-            return (
-            <NavigationContainer>
-            <Stack.Navigator >
-              <Stack.Screen name="Home Page"   component={CitiesList}
-                options={{
-                  headerStyle: {
-                    backgroundColor: 'white',
-                  },
-                  headerTitleStyle: {
-                    fontWeight: 'bold',
-                  },
-                  headerRight: () => (
-                      <Button
-                      onPress={() => navigation.navigate('cart')}
-                      title="cart"
-                    /> 
-                    // <Img source={imm}  />
-                  ),
-                }}
-              />
-              <Stack.Screen name="EditCity" component={EditCity} />
-              <Stack.Screen name="product" component={product} />
-              <Stack.Screen name="cart" component={cart} />
-
-
-            </Stack.Navigator>
-          </NavigationContainer>
-              // <CitiesList /> 
-              )
-      }else{ 
-        return(
-          <NavigationContainer>
-            <Stack.Navigator initialRouteName="fpage" >
-              <Stack.Screen name="fpage" component={fpage} />
-              <Stack.Screen name="Login" component={Login} />
-              <Stack.Screen name="Register" component={Register} />
-            </Stack.Navigator>
-          </NavigationContainer>
-            //<fpage />
-        )}
-      
+            <Tab.Screen
+              name="Profile."
+              component={ProfileNave}
+              options={{
+                headerShown: false,
+                tabBarIcon: () => (
+                  <Image
+                    source={require("./assets/userrrr.png")}
+                    style={{ width: 20, height: 20 }}
+                  />
+                ),
+              }}
+            />
+          </Tab.Navigator>
+        </NavigationContainer>
+      );
+    }
+  } else {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Fpage"
+            component={Fpage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              headerTransparent: true,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{
+              headerTransparent: true,
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+      //<fpage />
+    );
+  }
 }
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  // navbar: {
+  //   backgroundColor: "red",
+  // },
+});
