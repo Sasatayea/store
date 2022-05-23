@@ -21,7 +21,6 @@ import Product from "./Components/items/Product";
 import Profile from "./Components/Pages/Profile";
 import Search from "./Components/Pages/Search";
 import AddP from "./Components/Admin/AddP";
-import { ImageBackground } from "react-native-web";
 import OrderHistory from "./Components/Pages/OrderHistory";
 import UserEditInPro from "./Components/Pages/UserEditInPro";
 import EditUserInfo from "./Components/Admin/EditUserInfo";

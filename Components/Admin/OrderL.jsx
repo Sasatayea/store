@@ -15,7 +15,7 @@ import {
   subscribeOrders,
 } from "../../db/Data/Orders";
 import { useEffect, useState } from "react";
-import { addHistory } from "../../db/Data/History";
+import { addHistory,editHistory } from "../../db/Data/History";
 
 const OrderL = ({ navigation }) => {
   const getOrder = async () => {
@@ -62,9 +62,7 @@ const OrderL = ({ navigation }) => {
     let Myorder = Orders.filter((e) => e.id == item.id);
     // console.log(id);
 
-    addHistory({
-      ...Myorder[0],
-    });
+    editHistory({...Myorder[0],id:item.id});
     deleteOrder(item.id);
   };
   return (
