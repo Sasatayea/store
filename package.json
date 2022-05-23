@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@draftbit/ui": "^44.1.7",
+    "@expo/vector-icons": "^13.0.0",
     "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.1",
