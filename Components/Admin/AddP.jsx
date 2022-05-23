@@ -13,18 +13,18 @@ import { React, useState } from "react";
 
 const AddP = ({ navigation }) => {
   const [price, setPrice] = useState("");
-  const [priceerr, setPriceerr] = useState("");
   const [image, setImage] = useState("");
-  const [imageerr, setImageerr] = useState("");
   const [name, setName] = useState("");
-  const [nameerr, setnameerr] = useState("");
   const [size, setSize] = useState("");
   const [type, setType] = useState("chair");
   const [description, setDescription] = useState("");
-  const [descriptionerr, setDescriptionerr] = useState("");
   const [image2, setImage2] = useState("");
-  const [image2err, setImage2err] = useState("");
   const [image3, setImage3] = useState("");
+  const [priceerr, setPriceerr] = useState("");
+  const [imageerr, setImageerr] = useState("");
+  const [nameerr, setNameerr] = useState("");
+  const [descriptionerr, setDescriptionerr] = useState("");
+  const [image2err, setImage2err] = useState("");
   const [image3err, setImage3err] = useState("");
   return (
     <View
@@ -67,9 +67,7 @@ const AddP = ({ navigation }) => {
       </View>
       <View style={styles.in}>
         <TextInput
-          onChangeText={(e) => {
-            setDescription(e);
-          }}
+          onChangeText={setDescription}
           keyboardType="default"
           placeholder="Description"
           value={description}
@@ -87,10 +85,8 @@ const AddP = ({ navigation }) => {
       </View>
       <View style={styles.in}>
         <TextInput
-          onChangeText={(e) => {
-            setPrice(e);
-          }}
-          keyboardType="numeric"
+          onChangeText={setPrice}
+          keyboardType="number-pad"
           placeholder="Price"
           style={{
             flex: 2,
@@ -106,9 +102,7 @@ const AddP = ({ navigation }) => {
       </View>
       <View style={styles.in}>
         <TextInput
-          onChangeText={(e) => {
-            setImage(e);
-          }}
+          onChangeText={setImage}
           keyboardType="default"
           placeholder="Image"
           style={{
@@ -125,9 +119,7 @@ const AddP = ({ navigation }) => {
       </View>
       <View style={styles.in}>
         <TextInput
-          onChangeText={(e) => {
-            setImage2(e);
-          }}
+          onChangeText={setImage2}
           keyboardType="default"
           placeholder="Image2"
           value={image2}
@@ -145,9 +137,7 @@ const AddP = ({ navigation }) => {
       </View>
       <View style={styles.in}>
         <TextInput
-          onChangeText={(e) => {
-            setImage3(e);
-          }}
+          onChangeText={setImage3}
           keyboardType="default"
           placeholder="Image3"
           value={image3}
@@ -206,22 +196,19 @@ const AddP = ({ navigation }) => {
           title="Add"
           color="#000"
           onPress={() => {
-            if (name.length < 5) {
-              setnameerr("At leas 5 characters");
-            } else if (description.length < 12) {
-              setDescriptionerr("At leas 13 characters");
+            if (name.length < 3) setNameerr("This name less than 3 characters");
+            else if (description.length < 12) {
+              setDescriptionerr("This description less than 12 characters");
             } else if (price == "") {
-              console.log("Enter a valid price");
-              setPriceerr("Enter a valid price");
+              setPriceerr("Enter the price");
             } else if (image == "") {
-              setImageerr("Please add a valid image");
+              setImageerr("Please uplode an Image1");
             } else if (image2 == "") {
-              setImage2err("Please add a valid image2");
+              setImage2err("Please uplode an Image2");
             } else if (image3 == "") {
-              setImage3err("Please add a valid image3");
+              setImage3err("Please uplode an Image3");
             } else {
               addCity({
-              
                 name: name,
                 price: price,
                 size: size,
@@ -231,7 +218,7 @@ const AddP = ({ navigation }) => {
                 image3: image3,
                 description: description,
                 liked: [],
-              });
+              }).then(navigation.navigate("EditP"));
             }
           }}
         />

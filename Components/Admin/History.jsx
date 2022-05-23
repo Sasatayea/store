@@ -1,4 +1,4 @@
-
+import { StyleSheet, Text, View, Button, Image } from "react-native";
 import React from "react";
 import {
   getHistory,
@@ -8,19 +8,10 @@ import {
   subscribehistory,
 } from "../../db/Data/History";
 import { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  Picker,
-  ImageBackground,
-  TouchableOpacity,
-  FlatList,
-} from "react-native";
+import { FlatList } from "react-native";
+import { TouchableOpacity } from "react-native";
 
-const History = ({navigation}) => {
+const History = () => {
   const getHistorylist = async () => {
     const c = await getHistory();
     await setHistory(c);
@@ -50,13 +41,21 @@ const History = ({navigation}) => {
 
   const [History, setHistory] = useState([]);
 
+  console.log(History);
   const dellete = (id) => {
     deleteHistory(id);
   };
-  console.log(History) ;
   return (
     <View>
-      <Text>Hestory</Text>
+      <Image
+        source={require("../../assets/megan.png")}
+        style={{
+          width: 80,
+          height: 80,
+          alignSelf: "center",
+          marginTop: "1%",
+        }}
+      />
       <FlatList
         data={History}
         keyExtractor={(item, index) => index.toString()}
@@ -69,9 +68,35 @@ const History = ({navigation}) => {
                 margin: 3,
               }}
             >
-              <Text>Client name : {item.client}</Text>
-              <Text>total cost : {item.cost}</Text>
-              <Text>Address : {item.adress}</Text>
+              <View>
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 19,
+                    paddingLeft: "4%",
+                  }}
+                >
+                  Client name : {item.client}
+                </Text>
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 19,
+                    paddingLeft: "4%",
+                  }}
+                >
+                  total cost : {item.cost}
+                </Text>
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 19,
+                    paddingLeft: "4%",
+                  }}
+                >
+                  Address : {item.adress}
+                </Text>
+              </View>
               <View style={styles.Buttonn}>
                 <Button title="dellete" onPress={() => dellete(item.id)} />
               </View>

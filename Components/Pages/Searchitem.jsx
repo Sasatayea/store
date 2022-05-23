@@ -19,15 +19,11 @@ export default function Searchitem({ navigation, item }) {
   const auth = getAuth();
 
   const userr = auth.currentUser;
-  const [liked, setLiked] = useState(item.liked);
-  const liked1 = [...liked];
-  const [flag, setFlage] = useState();
+
   const [cartI, setCartI] = useState();
   const [cart, setCart] = useState([]);
   //let isInCart = route.params.isInCart;
-  const [curLike, setCurLike] = useState(
-    liked1.filter((e) => userr.email == e)
-  );
+
   const addCart = async (item) => {
     getUserById(userr.uid).then((user) => {
       const user1 = user;
@@ -57,35 +53,6 @@ export default function Searchitem({ navigation, item }) {
         }
       }
     });
-  };
-
-  const unsubLike = async () => {
-    if (curLike[0] == userr.email) setFlage(false);
-    else setFlage(true);
-  };
-  useEffect(async () => {
-    await unsubLike();
-  }, []);
-  const Like = () => {
-    if (flag) {
-      editCity({ ...item, liked: [...liked, userr.email] });
-      setFlage(false);
-      getUserById(userr.uid).then((user) => {
-        const user1 = user;
-        const fav = user1[0].favourite;
-        editUser({ ...user1[0], favourite: [...fav, item] });
-      });
-    } else {
-      let arr = liked.filter((e) => e != userr.email);
-      editCity({ ...item, liked: arr });
-      setFlage(true);
-      getUserById(userr.uid).then((user) => {
-        const user1 = user;
-        const fav = user1[0].favourite;
-        let arr2 = fav.filter((e) => e.id != item.id);
-        editUser({ ...user1[0], favourite: [...arr2] });
-      });
-    }
   };
 
   useEffect(() => {

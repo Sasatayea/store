@@ -14,18 +14,18 @@ import { React, useState } from "react";
 const Edit = ({ navigation, route }) => {
   let item = route.params.item;
   const [price, setPrice] = useState(item.price);
-  const [priceerr, setPriceerr] = useState("");
   const [image, setImage] = useState(item.image);
-  const [imageerr, setImageerr] = useState("");
   const [name, setName] = useState(item.name);
-  const [nameerr, setnameerr] = useState("");
-  const [type, setType] = useState("chair");
   const [size, setSize] = useState(item.size);
+  const [type, setType] = useState("chair");
   const [description, setDescription] = useState(item.description);
-  const [descriptionerr, setDescriptionerr] = useState("");
   const [image2, setImage2] = useState(item.image2);
-  const [image2err, setImage2err] = useState("");
   const [image3, setImage3] = useState(item.image3);
+  const [priceerr, setPriceerr] = useState("");
+  const [imageerr, setImageerr] = useState("");
+  const [nameerr, setNameerr] = useState("");
+  const [descriptionerr, setDescriptionerr] = useState("");
+  const [image2err, setImage2err] = useState("");
   const [image3err, setImage3err] = useState("");
   return (
     <View
@@ -47,8 +47,8 @@ const Edit = ({ navigation, route }) => {
             fontSize: 30,
           }}
         />
-        <Text>{nameerr}</Text>
       </View>
+      <Text>{nameerr}</Text>
 
       <View style={styles.in}>
         <TextInput
@@ -185,19 +185,17 @@ const Edit = ({ navigation, route }) => {
           title="Edit"
           color="#000"
           onPress={() => {
-            if (name.length < 5) {
-              setnameerr("At leas 5 characters");
-            } else if (description.length < 12) {
-              setDescriptionerr("At leas 13 characters");
+            if (name.length < 3) setNameerr("This name less than 3 characters");
+            else if (description.length < 12) {
+              setDescriptionerr("This description less than 12 characters");
             } else if (price == "") {
-              console.log("Enter a valid price");
-              setPriceerr("Enter a valid price");
+              setPriceerr("Enter the price");
             } else if (image == "") {
-              setImageerr("Please add a valid image");
+              setImageerr("Please uplode an Image1");
             } else if (image2 == "") {
-              setImage2err("Please add a valid image2");
+              setImage2err("Please uplode an Image2");
             } else if (image3 == "") {
-              setImage3err("Please add a valid image3");
+              setImage3err("Please uplode an Image3");
             } else {
               editCity({
                 id: item.id,

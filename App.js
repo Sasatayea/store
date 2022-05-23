@@ -26,9 +26,9 @@ import OrderHistory from "./Components/Pages/OrderHistory";
 import UserEditInPro from "./Components/Pages/UserEditInPro";
 import EditUserInfo from "./Components/Admin/EditUserInfo";
 import UserSite from "./Components/Admin/UserSite";
-import OrderL from './Components/Admin/OrderL';
-import History from './Components/Admin/History';
-import ResetPassword from "./Components/Users/ResetPassword";
+import OrderL from "./Components/Admin/OrderL";
+import History from "./Components/Admin/History";
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const CartNav = () => {
@@ -127,6 +127,50 @@ const HomeNav = () => {
     </Stack.Navigator>
   );
 };
+const Favorite = () => {
+  return (
+    <Stack.Navigator>
+      <Tab.Screen
+        name="Favorite"
+        component={Search}
+        options={{
+          headerShown: false,
+          // headerBackground: () => (
+          //   // <View style={{ backgroundColor: "white" }}>
+          //   //   <Image
+          //   //     source={require("./assets/megan.png")}
+          //   //     style={{ width: 80, height: 80, alignSelf: "center" }}
+          //   //   />
+          //   // </View>
+          // ),
+          tabBarIcon: () => (
+            <Image
+              source={require("./assets/love.png")}
+              style={{ width: 20, height: 20 }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Product"
+        component={Product}
+        options={{
+          headerBackground: () => (
+            <View style={{ backgroundColor: "white" }}>
+              <Image
+                source={require("./assets/megan.png")}
+                style={{ width: 80, height: 80, alignSelf: "center" }}
+              />
+            </View>
+          ),
+          headerTitle: () => null,
+          tabBarButton: () => null,
+          tabBarVisible: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const ProfileNave = () => {
   return (
@@ -148,7 +192,6 @@ const ProfileNave = () => {
         name="ProfileItem"
         component={(props) => <ProfileItem {...props} />}
         options={{
-          
           tabBarButton: () => null,
           tabBarVisible: false,
         }}
@@ -174,7 +217,6 @@ const ProfileNave = () => {
         name="OrderHistory"
         component={(props) => <OrderHistory {...props} />}
         options={{
-          
           tabBarButton: () => null,
           tabBarVisible: false,
         }}
@@ -210,30 +252,8 @@ export default function App() {
       return (
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen
-              name="Admin"
-              component={Admin}
-              options={{
-                title: (
-                  <Image
-                    source={require("./assets/megan.png")}
-                    style={{ width: 80, height: 80, alignSelf: "center" }}
-                  />
-                ),
-              }}
-            />
-            <Stack.Screen
-              name="EditP"
-              component={EditP}
-              options={{
-                title: (
-                  <Image
-                    source={require("./assets/megan.png")}
-                    style={{ width: 80, height: 80, alignSelf: "center" }}
-                  />
-                ),
-              }}
-            />
+            <Stack.Screen name="Admin" component={Admin} options={{}} />
+            <Stack.Screen name="EditP" component={EditP} options={{}} />
             <Stack.Screen
               name="UserSite"
               component={UserSite}
@@ -282,30 +302,8 @@ export default function App() {
                 ),
               }}
             />
-            <Stack.Screen
-              name="OrderL"
-              component={OrderL}
-              options={{
-                title: (
-                  <Image
-                    source={require("./assets/megan.png")}
-                    style={{ width: 80, height: 80, alignSelf: "center" }}
-                  />
-                ),
-              }}
-            />
-            <Stack.Screen
-              name="History"
-              component={History}
-              options={{
-                title: (
-                  <Image
-                    source={require("./assets/megan.png")}
-                    style={{ width: 80, height: 80, alignSelf: "center" }}
-                  />
-                ),
-              }}
-            />
+            <Stack.Screen name="OrderL" component={OrderL} options={{}} />
+            <Stack.Screen name="History" component={History} options={{}} />
           </Stack.Navigator>
         </NavigationContainer>
       );
@@ -314,7 +312,7 @@ export default function App() {
         <NavigationContainer>
           <Tab.Navigator>
             <Tab.Screen
-              name="HomeNav"
+              name="Home."
               component={HomeNav}
               options={{
                 headerBackground: () => (
@@ -335,8 +333,8 @@ export default function App() {
               }}
             />
             <Tab.Screen
-              name="favourite"
-              component={Search}
+              name="Favorite"
+              component={Favorite}
               options={{
                 headerShown: false,
                 // headerBackground: () => (
@@ -356,10 +354,9 @@ export default function App() {
               }}
             />
             <Tab.Screen
-              name="CartNav"
+              name="Cart."
               component={CartNav}
               options={{
-                
                 headerShown: false,
                 tabBarIcon: () => (
                   <Image
@@ -369,9 +366,9 @@ export default function App() {
                 ),
               }}
             />
-            
+
             <Tab.Screen
-              name="ProfileNave"
+              name="Profile."
               component={ProfileNave}
               options={{
                 headerShown: false,
@@ -383,8 +380,6 @@ export default function App() {
                 ),
               }}
             />
-          
-            
           </Tab.Navigator>
         </NavigationContainer>
       );
@@ -409,14 +404,6 @@ export default function App() {
           <Stack.Screen
             name="Register"
             component={Register}
-            options={{
-              headerTransparent: true,
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="ResetPassword"
-            component={ResetPassword}
             options={{
               headerTransparent: true,
               headerShown: false,

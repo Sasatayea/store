@@ -5,9 +5,8 @@ import { editUser, getUserById } from "../../db/Data/Users";
 import { getAuth } from "firebase/auth";
 import { ScrollView } from "react-native-web";
 
-const UserEditInPro = ({navigation,route}) => {
-  let item = route.params;
-  console.log(route)
+const UserEditInPro = (items) => {
+  let item = items.route.params;
   console.log("user info", item);
   const auth = getAuth();
   const userr = auth.currentUser;
@@ -28,7 +27,7 @@ const UserEditInPro = ({navigation,route}) => {
         countryname: countryname,
         background:background,
       });
-    }).then(navigation.navigate("Profile"));
+    });
   };
   return (
     <ScrollView>

@@ -122,15 +122,6 @@ const Login = ({ navigation }) => {
               Sign up?{" "}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("ResetPassword")}>
-            <Text
-              style={{ marginTop: "40%", paddingLeft: "6%", color: "#fff" }}
-            >
-              
-              Forgot Password?
-            </Text>
-          </TouchableOpacity>
-          
         </View>
       </View>
     </ImageBackground>
